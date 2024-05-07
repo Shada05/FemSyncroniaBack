@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f2f2f2; /* Color de fondo del contenedor principal */
+  }
+  
+  .login-form {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente del formulario */
+    padding: 0; /* Quitamos el relleno */
+    border-radius: 0px; /* Bordes redondeados */
+    height: 100vh; /* Altura del contenedor igual a la altura de la ventana del navegador */
+  }
+  
+  .image-container {
+    margin-bottom: 20px; /* Espacio entre la imagen y el resto del contenido */
+  }
+  
+  .image-container img {
+    width: 100%; /* Ancho completo */
+    border-radius: 10px; /* Bordes redondeados */
+  }
+  .login-form {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente del formulario */
+    padding: 20px;
+    border-radius: 0px; /* Bordes redondeados */
+    height: 100vh; /* Altura del contenedor igual a la altura de la ventana del navegador */
+  }
+  
+  .title {
+    font-size: 120%; /* Aumentamos el tamaño del título en un 20% */
+    color:blue;
+  }
+  
+  .input-container {
+    margin-bottom: 20px; /* Espacio entre los campos */
+  }
+  
+  label {
+    display: block;
+    text-align: center; /* Centramos el texto horizontalmente */
+  }

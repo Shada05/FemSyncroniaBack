@@ -1,0 +1,15 @@
+<div class="detalle-producto">
+    <button (click)="goBack()">Regresar</button>
+    <h1>Detalle del producto</h1>
+    <header>
+    
+    </header>
+    <div class="product-details">
+        <div class="product-image" [style.background-image]="'url(' + product.image + ')'"></div>
+        <div class="product-info">
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.description }}</p>
+            <p>{{ product.cost }}</p>
+        </div>
+    </div>
+</div>

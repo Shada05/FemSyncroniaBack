@@ -1,0 +1,39 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0; /* Color de fondo del encabezado */
+  }
+  
+  .contenido {
+    display: flex;
+    padding: 20px;
+  }
+  
+  .info {
+    margin-left: 20px;
+  }
+  
+  img {
+    max-width: 300px; /* Ancho máximo de la imagen del producto */
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 20px; /* Espacio entre las tarjetas */
+  }
+  
+  .product-card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Estilos adicionales según tus necesidades */
+  }
+  
+  .product-image {
+    height: 200px; /* Ajusta la altura de la imagen según tus necesidades */
+    background-size: cover;
+    background-position: center;
+  }

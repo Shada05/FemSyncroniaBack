@@ -1,0 +1,20 @@
+<header>
+  <h1>Lista de Productos</h1>
+  <button (click)="Out()">Salir</button>
+</header>
+<div class="search-container">
+  <label for="username">Busqueda de productos:</label>
+  <input type="text"  placeholder="Buscar productos">
+  <!-- <button (click)="search()">Buscar</button> -->
+  <button (click)="sortByLowestCost()">Menor a Mayor Precio</button>
+  <button (click)="sortByHighestCost()">Mayor a Menor Precio</button>
+</div>
+<div class="product-grid">
+  <div *ngFor="let product of products" class="product-card">
+    <div class="product-image" [style.background-image]="'url(' + product.image + ')'"></div>
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }} {{ product.cost }}</p>
+    <p></p>
+    <a [routerLink]="['/products/' + product.id]">Ver detalles</a>
+  </div>
+</div>

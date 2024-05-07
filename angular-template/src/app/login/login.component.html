@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="login-form">
+      <div class="image-container">
+        <!-- Aquí colocamos la imagen -->
+        <img src="../assets/zapatos.jpg">
+      </div>
+  
+      <h2 class="title">Ingresa tus credenciales</h2>
+  
+      <div class="input-container">
+        <label for="username">Nombre de usuario</label>
+        <input id="username" [(ngModel)]="username" placeholder="Nombre de usuario" />
+      </div>
+  
+      <div class="input-container">
+        <label for="password">Contraseña</label>
+        <input id="password" [(ngModel)]="password" type="password" placeholder="Contraseña" />
+      </div>
+  
+      <button (click)="login()">Ingresar</button>
+      <!-- <button [routerLink]="['/products']">Productos</button> -->
+    </div>
+  </div>
