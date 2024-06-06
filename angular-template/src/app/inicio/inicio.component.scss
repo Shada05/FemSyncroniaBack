@@ -1,0 +1,40 @@
+ion-content {
+  width: 100%;
+  height: 100vh;
+}
+swiper-container{
+  width: 100%;
+  height: 100%;
+}
+p{
+  font-weight: bold;
+  text-align: center;
+  font-family: arial;
+}
+swiper-slide {
+  background-image: url('../../assets/img/fondoInicio.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.portada1{
+  margin-bottom: 10px;
+  width: 280px;
+  height: 280px;
+}
+.logo{
+  margin-top: -100px;
+  width: 200px;
+  height: 200px;
+}
+
+.texto {
+  margin: 0; /* Elimina los márgenes por defecto */
+  padding: 0; /* Elimina el padding por defecto */
+  text-align: center; /* Centra el texto */
+  line-height: 1.2; /* Ajusta la altura de la línea para controlar el espacio entre líneas */
+}
