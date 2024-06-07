@@ -21,15 +21,27 @@ swiper-slide {
   align-items: center;
   justify-content: center;
 }
-.portada1{
-  margin-bottom: 10px;
+.portada-1{
   width: 280px;
   height: 280px;
 }
+
 .logo{
   margin-top: -100px;
   width: 200px;
   height: 200px;
+}
+
+.logo-portada-3{
+  margin-top: -40px;
+  width: 200px;
+  height: 200px;  
+}
+
+.portada-3{
+  width: 280px;
+  height: 280px;
+  margin-top: -30px;
 }
 
 .texto {
@@ -37,4 +49,23 @@ swiper-slide {
   padding: 0; /* Elimina el padding por defecto */
   text-align: center; /* Centra el texto */
   line-height: 1.2; /* Ajusta la altura de la línea para controlar el espacio entre líneas */
+}
+
+ion-button {
+  --background: #FF4D7F;
+  --color: white;
+  --border-radius: 15px; /* Ajusta el valor para el redondeo deseado */
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --border-color:#FF4D7F;
+  --border-style:solid;
+  --border-width:1px;
+  width:249px;
+  height: 31px;
+  font-weight: bold ;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+ion-button:hover{
+  --background: white;
+  --color: #FF4D7F;
 }
