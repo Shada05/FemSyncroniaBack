@@ -2,70 +2,82 @@ ion-content {
   width: 100%;
   height: 100vh;
 }
-swiper-container{
+
+/* Estilo del contenedor del swiper */
+swiper-container {
   width: 100%;
   height: 100%;
+  --swiper-pagination-bullet-inactive-color: black;
+  --swiper-pagination-color: #FF9CA7;
+  --swiper-pagination-bullet-width: 50px;
+  --swiper-pagination-bullet-height: 6px;
+  --swiper-pagination-bullet-border-radius: 5px;
+  --swiper-navigation-size: 20px;
 }
-p{
-  font-weight: bold;
+
+/* Estilo de la paginación */
+swiper-pagination {
+  margin-bottom: 50px;
+}
+
+/* Estilo general para los párrafos */
+p {
+  font-size: 20px;
+  font-weight: 600;
   text-align: center;
   font-family: arial;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  line-height: 1.2;
 }
+
+/* Estilo de las diapositivas del swiper */
 swiper-slide {
-  background-image: url('../../assets/img/fondoInicio.png');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-image: url('../../assets/img/fondo-inicio.svg');
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
+  justify-items: center; /* Centra los elementos horizontalmente */
+  align-items: center; /* Centra los elementos verticalmente */
+  height: 100%; /* Asegúrate de que cada diapositiva ocupe toda la altura disponible */
+  padding: 20px; /* Añade espacio alrededor de los bordes si es necesario */
+  gap: 10px;
+}
+
+/* Estilo de las secciones dentro de las diapositivas */
+.swiper-slide .section {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.portada-1{
-  width: 280px;
-  height: 280px;
-}
-
-.logo{
-  margin-top: -100px;
-  width: 200px;
-  height: 200px;
-}
-
-.logo-portada-3{
-  margin-top: -40px;
-  width: 200px;
-  height: 200px;  
-}
-
-.portada-3{
-  width: 280px;
-  height: 280px;
-  margin-top: -30px;
-}
-
-.texto {
-  margin: 0; /* Elimina los márgenes por defecto */
-  padding: 0; /* Elimina el padding por defecto */
+  justify-content: center; /* Centra los elementos dentro de cada sección */
+  align-items: center; /* Centra los elementos dentro de cada sección */
   text-align: center; /* Centra el texto */
-  line-height: 1.2; /* Ajusta la altura de la línea para controlar el espacio entre líneas */
 }
 
+/* Estilo de las imágenes dentro de las diapositivas */
+swiper-slide img {
+  max-width: 80%; /* Ajusta el tamaño de la imagen para que no sobresalga */
+  height: auto;
+  mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 5%);
+}
+
+/* Estilo del botón */
 ion-button {
   --background: #FF4D7F;
   --color: white;
-  --border-radius: 15px; /* Ajusta el valor para el redondeo deseado */
+  --border-radius: 15px;
   --padding-start: 20px;
   --padding-end: 20px;
-  --border-color:#FF4D7F;
-  --border-style:solid;
-  --border-width:1px;
-  width:249px;
+  --border-color: #FF4D7F;
+  --border-style: solid;
+  --border-width: 1px;
+  width: 249px;
   height: 31px;
-  font-weight: bold ;
+  font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-ion-button:hover{
+
+/* Efecto hover para el botón */
+ion-button:hover {
   --background: white;
   --color: #FF4D7F;
 }

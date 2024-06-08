@@ -1,25 +1,41 @@
 <ion-content>
-<swiper-container 
-   [pagination]="true">
-
-    <swiper-slide>
-      <img class="logo" src="../../assets/img/Logo.svg" alt="Logo de la marca">
-      <img class="portada-1" src="../../assets/img/portada 1.svg" alt="Portada 1">
-      <p class ="texto">Mantén tu ciclo registrado de</p>
-      <p class ="texto">manera fácil y sencilla</p>
+  <swiper-container [pagination]="true">
+    <swiper-slide class="slide">
+      <div class="section">
+        <p>Ten un periodo registrado de</p>
+        <p>manera fácil y sencilla</p>
+      </div>
+      <div class="section">
+        <img src="../../assets/img/portada-1.svg" alt="Portada 1">
+      </div>
+      <div class="section">
+        <p>Vive tus dias con seguridad</p>
+      </div>
     </swiper-slide>
-    <swiper-slide>
-      <img class="logo" src="../../assets/img/Logo.svg" alt="Logo de la marca">
-      <p class="texto">planea tus tiempos conforme a la</p>
-      <p class="texto">previsión de tu ciclo y lleva un</p>
-      <p class="texto">control de tus sintomas</p>
-    </swiper-slide >
-    <swiper-slide>
-      <img class="logo-portada-3" src="../../assets/img/Logo.svg" alt="logo de la marca">
-      <img class="portada-3" src="../../assets/img/portada3.svg" alt="Portada 3">
-      <p class="texto">No más preocupación</p>
-      <p class="texto">de tu ciclo menstrual</p>
-      <ion-button class="ion-padding" [routerLink]="['/login']">Iniciar sesión</ion-button>
+    <swiper-slide class="slide">
+      <div class="section">
+        <p>Planea tus días y previene</p>
+        <p>accidentes</p>
+      </div>
+      <div class="section">
+        <img src="../../assets/img/portada-2.svg" alt="Portada 2">
+      </div>
+      <div class="section">
+        <p>¡Tú llevas el control!</p>
+      </div>
+    </swiper-slide>
+    <swiper-slide class="slide">
+      <div class="section">
+        <p>No más preocupaciones </p>
+        <p>siéntete segura</p>
+      </div>
+     <div class="section">
+        <img src="../../assets/img/portada-3.svg" alt="Portada 3">
+     </div> 
+      <div class="section">
+        <p>Sincroniza tu vida</p>
+        <ion-button class="ion-padding" [routerLink]="['/login']">Iniciar sesión</ion-button>
+      </div>
     </swiper-slide>
   </swiper-container>
 </ion-content>
