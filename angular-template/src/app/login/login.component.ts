@@ -5,25 +5,25 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 
 export class LoginComponent implements OnInit {
  username:string="";
  password:string="";
- constructor(private _loginService: LoginService, private router: Router){
+ constructor(/*private _loginService: LoginService, private router: Router*/){
    
  }
  ngOnInit(){
-  let token =  localStorage.getItem('token');
+/*let token =  localStorage.getItem('token');
   // localStorage.getItem("token")
   if(token!=null){
     this.router.navigate(['/products']);
   }
-  
+  */
  }
  login(){
-  console.log(this.username);
+  /*console.log(this.username);
   console.log(this.password);
   const data={
     username: this.username,
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
   },error:(err)=>{
     console.log(err)
     alert(err.error.message)
-  }});
+  }});*/
  }
 }
 

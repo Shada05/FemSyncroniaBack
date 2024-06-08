@@ -22,12 +22,31 @@
 <!--   </div>
   </div>--> 
 <!-- nombre-de-la-pagina.page.html -->
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Nombre de la Página</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <p>Contenido de la nueva página</p>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Iniciar sesión</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Correo electrónico</ion-label>
+        <ion-input type="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Contraseña</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+
+      <ion-button>Ingresar</ion-button>
+    </ion-card-content>
+
+    <ion-footer>
+      <ion-button color="secondary">¿No tienes una cuenta? Regístrate</ion-button>
+    </ion-footer>
+  </ion-card>
+
+  <ion-button color="danger">G Continuar con Google</ion-button>
 </ion-content>
+

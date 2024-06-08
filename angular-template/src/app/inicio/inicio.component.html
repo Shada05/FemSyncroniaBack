@@ -8,13 +8,18 @@
       <p class ="texto">Mantén tu ciclo registrado de</p>
       <p class ="texto">manera fácil y sencilla</p>
     </swiper-slide>
-
+    <swiper-slide>
+      <img class="logo" src="../../assets/img/Logo.svg" alt="Logo de la marca">
+      <p class="texto">planea tus tiempos conforme a la</p>
+      <p class="texto">previsión de tu ciclo y lleva un</p>
+      <p class="texto">control de tus sintomas</p>
+    </swiper-slide >
     <swiper-slide>
       <img class="logo-portada-3" src="../../assets/img/Logo.svg" alt="logo de la marca">
       <img class="portada-3" src="../../assets/img/portada3.svg" alt="Portada 3">
       <p class="texto">No más preocupación</p>
       <p class="texto">de tu ciclo menstrual</p>
-      <ion-button class="ion-padding" >Iniciar sesión</ion-button>
+      <ion-button class="ion-padding" [routerLink]="['/login']">Iniciar sesión</ion-button>
     </swiper-slide>
   </swiper-container>
 </ion-content>

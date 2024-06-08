@@ -43,3 +43,24 @@
     display: block;
     text-align: center; /* Centramos el texto horizontalmente */
   }
+  .login-page {
+    ion-content {
+      padding: 20px;
+    }
+  
+    ion-card {
+      margin-bottom: 20px;
+    }
+  
+    ion-button {
+      margin-top: 10px;
+    }
+  
+    ion-button.danger {
+      margin-bottom: 20px;
+    }
+  }
+  ion-content{
+    --background: url('../../assets/img/Fondo_Login.svg') no-repeat center 100%;
+    background-color: white;
+  }

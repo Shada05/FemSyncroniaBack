@@ -9,10 +9,11 @@ import { RouteReuseStrategy } from '@angular/router';
 import { InicioComponent } from './inicio/inicio.component';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 @NgModule({
   declarations: [
     AppComponent,
-    InicioComponent
+    InicioComponent,
   ],
   imports: [
     BrowserModule,
