@@ -23,13 +23,12 @@ swiper-pagination {
 /* Estilo general para los párrafos */
 p {
   font-size: 20px;
+  font-style: normal;
   font-weight: 600;
-  text-align: center;
-  font-family: arial;
   margin: 0;
   padding: 0;
   text-align: center;
-  line-height: 1.2;
+  line-height: normal;
 }
 
 /* Estilo de las diapositivas del swiper */
@@ -74,7 +73,6 @@ ion-button {
   --border-width: 1px;
   width: 249px;
   height: 31px;
-  font-family: 'Open sans', sans-serif;
   font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
