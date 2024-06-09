@@ -1,7 +1,7 @@
 <!--<div class="container">
     <div class="login-form">
       <div class="image-container">--->
-        <!-- Aquí colocamos la imagen -->
+<!-- Aquí colocamos la imagen -->
 <!--      <img src="../assets/zapatos.jpg">
       </div>
   
@@ -17,36 +17,20 @@
         <input id="password" [(ngModel)]="password" type="password" placeholder="Contraseña" />
       </div>
   
-      <button (click)="login()">Ingresar</button>-->  
-      <!-- <button [routerLink]="['/products']">Productos</button> -->
+      <button (click)="login()">Ingresar</button>-->
+<!-- <button [routerLink]="['/products']">Productos</button> -->
 <!--   </div>
-  </div>--> 
+  </div>-->
 <!-- nombre-de-la-pagina.page.html -->
-<ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Iniciar sesión</ion-card-title>
-    </ion-card-header>
-
-    <ion-card-content>
-      <ion-item>
-        <ion-label>Correo electrónico</ion-label>
-        <ion-input type="email"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label>Contraseña</ion-label>
-        <ion-input type="password"></ion-input>
-      </ion-item>
-
-      <ion-button>Ingresar</ion-button>
-    </ion-card-content>
-
-    <ion-footer>
-      <ion-button color="secondary">¿No tienes una cuenta? Regístrate</ion-button>
-    </ion-footer>
-  </ion-card>
-
-  <ion-button color="danger">G Continuar con Google</ion-button>
+<ion-content class="ion-align-items-center">
+  <p>Iniciar Sesión</p>
+  <ion-button class="btn-Google" >
+    <ion-icon slot="start" src="../../assets/icons/google.svg"></ion-icon>
+    Continuar con Google
+  </ion-button>
+  <ion-input type="text" type="email" placeholder="Correo Electronico"></ion-input>
+  <ion-input type="text" type="password" placeholder="Contraseña"></ion-input>
+  <ion-button class="btn-ingresar">
+    Ingresar
+  </ion-button>
 </ion-content>
-
