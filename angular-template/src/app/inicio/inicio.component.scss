@@ -63,15 +63,16 @@ swiper-slide img {
 
 /* Estilo del botón */
 ion-button {
-  --background: #FF4D7F;
+  --background: #FF94A0;
   --color: white;
   --border-radius: 15px;
   --padding-start: 20px;
   --padding-end: 20px;
-  --border-color: #FF4D7F;
+  --border-color: #FF94A0;
   --border-style: solid;
   --border-width: 1px;
-  width: 249px;
+  --box-shadow:none;
+  width: 302px;
   height: 31px;
   font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -80,5 +81,5 @@ ion-button {
 /* Efecto hover para el botón */
 ion-button:hover {
   --background: white;
-  --color: #FF4D7F;
+  --color: #FF94A0;
 }
