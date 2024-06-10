@@ -1,7 +1,7 @@
 <!--<div class="container">
     <div class="login-form">
       <div class="image-container">--->
-        <!-- Aquí colocamos la imagen -->
+<!-- Aquí colocamos la imagen -->
 <!--      <img src="../assets/zapatos.jpg">
       </div>
   
@@ -17,17 +17,20 @@
         <input id="password" [(ngModel)]="password" type="password" placeholder="Contraseña" />
       </div>
   
-      <button (click)="login()">Ingresar</button>-->  
-      <!-- <button [routerLink]="['/products']">Productos</button> -->
+      <button (click)="login()">Ingresar</button>-->
+<!-- <button [routerLink]="['/products']">Productos</button> -->
 <!--   </div>
-  </div>--> 
+  </div>-->
 <!-- nombre-de-la-pagina.page.html -->
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Nombre de la Página</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <p>Contenido de la nueva página</p>
+<ion-content class="ion-align-items-center">
+  <p>Iniciar Sesión</p>
+  <ion-button class="btn-Google" >
+    <ion-icon slot="start" src="../../assets/icons/google.svg"></ion-icon>
+    Continuar con Google
+  </ion-button>
+  <ion-input type="text" type="email" placeholder="Correo Electronico"></ion-input>
+  <ion-input type="text" type="password" placeholder="Contraseña"></ion-input>
+  <ion-button class="btn-ingresar">
+    Ingresar
+  </ion-button>
 </ion-content>

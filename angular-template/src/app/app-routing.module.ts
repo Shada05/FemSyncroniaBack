@@ -1,17 +1,22 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/guards/auth.guards';
+import { InicioComponent } from './inicio/inicio.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'inicio',
     pathMatch: 'full'
+  },{
+    path:'inicio',
+    component:InicioComponent
   },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginModule)
   },
+/*
   {
     path: 'products',
     loadChildren: () => import('./products/products.module').then( m => m.ProductsModule),
@@ -22,11 +27,11 @@ const routes: Routes = [
     loadChildren: () => import('./product/product.module').then( m => m.ProductModule),
     canActivate: [AuthGuard]
   },
+*/
   {
     path: '**', 
-    redirectTo: 'login'
+    redirectTo: 'inicio'
   }
-
 ];
 
 @NgModule({
