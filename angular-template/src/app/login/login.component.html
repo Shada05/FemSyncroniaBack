@@ -38,9 +38,9 @@
       <ion-item lines="none" class="ion-no-padding">
         <ion-input [type]="passwordVisible ? 'text' : 'password'" placeholder="Contraseña" errorText="Contraseña incorrecta"
           name="password" [(ngModel)]="usuario.password" #passwordInput="ngModel"
-          (input)="showPasswordIcon = usuario.password.trim() !== ''"(blur)="showPasswordIcon = false">
+          (input)="mostrarIcono = usuario.password.trim() !== ''"(blur)="mostrarIcono = false">
         </ion-input>
-        <ion-icon *ngIf="showPasswordIcon" name="{{ passwordVisible ? 'eye-off-outline' : 'eye-outline' }}" aria-hidden="true"
+        <ion-icon *ngIf="mostrarIcono" name="{{ passwordVisible ? 'eye-off-outline' : 'eye-outline' }}" aria-hidden="true"
           class="ver-config" (click)="verContrasenia()">
         </ion-icon>
       </ion-item>

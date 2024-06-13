@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
     password: ''
   };
   passwordVisible = false;
-  showPasswordIcon = false;
-  
+  mostrarIcono = false;
+
   constructor(/*private _loginService: LoginService, private router: Router*/) {
 
   }
