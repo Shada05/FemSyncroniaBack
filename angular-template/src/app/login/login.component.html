@@ -28,18 +28,33 @@
       <h1>¡Bienvenido!</h1>
       <ion-text>Ingresa tus datos para iniciar sesión</ion-text>
     </div>
-    <ion-input type="email" placeholder="Correo Electronico"></ion-input>
-    <ion-input type="password" placeholder="Contraseña"></ion-input>
-    <div class="recordarme-olvide">
-      <ion-checkbox labelPlacement="end">Recuérdame</ion-checkbox>
-      <a href="#">Olvidé mi contraseña</a>
-    </div>
-      <ion-button class="btn-continuar">
+    <form #formulario="ngForm" (ngSubmit)="enviarDatos()">
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-input type="email" placeholder="Correo Electrónico" errorText="El correo electrónico no es válido"
+          pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" name="email" [(ngModel)]="usuario.email"
+          class="espacio-input">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-input [type]="passwordVisible ? 'text' : 'password'" placeholder="Contraseña" errorText="Contraseña incorrecta"
+          name="password" [(ngModel)]="usuario.password" #passwordInput="ngModel"
+          (input)="showPasswordIcon = usuario.password.trim() !== ''"(blur)="showPasswordIcon = false">
+        </ion-input>
+        <ion-icon *ngIf="showPasswordIcon" name="{{ passwordVisible ? 'eye-off-outline' : 'eye-outline' }}" aria-hidden="true"
+          class="ver-config" (click)="verContrasenia()">
+        </ion-icon>
+      </ion-item>
+      <div class="recordarme-olvide">
+        <ion-checkbox labelPlacement="end">Recuérdame</ion-checkbox>
+        <a href="#">Olvidé mi contraseña</a>
+      </div>
+      <ion-button class="btn-continuar btn-config" type="submit">
         Continuar
       </ion-button>
-      <span>¿No tienes una cuenta? <a [routerLink]="['/login']">Regístrate</a></span>
+    </form>
+    <span>¿No tienes una cuenta? <a [routerLink]="['/login']">Regístrate</a></span>
     <div class="divisor"></div>
-    <ion-button class="btn-Google">
+    <ion-button class="btn-Google btn-config">
       <ion-icon slot="start" style="margin-right: 30px;" src="../../assets/icons/google.svg"></ion-icon>
       Continuar con Google
     </ion-button>
