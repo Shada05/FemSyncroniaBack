@@ -22,15 +22,41 @@
 <!--   </div>
   </div>-->
 <!-- nombre-de-la-pagina.page.html -->
-<ion-content class="ion-align-items-center">
-  <p>Iniciar Sesión</p>
-  <ion-button class="btn-Google" >
-    <ion-icon slot="start" src="../../assets/icons/google.svg"></ion-icon>
-    Continuar con Google
-  </ion-button>
-  <ion-input type="text" type="email" placeholder="Correo Electronico"></ion-input>
-  <ion-input type="text" type="password" placeholder="Contraseña"></ion-input>
-  <ion-button class="btn-ingresar">
-    Ingresar
-  </ion-button>
+<ion-content>
+  <div class="center">
+    <div>
+      <h1>¡Bienvenido!</h1>
+      <ion-text>Ingresa tus datos para iniciar sesión</ion-text>
+    </div>
+    <form #formulario="ngForm" (ngSubmit)="enviarDatos()">
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-input type="email" placeholder="Correo Electrónico" errorText="El correo electrónico no es válido"
+          pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" name="email" [(ngModel)]="usuario.email"
+          class="espacio-input">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-input [type]="passwordVisible ? 'text' : 'password'" placeholder="Contraseña" errorText="Contraseña incorrecta"
+          name="password" [(ngModel)]="usuario.password" #passwordInput="ngModel"
+          (input)="mostrarIcono = usuario.password.trim() !== ''"(blur)="mostrarIcono = false">
+        </ion-input>
+        <ion-icon *ngIf="mostrarIcono" name="{{ passwordVisible ? 'eye-off-outline' : 'eye-outline' }}" aria-hidden="true"
+          class="ver-config" (click)="verContrasenia()">
+        </ion-icon>
+      </ion-item>
+      <div class="recordarme-olvide">
+        <ion-checkbox labelPlacement="end">Recuérdame</ion-checkbox>
+        <a href="#">Olvidé mi contraseña</a>
+      </div>
+      <ion-button class="btn-continuar btn-config" type="submit">
+        Continuar
+      </ion-button>
+    </form>
+    <span>¿No tienes una cuenta? <a [routerLink]="['/login']">Regístrate</a></span>
+    <div class="divisor"></div>
+    <ion-button class="btn-Google btn-config">
+      <ion-icon slot="start" style="margin-right: 30px;" src="../../assets/icons/google.svg"></ion-icon>
+      Continuar con Google
+    </ion-button>
+  </div>
 </ion-content>

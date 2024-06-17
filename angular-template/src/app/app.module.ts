@@ -9,17 +9,20 @@ import { RouteReuseStrategy } from '@angular/router';
 import { InicioComponent } from './inicio/inicio.component';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    IonicModule.forRoot() //peticiones a las API'S
+    IonicModule.forRoot({}), //peticiones a las API'S
+    FormsModule,
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
