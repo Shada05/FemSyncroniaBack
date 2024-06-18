@@ -1,0 +1,73 @@
+<ion-content>
+  <div class="center">
+    <div>
+      <h1>Crea una cuenta</h1>
+      <ion-text>Ingresa tus datos para registrarte</ion-text>
+    </div>
+    <form #formulario="ngForm">
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-input type="text" placeholder="Nombre de usuario" errorText="El usuario ya existe"
+        class="espacio-input">
+        </ion-input>
+      </ion-item>
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-input type="email" placeholder="Correo Electrónico" errorText="El correo electrónico no es válido"
+          pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" name="email" [(ngModel)]="usuario.email"
+          class="espacio-input"
+          > 
+        </ion-input>
+      </ion-item>
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-input 
+          [type]="passwordVisible ? 'text' : 'password'" 
+          placeholder="Contraseña"
+          name="password"
+          errorText="''"
+          [(ngModel)]="usuario.password" 
+          #passwordInput="ngModel"
+          (input)="mostrarIconoPassword = usuario.password.trim() !== '' ; validarContrasenas()" 
+          (blur)="mostrarIconoPassword = false"
+          class="espacio-input"
+          >
+        </ion-input>
+        <ion-icon *ngIf="mostrarIconoPassword" 
+          name="{{ passwordVisible ? 'eye-off-outline' : 'eye-outline' }}"
+          aria-hidden="true" 
+          class="ver-config" 
+          (click)="verContrasena('password')">
+        </ion-icon>
+      </ion-item>
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-input 
+          [type]="confirmarPasswordVisible ? 'text' : 'password'" 
+          placeholder="confirmar constraseña"
+          error-text="las contraseñas no coinciden" 
+          name="confirmarPassword" 
+          [(ngModel)]="usuario.confirmarPassword"
+          #passwordInput="ngModel" 
+          (input)="mostrarIconoConfirmPassword = usuario.confirmarPassword.trim() !== ''; validarContrasenas()"
+          (blur)="mostrarIconoConfirmPassword = false">
+        </ion-input>
+        <ion-icon *ngIf="mostrarIconoConfirmPassword" 
+          name="{{ confirmarPasswordVisible ? 'eye-off-outline' : 'eye-outline' }}"
+          aria-hidden="true" 
+          class="ver-config" 
+          (click)="verContrasena('confirmarPassword')">
+        </ion-icon>
+      </ion-item>
+      <div class="recordarme-olvide">
+        <ion-checkbox labelPlacement="end">Acepto <a href="#">Términos y Condiciones</a></ion-checkbox>
+        
+      </div>
+      <ion-button class="btn-registrarse btn-config" type="submit">
+        Registrarse
+      </ion-button>
+    </form>
+    <span>¿Ya tienes una cuenta? <a [routerLink]="['/login']">Inicia sesión</a></span>
+    <div class="divisor"></div>
+    <ion-button class="btn-Google btn-config">
+      <ion-icon slot="start" style="margin-right: 30px;" src="../../assets/icons/google.svg"></ion-icon>
+      Continuar con Google
+    </ion-button>
+  </div>
+</ion-content>

@@ -10,12 +10,13 @@ import { InicioComponent } from './inicio/inicio.component';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RegistroComponent } from './registro/registro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
-    
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
