@@ -9,8 +9,6 @@ import { NgModel } from '@angular/forms';
 })
 
 export class LoginComponent implements OnInit {
-  username: string = "";
-  password: string = "";
   usuario = {
     email: '',
     password: ''
@@ -26,8 +24,12 @@ export class LoginComponent implements OnInit {
     console.log(this.usuario)
   }
 
-  verContrasenia() {
+  alternarVisibilidadContrasena() {
     this.passwordVisible = !this.passwordVisible;
+  }
+  validarContrasena() {
+    this.mostrarIcono = this.usuario.password.trim() !== '';
+    
   }
   ngOnInit() {
     /*let token =  localStorage.getItem('token');

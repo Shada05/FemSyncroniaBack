@@ -30,20 +30,28 @@
     </div>
     <form #formulario="ngForm" (ngSubmit)="enviarDatos()">
       <ion-item lines="none" class="ion-no-padding">
-        <ion-input type="email" placeholder="Correo Electrónico" errorText="El correo electrónico no es válido"
-          pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" name="email" [(ngModel)]="usuario.email"
-          class="espacio-input">
+        <ion-input label="Correo electrónico" labelPlacement="floating" type="email" name="email" ngModel required email>
         </ion-input>
       </ion-item>
+      <div class="contenedor-error">
+        <ion-text class="mensaje-error"
+          *ngIf="formulario.controls['email']?.invalid && formulario.controls['email']?.touched">
+          Ingresa un correo válido.
+        </ion-text>
+      </div>
       <ion-item lines="none" class="ion-no-padding">
-        <ion-input [type]="passwordVisible ? 'text' : 'password'" placeholder="Contraseña" errorText="Contraseña incorrecta"
-          name="password" [(ngModel)]="usuario.password" #passwordInput="ngModel"
-          (input)="mostrarIcono = usuario.password.trim() !== ''"(blur)="mostrarIcono = false">
+        <ion-input label="Contraseña" labelPlacement="floating" [type]="passwordVisible ? 'text' : 'password'" name="password"
+          [(ngModel)]="usuario.password" required (input)="validarContrasena()" (blur)="mostrarIcono = false">
         </ion-input>
-        <ion-icon *ngIf="mostrarIcono" name="{{ passwordVisible ? 'eye-off-outline' : 'eye-outline' }}" aria-hidden="true"
-          class="ver-config" (click)="verContrasenia()">
-        </ion-icon>
+        <ion-icon *ngIf="mostrarIcono" name="{{ passwordVisible ? 'eye-off-outline' : 'eye-outline' }}"
+          aria-hidden="true" class="ver-config" (click)="alternarVisibilidadContrasena()"></ion-icon>
       </ion-item>
+      <div class="contenedor-error">
+        <ion-text class="mensaje-error"
+          *ngIf="formulario.controls['password']?.invalid && formulario.controls['password']?.touched">
+          La contraseña es requerida.
+        </ion-text>
+      </div>
       <div class="recordarme-olvide">
         <ion-checkbox labelPlacement="end">Recuérdame</ion-checkbox>
         <a href="#">Olvidé mi contraseña</a>
