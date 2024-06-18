@@ -15,15 +15,19 @@ export class RegistroComponent implements OnInit {
   passwordVisible = false;
   confirmarPasswordVisible = false;
   mostrarIconoPassword = false;
-  contrasenasCoinciden = true;
   mostrarIconoConfirmPassword = false;
 
-  constructor() { }
+  constructor() {}
+
   enviarDatos() {
-    console.log(this.usuario)
+    if (this.usuario.password === this.usuario.confirmarPassword) {
+      console.log(this.usuario);
+    } else {
+      console.error('Las contraseñas no coinciden');
+    }
   }
 
-  verContrasena(campo:string) {
+  alternarVisibilidadContrasena(campo: string) {
     if (campo === 'password') {
       this.passwordVisible = !this.passwordVisible;
     } else if (campo === 'confirmarPassword') {
@@ -31,9 +35,18 @@ export class RegistroComponent implements OnInit {
     }
   }
 
-  validarContrasenas() {
-    this.contrasenasCoinciden = this.usuario.password === this.usuario.confirmarPassword;
+  alternarIcono(campo: string) {
+    if (campo === 'password') {
+      this.mostrarIconoPassword = this.usuario.password.trim() !== '';
+    } else if (campo === 'confirmarPassword') {
+      this.mostrarIconoConfirmPassword = this.usuario.confirmarPassword.trim() !== '';
+    }
   }
-  ngOnInit() { }
 
+  validarContrasenas() {
+    this.mostrarIconoPassword = this.usuario.password.trim() !== '';
+    this.mostrarIconoConfirmPassword = this.usuario.confirmarPassword.trim() !== '';
+  }
+
+  ngOnInit() {}
 }
