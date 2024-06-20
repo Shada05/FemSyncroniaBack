@@ -24,35 +24,55 @@
 <!-- nombre-de-la-pagina.page.html -->
 <ion-content>
   <div class="center">
+    <!-- Título -->
     <div>
       <h1>¡Bienvenido!</h1>
       <ion-text>Ingresa tus datos para iniciar sesión</ion-text>
     </div>
-    <form #formulario="ngForm" (ngSubmit)="enviarDatos()">
-      <ion-item lines="none" class="ion-no-padding">
-        <ion-input type="email" placeholder="Correo Electrónico" errorText="El correo electrónico no es válido"
-          pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" name="email" [(ngModel)]="usuario.email"
-          class="espacio-input">
+
+    <!-- Formulario de registro -->
+    <form [formGroup]="formulario" (ngSubmit)="enviarDatos()" novalidate>
+
+      <!-- Campo de Correo Electrónico --> 
+      <ion-item lines="none" class="ion-no-padding" [class.invalid]="formulario.get('email')?.invalid && formulario.get('email')?.touched">
+        <ion-input formControlName="email" label="Correo electrónico" labelPlacement="floating" type="email"
+          name="email" ngModel required email>
         </ion-input>
       </ion-item>
-      <ion-item lines="none" class="ion-no-padding">
-        <ion-input [type]="passwordVisible ? 'text' : 'password'" placeholder="Contraseña" errorText="Contraseña incorrecta"
-          name="password" [(ngModel)]="usuario.password" #passwordInput="ngModel"
-          (input)="mostrarIcono = usuario.password.trim() !== ''"(blur)="mostrarIcono = false">
-        </ion-input>
-        <ion-icon *ngIf="mostrarIcono" name="{{ passwordVisible ? 'eye-off-outline' : 'eye-outline' }}" aria-hidden="true"
-          class="ver-config" (click)="verContrasenia()">
-        </ion-icon>
+      <div class="contenedor-error">
+        <ion-text class="mensaje-error"
+          *ngIf="formulario.get('email')?.hasError('required') && formulario.get('email')?.touched">
+          Ingresa un correo válido.
+        </ion-text>
+      </div>
+
+      <!-- Campo de Contraseña -->
+      <ion-item lines="none" class="ion-no-padding" [class.invalid]="formulario.get('password')?.invalid && formulario.get('password')?.touched">
+        <ion-input formControlName="password" label="Contraseña" labelPlacement="floating"
+          [type]="passwordVisible ? 'text' : 'password'" (input)="alternarIcono()"></ion-input>
+        <ion-icon class="ver-config" *ngIf="mostrarIcono" slot="end"
+          name="{{ passwordVisible ? 'eye-off-outline' : 'eye-outline' }}" aria-hidden="true"
+          (click)="alternarVisibilidadContrasena()"></ion-icon>
       </ion-item>
+      <div class="contenedor-error">
+        <ion-text class="mensaje-error"
+          *ngIf="formulario.get('password')?.hasError('required') && formulario.get('password')?.touched">
+          La contraseña es requerida.
+        </ion-text>
+      </div>
+
+      <!-- Checkbox recordarme -->
       <div class="recordarme-olvide">
         <ion-checkbox labelPlacement="end">Recuérdame</ion-checkbox>
+
+        <!-- Enlace a olvide contraseña -->
         <a href="#">Olvidé mi contraseña</a>
       </div>
       <ion-button class="btn-continuar btn-config" type="submit">
         Continuar
       </ion-button>
     </form>
-    <span>¿No tienes una cuenta? <a [routerLink]="['/login']">Regístrate</a></span>
+    <span>¿No tienes una cuenta? <a [routerLink]="['/registro']">Regístrate</a></span>
     <div class="divisor"></div>
     <ion-button class="btn-Google btn-config">
       <ion-icon slot="start" style="margin-right: 30px;" src="../../assets/icons/google.svg"></ion-icon>
