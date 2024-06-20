@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from './longin.service';
 import { Router } from '@angular/router';
 import { NgModel } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,27 +11,30 @@ import { NgModel } from '@angular/forms';
 })
 
 export class LoginComponent implements OnInit {
-  usuario = {
-    email: '',
-    password: ''
-  };
+  formulario: FormGroup;
   passwordVisible = false;
   mostrarIcono = false;
 
-  constructor(/*private _loginService: LoginService, private router: Router*/) {
-
+  constructor(private fb: FormBuilder) {
+    this.formulario = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    })
   }
 
   enviarDatos() {
-    console.log(this.usuario)
+    if (this.formulario.valid) {
+      console.log(this.formulario.value);
+    } else {
+      console.log('Formulario inválido');
+    }
   }
 
   alternarVisibilidadContrasena() {
     this.passwordVisible = !this.passwordVisible;
   }
-  validarContrasena() {
-    this.mostrarIcono = this.usuario.password.trim() !== '';
-    
+  alternarIcono() {
+    this.mostrarIcono = this.formulario.get('password')?.value.trim() !== '';
   }
   ngOnInit() {
     /*let token =  localStorage.getItem('token');

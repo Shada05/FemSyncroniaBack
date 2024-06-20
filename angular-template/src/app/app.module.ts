@@ -9,13 +9,15 @@ import { RouteReuseStrategy } from '@angular/router';
 import { InicioComponent } from './inicio/inicio.component';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {ReactiveFormsModule } from '@angular/forms';
 import { RegistroComponent } from './registro/registro.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
+    LoginComponent,
     RegistroComponent
   ],
   imports: [
@@ -23,7 +25,6 @@ import { RegistroComponent } from './registro/registro.component';
     AppRoutingModule,
     HttpClientModule,
     IonicModule.forRoot({}), //peticiones a las API'S
-    FormsModule,
     ReactiveFormsModule
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
