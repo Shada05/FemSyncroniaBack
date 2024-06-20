@@ -9,7 +9,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { InicioComponent } from './inicio/inicio.component';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegistroComponent } from './registro/registro.component';
 
 @NgModule({
@@ -24,6 +24,7 @@ import { RegistroComponent } from './registro/registro.component';
     HttpClientModule,
     IonicModule.forRoot({}), //peticiones a las API'S
     FormsModule,
+    ReactiveFormsModule
   ],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
