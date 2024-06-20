@@ -34,7 +34,7 @@
     <form [formGroup]="formulario" (ngSubmit)="enviarDatos()" novalidate>
 
       <!-- Campo de Correo Electrónico --> 
-      <ion-item lines="none" class="ion-no-padding">
+      <ion-item lines="none" class="ion-no-padding" [class.invalid]="formulario.get('email')?.invalid && formulario.get('email')?.touched">
         <ion-input formControlName="email" label="Correo electrónico" labelPlacement="floating" type="email"
           name="email" ngModel required email>
         </ion-input>
@@ -47,7 +47,7 @@
       </div>
 
       <!-- Campo de Contraseña -->
-      <ion-item lines="none" class="ion-no-padding">
+      <ion-item lines="none" class="ion-no-padding" [class.invalid]="formulario.get('password')?.invalid && formulario.get('password')?.touched">
         <ion-input formControlName="password" label="Contraseña" labelPlacement="floating"
           [type]="passwordVisible ? 'text' : 'password'" (input)="alternarIcono()"></ion-input>
         <ion-icon class="ver-config" *ngIf="mostrarIcono" slot="end"

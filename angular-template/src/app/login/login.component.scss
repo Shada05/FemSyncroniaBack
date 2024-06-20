@@ -1,155 +1,182 @@
+/* Estilo para el contenido principal */
 ion-content {
-  --background: none;
-  background-image: url('../../assets/img/login/fondo-login.svg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 100%;
-  height: 100vh;
+  --background: none; /* Sin fondo de color por defecto */
+  background-image: url('../../assets/img/login/fondo-login.svg'); /* Imagen de fondo */
+  background-size: cover; /* La imagen cubre todo el área */
+  background-repeat: no-repeat; /* La imagen no se repite */
+  background-position: center; /* La imagen está centrada */
+  width: 100%; /* Ancho completo */
+  height: 100vh; /* Altura completa de la ventana */
 }
 
+/* Estilo para centrar elementos en una cuadrícula */
 .center {
-  display: grid;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-  height: 100%;
+  display: grid; /* Utiliza grid layout */
+  justify-content: center; /* Centra los elementos horizontalmente */
+  align-content: center; /* Centra los elementos verticalmente */
+  align-items: center; /* Alinea los elementos en el centro */
+  gap: 20px; /* Espacio entre los elementos */
+  width: 100%; /* Ancho completo */
+  height: 100%; /* Altura completa */
 }
 
+/* Estilo para los párrafos */
 p {
-  font-size: 15px;
-  font-family: 'Open sans';
+  font-size: 15px; /* Tamaño de fuente */
+  font-family: 'Open sans'; /* Familia de fuente */
 }
 
+/* Estilo para ion-item */
 ion-item {
-  --background: none;
-  --color: #C8C8C8;
-  --border-color: #B9B9B9;
-  /* Solo el borde inferior tiene ancho de 1px */
-  font-size: 17px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid;
+  --background: none; /* Sin fondo de color por defecto */
+  --color: #C8C8C8; /* Color del texto */
+  --border-color: #B9B9B9; /* Color del borde */
+  font-size: 17px; /* Tamaño de fuente */
+  height: 40px; /* Altura del elemento */
+  display: flex; /* Flexbox layout */
+  align-items: center; /* Alinea los elementos en el centro verticalmente */
+  border-bottom: 1px solid; /* Solo el borde inferior */
 }
 
-ion-input{
-  color: #868686;
+/* Estilos para cuando el elemento es inválido */
+.invalid {
+  border-bottom-color: #FF7B7B !important; /* Color del borde inferior en caso de ser inválido */
 }
-.contenedor-error{
-  height: 20px;
-  display: flex;
-  align-items: center;
-}
-
-.mensaje-error{
-  font-size: 12px;
-  color: rgba(255, 0, 0, 0.45);
-  font-weight: 400;
+/* Estilo para ion-input */
+ion-input {
+  color: #868686; /* Color del texto */
+  --highlight-color-valid: #868686;
 }
 
+.invalid ion-input {
+  color: #FF7B7B; /* Color de texto cuando es inválido */
+  --highlight-color-invalid: #FF7B7B; /* Color del borde inferior cuando es inválido */
+}
+
+/* Contenedor de mensajes de error */
+.contenedor-error {
+  height: 20px; /* Altura del contenedor */
+  display: flex; /* Flexbox layout */
+  align-items: center; /* Alinea los elementos en el centro verticalmente */
+}
+
+/* Estilo para los mensajes de error */
+.mensaje-error {
+  font-size: 12px; /* Tamaño de fuente */
+  color: rgba(255, 0, 0, 0.45); /* Color del texto en un tono rojo translúcido */
+  font-weight: 400; /* Grosor de la fuente */
+}
+
+/* Estilo para el icono de visibilidad de contraseña */
 .ver-config {
-  position: absolute;
-  right: 0px;
-  top: 45%;
-  transform: translateY(-40%);
-  cursor: pointer;
-}
-
-.recordarme-olvide {
-  font-size: 13px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 305px;
-  margin-top: 16px;
-  margin-bottom: 16px;
-}
-
-.recordarme-olvide a {
-  text-decoration: none;
-}
-
-.recordarme-olvide ion-checkbox {
-  --size: 15px;
-  --border-radius: 5px;
-  --border-color: #FF94A0;
-  --checkbox-background-checked: #FF94A0;
-  --border-color-checked: #FF94A0;
-  color: #838383;
-}
-
-span {
-  font-size: 13px;
-  text-align: center;
-  color: #838383;
-}
-
-span a {
-  text-decoration: none;
-}
-
-.divisor {
-  width: 100%;
-  height: 1px;
-  background-color: #B9B9B9;/* Color de la línea */
-  margin: 2px auto;  /* Espacio arriba y abajo de la línea */
   position: relative;
+  left: 15px; /* Posición izquierda */
+  top: 15%; /* Posición superior */
+  cursor: pointer; /* Cambia el cursor a pointer */
 }
 
+/* Estilo para el contenedor de recordar contraseña y enlace de olvidar */
+.recordarme-olvide {
+  font-size: 13px; /* Tamaño de fuente */
+  display: flex; /* Flexbox layout */
+  justify-content: space-between; /* Espacio entre los elementos */
+  align-items: center; /* Alinea los elementos en el centro verticalmente */
+  width: 100%; /* Ancho completo */
+  max-width: 305px; /* Ancho máximo */
+  margin-top: 16px; /* Margen superior */
+  margin-bottom: 16px; /* Margen inferior */
+}
+
+/* Estilo para los enlaces dentro del contenedor de recordar y olvidar */
+.recordarme-olvide a {
+  text-decoration: none; /* Sin subrayado */
+}
+
+/* Estilo para el checkbox */
+.recordarme-olvide ion-checkbox {
+  --size: 15px; /* Tamaño del checkbox */
+  --border-radius: 5px; /* Radio del borde */
+  --border-color: #FF94A0; /* Color del borde */
+  --checkbox-background-checked: #FF94A0; /* Color de fondo cuando está seleccionado */
+  --border-color-checked: #FF94A0; /* Color del borde cuando está seleccionado */
+  color: #838383; /* Color del texto */
+}
+
+/* Estilo para los span */
+span {
+  font-size: 13px; /* Tamaño de fuente */
+  text-align: center; /* Texto centrado */
+  color: #838383; /* Color del texto */
+}
+
+/* Estilo para los enlaces dentro de span */
+span a {
+  text-decoration: none; /* Sin subrayado */
+}
+
+/* Estilo para el divisor */
+.divisor {
+  width: 100%; /* Ancho completo */
+  height: 1px; /* Altura de 1px */
+  background-color: #B9B9B9; /* Color de la línea */
+  margin: 2px auto; /* Margen arriba y abajo */
+  position: relative; /* Posición relativa */
+}
+
+/* Estilo para el texto dentro del divisor */
 .divisor::after {
-  content: "O";
-  font-size: 14px;
-  color: #B9B9B9;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #FCF4F4;
-  /* Fondo para cubrir la línea */
-  padding: 0 5px;
-  /* Espacio alrededor de la letra */
+  content: "O"; /* Texto "O" */
+  font-size: 14px; /* Tamaño de fuente */
+  color: #B9B9B9; /* Color del texto */
+  position: absolute; /* Posición absoluta */
+  top: 50%; /* Alineado al 50% desde la parte superior */
+  left: 50%; /* Alineado al 50% desde la izquierda */
+  transform: translate(-50%, -50%); /* Centra el texto */
+  background-color: #FCF4F4; /* Color de fondo para cubrir la línea */
+  padding: 0 5px; /* Espacio alrededor del texto */
 }
 
+/* Estilo para los botones con configuración personalizada */
 .btn-config {
-  --border-radius: 50px;
-  width: 302px;
-  height: 44px;
-  text-transform: none;
-  font-family: 'Roboto-medium';
+  --border-radius: 50px; /* Radio del borde */
+  width: 302px; /* Ancho del botón */
+  height: 44px; /* Altura del botón */
+  text-transform: none; /* Sin transformación de texto */
+  font-family: 'Roboto-medium'; /* Familia de fuente */
 }
 
+/* Estilo para el botón de continuar */
 .btn-continuar {
-  --background: #FFB7BF;
-  --color: white;
-  --padding-start: 20px;
-  --padding-end: 20px;
-  --border-color: #FFB7BF;
-  --border-style: solid;
-  --border-width: 1px;
-  --box-shadow: none;
-  font-size: 18px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  --background: #FFB7BF; /* Color de fondo */
+  --color: white; /* Color del texto */
+  --padding-start: 20px; /* Espacio al inicio */
+  --padding-end: 20px; /* Espacio al final */
+  --border-color: #FFB7BF; /* Color del borde */
+  --border-style: solid; /* Estilo del borde */
+  --border-width: 1px; /* Ancho del borde */
+  --box-shadow: none; /* Sin sombra */
+  font-size: 18px; /* Tamaño de fuente */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave para color de fondo y texto */
 }
 
+/* Estilo para el botón de continuar en hover */
 .btn-continuar:hover {
-  --background: white;
-  --color: #FFB7BF;
+  --background: white; /* Color de fondo */
+  --color: #FFB7BF; /* Color del texto */
 }
 
+/* Estilo para el botón de Google */
 .btn-Google {
-  font-size: 18px;
-  --color: black;
-  --background: rgba(0, 0, 0, 0.09);
-  --box-shadow: none;
+  font-size: 18px; /* Tamaño de fuente */
+  --color: black; /* Color del texto */
+  --background: rgba(0, 0, 0, 0.09); /* Color de fondo */
+  --box-shadow: none; /* Sin sombra */
 }
 
+/* Estilo para el botón de Google en hover */
 .btn-Google:hover {
-  --background: white;
-  --border-color: rgba(0, 0, 0, 0.09);
-  --border-style: solid;
-  --border-width: 1px;
+  --background: white; /* Color de fondo */
+  --border-color: rgba(0, 0, 0, 0.09); /* Color del borde */
+  --border-style: solid; /* Estilo del borde */
+  --border-width: 1px; /* Ancho del borde */
 }
