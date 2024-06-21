@@ -22,10 +22,10 @@ export class RegistroComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]], // Campo de correo electrónico
       password: ['', [ // Campo de contraseña con varias validaciones
         Validators.required,
-        Validators.minLength(8),
         this.validarMayuscula,
         this.validarNumero,
-        this.validarEspecial
+        this.validarEspecial,
+        this.validarNumCaracteres
       ]],
       confirmarPassword: ['', Validators.required], // Campo de confirmar contraseña
       terms: [false, Validators.requiredTrue] // Checkbox de términos y condiciones
@@ -103,7 +103,15 @@ export class RegistroComponent implements OnInit {
     }
     return null;
   }
+  validarNumCaracteres(control:AbstractControl) :ValidationErrors | null{
+    const contrasena = control.value;
+    const esMayorOIgual = contrasena.length >= 8;
 
+    if(!esMayorOIgual){
+      return{faltaLongitud: true};
+    }
+    return null;
+  }
   // Validador  para verificar si hay al menos un carácter especial en la contraseña
   validarEspecial(control: AbstractControl): ValidationErrors | null {
     const contrasena = control.value;
