@@ -68,7 +68,17 @@ ion-input {
   color: rgba(255, 0, 0, 0.45); /* Color de texto */
   font-weight: 400; /* Grosor de la fuente */
 }
+.tooltip-mensaje{
+  font-size: 12px;
+  color: black;
+}
 
+.valido{
+  color: green;
+}
+.invalido{
+  color:red;
+}
 /* Estilos para el icono de visibilidad */
 .ver-config {
   position: relative;
