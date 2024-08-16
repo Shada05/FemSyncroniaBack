@@ -14,7 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   cycles.init({
-    id: DataTypes.INTEGER,
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false
+    },
     user_id: DataTypes.INTEGER,
     cycle_status: DataTypes.INTEGER,
     weight: DataTypes.FLOAT,

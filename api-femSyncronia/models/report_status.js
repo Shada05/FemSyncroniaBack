@@ -14,7 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   report_status.init({
-    id: DataTypes.INTEGER,
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false
+    },
     name: DataTypes.STRING,
     status: DataTypes.INTEGER,
     created_at: DataTypes.DATE,

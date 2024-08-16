@@ -14,7 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   cycle_symptoms.init({
-    id: DataTypes.INTEGER,
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false
+    },
     cycle_id: DataTypes.INTEGER,
     symptom_id: DataTypes.INTEGER,
     created_at: DataTypes.DATE,

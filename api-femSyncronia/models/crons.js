@@ -14,7 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   crons.init({
-    id: DataTypes.INTEGER,
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false
+    },
     name: DataTypes.STRING,
     cron_status: DataTypes.INTEGER,
     seconds: DataTypes.INTEGER,

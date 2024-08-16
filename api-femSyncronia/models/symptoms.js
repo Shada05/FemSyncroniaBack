@@ -14,7 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   symptoms.init({
-    id: DataTypes.INTEGER,
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false
+    },
     name: DataTypes.STRING,
     symptom_name: DataTypes.STRING,
     frequency: DataTypes.STRING,

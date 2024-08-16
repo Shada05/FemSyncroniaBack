@@ -14,7 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   reports.init({
-    id: DataTypes.INTEGER,
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false
+    },
     doctor_id: DataTypes.INTEGER,
     patient_data_id: DataTypes.INTEGER,
     pdf_path: DataTypes.STRING,

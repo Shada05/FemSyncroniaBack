@@ -14,7 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   emails.init({
-    id: DataTypes.INTEGER,
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false
+    },
     app_id: DataTypes.STRING,
     main: DataTypes.STRING,
     type: DataTypes.STRING,
