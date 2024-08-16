@@ -6,7 +6,7 @@ const Sequelize = require('sequelize');
 const process = require('process');
 const dotenv = require('dotenv');
 const basename = path.basename(__filename);
-dotenv.config();
+dotenv.config(); // Cargar las variables de entorno desde el archivo .env
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
