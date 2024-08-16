@@ -42,10 +42,14 @@
       <div class="contenedor-error">
         <ion-text class="mensaje-error"
           *ngIf="formulario.get('email')?.hasError('required') && formulario.get('email')?.touched">
-          Ingresa un correo válido.
+          El correo electrónico es requerido.
+        </ion-text>
+        <ion-text class="mensaje-error"
+          *ngIf="formulario.get('email')?.hasError('email') && formulario.get('email')?.touched">
+          Ingresa un correo electronico valido.
         </ion-text>
       </div>
-
+      
       <!-- Campo de Contraseña -->
       <ion-item lines="none" class="ion-no-padding" [class.invalid]="formulario.get('password')?.invalid && formulario.get('password')?.touched">
         <ion-input formControlName="password" label="Contraseña" labelPlacement="floating"
@@ -66,7 +70,7 @@
         <ion-checkbox labelPlacement="end">Recuérdame</ion-checkbox>
 
         <!-- Enlace a olvide contraseña -->
-        <a href="#">Olvidé mi contraseña</a>
+        <a [routerLink]="['/enviar-codigo']">Olvidé mi contraseña</a>
       </div>
       <ion-button class="btn-continuar btn-config" type="submit">
         Continuar

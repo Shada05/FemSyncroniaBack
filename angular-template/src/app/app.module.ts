@@ -11,13 +11,15 @@ import { LoginComponent } from './login/login.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {ReactiveFormsModule } from '@angular/forms';
 import { RegistroComponent } from './registro/registro.component';
+import { EnviarCodigoComponent } from './restablecerContrasena/enviar-codigo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
     RegistroComponent,
-    LoginComponent
+    LoginComponent,
+    EnviarCodigoComponent
   ],
   imports: [
     BrowserModule,
