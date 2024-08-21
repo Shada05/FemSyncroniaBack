@@ -12,6 +12,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {ReactiveFormsModule } from '@angular/forms';
 import { RegistroComponent } from './registro/registro.component';
 import { EnviarCodigoComponent } from './restablecerContrasena/enviar-codigo.component';
+import { EscribirCodigoComponent } from './escribir-codigo/escribir-codigo.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { EnviarCodigoComponent } from './restablecerContrasena/enviar-codigo.com
     InicioComponent,
     RegistroComponent,
     LoginComponent,
-    EnviarCodigoComponent
+    EnviarCodigoComponent,
+    EscribirCodigoComponent
   ],
   imports: [
     BrowserModule,

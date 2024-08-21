@@ -5,6 +5,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { RegistroComponent } from './registro/registro.component';
 import { LoginComponent } from './login/login.component';
 import { EnviarCodigoComponent } from './restablecerContrasena/enviar-codigo.component';
+import { EscribirCodigoComponent } from './escribir-codigo/escribir-codigo.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,9 @@ const routes: Routes = [
   },{
     path: 'enviar-codigo',
     component:EnviarCodigoComponent
+  },
+  {path: 'escribir-codigo',
+    component:EscribirCodigoComponent
   },
 /*
   {

@@ -1,0 +1,46 @@
+<ion-content>
+  <div class="centrar">
+    <div>
+      <h1>Consulta tu</h1>
+      <h1>correo electrónico</h1>
+      <ion-text style="margin-top: 10px;">
+        Te enviaremos un código para
+      </ion-text>
+      <ion-text>
+        restablecer tu contraseña.
+      </ion-text>
+      <ion-text style="margin-top: 30px;">
+        Para continuar, ingresa el código de
+      </ion-text>
+      <ion-text>
+        restablecimiento de 6 dígitos.
+      </ion-text>
+    </div>
+
+    <form [formGroup]="formulario">
+      <!-- Campo de entrada para el código de 6 dígitos -->
+      <div class="contenedor-entrada-codigo">
+        <ion-input type="tel" maxlength="6" formControlName="codigo" class="entrada-codigo" inputmode="numeric" (keypress)="validarSoloNumeros($event)"></ion-input>
+        <div class="lineas">
+          <div class="linea"></div>
+          <div class="linea"></div>
+          <div class="linea"></div>
+          <div class="linea"></div>
+          <div class="linea"></div>
+          <div class="linea"></div>
+        </div>
+      </div>
+
+      <!-- Contenedor de botones y línea divisoria -->
+      <div class="contenedor-botones">
+        <ion-button class="btn-validar" type="button">
+          Validar
+        </ion-button>
+        <div class="divisor"></div>
+        <ion-button class="btn-enviar-codigo" type="button">
+          Reenviar Código
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

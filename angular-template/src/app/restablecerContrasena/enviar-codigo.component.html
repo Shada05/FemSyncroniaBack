@@ -10,8 +10,8 @@
       </ion-text>
     </div>
 
-    <!-- Formulario de registro -->
-    <form [formGroup]="formulario" class="form-centered">
+    <!-- Formulario-->
+    <form [formGroup]="formulario">
       <!-- Campo de Correo Electrónico -->
       <ion-item lines="none" class="ion-no-padding"
         [class.invalid]="formulario.get('email')?.invalid && formulario.get('email')?.touched">
@@ -33,7 +33,7 @@
     
       <!-- Botón de Continuar -->
       <div class="button-container">
-        <ion-button class="btn-config" type="submit" [disabled]="formulario.invalid">
+        <ion-button class="btn-config" [routerLink]="['/escribir-codigo']" type="submit" [disabled]="formulario.invalid">
           Continuar
         </ion-button>
       </div>

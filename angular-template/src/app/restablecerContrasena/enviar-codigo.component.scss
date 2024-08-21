@@ -19,6 +19,7 @@ ion-content {
   height: 100vh; /* Tamaño del contenedor al 100% del viewport */
   box-sizing: border-box; /* Incluye el padding y border dentro de los tamaños */
   padding: 0 20px; /* Añade padding para evitar que el contenido quede pegado a los bordes */
+  transform: translateY(-15vh); /* Mueve el contenido hacia arriba. Ajusta este valor según lo necesario */
 }
 
 /* Estilos para el titulo */
@@ -81,6 +82,7 @@ ion-input {
   display: flex;
   justify-content: center; /* Centra el botón horizontalmente */
   width: 100%;
+  margin-top: 30px;
 }
 
 
