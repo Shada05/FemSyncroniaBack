@@ -1,29 +1,59 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { IonInput } from '@ionic/angular';
+
 @Component({
   selector: 'app-escribir-codigo',
   templateUrl: './escribir-codigo.component.html',
   styleUrls: ['./escribir-codigo.component.scss'],
 })
-
 export class EscribirCodigoComponent implements OnInit {
   formulario: FormGroup;
+
+  @ViewChild('codigo1', { static: false }) codigo1: IonInput | null = null;
+  @ViewChild('codigo2', { static: false }) codigo2: IonInput | null = null;
+  @ViewChild('codigo3', { static: false }) codigo3: IonInput | null = null;
+  @ViewChild('codigo4', { static: false }) codigo4: IonInput | null = null;
+  @ViewChild('codigo5', { static: false }) codigo5: IonInput | null = null;
+  @ViewChild('codigo6', { static: false }) codigo6: IonInput | null = null;
+
   constructor(private fb: FormBuilder) {
     this.formulario = this.fb.group({
-      codigo: [null, [Validators.required, Validators.pattern('^[0-9]{6}$')]]  // Asegura que solo 6 dígitos numéricos sean aceptados
+      codigo1: ['', [Validators.required, Validators.pattern('^[0-9]$')]],
+      codigo2: ['', [Validators.required, Validators.pattern('^[0-9]$')]],
+      codigo3: ['', [Validators.required, Validators.pattern('^[0-9]$')]],
+      codigo4: ['', [Validators.required, Validators.pattern('^[0-9]$')]],
+      codigo5: ['', [Validators.required, Validators.pattern('^[0-9]$')]],
+      codigo6: ['', [Validators.required, Validators.pattern('^[0-9]$')]],
     });
   }
-  
-  // Función para permitir solo números
-  validarSoloNumeros(event: any) {
-    const patron = /[0-9.,]/;
-    let caracterIngresado = String.fromCharCode(event.charCode);
 
-    if (!patron.test(caracterIngresado)) {
-      // Caracter inválido, prevenir la entrada
-      event.preventDefault();
+  ngOnInit() {}
+
+  moverFoco(inputActual: IonInput | null, siguienteInput: IonInput | null) {
+    setTimeout(() => {
+      if (inputActual?.value) {
+        siguienteInput?.setFocus();
+      }
+    }, 100);
+  }
+
+  handleKeydown(event: KeyboardEvent, inputAnterior: IonInput | null, inputSiguiente: IonInput | null) {
+    if (event.key === 'Backspace') {
+      if ((event.target as HTMLInputElement).value === '') {
+        if (inputAnterior) {
+          inputAnterior.setFocus();
+        }
+      }
     }
   }
-  ngOnInit() { }
 
+  soloNumeros(input: IonInput | null) {
+    if (input) {
+      // Asegúrate de que el valor sea tratado como una cadena
+      const value = (input.value as string).replace(/[^0-9]/g, '');
+      input.value = value;
+    }
+  }
+  
 }

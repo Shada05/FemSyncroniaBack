@@ -22,6 +22,38 @@ ion-content {
     transform: translateY(-3vh); /* Mueve el contenido hacia arriba. Ajusta este valor según lo necesario */
   }
 
+/* Estilos para centrar los inputs y agregar espacio entre ellos */
+.contenedor-entrada-codigo {
+    position: relative;
+    margin-top: 20px;
+    width: 100%; /* Asegura que el contenedor ocupe el ancho completo */
+    display: flex;
+    justify-content: center; /* Centra el input */
+    gap: 10px; /* Espacio entre cada input */
+}
+
+ion-item {
+    //--highlight-height: 0; /* Quita la línea de enfoque de IonItem */
+    --inner-padding-end: 0;
+    --inner-padding-start: 0;
+    --border-width: 0; /* Elimina cualquier borde preexistente */
+    --background:none;
+    --color:#868686;
+    --border-color:#868686;
+}
+/* Estilos para los inputs */
+ion-input {
+    text-align: center;
+    font-size: 24px;
+    width: 30px; /* Ajusta el ancho del input */
+    height: 20px; /* Ajusta la altura del input */
+    
+}
+
+ion-input:focus {
+    outline: none; /* Quitar el borde de enfoque por defecto */
+    border: 2px solid #007BFF; /* Cambiar color de la línea al enfocarse */
+}
 /* Estilos para el título */
 h1 {
     font-size: 27px;
@@ -83,39 +115,4 @@ ion-text {
     --background: #E9E9E9; /* Color de fondo */
     --color: #9D9D9D; /* Color del texto */
     --border-color: #E9E9E9; /* Color del borde */
-}
-
-.contenedor-entrada-codigo {
-    position: relative;
-    margin-top: 20px;
-    width: 100%; /* Asegura que el contenedor ocupe el ancho completo */
-    display: flex;
-    justify-content: center; /* Centra el input */
-}
-
-.entrada-codigo {
-    text-align: center;
-    font-size: 24px;
-    letter-spacing: 25px; /* Ajusta el espaciado entre números */
-    background: transparent;
-    border: none;
-    outline: none;
-    width: 286px; /* Ajusta el tamaño según sea necesario */
-    --padding-start: 25px;
-    --highlight-color-focused:none;
-    color: #868686;
-}
-
-.lineas {
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    bottom: 0;
-    width: 215px; /* Igual al ancho del input para mantener las líneas alineadas */
-    height: 1px; /* Grosor de la línea */
-}
-
-.linea {
-    width: 12%; /* Ancho de cada línea */
-    background-color: #868686; /* Color de la línea */
 }

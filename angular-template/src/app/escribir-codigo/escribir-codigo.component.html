@@ -18,17 +18,38 @@
     </div>
 
     <form [formGroup]="formulario">
-      <!-- Campo de entrada para el código de 6 dígitos -->
+      <!-- Contenedor de los inputs centrados -->
       <div class="contenedor-entrada-codigo">
-        <ion-input type="tel" maxlength="6" formControlName="codigo" class="entrada-codigo" inputmode="numeric" (keypress)="validarSoloNumeros($event)"></ion-input>
-        <div class="lineas">
-          <div class="linea"></div>
-          <div class="linea"></div>
-          <div class="linea"></div>
-          <div class="linea"></div>
-          <div class="linea"></div>
-          <div class="linea"></div>
-        </div>
+        <ion-item class="ion-no-padding">
+          <ion-input #codigo1 type="text" maxlength="1" formControlName="codigo1" placeholder="0"
+            (input)="soloNumeros(codigo1)" (input)="moverFoco(codigo1, codigo2)"
+            (keydown)="handleKeydown($event, null, codigo2)" inputmode="numeric"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-input #codigo2 type="text" maxlength="1" formControlName="codigo2" placeholder="0"
+            (input)="soloNumeros(codigo2)" (input)="moverFoco(codigo2, codigo3)"
+            (keydown)="handleKeydown($event, codigo1, codigo3)" inputmode="numeric"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-input #codigo3 type="text" maxlength="1" formControlName="codigo3" placeholder="0"
+            (input)="soloNumeros(codigo3)" (input)="moverFoco(codigo3, codigo4)"
+            (keydown)="handleKeydown($event, codigo2, codigo4)" inputmode="numeric"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-input #codigo4 type="text" maxlength="1" formControlName="codigo4" placeholder="0"
+            (input)="soloNumeros(codigo4)" (input)="moverFoco(codigo4, codigo5)"
+            (keydown)="handleKeydown($event, codigo3, codigo5)" inputmode="numeric"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-input #codigo5 type="text" maxlength="1" formControlName="codigo5" placeholder="0"
+            (input)="soloNumeros(codigo5)" (input)="moverFoco(codigo5, codigo6)"
+            (keydown)="handleKeydown($event, codigo4, codigo6)" inputmode="numeric"></ion-input>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-input #codigo6 type="text" maxlength="1" formControlName="codigo6" placeholder="0"
+            (input)="soloNumeros(codigo6)" (keydown)="handleKeydown($event, codigo5, null)"
+            inputmode="numeric"></ion-input>
+        </ion-item>
       </div>
 
       <!-- Contenedor de botones y línea divisoria -->
