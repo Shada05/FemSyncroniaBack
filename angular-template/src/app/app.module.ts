@@ -13,6 +13,7 @@ import {ReactiveFormsModule } from '@angular/forms';
 import { RegistroComponent } from './registro/registro.component';
 import { EnviarCodigoComponent } from './restablecerContrasena/enviar-codigo.component';
 import { EscribirCodigoComponent } from './escribir-codigo/escribir-codigo.component';
+import { CambiarContrasenaComponent } from './cambiar-contrasena/cambiar-contrasena.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { EscribirCodigoComponent } from './escribir-codigo/escribir-codigo.compo
     RegistroComponent,
     LoginComponent,
     EnviarCodigoComponent,
-    EscribirCodigoComponent
+    EscribirCodigoComponent,
+    CambiarContrasenaComponent
   ],
   imports: [
     BrowserModule,

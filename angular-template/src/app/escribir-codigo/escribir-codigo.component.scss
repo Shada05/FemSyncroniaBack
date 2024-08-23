@@ -116,3 +116,10 @@ ion-text {
     --color: #9D9D9D; /* Color del texto */
     --border-color: #E9E9E9; /* Color del borde */
 }
+
+ion-toast{
+    --background:#E4E4E4;
+    --color:black;
+    --border-radius:15px;
+    --height: 85px;
+}

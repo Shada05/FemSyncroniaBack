@@ -6,6 +6,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { LoginComponent } from './login/login.component';
 import { EnviarCodigoComponent } from './restablecerContrasena/enviar-codigo.component';
 import { EscribirCodigoComponent } from './escribir-codigo/escribir-codigo.component';
+import { CambiarContrasenaComponent } from './cambiar-contrasena/cambiar-contrasena.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,9 @@ const routes: Routes = [
   },
   {path: 'escribir-codigo',
     component:EscribirCodigoComponent
+  },{
+    path:'cambiar-contrasena',
+    component:CambiarContrasenaComponent
   },
 /*
   {
