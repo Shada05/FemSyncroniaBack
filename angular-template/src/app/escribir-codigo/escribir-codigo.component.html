@@ -54,7 +54,7 @@
 
       <!-- Contenedor de botones y línea divisoria -->
       <div class="contenedor-botones">
-        <ion-button class="btn-validar" type="button" [disabled]="!botonHabilitado" (click)="enviarCodigo()"
+        <ion-button class="btn-validar" type="button" [disabled]="formulario.invalid" (click)="enviarCodigo()"
           [routerLink]="['/cambiar-contrasena']">
           Validar
         </ion-button>

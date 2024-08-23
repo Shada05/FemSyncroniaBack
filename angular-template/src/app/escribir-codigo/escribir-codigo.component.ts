@@ -9,7 +9,6 @@ import { IonInput } from '@ionic/angular';
 })
 export class EscribirCodigoComponent implements OnInit {
   formulario: FormGroup;
-  botonHabilitado: boolean = false;
 
   @ViewChild('codigo1', { static: false }) codigo1: IonInput | null = null;
   @ViewChild('codigo2', { static: false }) codigo2: IonInput | null = null;
@@ -30,9 +29,6 @@ export class EscribirCodigoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.formulario.statusChanges.subscribe((status) => {
-      this.botonHabilitado = this.formulario.valid;
-    });
   }
 
   moverFoco(inputActual: IonInput | null, siguienteInput: IonInput | null) {
