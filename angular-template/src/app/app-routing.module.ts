@@ -4,6 +4,9 @@ import { AuthGuard } from 'src/guards/auth.guards';
 import { InicioComponent } from './inicio/inicio.component';
 import { RegistroComponent } from './registro/registro.component';
 import { LoginComponent } from './login/login.component';
+import { EnviarCodigoComponent } from './restablecerContrasena/enviar-codigo.component';
+import { EscribirCodigoComponent } from './escribir-codigo/escribir-codigo.component';
+import { CambiarContrasenaComponent } from './cambiar-contrasena/cambiar-contrasena.component';
 
 const routes: Routes = [
   {
@@ -21,6 +24,15 @@ const routes: Routes = [
   {
     path: 'registro',
     component:RegistroComponent
+  },{
+    path: 'enviar-codigo',
+    component:EnviarCodigoComponent
+  },
+  {path: 'escribir-codigo',
+    component:EscribirCodigoComponent
+  },{
+    path:'cambiar-contrasena',
+    component:CambiarContrasenaComponent
   },
 /*
   {

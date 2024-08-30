@@ -11,13 +11,19 @@ import { LoginComponent } from './login/login.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {ReactiveFormsModule } from '@angular/forms';
 import { RegistroComponent } from './registro/registro.component';
+import { EnviarCodigoComponent } from './restablecerContrasena/enviar-codigo.component';
+import { EscribirCodigoComponent } from './escribir-codigo/escribir-codigo.component';
+import { CambiarContrasenaComponent } from './cambiar-contrasena/cambiar-contrasena.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
     RegistroComponent,
-    LoginComponent
+    LoginComponent,
+    EnviarCodigoComponent,
+    EscribirCodigoComponent,
+    CambiarContrasenaComponent
   ],
   imports: [
     BrowserModule,

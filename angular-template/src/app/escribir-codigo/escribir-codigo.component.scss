@@ -1,0 +1,134 @@
+ion-content {
+    --background: none; /* Elimina el fondo por defecto */
+    background-image: url('../../assets/img/login/fondo-login.svg'); /* Fondo con imagen */
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    background-position: center; /* Centra la imagen */
+    width: 100vw; /* Asegura que el contenedor ocupe todo el ancho de la ventana */
+    height: 100vh; /* Tamaño del contenedor al 100% del viewport */
+  }
+
+/* Estilos para centrar el contenido */
+.centrar {
+    display: grid;
+    justify-content: center; /* Centra horizontalmente */
+    align-content: center; /* Centra verticalmente */
+    align-items: center; /* Alinea los elementos internos al centro */
+    gap: 20px; /* Espacio entre elementos */
+    width: 100vw; /* Asegura que el contenedor ocupe todo el ancho de la ventana */
+    height: 100vh; /* Tamaño del contenedor al 100% del viewport */
+    box-sizing: border-box; /* Incluye el padding y border dentro de los tamaños */
+    padding: 0 20px; /* Añade padding para evitar que el contenido quede pegado a los bordes */
+    transform: translateY(-3vh); /* Mueve el contenido hacia arriba. Ajusta este valor según lo necesario */
+  }
+
+/* Estilos para centrar los inputs y agregar espacio entre ellos */
+.contenedor-entrada-codigo {
+    position: relative;
+    margin-top: 20px;
+    width: 100%; /* Asegura que el contenedor ocupe el ancho completo */
+    display: flex;
+    justify-content: center; /* Centra el input */
+    gap: 10px; /* Espacio entre cada input */
+}
+
+ion-item {
+    --highlight-height: 0; /* Quita la línea de enfoque de IonItem */
+    --inner-padding-end: 0;
+    --inner-padding-start: 0;
+    --border-width: 0; /* Elimina cualquier borde preexistente */
+    --background:none;
+    --color:#868686;
+    --border-color:#868686;
+}
+/* Estilos para los inputs */
+ion-input {
+    text-align: center;
+    font-size: 24px;
+    width: 30px; /* Ajusta el ancho del input */
+    height: 20px; /* Ajusta la altura del input */
+}
+
+.invalid {
+    --border-color: #FF7B7B !important; /* Color del borde inferior en caso de ser inválido */
+    color: #FF7B7B;
+}
+
+.invalid ion-input {
+  color: #FF7B7B; /* Color de texto cuando es inválido */
+}
+
+ion-input:focus {
+    outline: none; /* Quitar el borde de enfoque por defecto */
+    border: 2px solid #007BFF; /* Cambiar color de la línea al enfocarse */
+}
+
+/* Estilos para el título */
+h1 {
+    font-size: 27px;
+    margin: 0;
+}
+
+/* Estilos para los textos */
+ion-text {
+    font-family: 'Open Sans';
+    font-size: 15px;
+    font-weight: 400;
+    display: block;
+}
+
+/* Estilo para el contenedor de botones */
+.contenedor-botones {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los botones horizontalmente */
+    justify-content: center;
+    width: 100%; /* Ancho completo */
+    margin-top: 30px; /* Espacio superior */
+}
+
+/* Estilo para la línea divisoria */
+.divisor {
+    width: 302px; /* Ancho completo */
+    height: 1px; /* Altura de la línea */
+    background: #B9B9B9; /* Color gris */
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+/* Estilo para los botones */
+.btn-validar, .btn-enviar-codigo {
+    --border-radius: 50px; /* Radio de borde */
+    width: 302px; /* Ancho del botón */
+    height: 44px; /* Altura del botón */
+    text-transform: none; /* No transformar el texto */
+    font-family: 'Roboto-medium'; /* Familia de fuente */
+    --padding-start: 20px; /* Espacio interior al inicio */
+    --padding-end: 20px; /* Espacio interior al final */
+    --border-style: solid; /* Estilo del borde */
+    --border-width: 1px; /* Ancho del borde */
+    --box-shadow: none; /* Sin sombra */
+    font-size: 18px; /* Tamaño de fuente */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones */
+}
+
+/* Estilo específico para el botón Validar */
+.btn-validar {
+    --background: #FFB7BF; /* Color de fondo */
+    --color: white; /* Color de texto */
+    --border-color: #FFB7BF; /* Color del borde */
+}
+
+/* Estilo específico para el botón Enviar Código */
+.btn-enviar-codigo {
+    --background: #E9E9E9; /* Color de fondo */
+    --color: #9D9D9D; /* Color del texto */
+    --border-color: #E9E9E9; /* Color del borde */
+}
+
+ion-toast{
+    --background:#E4E4E4;
+    --color:black;
+    --border-radius:15px;
+    --height: 85px;
+}
