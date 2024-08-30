@@ -33,7 +33,7 @@ ion-content {
 }
 
 ion-item {
-    //--highlight-height: 0; /* Quita la línea de enfoque de IonItem */
+    --highlight-height: 0; /* Quita la línea de enfoque de IonItem */
     --inner-padding-end: 0;
     --inner-padding-start: 0;
     --border-width: 0; /* Elimina cualquier borde preexistente */
@@ -47,13 +47,22 @@ ion-input {
     font-size: 24px;
     width: 30px; /* Ajusta el ancho del input */
     height: 20px; /* Ajusta la altura del input */
-    
+}
+
+.invalid {
+    --border-color: #FF7B7B !important; /* Color del borde inferior en caso de ser inválido */
+    color: #FF7B7B;
+}
+
+.invalid ion-input {
+  color: #FF7B7B; /* Color de texto cuando es inválido */
 }
 
 ion-input:focus {
     outline: none; /* Quitar el borde de enfoque por defecto */
     border: 2px solid #007BFF; /* Cambiar color de la línea al enfocarse */
 }
+
 /* Estilos para el título */
 h1 {
     font-size: 27px;

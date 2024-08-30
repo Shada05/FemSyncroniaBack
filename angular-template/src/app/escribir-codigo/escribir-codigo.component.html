@@ -20,32 +20,38 @@
     <form [formGroup]="formulario" novalidate>
       <!-- Contenedor de los inputs centrados -->
       <div class="contenedor-entrada-codigo">
-        <ion-item class="ion-no-padding">
+        <ion-item class="ion-no-padding"
+          [class.invalid]="formulario.get('codigo1')?.invalid && formulario.get('codigo1')?.touched">
           <ion-input #codigo1 type="text" maxlength="1" formControlName="codigo1" placeholder="0"
             (input)="soloNumeros(codigo1)" (input)="moverFoco(codigo1, codigo2)"
             (keydown)="handleKeydown($event, null, codigo2)" inputmode="numeric"></ion-input>
         </ion-item>
-        <ion-item class="ion-no-padding">
+        <ion-item class="ion-no-padding"
+          [class.invalid]="formulario.get('codigo2')?.invalid && formulario.get('codigo2')?.touched">
           <ion-input #codigo2 type="text" maxlength="1" formControlName="codigo2" placeholder="0"
             (input)="soloNumeros(codigo2)" (input)="moverFoco(codigo2, codigo3)"
             (keydown)="handleKeydown($event, codigo1, codigo3)" inputmode="numeric"></ion-input>
         </ion-item>
-        <ion-item class="ion-no-padding">
+        <ion-item class="ion-no-padding"
+          [class.invalid]="formulario.get('codigo3')?.invalid && formulario.get('codigo3')?.touched">
           <ion-input #codigo3 type="text" maxlength="1" formControlName="codigo3" placeholder="0"
             (input)="soloNumeros(codigo3)" (input)="moverFoco(codigo3, codigo4)"
             (keydown)="handleKeydown($event, codigo2, codigo4)" inputmode="numeric"></ion-input>
         </ion-item>
-        <ion-item class="ion-no-padding">
+        <ion-item class="ion-no-padding"
+          [class.invalid]="formulario.get('codigo4')?.invalid && formulario.get('codigo4')?.touched">
           <ion-input #codigo4 type="text" maxlength="1" formControlName="codigo4" placeholder="0"
             (input)="soloNumeros(codigo4)" (input)="moverFoco(codigo4, codigo5)"
             (keydown)="handleKeydown($event, codigo3, codigo5)" inputmode="numeric"></ion-input>
         </ion-item>
-        <ion-item class="ion-no-padding">
+        <ion-item class="ion-no-padding"
+          [class.invalid]="formulario.get('codigo5')?.invalid && formulario.get('codigo5')?.touched">
           <ion-input #codigo5 type="text" maxlength="1" formControlName="codigo5" placeholder="0"
             (input)="soloNumeros(codigo5)" (input)="moverFoco(codigo5, codigo6)"
             (keydown)="handleKeydown($event, codigo4, codigo6)" inputmode="numeric"></ion-input>
         </ion-item>
-        <ion-item class="ion-no-padding">
+        <ion-item class="ion-no-padding"
+          [class.invalid]="formulario.get('codigo6')?.invalid && formulario.get('codigo6')?.touched">
           <ion-input #codigo6 type="text" maxlength="1" formControlName="codigo6" placeholder="0"
             (input)="soloNumeros(codigo6)" (keydown)="handleKeydown($event, codigo5, null)"
             inputmode="numeric"></ion-input>
