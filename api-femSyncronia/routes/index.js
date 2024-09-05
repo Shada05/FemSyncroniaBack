@@ -1,22 +1,26 @@
-
 const express = require('express');
 const router = express.Router();
 const usuarioController = require('../controllers/usuario');
+const emailsController = require('../controllers/emailsController');
 
+// Rutas de usuario
 router.post('/api/v1/usuario/', usuarioController.store);
 router.get('/api/v1/usuario/:id', usuarioController.show);
 router.get('/api/v1/usuario/', usuarioController.index);
-/* Controllers */
+router.delete('/api/v1/usuario/:id', usuarioController.destroy);
+router.put('/usuarios/:id', usuarioController.update);
 
-// module.exports = (app) => {
-//    app.get('/api', (req, res) => res.status(200).send ({
-//         message: 'Example project did not give you access to the api web services',
-//    }));
+// Rutas de emails
+router.post('/api/v1/emails/', emailsController.createEmail);
+router.get('/api/v1/emails/:id', emailsController.getEmailById);
+router.get('/api/v1/emails/', emailsController.getAllEmails);
+router.put('/api/v1/emails/:id', emailsController.updateEmail);
+router.delete('/api/v1/emails/:id', emailsController.deleteEmail);
 
-//    app.post('/api/v1/usuario/', usuarioController.store);
-//    app.get('/api/v1/usuario/:id', usuarioController.show);
-//    app.get('/api/v1/usuario/', usuarioController.index);
-// };
+
+// Rutas de Users
+router.post('/api/v1/users/', usuarioController.store);
+
 
 module.exports = {
    router

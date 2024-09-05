@@ -6,7 +6,10 @@ const usersController = require('../controllers/usersController');
 router.post('/', usersController.createUser);
 
 // Obtener todos los usuarios
-router.get('/', usersController.getAllUsers);
+router.get('/', (req, res, next) => {
+    res.send("Estamos en los usuarios");
+    next();  // Llama al siguiente middleware o controlador
+  }, usersController.getAllUsers);
 
 // Obtener un usuario por ID
 router.get('/:id', usersController.getUserById);
@@ -18,3 +21,5 @@ router.put('/:id', usersController.updateUser);
 router.delete('/:id', usersController.deleteUser);
 
 module.exports = router;
+//hola
+

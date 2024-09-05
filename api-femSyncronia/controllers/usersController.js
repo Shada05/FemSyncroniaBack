@@ -26,7 +26,7 @@ exports.getUserById = async (req, res) => {
   try {
     const user = await users.findByPk(req.params.id);
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ error: 'Usuario no encontrado' });
     }
     res.status(200).json(user);
   } catch (error) {
@@ -44,7 +44,7 @@ exports.updateUser = async (req, res) => {
       const updatedUser = await users.findByPk(req.params.id);
       return res.status(200).json(updatedUser);
     }
-    throw new Error('User not found');
+    throw new Error('Usuario no encontrado');
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -57,9 +57,9 @@ exports.deleteUser = async (req, res) => {
       where: { id: req.params.id }
     });
     if (deleted) {
-      return res.status(204).send("User deleted");
+      return res.status(204).send("Usuario eliminado");
     }
-    throw new Error('User not found');
+    throw new Error('Usuario no encontrado');
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

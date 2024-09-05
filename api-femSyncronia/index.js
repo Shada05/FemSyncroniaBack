@@ -17,12 +17,13 @@ app.use(router);
 
 // Log requests to the console.
 app.use(logger('dev'));
-const port = parseInt(process.env.API_PORT) || 3001;
+const port = parseInt(process.env.API_PORT) || 3000;
 app.set('port', port);
 const server = http.createServer(app);
 
 app.listen(port, async()=>{
     console.log(`Servidor Corriendo en el puerto ${port}, ${process.env.NODE_ENV}`);
+    console.log('Aqui se encuentra el server');
 });   
 
 module.exports = app;  
