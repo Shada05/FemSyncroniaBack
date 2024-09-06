@@ -1,0 +1,7 @@
+{
+  "name": "front-femSyncronia",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
