@@ -1,4 +1,5 @@
 <ion-content>
+  <ion-button shape="round" class="skip-button" [routerLink]="['/login']">skip</ion-button>
   <swiper-container [pagination]="true">
     <swiper-slide class="slide">
       <div class="section">
@@ -29,12 +30,12 @@
         <p>No más preocupaciones </p>
         <p>siéntete segura</p>
       </div>
-     <div class="section">
+      <div class="section">
         <img src="../../assets/img/inicio/portada-3.svg" alt="Portada 3">
-     </div> 
+      </div>
       <div class="section">
         <p>Sincroniza tu vida</p>
-        <ion-button class="ion-padding" [routerLink]="['/login']">Iniciar sesión</ion-button>
+        <ion-button class="ion-padding sesion-button" [routerLink]="['/login']">Iniciar sesión</ion-button>
       </div>
     </swiper-slide>
   </swiper-container>
