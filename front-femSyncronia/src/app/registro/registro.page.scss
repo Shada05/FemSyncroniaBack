@@ -1,0 +1,199 @@
+/* Estilos para el contenido principal */
+ion-content {
+    --background: none; /* Elimina el fondo por defecto */
+    background-image: url('../../assets/img/login/fondo-login.svg'); /* Fondo con imagen */
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    background-position: center; /* Centra la imagen */
+    width: 100%;
+    height: 100vh; /* Tamaño del contenedor al 100% del viewport */
+  }
+  
+  /* Estilos para centrar el contenido */
+  .center {
+    display: grid;
+    justify-content: center; /* Centra horizontalmente */
+    align-content: center; /* Centra verticalmente */
+    align-items: center; /* Alinea los elementos internos al centro */
+    gap: 20px; /* Espacio entre elementos */
+    width: 100%;
+    height: 100%; /* Tamaño del contenedor al 100% del viewport */
+  }
+  
+  /* Estilos para los párrafos */
+  ion-text {
+    font-size: 15px;
+    font-family: 'Open sans'; /* Familia de fuente */
+    color: black;
+  }
+  h1 {
+    color:black;
+  }
+  /* Estilos para los elementos ion-item */
+  ion-item {
+    --background: none; /* Elimina el fondo por defecto */
+    --color: #C8C8C8; /* Color de texto por defecto */
+    --border-color: #B9B9B9; /* Color del borde */
+    font-size: 17px; /* Tamaño de fuente */
+    height: 40px; /* Altura del elemento */
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos */
+    border-bottom: 1px solid; /* Borde inferior del elemento */
+  }
+  
+  /* Estilos para cuando el elemento es inválido */
+  .invalid {
+    border-bottom-color: #FF7B7B !important; /* Color del borde inferior en caso de ser inválido */
+  }
+  
+  /* Estilos para los elementos ion-input dentro de ion-item */
+  ion-input {
+    color: #868686; /* Color de texto por defecto */
+    --highlight-color-valid: #868686;
+  }
+  
+  /* Estilos para ion-input cuando es inválido */
+  .invalid ion-input {
+    color: #FF7B7B; /* Color de texto cuando es inválido */
+    --highlight-color-invalid: #FF7B7B; /* Color del borde inferior cuando es inválido */
+  }
+  
+  /* Estilos para el contenedor de mensajes de error */
+  .contenedor-error {
+    height: 20px; /* Altura del contenedor */
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos */
+  }
+  
+  /* Estilos para los mensajes de error */
+  .mensaje-error {
+    font-size: 12px; /* Tamaño de fuente */
+    color: rgba(255, 0, 0, 0.45); /* Color de texto */
+    font-weight: 400; /* Grosor de la fuente */
+  }
+  .tooltip-mensaje{
+    font-size: 12px;
+    color: black;
+  }
+  
+  .valido{
+    color: green;
+  }
+  .invalido{
+    color:red;
+  }
+  /* Estilos para el icono de visibilidad */
+  .ver-config {
+    position: relative;
+    left: 15px; /* Posición izquierda */
+    top: 15%; /* Posición superior */
+    cursor: pointer; /* Cambia el cursor a pointer */
+  }
+  
+  /* Estilos para el contenedor de recordarme y olvidé */
+  .terminos {
+    font-size: 13px; /* Tamaño de fuente */
+    display: flex;
+    justify-content: space-between; /* Espacio entre elementos */
+    align-items: center; /* Alinea verticalmente los elementos */
+    width: 100%;
+    max-width: 305px; /* Ancho máximo del contenedor */
+    margin-top: 16px; /* Margen superior */
+    margin-bottom: 16px; /* Margen inferior */
+  }
+  
+  /* Estilos para el enlace dentro de recordarme-olvidé */
+  .terminos a {
+    text-decoration: none; /* Sin subrayado */
+  }
+  
+  /* Estilos para el ion-checkbox dentro de recordarme-olvidé */
+  .terminos ion-checkbox {
+    --size: 15px; /* Tamaño del checkbox */
+    --border-radius: 5px; /* Radio del borde */
+    --border-color: #FF94A0; /* Color del borde */
+    --checkbox-background-checked: #FF94A0; /* Color de fondo cuando está seleccionado */
+    --border-color-checked: #FF94A0; /* Color del borde cuando está seleccionado */
+    color: #838383; /* Color del texto */
+    --checkbox-background:#FF94A0;
+    --checkmark-color:white;
+  }
+  
+  /* Estilos para los elementos <span> */
+  span {
+    font-size: 13px; /* Tamaño de fuente */
+    text-align: center; /* Alineación de texto */
+    color: #838383; /* Color de texto */
+  }
+  
+  /* Estilos para los enlaces dentro de <span> */
+  span a {
+    text-decoration: none; /* Sin subrayado */
+  }
+  
+  /* Estilos para el divisor */
+  .divisor {
+    width: 100%; /* Ancho completo */
+    height: 1px; /* Altura del divisor */
+    background-color: #B9B9B9; /* Color de fondo */
+    margin: 2px auto; /* Margen superior e inferior automático */
+    position: relative; /* Posición relativa */
+  }
+  
+  /* Estilos para el pseudoelemento ::after del divisor */
+  .divisor::after {
+    content: "O"; /* Contenido del pseudoelemento */
+    font-size: 14px; /* Tamaño de fuente */
+    color: #B9B9B9; /* Color de texto */
+    position: absolute; /* Posición absoluta */
+    top: 50%; /* Posición superior al 50% */
+    left: 50%; /* Posición izquierda al 50% */
+    transform: translate(-50%, -50%); /* Centra el contenido */
+    background-color: #FCF4F4; /* Fondo para cubrir la línea */
+    padding: 0 5px; /* Espacio alrededor de la letra */
+  }
+  
+  /* Estilos generales para los botones */
+  .btn-config {
+    --border-radius: 50px; /* Radio de borde */
+    width: 302px; /* Ancho del botón */
+    height: 44px; /* Altura del botón */
+    text-transform: none; /* Transformación de texto */
+    font-family: 'Roboto-medium'; /* Familia de fuente */
+  }
+  
+  /* Estilos específicos para el botón de registrarse */
+  .btn-registrarse {
+    --background: #FFB7BF; /* Color de fondo */
+    --color: white; /* Color de texto */
+    --padding-start: 20px; /* Espacio interior al inicio */
+    --padding-end: 20px; /* Espacio interior al final */
+    --border-color: #FFB7BF; /* Color del borde */
+    --border-style: solid; /* Estilo de borde */
+    --border-width: 1px; /* Ancho de borde */
+    --box-shadow: none; /* Sin sombra */
+    font-size: 18px; /* Tamaño de fuente */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones */
+  }
+  
+  /* Estilos para el botón de registrarse al pasar el mouse */
+  .btn-registrarse:hover {
+    --background: white; /* Cambio de color de fondo */
+    --color: #FFB7BF; /* Cambio de color de texto */
+  }
+  
+  /* Estilos específicos para el botón de Google */
+  .btn-Google {
+    font-size: 18px; /* Tamaño de fuente */
+    --color: black; /* Color de texto */
+    --background: rgba(0, 0, 0, 0.09); /* Color de fondo */
+    --box-shadow: none; /* Sin sombra */
+  }
+  
+  /* Estilos para el botón de Google al pasar el mouse */
+  .btn-Google:hover {
+    --background: white; /* Cambio de color de fondo */
+    --border-color: rgba(0, 0, 0, 0.09); /* Cambio de color del borde */
+    --border-style: solid; /* Estilo de borde */
+    --border-width: 1px; /* Ancho de borde */
+  }

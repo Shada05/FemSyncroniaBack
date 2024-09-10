@@ -1,0 +1,126 @@
+<ion-content>
+  <div class="center">
+    <!-- Título -->
+    <div>
+      <h1>Crea una cuenta</h1>
+      <ion-text>Ingresa tus datos para registrarte</ion-text>
+    </div>
+
+    <!-- Formulario de registro -->
+    <form [formGroup]="formulario" (ngSubmit)="enviarDatos()" novalidate>
+
+      <!-- Campo de Usuario -->
+      <ion-item lines="none" class="ion-no-padding"
+        [class.invalid]="formulario.get('username')?.invalid && formulario.get('username')?.touched">
+        <ion-input formControlName="username" label="Usuario" labelPlacement="floating" type="text"
+          required></ion-input>
+      </ion-item>
+      <div class="contenedor-error">
+        <ion-text class="mensaje-error"
+          *ngIf="formulario.get('username')?.hasError('required') && formulario.get('username')?.touched">
+          El nombre de usuario es requerido.
+        </ion-text>
+      </div>
+
+      <!-- Campo de Correo Electrónico -->
+      <ion-item lines="none" class="ion-no-padding"
+        [class.invalid]="formulario.get('email')?.invalid && formulario.get('email')?.touched">
+        <ion-input formControlName="email" label="Correo electrónico" labelPlacement="floating" type="email"
+          required></ion-input>
+      </ion-item>
+      <div class="contenedor-error">
+        <ion-text class="mensaje-error"
+          *ngIf="formulario.get('email')?.hasError('required') && formulario.get('email')?.touched">
+          El correo electrónico es requerido.
+        </ion-text>
+        <ion-text class="mensaje-error"
+          *ngIf="formulario.get('email')?.hasError('email') && formulario.get('email')?.touched">
+          Ingresa un correo electronico valido.
+        </ion-text>
+      </div>
+
+      <!-- Campo de Contraseña -->
+      <ion-item lines="none" class="ion-no-padding"
+        [class.invalid]="formulario.get('password')?.invalid && formulario.get('password')?.touched">
+        <ion-input formControlName="password" label="Contraseña" labelPlacement="floating"
+          [type]="passwordVisible ? 'text' : 'password'" (input)="alternarIcono('password')"></ion-input>
+        <ion-icon class="ver-config" *ngIf="mostrarIconoPassword" slot="end"
+          name="{{ passwordVisible ? 'eye-off-outline' : 'eye-outline' }}"
+          (click)="alternarVisibilidadContrasena('password')"></ion-icon>
+        <div class="">
+          <ion-text class="tooltip-mensaje"
+          *ngIf="formulario.get('password')?.touched">
+          <ion-icon [name]="formulario.get('password')?.hasError('faltaLongitud') ? 'close' : 'checkmark'"
+          [class.valido]="!formulario.get('password')?.hasError('faltaLongitud')"
+          [class.invalido]="formulario.get('password')?.hasError('faltaLongitud')"></ion-icon>
+          La contraseña debe tener al menos 8 caracteres.
+        </ion-text>
+        <ion-text class="tooltip-mensaje"
+          *ngIf="formulario.get('password')?.touched ">
+          <ion-icon [name]="formulario.get('password')?.hasError('faltaMayuscula') ? 'close' : 'checkmark'"
+          [class.valido]="!formulario.get('password')?.hasError('faltaMayuscula')"
+          [class.invalido]="formulario.get('password')?.hasError('faltaMayuscula')"></ion-icon>
+          La contraseña debe contener al menos una letra mayúscula.
+        </ion-text>
+        <ion-text class="tooltip-mensaje"
+          *ngIf="formulario.get('password')?.touched">
+          <ion-icon [name]="formulario.get('password')?.hasError('faltaNumero') ? 'close' : 'checkmark'"
+          [class.valido]="!formulario.get('password')?.hasError('faltaNumero')"
+          [class.invalido]="formulario.get('password')?.hasError('faltaNumero')"></ion-icon>
+          La contraseña debe contener al menos un número.
+        </ion-text>
+        <ion-text class="tooltip-mensaje"
+          *ngIf="formulario.get('password')?.touched">
+          <ion-icon [name]="formulario.get('password')?.hasError('faltaEspecial') ? 'close' : 'checkmark'"
+          [class.valido]="!formulario.get('password')?.hasError('faltaEspecial')"
+          [class.invalido]="formulario.get('password')?.hasError('faltaEspecial')"></ion-icon>
+          La contraseña debe contener al menos un carácter especial.
+        </ion-text>
+        </div>
+      </ion-item>
+      <div class="contenedor-error">
+        <ion-text class="mensaje-error"
+        *ngIf="formulario.get('password')?.hasError('required') && formulario.get('password')?.touched">
+        <ion-icon name="close"></ion-icon>
+        La contraseña es requerida.
+      </ion-text>
+      </div>
+      <!-- Campo de Confirmar Contraseña -->
+      <ion-item lines="none" class="ion-no-padding"
+        [class.invalid]="formulario.get('confirmarPassword')?.invalid && formulario.get('confirmarPassword')">
+        <ion-input formControlName="confirmarPassword" label="Confirmar contraseña" labelPlacement="floating"
+          [type]="confirmarPasswordVisible ? 'text' : 'password'"
+          (input)="alternarIcono('confirmarPassword')"></ion-input>
+        <ion-icon class="ver-config" *ngIf="mostrarIconoConfirmPassword" slot="end"
+          name="{{ confirmarPasswordVisible ? 'eye-off-outline' : 'eye-outline' }}"
+          (click)="alternarVisibilidadContrasena('confirmarPassword')"></ion-icon>
+      </ion-item>
+      <div class="contenedor-error">
+        <ion-text class="mensaje-error" *ngIf="formulario.hasError('passwordMismatch')">
+          Las contraseñas no coinciden.
+        </ion-text>
+      </div>
+
+      <!-- Checkbox de Términos y Condiciones -->
+      <div class="terminos">
+        <ion-checkbox formControlName="terms" labelPlacement="end" required>Acepto <a href="#">Términos y
+            Condiciones</a></ion-checkbox>
+      </div>
+
+      <!-- Botón de Registrarse -->
+      <ion-button class="btn-registrarse btn-config" type="submit" [disabled]="formulario.invalid">
+        Registrarse
+      </ion-button>
+    </form>
+
+    <!-- Enlace a Iniciar Sesión -->
+    <span>¿Ya tienes una cuenta? <a [routerLink]="['/login']">Inicia sesión</a></span>
+    <div class="divisor"></div>
+
+    <!-- Botón de Continuar con Google -->
+    <ion-button class="btn-Google btn-config">
+      <ion-icon slot="start" style="margin-right: 30px;" src="../../assets/icons/google.svg"></ion-icon>
+      Continuar con Google
+    </ion-button>
+  </div>
+</ion-content>
