@@ -23,6 +23,14 @@ const routes: Routes = [
     path: 'registro',
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
   },
+  {
+    path: 'enviar-codigo',
+    loadChildren: () => import('./recuperar-contrasena/enviar-codigo/enviar-codigo.module').then( m => m.EnviarCodigoPageModule)
+  },
+  {
+    path: 'validar-codigo',
+    loadChildren: () => import('./recuperar-contrasena/validar-codigo/validar-codigo.module').then( m => m.ValidarCodigoPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,118 @@
+ion-content {
+    --background: none; /* Elimina el fondo por defecto */
+    background-image: url('../../../assets/img/login/fondo-login.svg'); /* Fondo con imagen */
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    background-position: center; /* Centra la imagen */
+    width: 100vw; /* Asegura que el contenedor ocupe todo el ancho de la ventana */
+    height: 100vh; /* Tamaño del contenedor al 100% del viewport */
+  }
+  
+  /* Estilos para centrar el contenido */
+  .center {
+    display: grid;
+    justify-content: center; /* Centra horizontalmente */
+    align-content: center; /* Centra verticalmente */
+    align-items: center; /* Alinea los elementos internos al centro */
+    width: 100%;
+    height: 100%; /* Tamaño del contenedor al 100% del viewport */
+    transform: translateY(-10vh); /* Mueve el contenido hacia arriba. Ajusta este valor según lo necesario */
+    gap:20px;
+  }
+  
+  /* Estilos para el titulo */
+  h1{
+    width: 211px;
+    height: 73px;
+    color: black;
+  }
+  
+  ion-text{
+    font-family: 'Open Sans';
+    font-size: 15px;
+    font-weight: 400;
+    display: block;
+    color: black;
+  }
+  /* Estilos para los elementos ion-item */
+  ion-item {
+    --background: none; /* Elimina el fondo por defecto */
+    --color: #C8C8C8; /* Color de texto por defecto */
+    --border-color: #B9B9B9; /* Color del borde */
+    font-size: 17px; /* Tamaño de fuente */
+    height: 40px; /* Altura del elemento */
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos */
+    border-bottom: 1px solid; /* Borde inferior del elemento */
+  }
+  
+  .invalid {
+    border-bottom-color: #FF7B7B !important; /* Color del borde inferior en caso de ser inválido */
+  }
+  
+  /* Estilo para ion-input */
+  ion-input {
+    color: #868686; /* Color del texto */
+    --highlight-color-valid: #868686;
+    --highlight-color-focused:none;
+  }
+  
+  .invalid ion-input {
+    color: #FF7B7B; /* Color de texto cuando es inválido */
+    --highlight-color-invalid: #FF7B7B; /* Color del borde inferior cuando es inválido */
+  }
+  
+  /* Contenedor de mensajes de error */
+  .contenedor-error {
+    height: 20px; /* Altura del contenedor */
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Alinea los elementos en el centro verticalmente */
+  }
+  
+  /* Estilo para los mensajes de error */
+  .mensaje-error {
+    font-size: 12px; /* Tamaño de fuente */
+    color: rgba(255, 0, 0, 0.45); /* Color del texto en un tono rojo translúcido */
+    font-weight: 400; /* Grosor de la fuente */
+  }
+  .form-centered {
+    width: 100%; /* Ocupa todo el ancho disponible */
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  
+  .btn-continuar {
+    --border-radius: 50px; /* Radio de borde */
+    width: 302px; /* Ancho del botón */
+    height: 44px; /* Altura del botón */
+    text-transform: none; /* Transformación de texto */
+    font-family: 'Roboto-medium'; /* Familia de fuente */
+    --background: #FFB7BF; /* Color de fondo */
+    --color: white; /* Color de texto */
+    --padding-start: 20px; /* Espacio interior al inicio */
+    --padding-end: 20px; /* Espacio interior al final */
+    --border-color: #FFB7BF; /* Color del borde */
+    --border-style: solid; /* Estilo de borde */
+    --border-width: 1px; /* Ancho de borde */
+    --box-shadow: none; /* Sin sombra */
+    font-size: 18px; /* Tamaño de fuente */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones */
+  }
+  
+  /* Estilos para el botón de registrarse al pasar el mouse */
+  .btn-continuar:hover {
+    --background: white; /* Cambio de color de fondo */
+    --color: #FFB7BF; /* Cambio de color de texto */
+  }
+  
+  a{
+    text-align: center;
+    text-decoration: none;
+    font-size: 13px;
+  }
