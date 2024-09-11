@@ -85,9 +85,10 @@ ion-content {
   /* Estilos para el icono de visibilidad */
   .ver-config {
     position: relative;
-    left: 15px; /* Posición izquierda */
-    top: 15%; /* Posición superior */
+    left: 5px; /* Posición izquierda */
+    top: 10%; /* Posición superior */
     cursor: pointer; /* Cambia el cursor a pointer */
+    color: #868686;
   }
   
   /* Estilos para el contenedor de recordarme y olvidé */
