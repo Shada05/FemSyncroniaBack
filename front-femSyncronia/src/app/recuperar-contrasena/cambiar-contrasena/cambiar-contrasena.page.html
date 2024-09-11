@@ -16,7 +16,7 @@
         [class.invalid]="formulario.get('password')?.invalid && formulario.get('password')?.touched">
         <ion-input formControlName="password" label="Contraseña" labelPlacement="floating"
           [type]="passwordVisible ? 'text' : 'password'" (input)="alternarIcono('password')"></ion-input>
-        <ion-icon class="ver-config" *ngIf="mostrarIconoPassword" slot="end"
+        <ion-icon class="icono" *ngIf="mostrarIconoPassword" slot="end"
           name="{{ passwordVisible ? 'eye-off-outline' : 'eye-outline' }}"
           (click)="alternarVisibilidadContrasena('password')"></ion-icon>
         <div>
@@ -59,7 +59,7 @@
         <ion-input formControlName="confirmarPassword" label="Confirmar contraseña" labelPlacement="floating"
           [type]="confirmarPasswordVisible ? 'text' : 'password'"
           (input)="alternarIcono('confirmarPassword')"></ion-input>
-        <ion-icon class="ver-config" *ngIf="mostrarIconoConfirmPassword" slot="end"
+        <ion-icon class="icono" *ngIf="mostrarIconoConfirmPassword" slot="end"
           name="{{ confirmarPasswordVisible ? 'eye-off-outline' : 'eye-outline' }}"
           (click)="alternarVisibilidadContrasena('confirmarPassword')"></ion-icon>
       </ion-item>

@@ -32,7 +32,7 @@
           [type]="passwordVisible ? 'text' : 'password'" (input)="alternarIcono()"></ion-input>
         <!-- Icono de visibilidad de la contraseña -->
         <ion-icon *ngIf="mostrarIcono" slot="end" [name]=" passwordVisible ? 'eye-off-outline' : 'eye-outline' "
-          class="ver-config" (click)="alternarVisibilidadContrasena()" style="cursor: pointer;">
+          class="icono" (click)="alternarVisibilidadContrasena()" style="cursor: pointer;">
         </ion-icon>
       </ion-item>
       <div class="contenedor-error">
