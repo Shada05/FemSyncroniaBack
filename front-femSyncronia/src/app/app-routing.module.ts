@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'validar-codigo',
     loadChildren: () => import('./recuperar-contrasena/validar-codigo/validar-codigo.module').then( m => m.ValidarCodigoPageModule)
   },
+  {
+    path: 'cambiar-contrasena',
+    loadChildren: () => import('./recuperar-contrasena/cambiar-contrasena/cambiar-contrasena.module').then( m => m.CambiarContrasenaPageModule)
+  },
 ];
 
 @NgModule({
