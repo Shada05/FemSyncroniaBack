@@ -20,17 +20,53 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       allowNull: false
     },
-    birthdate: DataTypes.DATE,
-    username: DataTypes.STRING,
-    user_status: DataTypes.INTEGER,
-    email: DataTypes.STRING,
-    profile_image: DataTypes.STRING,
-    password: DataTypes.STRING,
-    phone: DataTypes.STRING,
-    token: DataTypes.STRING,
-    created_at: DataTypes.DATE,
-    update_at: DataTypes.DATE,
-    deleted_at: DataTypes.DATE
+    birthdate: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    user_status: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false
+     },
+    profile_image: {
+    type: DataTypes.STRING,
+    allowNull: false
+    },
+    password: {
+    type: DataTypes.STRING,
+    allowNull: false
+    },
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: false
+      },
+    token: {
+      type: DataTypes.STRING,
+      allowNull: false
+      },
+      createdAt: {
+        allowNull: false, 
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+    },
+    updatedAt: {
+        allowNull: false, 
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+    },
+    deleted_at: {
+      allowNull: false, 
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    }
   }, {
     sequelize,
     modelName: 'users',

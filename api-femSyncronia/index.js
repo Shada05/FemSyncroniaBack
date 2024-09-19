@@ -23,6 +23,7 @@ const server = http.createServer(app);
 
 app.listen(port, async()=>{
     console.log(`Servidor Corriendo en el puerto ${port}, ${process.env.NODE_ENV}`);
+    console.log('Aqui se encuentra el server');
 });   
 
 module.exports = app;  

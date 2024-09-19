@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.INTEGER,
     cycle_id: DataTypes.INTEGER,
     created_at: DataTypes.DATE,
-    update_at: DataTypes.DATE,
+    updated_at: DataTypes.DATE,
     deleted_at: DataTypes.DATE
   }, {
     sequelize,
@@ -31,3 +31,4 @@ module.exports = (sequelize, DataTypes) => {
   });
   return patient_data;
 };
+

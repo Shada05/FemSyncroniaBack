@@ -1,14 +1,7 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class emails extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
       // define association here
     }
@@ -20,22 +13,65 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       allowNull: false
     },
-    app_id: DataTypes.STRING,
-    main: DataTypes.STRING,
-    type: DataTypes.STRING,
-    host: DataTypes.STRING,
-    port: DataTypes.INTEGER,
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    encryption: DataTypes.STRING,
-    from_name: DataTypes.STRING,
-    from_address: DataTypes.STRING,
-    created_at: DataTypes.DATE,
-    update_at: DataTypes.DATE,
-    deleted_at: DataTypes.DATE
+    app_id: {
+      type:DataTypes.STRING(255),
+      allowNull: false  
+    },
+    main: {
+        type:DataTypes.STRING(255),
+        allowNull: false  
+      },
+    type:{
+      type:DataTypes.STRING(255),
+      allowNull: false  
+    },
+    host: {
+      type:DataTypes.STRING(255),
+      allowNull: false  
+    },
+    port: {
+      type:DataTypes.INTEGER,
+      allowNull: false
+      },
+    username: {
+      type:DataTypes.STRING(255),
+      allowNull: false  
+    },
+    password: {
+      type:DataTypes.STRING(255),
+      allowNull: false  
+    },
+    encryption: {
+      type:DataTypes.STRING(255),
+      allowNull: false  
+    },
+    from_name: {
+      type:DataTypes.STRING(255),
+      allowNull: false  
+    },
+    from_address: {
+      type:DataTypes.STRING(255),
+      allowNull: false  
+    },
+    created_at: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,  // Asigna automáticamente la fecha y hora actual
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
+    deleted_at: {
+      type: DataTypes.DATE,
+    }
   }, {
     sequelize,
     modelName: 'emails',
+    timestamps: true,  // Para que Sequelize maneje automáticamente los timestamps
+    createdAt: 'created_at', // Indica a Sequelize que use 'created_at'
+    updatedAt: 'update_at',  // Indica a Sequelize que use 'update_at'
+    deletedAt: 'deleted_at',  // Indica a Sequelize que use 'deleted_at' si usas soft deletes
+    paranoid: true // Para activar soft deletes y que use la columna 'deleted_at'
   });
   return emails;
 };
