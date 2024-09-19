@@ -34,7 +34,11 @@ const routes: Routes = [
   {
     path: 'cambiar-contrasena',
     loadChildren: () => import('./recuperar-contrasena/cambiar-contrasena/cambiar-contrasena.module').then( m => m.CambiarContrasenaPageModule)
+  },  {
+    path: 'confirmacion',
+    loadChildren: () => import('./recuperar-contrasena/confirmacion/confirmacion.module').then( m => m.ConfirmacionPageModule)
   },
+
 ];
 
 @NgModule({
