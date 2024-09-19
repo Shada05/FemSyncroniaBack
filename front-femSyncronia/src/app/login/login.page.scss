@@ -72,13 +72,14 @@ ion-content {
     font-weight: 400; /* Grosor de la fuente */
   }
   
-  /* Estilo para el icono de visibilidad de contraseña */
-  .ver-config {
-    position: relative;
-    left: 15px; /* Posición izquierda */
-    top: 15%; /* Posición superior */
-    cursor: pointer; /* Cambia el cursor a pointer */
-  }
+ /* Estilos para el icono de visibilidad */
+.icono{
+  position: relative;
+  left: 5px; /* Posición izquierda */
+  top: 10%; /* Posición superior */
+  cursor: pointer; /* Cambia el cursor a pointer */
+  color: #868686;
+}
   
   /* Estilo para el contenedor de recordar contraseña y enlace de olvidar */
   .recordarme-olvide {

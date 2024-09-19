@@ -82,13 +82,14 @@ ion-content {
   .invalido{
     color:red;
   }
-  /* Estilos para el icono de visibilidad */
-  .ver-config {
-    position: relative;
-    left: 15px; /* Posición izquierda */
-    top: 15%; /* Posición superior */
-    cursor: pointer; /* Cambia el cursor a pointer */
-  }
+/* Estilos para el icono de visibilidad */
+.icono{
+  position: relative;
+  left: 5px; /* Posición izquierda */
+  top: 10%; /* Posición superior */
+  cursor: pointer; /* Cambia el cursor a pointer */
+  color: #868686;
+}
   
   /* Estilos para el contenedor de recordarme y olvidé */
   .terminos {

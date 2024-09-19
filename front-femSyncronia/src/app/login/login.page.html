@@ -30,7 +30,7 @@
       <ion-item lines="none" class="ion-no-padding" [class.invalid]="formulario.get('password')?.invalid && formulario.get('password')?.touched">
         <ion-input formControlName="password" label="Contraseña" labelPlacement="floating"
           [type]="passwordVisible ? 'text' : 'password'" (input)="alternarIcono()"></ion-input>
-        <ion-icon class="ver-config" *ngIf="mostrarIcono" slot="end"
+        <ion-icon class="icono" *ngIf="mostrarIcono" slot="end"
           name="{{ passwordVisible ? 'eye-off-outline' : 'eye-outline' }}" aria-hidden="true"
           (click)="alternarVisibilidadContrasena()"></ion-icon>
       </ion-item>

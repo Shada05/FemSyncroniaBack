@@ -59,7 +59,7 @@
         <ion-input formControlName="confirmarPassword" label="Confirmar contraseña" labelPlacement="floating"
           [type]="confirmarPasswordVisible ? 'text' : 'password'"
           (input)="alternarIcono('confirmarPassword')"></ion-input>
-        <ion-icon class="ver-config" *ngIf="mostrarIconoConfirmPassword" slot="end"
+        <ion-icon class="icono" *ngIf="mostrarIconoConfirmPassword" slot="end"
           name="{{ confirmarPasswordVisible ? 'eye-off-outline' : 'eye-outline' }}"
           (click)="alternarVisibilidadContrasena('confirmarPassword')"></ion-icon>
       </ion-item>
@@ -69,7 +69,7 @@
         </ion-text>
       </div>
       <div class="contenedor-boton"> <!-- Botón de enviar datos -->
-        <ion-button class="btn-enviar btn-config" type="submit" [disabled]="formulario.invalid">
+        <ion-button class="btn-enviar btn-config"  [routerLink]="['/confirmacion']" type="submit" [disabled]="formulario.invalid">
           Enviar
         </ion-button>
       </div>

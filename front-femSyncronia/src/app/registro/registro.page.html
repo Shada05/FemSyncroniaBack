@@ -91,7 +91,7 @@
         <ion-input formControlName="confirmarPassword" label="Confirmar contraseña" labelPlacement="floating"
           [type]="confirmarPasswordVisible ? 'text' : 'password'"
           (input)="alternarIcono('confirmarPassword')"></ion-input>
-        <ion-icon class="ver-config" *ngIf="mostrarIconoConfirmPassword" slot="end"
+        <ion-icon class="icono" *ngIf="mostrarIconoConfirmPassword" slot="end"
           name="{{ confirmarPasswordVisible ? 'eye-off-outline' : 'eye-outline' }}"
           (click)="alternarVisibilidadContrasena('confirmarPassword')"></ion-icon>
       </ion-item>
