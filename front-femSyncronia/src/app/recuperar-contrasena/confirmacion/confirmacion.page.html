@@ -1,5 +1,24 @@
 <ion-content>
-<ion-text >
-    
-</ion-text>
+    <div class="center">
+        <div>
+            <h1>!Perfecto!</h1>
+            <ion-text>
+                Fue restablecida tu contraseña
+            </ion-text>
+            <ion-text>
+                correctamente
+            </ion-text>
+            <ion-text style="margin-top: 10px;">
+                Ya puedes iniciar sesión en tu cuenta.
+            </ion-text>
+        </div>
+        <div>
+            <img class="imagen" src="../../../assets/img/recuperar-contrasena/felicidades-1.svg" alt="imagen">
+        </div>
+        <div class="contenedor-boton">
+            <ion-button class="btn-iniciar-sesion" [routerLink]="['/login']" type="submit">
+                Continuar
+            </ion-button>
+        </div>
+    </div>
 </ion-content>
