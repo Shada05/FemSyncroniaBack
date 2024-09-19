@@ -1,0 +1,121 @@
+ion-content {
+    --background: none; /* Elimina el fondo por defecto */
+    background-image: url('../../assets/img/login/fondo-login.svg'); /* Fondo con imagen */
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    background-position: center; /* Centra la imagen */
+    width: 100%;
+    height: 100vh; /* Tamaño del contenedor al 100% del viewport */
+  }
+
+  /* Estilos para centrar el contenido */
+.center {
+    display: grid;
+    justify-content: center; /* Centra horizontalmente */
+    align-content: center; /* Centra verticalmente */
+    align-items: center; /* Alinea los elementos internos al centro */
+    width: 100%;
+    height: 100%; /* Tamaño del contenedor al 100% del viewport */
+    gap: 20px;
+    transform: translateY(-10vh); /* Mueve el contenido hacia arriba. Ajusta este valor según lo necesario */
+}
+
+  /* Estilos para el título */
+h1 {
+    font-size: 27px;
+    margin: 0;
+}
+  /* Estilos para los textos */
+ion-text {
+    font-family: 'Open Sans';
+    font-size: 15px;
+    font-weight: 400;
+    display: block;
+}
+
+/* Estilos para los elementos ion-item */
+ion-item {
+    --background: none; /* Elimina el fondo por defecto */
+    --color: #C8C8C8; /* Color de texto por defecto */
+    --border-color: #B9B9B9; /* Color del borde */
+    font-size: 17px; /* Tamaño de fuente */
+    height: 40px; /* Altura del elemento */
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos */
+    border-bottom: 1px solid; /* Borde inferior del elemento */
+}
+
+/* Estilos para cuando el elemento es inválido */
+.invalid {
+    border-bottom-color: #FF7B7B !important; /* Color del borde inferior en caso de ser inválido */
+}
+  
+/* Estilos para los elementos ion-input dentro de ion-item */
+ion-input {
+    color: #868686; /* Color de texto por defecto */
+    --highlight-color-valid: #868686;
+  }
+  
+  /* Estilos para ion-input cuando es inválido */
+.invalid ion-input {
+    color: #FF7B7B; /* Color de texto cuando es inválido */
+    --highlight-color-invalid: #FF7B7B; /* Color del borde inferior cuando es inválido */
+}
+  
+/* Estilos para el contenedor de mensajes de error */
+.contenedor-error {
+    height: 20px; /* Altura del contenedor */
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos */
+}
+  
+/* Estilos para los mensajes de error */
+.mensaje-error {
+    font-size: 12px; /* Tamaño de fuente */
+    color: rgba(255, 0, 0, 0.45); /* Color de texto */
+    font-weight: 400; /* Grosor de la fuente */
+}
+.valido{
+    color: green;
+}
+.invalido{
+    color:red;
+}
+/* Estilos para el icono de visibilidad */
+.ver-config {
+    position: relative;
+    left: 15px; /* Posición izquierda */
+    top: 15%; /* Posición superior */
+    cursor: pointer; /* Cambia el cursor a pointer */
+}
+
+.contenedor-boton{
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    width: 100%;
+    margin-top: 10px;
+}
+/* Estilos específicos para el botón de registrarse */
+.btn-enviar {
+    --border-radius: 50px; /* Radio de borde */
+    width: 302px; /* Ancho del botón */
+    height: 44px; /* Altura del botón */
+    text-transform: none; /* Transformación de texto */
+    font-family: 'Roboto-medium'; /* Familia de fuente */
+    --background: #FFB7BF; /* Color de fondo */
+    --color: white; /* Color de texto */
+    --padding-start: 20px; /* Espacio interior al inicio */
+    --padding-end: 20px; /* Espacio interior al final */
+    --border-color: #FFB7BF; /* Color del borde */
+    --border-style: solid; /* Estilo de borde */
+    --border-width: 1px; /* Ancho de borde */
+    --box-shadow: none; /* Sin sombra */
+    font-size: 18px; /* Tamaño de fuente */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones */
+}
+  
+/* Estilos para el botón de registrarse al pasar el mouse */
+.btn-enviar:hover {
+    --background: white; /* Cambio de color de fondo */
+    --color: #FFB7BF; /* Cambio de color de texto */
+}

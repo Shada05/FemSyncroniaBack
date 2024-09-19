@@ -1,0 +1,43 @@
+<ion-content>
+  <div class="center">
+    <div>
+      <h1>Olvide mi contraseña</h1>
+      <ion-text>
+        Te enviaremos un código
+      </ion-text>
+      <ion-text >
+        para restablecer la contraseña.
+      </ion-text>
+    </div>
+
+    <!-- Formulario-->
+    <form [formGroup]="formulario">
+      <!-- Campo de Correo Electrónico -->
+      <ion-item lines="none" class="ion-no-padding"
+        [class.invalid]="formulario.get('email')?.invalid && formulario.get('email')?.touched">
+        <ion-input formControlName="email" label="Correo electrónico" labelPlacement="floating" type="email"
+          name="email" ngModel required email>
+        </ion-input>
+      </ion-item>
+    
+      <div class="contenedor-error">
+        <ion-text class="mensaje-error"
+          *ngIf="formulario.get('email')?.hasError('required') && formulario.get('email')?.touched">
+          El correo electrónico es requerido.
+        </ion-text>
+        <ion-text class="mensaje-error"
+          *ngIf="formulario.get('email')?.hasError('email') && formulario.get('email')?.touched">
+          Ingresa un correo electronico valido.
+        </ion-text>
+      </div>
+    
+      <!-- Botón de Continuar -->
+      <div class="button-container">
+        <ion-button class="btn-continuar" [routerLink]="['/escribir-codigo']" type="submit" [disabled]="formulario.invalid">
+          Continuar
+        </ion-button>
+      </div>
+    </form>    
+    <a href="#">¿Necesitas ayuda?</a>
+  </div>
+</ion-content>
