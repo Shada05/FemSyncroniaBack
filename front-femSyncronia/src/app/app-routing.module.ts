@@ -40,7 +40,7 @@ const routes: Routes = [
     loadChildren: () => import('./registro-usuarios/registro/registro.module').then( m => m.RegistroPageModule)
   },
   {
-    path: 'validar-codigo',
+    path: 'validar-codigo-regis',
     loadChildren: () => import('./registro-usuarios/validar-codigo/validar-codigo.module').then( m => m.ValidarCodigoPageModule)
   },
 
