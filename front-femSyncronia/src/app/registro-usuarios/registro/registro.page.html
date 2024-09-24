@@ -44,7 +44,7 @@
         [class.invalid]="formulario.get('password')?.invalid && formulario.get('password')?.touched">
         <ion-input formControlName="password" label="Contraseña" labelPlacement="floating"
           [type]="passwordVisible ? 'text' : 'password'" (input)="alternarIcono('password')"></ion-input>
-        <ion-icon class="ver-config" *ngIf="mostrarIconoPassword" slot="end"
+        <ion-icon class="icono" *ngIf="mostrarIconoPassword" slot="end"
           name="{{ passwordVisible ? 'eye-off-outline' : 'eye-outline' }}"
           (click)="alternarVisibilidadContrasena('password')"></ion-icon>
         <div class="">
@@ -108,7 +108,7 @@
       </div>
 
       <!-- Botón de Registrarse -->
-      <ion-button class="btn-registrarse btn-config" type="submit" [disabled]="formulario.invalid">
+      <ion-button class="btn-registrarse btn-config" type="submit" [disabled]="formulario.invalid" [routerLink]="['/validar-codigo-regis']">
         Registrarse
       </ion-button>
     </form>
