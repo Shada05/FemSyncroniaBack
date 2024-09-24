@@ -1,0 +1,52 @@
+ion-content {
+    --background: none; /* Elimina el fondo por defecto */
+    background-image: url('../../../assets/img/login/fondo-login.svg'); /* Fondo con imagen */    
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    background-position: center;
+}
+
+/* Estilos para centrar el contenido */
+.center {
+    display: grid;
+    justify-content: center; /* Centra horizontalmente */
+    align-content: center; /* Centra verticalmente */
+    align-items: center; /* Alinea los elementos internos al centro */
+    height: 100%; /* Tamaño del contenedor al 100% del viewport */
+    gap:20px;
+}
+/* Estilos para el titulo */
+h1{
+    font-size: 27px;
+    color: black;
+}
+
+ion-text{
+    font-family: 'Open Sans';
+    font-size: 15px;
+    font-weight: 400;
+    display: block;
+    color: black;
+}
+
+
+.contenedor-boton{
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-continuar{
+    --border-radius: 50px; /* Radio de borde */
+    width: 302px; /* Ancho del botón */
+    height: 44px; /* Altura del botón */
+    text-transform: none; /* Transformación de texto */
+    font-family: 'Roboto-medium'; /* Familia de fuente */
+    --background: #FFB7BF; /* Color de fondo */
+    --color: white; /* Color de texto */
+    --box-shadow: none; /* Sin sombra */
+    font-size: 18px; /* Tamaño de fuente */
+    --background-activated:#FF8390;
+    --background-hover:#FF8390;
+}

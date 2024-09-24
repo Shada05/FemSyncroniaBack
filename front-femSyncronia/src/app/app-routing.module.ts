@@ -43,6 +43,15 @@ const routes: Routes = [
     path: 'validar-codigo-regis',
     loadChildren: () => import('./registro-usuarios/validar-codigo/validar-codigo.module').then( m => m.ValidarCodigoPageModule)
   },
+  {
+    path: 'confirmacion-registro',
+    loadChildren: () => import('./registro-usuarios/confirmacion/confirmacion.module').then( m => m.ConfirmacionPageModule)
+  },  {
+    path: 'datos-personales',
+    loadChildren: () => import('./registro-usuarios/datos-personales/datos-personales.module').then( m => m.DatosPersonalesPageModule)
+  },
+
+
 
 
 ];
