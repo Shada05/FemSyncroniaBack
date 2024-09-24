@@ -20,10 +20,6 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'registro',
-    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
-  },
-  {
     path: 'enviar-codigo',
     loadChildren: () => import('./recuperar-contrasena/enviar-codigo/enviar-codigo.module').then( m => m.EnviarCodigoPageModule)
   },
@@ -34,10 +30,20 @@ const routes: Routes = [
   {
     path: 'cambiar-contrasena',
     loadChildren: () => import('./recuperar-contrasena/cambiar-contrasena/cambiar-contrasena.module').then( m => m.CambiarContrasenaPageModule)
-  },  {
+  },
+  {
     path: 'confirmacion',
     loadChildren: () => import('./recuperar-contrasena/confirmacion/confirmacion.module').then( m => m.ConfirmacionPageModule)
   },
+  {
+    path: 'registro',
+    loadChildren: () => import('./registro-usuarios/registro/registro.module').then( m => m.RegistroPageModule)
+  },
+  {
+    path: 'validar-codigo',
+    loadChildren: () => import('./registro-usuarios/validar-codigo/validar-codigo.module').then( m => m.ValidarCodigoPageModule)
+  },
+
 
 ];
 
