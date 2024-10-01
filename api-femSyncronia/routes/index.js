@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const usuarioController = require('../controllers/usuario');
+const usersController = require('../controllers/users');
 const emailsController = require('../controllers/emailsController');
 
 // Rutas de usuario
@@ -19,7 +20,16 @@ router.delete('/api/v1/emails/:id', emailsController.deleteEmail);
 
 
 // Rutas de Users
-router.post('/api/v1/users/', usuarioController.store);
+// Ruta para crear un usuario
+router.post('/api/v1/users', usersController.store);
+// Ruta para listar todos los usuarios
+router.get('/api/v1/users', usersController.index);
+// Ruta para mostrar un solo usuario por ID
+router.get('/api/v1/users/:id', usersController.show);
+// Ruta para actualizar un usuario
+router.put('/api/v1/users/:id', usersController.update);
+// Ruta para eliminar un usuario
+router.delete('/api/v1/users/:id', usersController.destroy);
 
 
 module.exports = {

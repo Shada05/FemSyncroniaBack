@@ -14,20 +14,37 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   user_status.init({
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+    status: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+    createdAt: {
+        allowNull: false, 
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
     },
-    name: DataTypes.STRING,
-    status: DataTypes.INTEGER,
-    created_at: DataTypes.DATE,
-    update_at: DataTypes.DATE,
-    deleted_at: DataTypes.DATE
-  }, {
+    updatedAt: {
+        allowNull: false, 
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+    },
+    deletedAt: {
+        allowNull: true, 
+        type: DataTypes.DATE,
+    }
+    },{
     sequelize,
     modelName: 'user_status',
+    defaultScope: {
+      attributes: {
+        exclude:['deleteAt', 'update_at']
+
+      }
+    }
   });
   return user_status;
 };
