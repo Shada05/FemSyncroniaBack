@@ -1,13 +1,98 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>datos-personales</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="center">
+    <div>
+      <h1>Datos personales</h1>
+      <ion-text>
+        Completa tu perfil.
+      </ion-text>
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">datos-personales</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <!-- Sección para la foto de perfil -->
+    <div class="foto-perfil">
+      <img class="imagen-perfil" [src]="profileImage" alt="Foto de perfil">
+      <ion-text color="primary" class="cambiar-foto" (click)="changeProfilePicture()">
+        Cambiar foto de perfil
+      </ion-text>
+    </div>
+
+    <!-- Nombre y Apellido en la misma línea -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item class="ion-no-padding entradas">
+            <ion-input label="Nombre" labelPlacement="floating" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item class="ion-no-padding entradas">
+            <ion-input label="Apellido" labelPlacement="floating" type="text"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Lada Nacional y Número de Teléfono en la misma línea -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3">
+          <ion-item class="ion-no-padding lada">
+            <ion-select [(ngModel)]="selectedLada" interface="popover" placeholder="Selecciona lada" class="lada-select">
+              <ion-select-option value="+52">+52</ion-select-option>
+              <ion-select-option value="+1">+1</ion-select-option>
+              <ion-select-option value="+34">+34</ion-select-option>
+              <ion-select-option value="+44">+44</ion-select-option>
+              <!-- Agrega más ladas nacionales aquí según sea necesario -->
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size="9">
+          <ion-item class="ion-no-padding entradas">
+            <ion-input label="Número de teléfono" labelPlacement="floating" type="tel"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-text style="color: #868686;">Fecha de nacimiento</ion-text>
+
+    <!-- Día, Mes y Año como selects -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4">
+          <ion-item class="ion-no-padding fecha-nacimiento">
+            <ion-select [(ngModel)]="selectedDay" interface="popover" placeholder="Día" class="date">
+              <ion-select-option *ngFor="let day of days" [value]="day">{{day}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="4">
+          <ion-item class="ion-no-padding fecha-nacimiento">
+            <ion-select [(ngModel)]="selectedMonth" interface="popover" placeholder="Mes" class="date">
+              <ion-select-option *ngFor="let month of months" [value]="month">{{month}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="4">
+          <ion-item class="ion-no-padding fecha-nacimiento">
+            <ion-select [(ngModel)]="selectedYear" interface="popover" placeholder="Año" class="date">
+              <ion-select-option *ngFor="let year of years" [value]="year">{{year}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="divisor"></div>
+
+    <div class="contenedor-boton">
+      <ion-button class="btn-continuar" [routerLink]="['/datos-personales']" type="submit">
+        Continuar
+      </ion-button>
+    </div>
+
+    <span><a [routerLink]="['/registro']">¿Necesitas ayuda?</a></span>
+
+  </div>
 </ion-content>

@@ -1,0 +1,159 @@
+ion-content {
+    --background: none; /* Elimina el fondo por defecto */
+    background-image: url('../../../assets/img/login/fondo-login.svg'); /* Fondo con imagen */    
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    background-position: center;
+    
+}
+
+/* Estilos para centrar el contenido */
+.center {
+    display: grid;
+    justify-content: center; /* Centra horizontalmente */
+    align-content: center; /* Centra verticalmente */
+    align-items: center; /* Alinea los elementos internos al centro */
+    height: 100%; /* Tamaño del contenedor al 100% del viewport */
+    gap:20px;
+    margin-top: 20px; /* Agregar un margen superior */
+}
+/* Estilos para el titulo */
+h1{
+    font-size: 27px;
+    color: black;
+}
+
+ion-text{
+    font-family: 'Open Sans';
+    font-size: 15px;
+    font-weight: 400;
+    display: block;
+    color: black;
+    margin-bottom: 0; /* Eliminación de margen inferior */
+}
+
+
+.foto-perfil {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+.imagen-perfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+  
+.cambiar-foto {
+    color: #0085FF;
+    font-size: 14px;
+    font-family: 'Open sans';
+    cursor: pointer;
+    display: block;
+}
+  /* Estilo para ion-item */
+.entradas{
+    --highlight-height: 0; /* Quita la línea de enfoque de IonItem */
+    --inner-padding-end: 0;
+    --inner-padding-start: 0;
+    --border-width:0; /* Elimina cualquier borde preexistente */
+    --background:none;
+    --color:#B9B9B9;
+    --border-color:#B9B9B9;
+    height: 45px;
+    border-bottom: 1px solid;
+}
+
+  /* Estilo para ion-input */
+ion-input {
+    font-size: 17px;
+    width: 160px;
+    height: 20px; /* Ajusta la altura del input */
+    --highlight-color-focused:none;
+    --color:#868686;
+}
+.fecha-nacimiento, .lada{
+    --border-radius:10px;
+    --background:#FFFFFF;
+    --border-color:#FFFFFF;
+    color: #868686;
+}
+
+.lada-select{
+    --padding-bottom: 6px;
+    --padding-start: 7px;
+    --padding-top: 6px;
+    --placeholder-color: #C8C8C8;
+    font-size: 17px;
+}
+
+.invalid ion-input {
+    color: #FF7B7B; /* Color de texto cuando es inválido */
+    --highlight-color-invalid: #FF7B7B; /* Color del borde inferior cuando es inválido */
+}
+
+/* Estilos para ion-grid */
+ion-grid {
+    --ion-grid-padding: 0; /* Sin padding */
+    margin: 0; /* Sin márgenes */
+}
+
+/* Estilos para ion-col */
+ion-col {
+    --ion-grid-padding: 0; /* Sin padding */
+    margin: 0; /* Sin márgenes */
+    height: auto; /* Permite que el col ajuste su altura automáticamente */
+}
+
+.date{
+    --padding-bottom: 6px;
+    --padding-start: 15px;
+    --padding-top: 6px;
+    --placeholder-color: #C8C8C8;
+    font-size: 17px;
+}
+
+  /* Estilo para el divisor */
+.divisor {
+    width: 100%; /* Ancho completo */
+    height: 1px; /* Altura de 1px */
+    background-color: #B9B9B9; /* Color de la línea */
+    margin: 2px auto; /* Margen arriba y abajo */
+    position: relative; /* Posición relativa */
+}
+
+.contenedor-boton{
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-continuar{
+    --border-radius: 50px; /* Radio de borde */
+    width: 302px; /* Ancho del botón */
+    height: 44px; /* Altura del botón */
+    text-transform: none; /* Transformación de texto */
+    font-family: 'Roboto-medium'; /* Familia de fuente */
+    --background: #FFB7BF; /* Color de fondo */
+    --color: white; /* Color de texto */
+    --box-shadow: none; /* Sin sombra */
+    font-size: 18px; /* Tamaño de fuente */
+    --background-activated:#FF8390;
+    --background-hover:#FF8390;
+}
+
+/* Estilo para los span */
+span {
+    font-size: 13px; /* Tamaño de fuente */
+    text-align: center; /* Texto centrado */
+    color: #838383; /* Color del texto */
+}
+  
+/* Estilo para los enlaces dentro de span */
+span a {
+    text-decoration: none; /* Sin subrayado */
+}
+  
+  
