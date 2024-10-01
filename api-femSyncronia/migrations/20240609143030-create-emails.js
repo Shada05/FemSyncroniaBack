@@ -8,9 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      app_id: {
-        type: Sequelize.STRING
-      },
       main: {
         type: Sequelize.STRING
       },
@@ -38,19 +35,20 @@ module.exports = {
       from_address: {
         type: Sequelize.STRING
       },
-      created_at: {
+      createdAt: {
+        type: Sequelize.DATE,
         allowNull: false,
+        defaultValue: Sequelize.fn('now')
+    },
+    updatedAt: {
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'), // Definir como CURRENT_TIMESTAMP
-      },
-      updated_at: {
         allowNull: false,
+        defaultValue: Sequelize.fn('now')
+    },
+    deletedAt: {
         type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'), // Definir como CURRENT_TIMESTAMP
-      },
-      deleted_at: {
-        type: Sequelize.DATE,
-      }
+        allowNull: true
+    }
     });
   },
   down: async (queryInterface, Sequelize) => {

@@ -40,8 +40,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'user_status',
     defaultScope: {
-      attributes: {
-        exclude:['deleteAt', 'update_at']
+        attributes: {
+            exclude:['deletedAt', 'updatedAt']
 
       }
     }

@@ -54,7 +54,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true, 
             type: DataTypes.DATE,
         }
-    }, {
+    }, 
+    {
         sequelize,
         modelName: 'users',
         defaultScope: {
