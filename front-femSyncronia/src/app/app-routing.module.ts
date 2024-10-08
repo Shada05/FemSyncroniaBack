@@ -50,6 +50,10 @@ const routes: Routes = [
     path: 'datos-personales',
     loadChildren: () => import('./registro-usuarios/datos-personales/datos-personales.module').then( m => m.DatosPersonalesPageModule)
   },
+  {
+    path: 'datos-guardados',
+    loadChildren: () => import('./registro-usuarios/datos-guardados/datos-guardados.module').then( m => m.DatosGuardadosPageModule)
+  },
 
 
 
