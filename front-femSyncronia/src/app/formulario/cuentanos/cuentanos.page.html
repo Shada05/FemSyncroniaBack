@@ -1,13 +1,13 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>cuentanos</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="center">
+    <div class="divisor"></div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">cuentanos</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <div class="contenedor-boton">
+      <ion-button class="btn-continuar" [routerLink]="['/#']" type="submit">
+        Continuar
+      </ion-button>
+    </div>
+
+    <span><a [routerLink]="['/registro']">¿Necesitas ayuda?</a></span>
+  </div>
 </ion-content>
