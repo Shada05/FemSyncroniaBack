@@ -1,13 +1,24 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>datos-guardados</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">datos-guardados</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="center">
+    <div>
+      <h1>!Excelente!</h1>
+      <ion-text>
+        Tus datos personales se han guardado
+      </ion-text>
+      <ion-text>
+        y están seguros con nostros.
+      </ion-text>
+      <ion-text style="margin-top: 10px; font-weight: bold;">
+        Sigue que nos cuentes sobre tu cuerpo.
+      </ion-text>
+    </div>
+    <div>
+      <img class="imagen" src="../../../assets/img/registro/excelente.svg" alt="imagen">
+    </div>
+    <div class="contenedor-boton">
+      <ion-button class="btn-continuar" [routerLink]="['/datos-personales']" type="submit">
+        Continuar
+      </ion-button>
+    </div>
+  </div>
 </ion-content>
