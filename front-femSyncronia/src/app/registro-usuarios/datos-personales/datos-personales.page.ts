@@ -16,7 +16,7 @@ export class DatosPersonalesPage implements OnInit {
   selectedYear: number = 0; // Año actual por defecto
   selectedLada: string = '';
   days: number[] = Array.from({ length: 31 }, (v, k) => k + 1); // Días 1-31
-  months: string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  months: string[] = ['Ene.', 'Feb.', 'Mar.', 'Abr.', 'May.', 'Jun.', 'Jul.', 'Ago.', 'Sep.', 'Oct.', 'Nov.', 'Dic.'];
   years: number[] = Array.from({ length: 124 }, (v, k) => k + 1900); // Años 1900-2023
 
   constructor() { }
