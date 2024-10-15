@@ -1,5 +1,32 @@
 <ion-content>
   <div class="center">
+    <div>
+      <h1>Cúentanos</h1>
+      <ion-text>
+        Queremos saber sobre tu periodo y
+      </ion-text>
+      <ion-text>
+        la experiencia que has tenido.
+      </ion-text>
+    </div>
+
+    <div class="preguntas">
+      <div class="pregunta">
+        <ion-text class="color-texto">¿Cuándo</ion-text>
+        <ion-text class="color-texto">naciste?</ion-text>
+        <ion-select class="año" placeholder="Año" interface="popover">
+          <ion-select-option *ngFor="let anio of anios" [value]="anio">{{ anio }}</ion-select-option>
+        </ion-select>
+      </div>
+
+      <div class="pregunta">
+        <ion-text class="color-texto">¿Cuándo llegó tu periodo?</ion-text>
+        <ion-select class="año" placeholder="Año" interface="popover">
+          <ion-select-option *ngFor="let anio of anios" [value]="anio">{{ anio }}</ion-select-option>
+        </ion-select>
+      </div>
+    </div>
+
     <div class="divisor"></div>
 
     <div class="contenedor-boton">

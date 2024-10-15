@@ -7,6 +7,7 @@ ion-content {
     
 }
 
+
 /* Estilos para centrar el contenido */
 .center {
     display: grid;
@@ -18,9 +19,50 @@ ion-content {
     margin-top: 20px; /* Agregar un margen superior */
 }
 
+/* Estilos para el título */
+h1 {
+    font-size: 27px;
+    margin: 0;
+    color: black;
+}
 
+/* Estilos para los textos */
+ion-text {
+    font-family: 'Open Sans';
+    font-size: 15px;
+    font-weight: 400;
+    display: block;
+    color: black;
+}
+.preguntas {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+.pregunta {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+.color-texto{
+    color: #585858;
+    font-family: "Open Sans";
+    font-size: 17px;
+}
+.año{
+    --padding-bottom: 6px;
+    --padding-start: 15px;
+    --padding-top: 6px;
+    --placeholder-color: #C8C8C8;
+    font-size: 17px;
+    --border-radius:10px;
+    --background:#FFFFFF;
+    width: 101px;
+    color: #868686;
+}
   /* Estilo para el divisor */
-  .divisor {
+.divisor {
     width: 100%; /* Ancho completo */
     height: 1px; /* Altura de 1px */
     background-color: #B9B9B9; /* Color de la línea */
