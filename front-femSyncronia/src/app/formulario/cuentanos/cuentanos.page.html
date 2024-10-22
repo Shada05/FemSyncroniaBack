@@ -20,17 +20,46 @@
       </div>
 
       <div class="pregunta">
-        <ion-text class="color-texto">¿Cuándo llegó tu periodo?</ion-text>
+        <ion-text class="color-texto">¿Cuándo llegó?</ion-text>
+        <ion-text class="color-texto">tu periodo</ion-text>
         <ion-select class="año" placeholder="Año" interface="popover">
           <ion-select-option *ngFor="let anio of anios" [value]="anio">{{ anio }}</ion-select-option>
         </ion-select>
       </div>
     </div>
 
+    <div class="pregunta-radio">
+      <ion-text class="color-texto">Anteriormente, ¿llevabas un registro</ion-text>
+      <ion-text class="color-texto">regular de tu periodo?</ion-text>
+      <ion-radio-group class="opciones-radio">
+          <ion-radio class="custom-radio" labelPlacement="end" value="si">Si</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="no">No</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="a veces">A veces</ion-radio>
+      </ion-radio-group>
+    </div>
+
+    <div class="pregunta-radio">
+      <ion-text class="color-texto">¿Tus periodos son regulares?</ion-text>
+      <ion-radio-group class="opciones-radio">
+          <ion-radio class="custom-radio" labelPlacement="end" value="si">Si</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="no">No</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="a veces">No lo sé</ion-radio>
+      </ion-radio-group>
+    </div>
+
+    <div class="pregunta-radio">
+      <ion-text class="color-texto">¿Presentas síntomas?</ion-text>
+      <ion-radio-group class="opciones-radio">
+          <ion-radio class="custom-radio" labelPlacement="end" value="si">Si</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="no">No</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="a veces">A veces</ion-radio>
+      </ion-radio-group>
+    </div>
+
     <div class="divisor"></div>
 
     <div class="contenedor-boton">
-      <ion-button class="btn-continuar" [routerLink]="['/#']" type="submit">
+      <ion-button class="btn-continuar" [routerLink]="['/mi-anterior-ciclo']" type="submit">
         Continuar
       </ion-button>
     </div>
