@@ -1,13 +1,46 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>mi-anterior-ciclo</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="center">
+    <div>
+      <h1>Mi anterior</h1>
+      <h1>ciclo menstrual</h1>
+      <ion-text>
+        para tener mayor precisión en tu periodo,
+      </ion-text>
+      <ion-text>
+        necesitamos saber sobre la última vez
+      </ion-text>
+      <ion-text>
+        que te bajó.
+      </ion-text>
+    </div>
+    <div class="preguntas">
+      <div>
+        <ion-text class="color-texto">Inicio del último periodo:</ion-text>
+        <div class="selector-periodo">
+          <!-- Selector para el mes -->
+          <ion-select class="mes" placeholder="Mes" interface="popover" (ionChange)="actualizarDias($event)">
+            <ion-select-option *ngFor="let mes of meses" [value]="mes">{{ mes }}</ion-select-option>
+          </ion-select>
+          <!-- Selector para el día, dependiente del mes -->
+          <ion-select class="dia" placeholder="Día" interface="popover">
+            <ion-select-option *ngFor="let dia of dias" [value]="dia">{{ dia }}</ion-select-option>
+          </ion-select>
+        </div>
+      </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">mi-anterior-ciclo</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <div>
+        <ion-text class="color-texto">Fin del último periodo:</ion-text>
+        <div class="selector-periodo">
+          <!-- Selector para el mes -->
+          <ion-select class="mes" placeholder="Mes" interface="popover" (ionChange)="actualizarDias($event)">
+            <ion-select-option *ngFor="let mes of meses" [value]="mes">{{ mes }}</ion-select-option>
+          </ion-select>
+          <!-- Selector para el día, dependiente del mes -->
+          <ion-select class="dia" placeholder="Día" interface="popover">
+            <ion-select-option *ngFor="let dia of dias" [value]="dia">{{ dia }}</ion-select-option>
+          </ion-select>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>
