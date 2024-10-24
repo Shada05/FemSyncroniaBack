@@ -14,21 +14,40 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   symptoms.init({
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
+    name: {
+      type: DataTypes.STRING,
       allowNull: false
     },
-    name: DataTypes.STRING,
-    symptom_name: DataTypes.STRING,
-    frequency: DataTypes.STRING,
-    created_at: DataTypes.DATE,
-    update_at: DataTypes.DATE,
-    deleted_at: DataTypes.DATE
+    symptom_name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    frequency: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    createdAt: {
+      allowNull: false, 
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    },
+    updatedAt: {
+      allowNull: false, 
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    },
+    deletedAt: {
+      allowNull: true, 
+      type: DataTypes.DATE,
+    }
   }, {
     sequelize,
-    modelName: 'symptoms',
+        modelName: 'symptoms',
+        defaultScope: {
+            attributes: {
+                exclude: ['updatedAt','deletedAt']
+            }
+        }
   });
   return symptoms;
 };

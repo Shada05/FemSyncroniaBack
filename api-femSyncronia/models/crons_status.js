@@ -14,20 +14,36 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   crons_status.init({
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false
-    },
-    name: DataTypes.STRING,
-    cron_status: DataTypes.INTEGER,
-    created_at: DataTypes.DATE,
-    update_at: DataTypes.DATE,
-    deleted_at: DataTypes.DATE
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false
+        },
+    status: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+        },
+    createdAt: {
+        allowNull: false, 
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+        },
+    updatedAt: {
+        allowNull: false, 
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+        },
+    deletedAt: {
+        allowNull: true, 
+        type: DataTypes.DATE,
+        }
   }, {
     sequelize,
     modelName: 'crons_status',
+    defaultScope: {
+        attributes:{
+            exclude: ['updateAt','deletedAt']
+        }
+    }
   });
   return crons_status;
 };

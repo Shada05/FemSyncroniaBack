@@ -14,22 +14,44 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   reports.init({
-    id: {
+    doctor_id: {
       type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false
+      allowNull:false
     },
-    doctor_id: DataTypes.INTEGER,
-    patient_data_id: DataTypes.INTEGER,
-    pdf_path: DataTypes.STRING,
-    generation_date: DataTypes.DATE,
-    created_at: DataTypes.DATE,
-    update_at: DataTypes.DATE,
-    deleted_at: DataTypes.DATE
+    patient_data_id: {
+      type: DataTypes.INTEGER,
+      allowNull:false
+    },
+    pdf_path: {
+      type: DataTypes.STRING,
+      allowNull:false
+    },
+    generation_date: {
+      type: DataTypes.DATE,
+      allowNull:false
+    },
+    createdAt: {
+      allowNull: false, 
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    },
+    updatedAt: {
+      allowNull: false, 
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    },
+    deletedAt: {
+      allowNull: true, 
+      type: DataTypes.DATE,
+    }
   }, {
     sequelize,
-    modelName: 'reports',
+        modelName: 'reports',
+        defaultScope: {
+            attributes: {
+                exclude: ['updatedAt','deletedAt']
+            }
+        }
   });
   return reports;
 };

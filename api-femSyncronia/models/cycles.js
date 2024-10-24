@@ -14,24 +14,48 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   cycles.init({
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false
+    cycle_status: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     },
-    user_id: DataTypes.INTEGER,
-    cycle_status: DataTypes.INTEGER,
-    weight: DataTypes.FLOAT,
-    temperature: DataTypes.FLOAT,
-    start_date: DataTypes.DATE,
-    end_date: DataTypes.DATE,
-    created_at: DataTypes.DATE,
-    update_at: DataTypes.DATE,
-    deleted_at: DataTypes.DATE
+    weight: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
+    temperature: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
+    start_date: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    end_date: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    createdAt: {
+      allowNull: false, 
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    },
+    updatedAt: {
+        allowNull: false, 
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+    },
+    deletedAt: {
+        allowNull: true, 
+        type: DataTypes.DATE,
+    }
   }, {
     sequelize,
-    modelName: 'cycles',
+        modelName: 'cycles',
+        defaultScope: {
+            attributes: {
+                exclude: ['updatedAt','deletedAt']
+            }
+        }
   });
   return cycles;
 };

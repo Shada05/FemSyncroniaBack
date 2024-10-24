@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const cyclesController = require('../controllers/cycles');
+
+const cronsstatus = require('../controllers/crons_status');
 const usuarioController = require('../controllers/usuario');
 const usersController = require('../controllers/users');
 const emailsController = require('../controllers/emails');
@@ -39,7 +42,19 @@ router.get('/api/v1/users-status/:id', user_statusesController.show);
 router.put('/api/v1/users-status/:id', user_statusesController.update);
 router.delete('/api/v1/users-status/:id', user_statusesController.destroy);
 
+//cycles
+router.post('/api/v1/cycles', cyclesController.store);
+router.get('/api/v1/cycles', cyclesController.index);
+router.get('/api/v1/cycles/:id', cyclesController.show);
+router.put('/api/v1/cycles/:id', cyclesController.update);
+router.delete('/api/v1/cycles/:id', cyclesController.destroy);
 
+//Crons_status
+router.post('/api/v1/cronsstatus', cyclesController.store);
+router.get('/api/v1/cronsstatus', cyclesController.index);
+router.get('/api/v1/cronsstatus/:id', cyclesController.show);
+router.put('/api/v1/cronsstatus/:id', cyclesController.update);
+router.delete('/api/v1/cronsstatus/:id', cyclesController.destroy);
 
 module.exports = {
    router

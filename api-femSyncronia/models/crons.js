@@ -7,26 +7,61 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   crons.init({
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+      },
+    cron_status: {
+      type: DataTypes.STRING,
       allowNull: false
     },
-    name: DataTypes.STRING,
-    cron_status: DataTypes.INTEGER,
-    seconds: DataTypes.INTEGER,
-    minutes: DataTypes.INTEGER,
-    hours: DataTypes.INTEGER,
-    day_of_month: DataTypes.INTEGER,
-    day_of_week: DataTypes.INTEGER,
-    created_at: DataTypes.DATE,
-    updated_at: DataTypes.DATE,
-    deleted_at: DataTypes.DATE
+    seconds: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+
+    minutes:{ 
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+
+    hours:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }, 
+    
+    day_of_month:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }, 
+    
+    day_of_week: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }, 
+    
+    createdAt: {
+      allowNull: false, 
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+  },
+  updatedAt: {
+      allowNull: false, 
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+  },
+  deletedAt: {
+      allowNull: true, 
+      type: DataTypes.DATE,
+  }
   }, {
     sequelize,
-    modelName: 'crons',
-    timestamps: false, // Asegúrate de esto si no estás usando timestamps automáticos
+        modelName: 'crons',
+        defaultScope: {
+            attributes: {
+                exclude: ['updatedAt','deletedAt']
+            }
+        }
   });
   return crons;
 };

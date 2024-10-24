@@ -9,9 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
-        type: Sequelize.INTEGER
-      },
       cycle_status: {
         type: Sequelize.INTEGER
       },
@@ -27,13 +24,7 @@ module.exports = {
       end_date: {
         type: Sequelize.DATE
       },
-      created_at: {
-        type: Sequelize.DATE
-      },
-      update_at: {
-        type: Sequelize.DATE
-      },
-      deleted_at: {
+      deletedAt: {
         type: Sequelize.DATE
       },
       createdAt: {
