@@ -68,3 +68,45 @@ ion-text {
     color: #868686;
     --border-radius:10px;
 }
+
+/* Estilo para el divisor */
+.divisor {
+    width: 100%; /* Ancho completo */
+    height: 1px; /* Altura de 1px */
+    background-color: #B9B9B9; /* Color de la línea */
+    margin: 2px auto; /* Margen arriba y abajo */
+    position: relative; /* Posición relativa */
+}
+
+.contenedor-boton {
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-continuar {
+    --border-radius: 50px; /* Radio de borde */
+    width: 302px; /* Ancho del botón */
+    height: 44px; /* Altura del botón */
+    text-transform: none; /* Transformación de texto */
+    font-family: 'Roboto-medium'; /* Familia de fuente */
+    --background: #FFB7BF; /* Color de fondo */
+    --color: white; /* Color de texto */
+    --box-shadow: none; /* Sin sombra */
+    font-size: 18px; /* Tamaño de fuente */
+    --background-activated: #FF8390;
+    --background-hover: #FF8390;
+}
+
+/* Estilo para los span */
+span {
+    font-size: 13px; /* Tamaño de fuente */
+    text-align: center; /* Texto centrado */
+    color: #838383; /* Color del texto */
+}
+
+/* Estilo para los enlaces dentro de span */
+span a {
+    text-decoration: none; /* Sin subrayado */
+}
