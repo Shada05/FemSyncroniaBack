@@ -62,6 +62,10 @@ const routes: Routes = [
     path: 'mi-anterior-ciclo',
     loadChildren: () => import('./formulario/mi-anterior-ciclo/mi-anterior-ciclo.module').then( m => m.MiAnteriorCicloPageModule)
   },
+  {
+    path: 'periodo',
+    loadChildren: () => import('./formulario/periodo/periodo.module').then( m => m.PeriodoPageModule)
+  },
 
 
 
