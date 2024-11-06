@@ -12,7 +12,7 @@ ion-content {
     justify-content: center; /* Centra horizontalmente */
     align-content: center; /* Centra verticalmente */
     align-items: center; /* Alinea los elementos internos al centro */
-    height: 100%; /* Tamaño del contenedor al 100% del viewport */
+    min-height: 100vh; /* Cambia 100% a 100vh */
     gap: 20px;
     padding-top: 40px; /* Agregar un margen superior */
 }
@@ -67,6 +67,70 @@ ion-text {
     height: 10px;
     color: #868686;
     --border-radius:10px;
+}
+
+.promedio-periodo {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espacio entre el input y la etiqueta */
+    position: relative;
+}
+
+ion-item {
+    --highlight-height: 0; /* Quita la línea de enfoque de IonItem */
+    --inner-padding-end: 0;
+    --inner-padding-start: 0;
+    --border-width: 0; /* Elimina cualquier borde preexistente */
+    --background:none;
+    --color:#868686;
+    --border-color:#868686;
+}
+
+ion-input {
+    text-align: center;
+    font-size: 17px;
+    width: 40px; /* Ajusta el ancho del input */
+    height: 20px; /* Ajusta la altura del input */
+    --highlight-color-focused:none;
+}
+
+.invalid {
+    --border-color: #FF7B7B !important; /* Color del borde inferior en caso de ser inválido */
+    color: #FF7B7B;
+}
+
+.invalid ion-input {
+  color: #FF7B7B; /* Color de texto cuando es inválido */
+}
+/* Estilos para el contenedor de mensajes de error */
+.contenedor-error {
+    height: 20px; /* Altura del contenedor */
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos */
+}
+  
+/* Estilos para los mensajes de error */
+.mensaje-error {
+    font-size: 12px; /* Tamaño de fuente */
+    color: rgba(255, 0, 0, 0.45); /* Color de texto */
+    font-weight: 400; /* Grosor de la fuente */
+}
+.label-dias {
+    background-color: #FFFFFF;
+    text-align: center;
+    padding-top: 5px;
+    width: 59px;
+    height: 31px;
+    border-radius: 10px;
+    font-family: 'Open Sans';
+    font-size: 15px;
+    color: #868686;
 }
 
 /* Estilo para el divisor */

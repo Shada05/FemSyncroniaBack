@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content keyboard-attach>
   <div class="center">
     <div>
       <h1>Mi anterior</h1>
@@ -13,35 +13,78 @@
         que te bajó.
       </ion-text>
     </div>
-    <div class="preguntas">
-      <div>
-        <ion-text class="color-texto">Inicio del último periodo:</ion-text>
-        <div class="selector-periodo">
-          <!-- Selector para el mes -->
-          <ion-select class="mes" placeholder="Mes" interface="popover" (ionChange)="actualizarDias($event)">
-            <ion-select-option *ngFor="let mes of meses" [value]="mes">{{ mes }}</ion-select-option>
-          </ion-select>
-          <!-- Selector para el día, dependiente del mes -->
-          <ion-select class="dia" placeholder="Día" interface="popover">
-            <ion-select-option *ngFor="let dia of dias" [value]="dia">{{ dia }}</ion-select-option>
-          </ion-select>
+    <form [formGroup]="formulario">
+      <div class="preguntas">
+        <div>
+          <ion-text class="color-texto">Inicio del último periodo:</ion-text>
+          <div class="selector-periodo">
+            <!-- Selector para el mes -->
+            <ion-select class="mes" placeholder="Mes" interface="popover" (ionChange)="actualizarDias($event)">
+              <ion-select-option *ngFor="let mes of meses" [value]="mes">{{ mes }}</ion-select-option>
+            </ion-select>
+            <!-- Selector para el día, dependiente del mes -->
+            <ion-select class="dia" placeholder="Día" interface="popover">
+              <ion-select-option *ngFor="let dia of dias" [value]="dia">{{ dia }}</ion-select-option>
+            </ion-select>
+          </div>
         </div>
-      </div>
 
-      <div>
-        <ion-text class="color-texto">Fin del último periodo:</ion-text>
-        <div class="selector-periodo">
-          <!-- Selector para el mes -->
-          <ion-select class="mes" placeholder="Mes" interface="popover" (ionChange)="actualizarDias($event)">
-            <ion-select-option *ngFor="let mes of meses" [value]="mes">{{ mes }}</ion-select-option>
-          </ion-select>
-          <!-- Selector para el día, dependiente del mes -->
-          <ion-select class="dia" placeholder="Día" interface="popover">
-            <ion-select-option *ngFor="let dia of dias" [value]="dia">{{ dia }}</ion-select-option>
-          </ion-select>
+        <div>
+          <ion-text class="color-texto">Fin del último periodo:</ion-text>
+          <div class="selector-periodo">
+            <!-- Selector para el mes -->
+            <ion-select class="mes" placeholder="Mes" interface="popover" (ionChange)="actualizarDias($event)">
+              <ion-select-option *ngFor="let mes of meses" [value]="mes">{{ mes }}</ion-select-option>
+            </ion-select>
+            <!-- Selector para el día, dependiente del mes -->
+            <ion-select class="dia" placeholder="Día" interface="popover">
+              <ion-select-option *ngFor="let dia of dias" [value]="dia">{{ dia }}</ion-select-option>
+            </ion-select>
+          </div>
+        </div>
+
+        <div class="promedio-periodo">
+          <div class="input-group">
+            <ion-item class="ion-no-padding"
+              [class.invalid]="formulario.get('dias1')?.hasError('max')">
+              <ion-input formControlName="dias1">
+              </ion-input>
+            </ion-item>
+            <label for="dias1" class="label-dias">Días</label>
+          </div>
+          <!-- Contenedor de error para el primer input -->
+          <div class="contenedor-error">
+            <ion-text class="mensaje-error"
+              *ngIf="formulario.get('dias1')?.hasError('required') && formulario.get('dias1')?.touched">
+              El numero es requerido.
+            </ion-text>
+            <ion-text class="mensaje-error" *ngIf="formulario.get('dias1')?.hasError('max')">
+              El numero de días excede el rango.
+            </ion-text>
+          </div>
+
+          <div class="input-group">
+            <ion-item class="ion-no-padding"
+              [class.invalid]="formulario.get('dias2')?.hasError('max')">
+              <ion-input maxlength="2" type="number" formControlName="dias2">
+              </ion-input>
+            </ion-item>
+            <label for="dias2" class="label-dias">Días</label>
+          </div>
+          <!-- Contenedor de error para el segundo input -->
+          <div class="contenedor-error">
+            <ion-text class="mensaje-error"
+              *ngIf="formulario.get('dias2')?.hasError('required') && formulario.get('dias2')?.touched">
+              El numero es requerido.
+            </ion-text>
+            <ion-text class="mensaje-error"
+              *ngIf="formulario.get('dias2')?.hasError('max')">
+              El numero de días excede el rango.
+            </ion-text>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
     <div class="divisor"></div>
 
     <div class="contenedor-boton">
