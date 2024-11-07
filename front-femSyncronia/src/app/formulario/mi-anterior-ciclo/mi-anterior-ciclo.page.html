@@ -47,7 +47,7 @@
           <div class="input-group">
             <ion-item class="ion-no-padding"
               [class.invalid]="formulario.get('dias1')?.hasError('max')">
-              <ion-input formControlName="dias1">
+              <ion-input #dias1 (input)="soloNumeros(dias1)" maxlength="2" type="text" formControlName="dias1">
               </ion-input>
             </ion-item>
             <label for="dias1" class="label-dias">Días</label>
@@ -66,7 +66,7 @@
           <div class="input-group">
             <ion-item class="ion-no-padding"
               [class.invalid]="formulario.get('dias2')?.hasError('max')">
-              <ion-input maxlength="2" type="number" formControlName="dias2">
+              <ion-input #dias2 (input)="soloNumeros(dias2)" maxlength="2" type="text" formControlName="dias2">
               </ion-input>
             </ion-item>
             <label for="dias2" class="label-dias">Días</label>

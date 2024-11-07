@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { IonInput } from '@ionic/angular';
 
 @Component({
   selector: 'app-mi-anterior-ciclo',
@@ -81,4 +82,10 @@ export class MiAnteriorCicloPage implements OnInit {
     return null; // Si el número es válido, no retorna ningún error
   }
   
+  soloNumeros(input: IonInput | null) {
+    if (input) {
+      const value = (input.value as string).replace(/[^0-9]/g, '');
+      input.value = value;
+    }
+  }
 }
