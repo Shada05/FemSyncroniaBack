@@ -1,29 +1,27 @@
-const cycles  = require('../models').cycles;
+const symptoms  = require('../models').symptoms;
 
 exports.store = async (req, res) => {
-    const cycle = {
+    const sympt = {
         
-        cycle_status: req.body.cycle_status,
-        weight: req.body.weight,
-        temperature: req.body.temperature,
-        start_date: req.body.start_date,
-        end_date: req.body.end_date
-        
-    }
-    console.log(cycle);
+        name: req.body.name,
+        symptom_name: req.body.symptom_name,
+        frequency: req.body.frequency
 
-    cycles.create(cycle).then(
-        cycle => res.status(200).send(cycle)
+    }
+    console.log(sympt);
+
+    symptoms.create(sympt).then(
+        sympt => res.status(200).send(sympt)
     ).catch(
         error => res.status(400).send(error)
     );
 }
 
 exports.index = async (req, res) =>{
-    return await cycles.findAll({
+    return await symptoms.findAll({
 
     }).then(
-        cycles => res.status(200).send(cycles)
+        symptoms => res.status(200).send(symptoms)
     ).catch(
         error => {
             console.log(error)
@@ -34,19 +32,19 @@ exports.index = async (req, res) =>{
 
 exports.show = async (req, res) => {
     const id = parseInt(req.params.id);
-    const cycle = await cycles.findOne({
+    const sympt = await symptoms.findOne({
         where: {
             id: id
         }
     });
 
-    return res.status(200).send(cycle);
+    return res.status(200).send(sympt);
 }
 
 exports.destroy = async (req, res) => {
     const id = parseInt(req.params.id);
 
-    return await cycles.destroy({
+    return await symptoms.destroy({
         where: {
             id: id
         }
@@ -70,20 +68,17 @@ exports.update = async (req, res) => {
     const id = parseInt(req.params.id);
     let updatedData = {};
 
-    if (req.body.cycle_status != null) updatedData['cycles_status']= req.body.cycle_status;
-    if (req.body.weight != null) updatedData['weight']= req.body.weigth;
-    if (req.body.temperature != null) updatedData['temperature']= req.body.temperature;
-    if (req.body.start_date != null) updatedData['start_date']= req.body.start_date;
-    if (req.body.end_date != null) updatedData['end_date']= req.body.end_date;
+    if (req.body.name != null) updatedData['name']= req.body.name;
+    if (req.body.symptom_name != null) updatedData['symptom_name']= req.body.symptom_name;
+    if (req.body.frequency != null) updatedData['frequency']= req.body.frequency;
 
-
-    return await cycles.update(updatedData, {
+    return await symptoms.update(updatedData, {
         where: {
             id: id
         }
     }).then(
         async ([updated]) => {
-            const userUpd = await cycles.findOne({where: {id}})
+            const userUpd = await symptoms.findOne({where: {id}})
             if (updated) {
                 res.status(200).send({ data: userUpd });
             } else {

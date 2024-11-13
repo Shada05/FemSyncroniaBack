@@ -1,18 +1,16 @@
-const cycles  = require('../models').cycles;
+const cycle_symptoms  = require('../models').cycle_symptoms;
 
 exports.store = async (req, res) => {
     const cycle = {
         
-        cycle_status: req.body.cycle_status,
-        weight: req.body.weight,
-        temperature: req.body.temperature,
-        start_date: req.body.start_date,
-        end_date: req.body.end_date
+        cycle_id: req.body.cycle_id,
+        symptom_id: req.body.symptom_id
+       
         
     }
     console.log(cycle);
 
-    cycles.create(cycle).then(
+    cycle_symptoms.create(cycle).then(
         cycle => res.status(200).send(cycle)
     ).catch(
         error => res.status(400).send(error)
@@ -20,10 +18,10 @@ exports.store = async (req, res) => {
 }
 
 exports.index = async (req, res) =>{
-    return await cycles.findAll({
+    return await cycle_symptoms.findAll({
 
     }).then(
-        cycles => res.status(200).send(cycles)
+        cycle_symptoms => res.status(200).send(cycle_symptoms)
     ).catch(
         error => {
             console.log(error)
@@ -34,7 +32,7 @@ exports.index = async (req, res) =>{
 
 exports.show = async (req, res) => {
     const id = parseInt(req.params.id);
-    const cycle = await cycles.findOne({
+    const cycle = await cycle_symptoms.findOne({
         where: {
             id: id
         }
@@ -70,14 +68,11 @@ exports.update = async (req, res) => {
     const id = parseInt(req.params.id);
     let updatedData = {};
 
-    if (req.body.cycle_status != null) updatedData['cycles_status']= req.body.cycle_status;
-    if (req.body.weight != null) updatedData['weight']= req.body.weigth;
-    if (req.body.temperature != null) updatedData['temperature']= req.body.temperature;
-    if (req.body.start_date != null) updatedData['start_date']= req.body.start_date;
-    if (req.body.end_date != null) updatedData['end_date']= req.body.end_date;
+    if (req.body.cycle_id != null) updatedData['cycle_id']= req.body.cycle_id;
+    if (req.body.symptom_id != null) updatedData['symptom_id']= req.body.symptom_id;
 
 
-    return await cycles.update(updatedData, {
+    return await cycle_symptoms.update(updatedData, {
         where: {
             id: id
         }

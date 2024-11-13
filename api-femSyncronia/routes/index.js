@@ -1,12 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const cyclesController = require('../controllers/cycles');
 
-const cronsstatus = require('../controllers/crons_status');
+const cyclesController = require('../controllers/cycles');
+const crons_statusController = require('../controllers/crons_status');
 const usuarioController = require('../controllers/usuario');
 const usersController = require('../controllers/users');
 const emailsController = require('../controllers/emails');
 const user_statusesController = require('../controllers/user_status');
+const crons_Controller = require('../controllers/crons');
+const cycle_symptoms_Controller = require('../controllers/cycle_symptoms');
+const doctors_Controller = require('../controllers/doctors');
+const patient_data_Controller = require('../controllers/patient_data');
+const report_status_Controller = require('../controllers/report_status');
+const reports_Controller = require('../controllers/reports');
+const symptoms_Controller = require('../controllers/symptoms');
+
+
+
+
 
 // Rutas de usuario
 router.post('/api/v1/usuario/', usuarioController.store);
@@ -50,11 +61,60 @@ router.put('/api/v1/cycles/:id', cyclesController.update);
 router.delete('/api/v1/cycles/:id', cyclesController.destroy);
 
 //Crons_status
-router.post('/api/v1/cronsstatus', cyclesController.store);
-router.get('/api/v1/cronsstatus', cyclesController.index);
-router.get('/api/v1/cronsstatus/:id', cyclesController.show);
-router.put('/api/v1/cronsstatus/:id', cyclesController.update);
-router.delete('/api/v1/cronsstatus/:id', cyclesController.destroy);
+router.post('/api/v1/cronsstatus', crons_statusController.store);
+router.get('/api/v1/cronsstatus', crons_statusController.index);
+router.get('/api/v1/cronsstatus/:id', crons_statusController.show);
+router.put('/api/v1/cronsstatus/:id', crons_statusController.update);
+router.delete('/api/v1/cronsstatus/:id', crons_statusController.destroy);
+
+//Crons
+router.post('/api/v1/crons', crons_Controller.store);
+router.get('/api/v1/crons', crons_Controller.index);
+router.get('/api/v1/crons/:id', crons_Controller.show);
+router.put('/api/v1/crons/:id', crons_Controller.update);
+router.delete('/api/v1/crons/:id', crons_Controller.destroy);
+
+//Cycle_symptoms
+router.post('/api/v1/cycle_symptoms', cycle_symptoms_Controller.store);
+router.get('/api/v1/cycle_symptoms', cycle_symptoms_Controller.index);
+router.get('/api/v1/cycle_symptoms/:id', cycle_symptoms_Controller.show);
+router.put('/api/v1/cycle_symptoms/:id', cycle_symptoms_Controller.update);
+router.delete('/api/v1/cycle_symptoms/:id', cycle_symptoms_Controller.destroy);
+
+//doctors
+router.post('/api/v1/doctors', doctors_Controller.store);
+router.get('/api/v1/doctors', doctors_Controller.index);
+router.get('/api/v1/doctors/:id', doctors_Controller.show);
+router.put('/api/v1/doctors/:id', doctors_Controller.update);
+router.delete('/api/v1/doctors/:id', doctors_Controller.destroy);
+
+//patient-data
+router.post('/api/v1/patient_data', patient_data_Controller.store);
+router.get('/api/v1/patient_data', patient_data_Controller.index);
+router.get('/api/v1/patient_data/:id', patient_data_Controller.show);
+router.put('/api/v1/patient_data/:id', patient_data_Controller.update);
+router.delete('/api/v1/patient_data/:id', patient_data_Controller.destroy);
+
+//report_status
+router.post('/api/v1/report_status', report_status_Controller.store);
+router.get('/api/v1/report_status', report_status_Controller.index);
+router.get('/api/v1/report_status/:id', report_status_Controller.show);
+router.put('/api/v1/report_status/:id', report_status_Controller.update);
+router.delete('/api/v1/report_status/:id', report_status_Controller.destroy);
+
+//report_status
+router.post('/api/v1/reports', reports_Controller.store);
+router.get('/api/v1/reports', reports_Controller.index);
+router.get('/api/v1/reports/:id', reports_Controller.show);
+router.put('/api/v1/reports/:id', reports_Controller.update);
+router.delete('/api/v1/reports/:id', reports_Controller.destroy);
+
+//symptoms
+router.post('/api/v1/symptoms', symptoms_Controller.store);
+router.get('/api/v1/symptoms', symptoms_Controller.index);
+router.get('/api/v1/symptoms/:id', symptoms_Controller.show);
+router.put('/api/v1/symptoms/:id', symptoms_Controller.update);
+router.delete('/api/v1/symptoms/:id', symptoms_Controller.destroy);
 
 module.exports = {
    router

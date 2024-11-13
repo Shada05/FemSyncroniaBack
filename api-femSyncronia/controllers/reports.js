@@ -1,29 +1,28 @@
-const cycles  = require('../models').cycles;
+const reports  = require('../models').reports;
 
 exports.store = async (req, res) => {
-    const cycle = {
+    const report = {
         
-        cycle_status: req.body.cycle_status,
-        weight: req.body.weight,
-        temperature: req.body.temperature,
-        start_date: req.body.start_date,
-        end_date: req.body.end_date
-        
+        doctor_id: req.body.doctor_id,
+        patient_data_id: req.body.patient_data_id,
+        pdf_path: req.body.pdf_path,
+        generation_date: req.body.generation_date
+           
     }
-    console.log(cycle);
+    console.log(report);
 
-    cycles.create(cycle).then(
-        cycle => res.status(200).send(cycle)
+    reports.create(report).then(
+        report => res.status(200).send(report)
     ).catch(
         error => res.status(400).send(error)
     );
 }
 
 exports.index = async (req, res) =>{
-    return await cycles.findAll({
+    return await reports.findAll({
 
     }).then(
-        cycles => res.status(200).send(cycles)
+        reports => res.status(200).send(reports)
     ).catch(
         error => {
             console.log(error)
@@ -34,19 +33,19 @@ exports.index = async (req, res) =>{
 
 exports.show = async (req, res) => {
     const id = parseInt(req.params.id);
-    const cycle = await cycles.findOne({
+    const report = await reports.findOne({
         where: {
             id: id
         }
     });
 
-    return res.status(200).send(cycle);
+    return res.status(200).send(report);
 }
 
 exports.destroy = async (req, res) => {
     const id = parseInt(req.params.id);
 
-    return await cycles.destroy({
+    return await reports.destroy({
         where: {
             id: id
         }
@@ -70,20 +69,18 @@ exports.update = async (req, res) => {
     const id = parseInt(req.params.id);
     let updatedData = {};
 
-    if (req.body.cycle_status != null) updatedData['cycles_status']= req.body.cycle_status;
-    if (req.body.weight != null) updatedData['weight']= req.body.weigth;
-    if (req.body.temperature != null) updatedData['temperature']= req.body.temperature;
-    if (req.body.start_date != null) updatedData['start_date']= req.body.start_date;
-    if (req.body.end_date != null) updatedData['end_date']= req.body.end_date;
+    if (req.body.doctor_id != null) updatedData['doctor_id']= req.body.doctor_id;
+    if (req.body.patient_data_id != null) updatedData['patient_data_id']= req.body.patient_data_id;
+    if (req.body.pdf_path != null) updatedData['pdf_path']= req.body.pdf_path;
+    if (req.body.generation_date != null) updatedData['generation_date']= req.body.generation_date;
 
-
-    return await cycles.update(updatedData, {
+    return await reports.update(updatedData, {
         where: {
             id: id
         }
     }).then(
         async ([updated]) => {
-            const userUpd = await cycles.findOne({where: {id}})
+            const userUpd = await reports.findOne({where: {id}})
             if (updated) {
                 res.status(200).send({ data: userUpd });
             } else {

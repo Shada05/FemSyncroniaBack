@@ -1,29 +1,32 @@
-const cycles  = require('../models').cycles;
+const doctors  = require('../models').doctors;
 
 exports.store = async (req, res) => {
-    const cycle = {
+    const doctor = {
         
-        cycle_status: req.body.cycle_status,
-        weight: req.body.weight,
-        temperature: req.body.temperature,
-        start_date: req.body.start_date,
-        end_date: req.body.end_date
+        username: req.body.username,
+        lastname: req.body.lastname,
+        doctor_status: req.body.doctor_status,
+        email: req.body.email,
+        password: req.body.password,
+        phone: req.body.phone,
+        token: req.body.token,
+        specialty: req.body.specialty
         
     }
-    console.log(cycle);
+    console.log(doctor);
 
-    cycles.create(cycle).then(
-        cycle => res.status(200).send(cycle)
+    doctors.create(doctor).then(
+        doctor => res.status(200).send(doctor)
     ).catch(
         error => res.status(400).send(error)
     );
 }
 
 exports.index = async (req, res) =>{
-    return await cycles.findAll({
+    return await doctors.findAll({
 
     }).then(
-        cycles => res.status(200).send(cycles)
+        doctors => res.status(200).send(doctors)
     ).catch(
         error => {
             console.log(error)
@@ -34,19 +37,19 @@ exports.index = async (req, res) =>{
 
 exports.show = async (req, res) => {
     const id = parseInt(req.params.id);
-    const cycle = await cycles.findOne({
+    const doctor = await doctors.findOne({
         where: {
             id: id
         }
     });
 
-    return res.status(200).send(cycle);
+    return res.status(200).send(doctor);
 }
 
 exports.destroy = async (req, res) => {
     const id = parseInt(req.params.id);
 
-    return await cycles.destroy({
+    return await doctors.destroy({
         where: {
             id: id
         }
@@ -70,20 +73,22 @@ exports.update = async (req, res) => {
     const id = parseInt(req.params.id);
     let updatedData = {};
 
-    if (req.body.cycle_status != null) updatedData['cycles_status']= req.body.cycle_status;
-    if (req.body.weight != null) updatedData['weight']= req.body.weigth;
-    if (req.body.temperature != null) updatedData['temperature']= req.body.temperature;
-    if (req.body.start_date != null) updatedData['start_date']= req.body.start_date;
-    if (req.body.end_date != null) updatedData['end_date']= req.body.end_date;
+    if (req.body.username != null) updatedData['username']= req.body.username;
+    if (req.body.lastname != null) updatedData['lastname']= req.body.lastname;
+    if (req.body.doctor_status != null) updatedData['doctor_status']= req.body.doctor_status;
+    if (req.body.email != null) updatedData['email']= req.body.email;
+    if (req.body.password != null) updatedData['password']= req.body.password;
+    if (req.body.phone != null) updatedData['phone']= req.body.phone;
+    if (req.body.token != null) updatedData['token']= req.body.token;
+    if (req.body.specialty != null) updatedData['specialty']= req.body.specialty;
 
-
-    return await cycles.update(updatedData, {
+    return await doctors.update(updatedData, {
         where: {
             id: id
         }
     }).then(
         async ([updated]) => {
-            const userUpd = await cycles.findOne({where: {id}})
+            const userUpd = await doctors.findOne({where: {id}})
             if (updated) {
                 res.status(200).send({ data: userUpd });
             } else {

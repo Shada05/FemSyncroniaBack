@@ -1,7 +1,6 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('crons', {
       id: {
         allowNull: false,
@@ -9,50 +8,45 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id: {
-        type: Sequelize.INTEGER
-      },
       name: {
         type: Sequelize.STRING
       },
       cron_status: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       seconds: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       minutes: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       hours: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       day_of_month: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
+        
       },
       day_of_week: {
-        type: Sequelize.INTEGER
-      },
-      created_at: {
-        type: Sequelize.DATE
-      },
-      update_at: {
-        type: Sequelize.DATE
-      },
-      deleted_at: {
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
       createdAt: {
+        type: Sequelize.DATE,
         allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
+        defaultValue: Sequelize.fn('now')
+    },
+    updatedAt: {
+        type: Sequelize.DATE,
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        defaultValue: Sequelize.fn('now')
+    },
+    deletedAt: {
+        type: Sequelize.DATE,
+        allowNull: true
+    }
     });
   },
-  async down(queryInterface, Sequelize) {
+  down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('crons');
   }
 };

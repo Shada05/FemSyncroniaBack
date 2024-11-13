@@ -3,7 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('crons_statuses', {
-    id: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -16,19 +16,19 @@ module.exports = {
         type: Sequelize.INTEGER
     },
     createdAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.fn('now')
-    },
-    updatedAt: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: Sequelize.fn('now')
-    },
-    deletedAt: {
-        type: Sequelize.DATE,
-        allowNull: true
-    }
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.fn('now')
+  },
+  updatedAt: {
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.fn('now')
+  },
+  deletedAt: {
+      type: Sequelize.DATE,
+      allowNull: true
+  }
     });
   },
   async down(queryInterface, Sequelize) {

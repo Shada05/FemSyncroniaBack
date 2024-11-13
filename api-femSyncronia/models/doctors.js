@@ -62,10 +62,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   }, {
     sequelize,
-        modelName: 'users',
+        modelName: 'doctors',
         defaultScope: {
             attributes: {
-                exclude: ['password','token','updatedAt','deletedAt']
+                exclude: ['token','password','updatedAt','deletedAt']
             }
         }
   });

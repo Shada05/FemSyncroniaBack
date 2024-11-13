@@ -1,3 +1,4 @@
+
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -8,24 +9,12 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
-      },
-      id: {
-        type: Sequelize.INTEGER
-      },
+    },
       cycle_id: {
         type: Sequelize.INTEGER
       },
       symptom_id: {
         type: Sequelize.INTEGER
-      },
-      created_at: {
-        type: Sequelize.DATE
-      },
-      update_at: {
-        type: Sequelize.DATE
-      },
-      deleted_at: {
-        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
@@ -34,6 +23,10 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      deleteAt: {
+        type: Sequelize.DATE,
+        allowNull: true
       }
     });
   },
