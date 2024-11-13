@@ -14,20 +14,36 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   patient_data.init({
-    id: {
+    user_id: {
       type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
       allowNull: false
-    },
-    user_id: DataTypes.INTEGER,
-    cycle_id: DataTypes.INTEGER,
-    created_at: DataTypes.DATE,
-    updated_at: DataTypes.DATE,
-    deleted_at: DataTypes.DATE
+    }, 
+    cycle_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }, 
+  createdAt: {
+      allowNull: false, 
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+  },
+  updatedAt: {
+      allowNull: false, 
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+  },
+  deletedAt: {
+      allowNull: true, 
+      type: DataTypes.DATE,
+  }
   }, {
     sequelize,
-    modelName: 'patient_data',
+        modelName: 'patient_data',
+        defaultScope: {
+            attributes: {
+                exclude: ['updatedAt','deletedAt']
+            }
+        }
   });
   return patient_data;
 };

@@ -14,26 +14,60 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   doctors.init({
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
+    username: {
+      type: DataTypes.STRING,
       allowNull: false
     },
-    username: DataTypes.STRING,
-    lastname: DataTypes.STRING,
-    doctor_status: DataTypes.INTEGER,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    phone: DataTypes.STRING,
-    token: DataTypes.STRING,
-    specialty: DataTypes.STRING,
-    created_at: DataTypes.DATE,
-    update_at: DataTypes.DATE,
-    deleted_at: DataTypes.DATE
+    lastname: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    doctor_status: {
+      type:  DataTypes.INTEGER,
+      allowNull:false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    token: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    specialty: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    createdAt: {
+      allowNull: false, 
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+  },
+  updatedAt: {
+      allowNull: false, 
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+  },
+  deletedAt: {
+      allowNull: true, 
+      type: DataTypes.DATE,
+  }
   }, {
     sequelize,
-    modelName: 'doctors',
+        modelName: 'doctors',
+        defaultScope: {
+            attributes: {
+                exclude: ['token','password','updatedAt','deletedAt']
+            }
+        }
   });
   return doctors;
 };

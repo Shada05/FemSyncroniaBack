@@ -5,34 +5,37 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert("emails", [
       {
-        app_id: "1",
-        main: "diego@example.com",
+        main: "diego.ruiz2863@alumnos.udg.mx",
         type: "SMTP",
         host: "smtp.example.com",
         port: 587,
-        username: "user",
-        password: "pass",
+        username: "Diego",
+        password: "Prueba123",
         encryption: "TLS",
         from_name: "Diego",
         from_address: "example@example.com",
-        created_at: new Date(),
-        updated_at: new Date(), // Corregido aquí
-        deleted_at: null,
       },
       {
-        app_id: "2",
-        main: "issac@example.com",
+        main: "issac.hernandez2871@alumnos.udg.mx",
         type: "SMTP",
         host: "smtp.example.com",
         port: 587,
-        username: "user",
-        password: "pass",
+        username: "Issac",
+        password: "Prueba123",
         encryption: "TLS",
         from_name: "Issac",
         from_address: "example@example.com",
-        created_at: new Date(),
-        updated_at: new Date(), // Corregido aquí
-        deleted_at: null,
+      },
+      {
+        main: "mally.hernandez2861@alumnos.udg.mx",
+        type: "SMTP",
+        host: "smtp.example.com",
+        port: 587,
+        username: "Mally",
+        password: "Prueba123",
+        encryption: "TLS",
+        from_name: "Mally",
+        from_address: "example@example.com",
       }
     ]);
   },

@@ -8,33 +8,27 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
-      },
-      id: {
-        type: Sequelize.INTEGER
-      },
-      name: {
+    },
+    name: {
         type: Sequelize.STRING
-      },
-      cron_status: {
+    },
+    status: {
         type: Sequelize.INTEGER
-      },
-      created_at: {
-        type: Sequelize.DATE
-      },
-      update_at: {
-        type: Sequelize.DATE
-      },
-      deleted_at: {
-        type: Sequelize.DATE
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
+    },
+    createdAt: {
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.fn('now')
+  },
+  updatedAt: {
+      type: Sequelize.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.fn('now')
+  },
+  deletedAt: {
+      type: Sequelize.DATE,
+      allowNull: true
+  }
     });
   },
   async down(queryInterface, Sequelize) {

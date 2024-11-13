@@ -17,7 +17,7 @@ app.use(router);
 
 // Log requests to the console.
 app.use(logger('dev'));
-const port = parseInt(process.env.API_PORT) || 3001;
+const port = parseInt(process.env.API_PORT) || 3000;
 app.set('port', port);
 const server = http.createServer(app);
 

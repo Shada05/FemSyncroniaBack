@@ -14,20 +14,37 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   report_status.init({
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
+
+    name:{
+      type: DataTypes.STRING,
       allowNull: false
     },
-    name: DataTypes.STRING,
-    status: DataTypes.INTEGER,
-    created_at: DataTypes.DATE,
-    updated_at: DataTypes.DATE,
-    deleted_at: DataTypes.DATE
+    status: {
+      type: DataTypes.INTEGER,
+      allowNull:false
+    }, 
+    createdAt: {
+      allowNull: false, 
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+  },
+  updatedAt: {
+      allowNull: false, 
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+  },
+  deletedAt: {
+      allowNull: true, 
+      type: DataTypes.DATE,
+  }
   }, {
     sequelize,
-    modelName: 'report_status',
+        modelName: 'report_status',
+        defaultScope: {
+            attributes: {
+                exclude: ['updatedAt','deletedAt']
+            }
+        }
   });
   return report_status;
 };

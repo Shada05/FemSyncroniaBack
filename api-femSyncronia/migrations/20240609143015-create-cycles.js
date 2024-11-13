@@ -8,13 +8,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
-      },
-      id: {
-        type: Sequelize.INTEGER
-      },
-      user_id: {
-        type: Sequelize.INTEGER
-      },
+    },
       cycle_status: {
         type: Sequelize.INTEGER
       },
@@ -30,23 +24,20 @@ module.exports = {
       end_date: {
         type: Sequelize.DATE
       },
-      created_at: {
-        type: Sequelize.DATE
-      },
-      update_at: {
-        type: Sequelize.DATE
-      },
-      deleted_at: {
-        type: Sequelize.DATE
-      },
       createdAt: {
+        type: Sequelize.DATE,
         allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
+        defaultValue: Sequelize.fn('now')
+    },
+    updatedAt: {
+        type: Sequelize.DATE,
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        defaultValue: Sequelize.fn('now')
+    },
+    deletedAt: {
+        type: Sequelize.DATE,
+        allowNull: true
+    }
     });
   },
   async down(queryInterface, Sequelize) {
