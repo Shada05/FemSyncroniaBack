@@ -11,6 +11,7 @@ export class LoginPage implements OnInit {
   formulario: FormGroup;
   passwordVisible = false;
   mostrarIcono = false;
+  
   constructor(private fb: FormBuilder) {
     this.formulario = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -24,17 +25,18 @@ export class LoginPage implements OnInit {
       console.log('Formulario inválido');
     }
   }
-  
+
   alternarVisibilidadContrasena() {
     this.passwordVisible = !this.passwordVisible;
   }
+
   alternarIcono() {
     const passwordControl = this.formulario.get('password');
     if (passwordControl) {
       this.mostrarIcono = passwordControl.value.trim() !== '';
     }
   }
-  
+
   ngOnInit() {
   }
 

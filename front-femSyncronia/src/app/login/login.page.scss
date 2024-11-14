@@ -40,8 +40,7 @@ ion-content {
     display: flex; /* Flexbox layout */
     align-items: center; /* Alinea los elementos en el centro verticalmente */
     border-bottom: 1px solid; /* Solo el borde inferior */
-  }
-  
+  }  
   
   .invalid {
     border-bottom-color: #FF7B7B !important; /* Color del borde inferior en caso de ser inválido */
@@ -72,14 +71,14 @@ ion-content {
     font-weight: 400; /* Grosor de la fuente */
   }
   
- /* Estilos para el icono de visibilidad */
-.icono{
-  position: relative;
-  left: 5px; /* Posición izquierda */
-  top: 10%; /* Posición superior */
-  cursor: pointer; /* Cambia el cursor a pointer */
-  color: #868686;
-}
+  /* Estilo para el icono de visibilidad de contraseña */
+  .icono { 
+    position: relative;
+    left: 5px; /* Posición izquierda */
+    top: 10%; /* Posición superior */
+    cursor: pointer; /* Cambia el cursor a pointer */
+    color: #868686;
+  }
   
   /* Estilo para el contenedor de recordar contraseña y enlace de olvidar */
   .recordarme-olvide {
