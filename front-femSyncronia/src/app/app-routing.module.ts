@@ -54,6 +54,18 @@ const routes: Routes = [
     path: 'datos-guardados',
     loadChildren: () => import('./registro-usuarios/datos-guardados/datos-guardados.module').then( m => m.DatosGuardadosPageModule)
   },
+  {
+    path: 'cuentanos',
+    loadChildren: () => import('./formulario/cuentanos/cuentanos.module').then( m => m.CuentanosPageModule)
+  },
+  {
+    path: 'mi-anterior-ciclo',
+    loadChildren: () => import('./formulario/mi-anterior-ciclo/mi-anterior-ciclo.module').then( m => m.MiAnteriorCicloPageModule)
+  },
+  {
+    path: 'periodo',
+    loadChildren: () => import('./formulario/periodo/periodo.module').then( m => m.PeriodoPageModule)
+  },
 
 
 

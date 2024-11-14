@@ -1,0 +1,77 @@
+<ion-content>
+  <div class="center">
+    <div>
+      <h1>¿En que te afecta el</h1>
+      <h1>periodo?</h1>
+      <ion-text>
+        Nuestro periodo tiende a afectar varios
+      </ion-text>
+      <ion-text>
+        factores de nuestra vida cotidiana.
+      </ion-text>
+    </div>
+
+    <div class="pregunta-radio">
+      <ion-text class="color-texto">En tu piel:</ion-text>
+      <ion-radio-group class="opciones-radio">
+          <ion-radio class="custom-radio" labelPlacement="end" value="si">Si</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="no">No</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="no lo se">No lo sé</ion-radio>
+      </ion-radio-group>
+    </div>
+
+    <div class="pregunta-radio">
+      <ion-text class="color-texto">En tu peso:</ion-text>
+      <ion-radio-group class="opciones-radio">
+          <ion-radio class="custom-radio" labelPlacement="end" value="si">Si</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="no">No</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="No lo se">No lo sé</ion-radio>
+      </ion-radio-group>
+    </div>
+
+    <div class="pregunta-radio">
+      <ion-text class="color-texto">En tu sueño:</ion-text>
+      <ion-radio-group class="opciones-radio">
+          <ion-radio class="custom-radio" labelPlacement="end" value="si">Si</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="no">No</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="No lo se">No lo sé</ion-radio>
+      </ion-radio-group>
+    </div>
+
+    <div class="pregunta-radio">
+      <ion-text class="color-texto">En tu energia:</ion-text>
+      <ion-radio-group class="opciones-radio">
+          <ion-radio class="custom-radio" labelPlacement="end" value="si">Si</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="no">No</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="No lo se">No lo sé</ion-radio>
+      </ion-radio-group>
+    </div>
+
+    <div class="pregunta-radio">
+      <ion-text class="color-texto">En tu apetito:</ion-text>
+      <ion-radio-group class="opciones-radio">
+          <ion-radio class="custom-radio" labelPlacement="end" value="si">Si</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="no">No</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="No lo se">No lo sé</ion-radio>
+      </ion-radio-group>
+    </div>
+
+    <div class="pregunta-radio">
+      <ion-text class="color-texto">En tu humor:</ion-text>
+      <ion-radio-group class="opciones-radio">
+          <ion-radio class="custom-radio" labelPlacement="end" value="si">Si</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="no">No</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="No lo se">No lo sé</ion-radio>
+      </ion-radio-group>
+    </div>
+    <div class="divisor"></div>
+
+    <div class="contenedor-boton">
+      <ion-button class="btn-continuar" [routerLink]="['/mi-anterior-ciclo']" type="submit">
+        Continuar
+      </ion-button>
+    </div>
+
+    <span><a [routerLink]="['/registro']">¿Necesitas ayuda?</a></span>
+  </div>
+</ion-content>

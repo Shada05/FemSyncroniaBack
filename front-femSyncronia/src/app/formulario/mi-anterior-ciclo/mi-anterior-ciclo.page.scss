@@ -1,0 +1,176 @@
+ion-content {
+    --background: none; /* Elimina el fondo por defecto */
+    background-image: url('../../../assets/img/login/fondo-login.svg'); /* Fondo con imagen */
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    background-position: center;
+}
+
+/* Estilos para centrar el contenido */
+.center {
+    display: grid;
+    justify-content: center; /* Centra horizontalmente */
+    align-content: center; /* Centra verticalmente */
+    align-items: center; /* Alinea los elementos internos al centro */
+    min-height: 100vh; /* Cambia 100% a 100vh */
+    gap: 20px;
+    padding-top: 40px; /* Agregar un margen superior */
+}
+
+/* Estilos para el título */
+h1 {
+    font-size: 27px;
+    margin: 0;
+    color: black;
+}
+/* Estilos para los textos */
+ion-text {
+    font-family: 'Open Sans';
+    font-size: 15px;
+    font-weight: 400;
+    display: block;
+    color: black;
+}
+
+.color-texto {
+    color: #585858;
+    font-family: "Open Sans";
+    font-size: 17px;
+}
+
+.preguntas {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.pregunta {
+    display: flex;
+    flex-direction: column;
+}
+
+.selector-periodo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin-top: 10px;
+}
+
+.mes, .dia{
+    --padding-start: 15px;
+    --placeholder-color: #C8C8C8;
+    font-size: 17px;
+    --border-radius: 10px;
+    --background: #FFFFFF;
+    width: 83px;
+    height: 10px;
+    color: #868686;
+    --border-radius:10px;
+}
+
+.promedio-periodo {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espacio entre el input y la etiqueta */
+    position: relative;
+}
+
+ion-item {
+    --highlight-height: 0; /* Quita la línea de enfoque de IonItem */
+    --inner-padding-end: 0;
+    --inner-padding-start: 0;
+    --border-width: 0; /* Elimina cualquier borde preexistente */
+    --background:none;
+    --color:#868686;
+    --border-color:#868686;
+}
+
+ion-input {
+    text-align: center;
+    font-size: 17px;
+    width: 40px; /* Ajusta el ancho del input */
+    height: 20px; /* Ajusta la altura del input */
+    --highlight-color-focused:none;
+}
+
+.invalid {
+    --border-color: #FF7B7B !important; /* Color del borde inferior en caso de ser inválido */
+    color: #FF7B7B;
+}
+
+.invalid ion-input {
+  color: #FF7B7B; /* Color de texto cuando es inválido */
+}
+/* Estilos para el contenedor de mensajes de error */
+.contenedor-error {
+    height: 20px; /* Altura del contenedor */
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos */
+}
+  
+/* Estilos para los mensajes de error */
+.mensaje-error {
+    font-size: 12px; /* Tamaño de fuente */
+    color: rgba(255, 0, 0, 0.45); /* Color de texto */
+    font-weight: 400; /* Grosor de la fuente */
+}
+.label-dias {
+    background-color: #FFFFFF;
+    text-align: center;
+    padding-top: 5px;
+    width: 59px;
+    height: 31px;
+    border-radius: 10px;
+    font-family: 'Open Sans';
+    font-size: 15px;
+    color: #868686;
+}
+
+/* Estilo para el divisor */
+.divisor {
+    width: 100%; /* Ancho completo */
+    height: 1px; /* Altura de 1px */
+    background-color: #B9B9B9; /* Color de la línea */
+    margin: 2px auto; /* Margen arriba y abajo */
+    position: relative; /* Posición relativa */
+}
+
+.contenedor-boton {
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-continuar {
+    --border-radius: 50px; /* Radio de borde */
+    width: 302px; /* Ancho del botón */
+    height: 44px; /* Altura del botón */
+    text-transform: none; /* Transformación de texto */
+    font-family: 'Roboto-medium'; /* Familia de fuente */
+    --background: #FFB7BF; /* Color de fondo */
+    --color: white; /* Color de texto */
+    --box-shadow: none; /* Sin sombra */
+    font-size: 18px; /* Tamaño de fuente */
+    --background-activated: #FF8390;
+    --background-hover: #FF8390;
+}
+
+/* Estilo para los span */
+span {
+    font-size: 13px; /* Tamaño de fuente */
+    text-align: center; /* Texto centrado */
+    color: #838383; /* Color del texto */
+}
+
+/* Estilo para los enlaces dentro de span */
+span a {
+    text-decoration: none; /* Sin subrayado */
+}
