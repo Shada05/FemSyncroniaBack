@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     users.init({
         birthdate: {
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: true
         },
         username: {
             type: DataTypes.STRING,
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         user_status: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         email: {
             type: DataTypes.STRING,
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         profile_image: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         password: {
             type: DataTypes.STRING,
@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         phone: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         token: {
             type: DataTypes.STRING,
