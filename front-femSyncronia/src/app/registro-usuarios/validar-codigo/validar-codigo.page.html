@@ -4,16 +4,19 @@
       <h1>Consulta tu</h1>
       <h1>correo electrónico</h1>
       <ion-text style="margin-top: 10px;">
-        Te enviaremos un código para
+        Te hemos enviado un código de 
       </ion-text>
       <ion-text>
-        restablecer tu contraseña.
+        verificación a tu correo anteriormente
+      </ion-text>
+      <ion-text>
+        registrado.
       </ion-text>
       <ion-text style="margin-top: 30px;">
-        Para continuar, ingresa el código de
+        Para completar tu registro, por favor,
       </ion-text>
       <ion-text>
-        restablecimiento de 6 dígitos.
+        ingresa el código de 6 dígitos.
       </ion-text>
     </div>
 
@@ -61,7 +64,7 @@
       <!-- Contenedor de botones y línea divisoria -->
       <div class="contenedor-botones">
         <ion-button class="btn-validar" type="button" [disabled]="formulario.invalid" (click)="enviarCodigo()"
-          [routerLink]="['/cambiar-contrasena']">
+          [routerLink]="['/confirmacion-registro']">
           Validar
         </ion-button>
 

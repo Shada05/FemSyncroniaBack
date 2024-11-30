@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-login',
@@ -11,16 +11,25 @@ export class LoginPage implements OnInit {
   formulario: FormGroup;
   passwordVisible = false;
   mostrarIcono = false;
-  
-  constructor(private fb: FormBuilder) {
+
+  constructor(private fb: FormBuilder, private apiService: ApiService) {
     this.formulario = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
-    })
+    });
   }
+
   enviarDatos() {
     if (this.formulario.valid) {
-      console.log(this.formulario.value);
+      const { email, password } = this.formulario.value;
+      this.apiService.login(email, password).subscribe({
+        next: (response) => {
+          console.log('Respuesta del servidor:', response);
+        },
+        error: (error) => {
+          console.error('Error al iniciar sesión:', error);
+        }
+      });
     } else {
       console.log('Formulario inválido');
     }
@@ -37,7 +46,5 @@ export class LoginPage implements OnInit {
     }
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

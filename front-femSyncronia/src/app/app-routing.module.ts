@@ -46,7 +46,8 @@ const routes: Routes = [
   {
     path: 'confirmacion-registro',
     loadChildren: () => import('./registro-usuarios/confirmacion/confirmacion.module').then( m => m.ConfirmacionPageModule)
-  },  {
+  },
+  {
     path: 'datos-personales',
     loadChildren: () => import('./registro-usuarios/datos-personales/datos-personales.module').then( m => m.DatosPersonalesPageModule)
   },
