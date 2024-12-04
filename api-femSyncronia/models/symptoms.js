@@ -18,12 +18,20 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    symptom_name: {
+    image: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     frequency: {
       type: DataTypes.STRING,
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    type:{
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     createdAt: {

@@ -13,10 +13,7 @@ const doctors_Controller = require('../controllers/doctors');
 const patient_data_Controller = require('../controllers/patient_data');
 const report_status_Controller = require('../controllers/report_status');
 const reports_Controller = require('../controllers/reports');
-const symptoms_Controller = require('../controllers/symptoms');
-
-
-
+const symptoms_Controller = require('../controllers/symptoms.js');
 
 
 // Rutas de usuario

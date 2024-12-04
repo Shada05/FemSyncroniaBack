@@ -12,10 +12,16 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      symptom_name: {
+      image: {
         type: Sequelize.STRING
       },
       frequency: {
+        type: Sequelize.STRING
+      },
+      description:{
+        type: Sequelize.STRING
+      },
+      type:{
         type: Sequelize.STRING
       },
       createdAt: {

@@ -4,8 +4,10 @@ exports.store = async (req, res) => {
     const sympt = {
         
         name: req.body.name,
-        symptom_name: req.body.symptom_name,
-        frequency: req.body.frequency
+        image: req.body.symptom_name,
+        frequency: req.body.frequency,
+        description: req.body.description,
+        type: req.body.type
 
     }
     console.log(sympt);
@@ -69,8 +71,10 @@ exports.update = async (req, res) => {
     let updatedData = {};
 
     if (req.body.name != null) updatedData['name']= req.body.name;
-    if (req.body.symptom_name != null) updatedData['symptom_name']= req.body.symptom_name;
+    if (req.body.image != null) updatedData['symptom_name']= req.body.image;
     if (req.body.frequency != null) updatedData['frequency']= req.body.frequency;
+    if (req.body.description != null) updatedData['description']= req.body.description;
+    if (req.body.type != null) updatedData['type']= req.body.type;
 
     return await symptoms.update(updatedData, {
         where: {

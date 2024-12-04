@@ -1,23 +1,37 @@
 const users  = require('../models').users;
+const bcrypt = require('bcrypt');
 
 exports.store = async (req, res) => {
-    const user = {
-        birthdate: req.body.birthdate,
-        username: req.body.username,
-        user_status: req.body.user_status,
-        email: req.body.email,
-        password: req.body.password,
-        profile_image: req.body.profile_image,
-        phone: req.body.phone
-    }
-    console.log(user);
+    try {
+        const { birthdate, username, user_status, email, password, profile_image, phone  } = req.body;
 
-    users.create(user).then(
-        user => res.status(200).send(user)
-    ).catch(
-        error => res.status(400).send(error)
-    );
-}
+        // Verificar si el email ya está registrado
+        const existingUser = await users.findOne({ where: { email } });
+        if (existingUser) {
+            return res.status(400).send({ message: 'El email ya está registrado.' });
+        }
+
+        // Hashear la contraseña
+        const hashedPassword = await bcrypt.hash(password, 8); // 10 es el número de rondas de sal
+
+        // Crear el usuario con el email y la contraseña hash
+        const newUser = await users.create({
+            email,
+            password: hashedPassword,
+            phone,
+            profile_image,
+            birthdate,
+            username,
+            user_status
+
+        });
+
+        return res.status(201).send(newUser);
+    } catch (error) {
+        console.error(error);
+        return res.status(400).send({ message: 'Ocurrió un error al crear el usuario.', error });
+    }
+};
 
 exports.index = async (req, res) =>{
     return await users.findAll({

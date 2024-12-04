@@ -21,8 +21,12 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
           },
         email: {
-            type: DataTypes.STRING(120),
-            allowNull:false,
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true, // Agrega esta línea para la restricción única
+            validate: {
+                isEmail: true, // Validación de formato de email
+            }
         },
         password: {
             type:  DataTypes.STRING(200),
