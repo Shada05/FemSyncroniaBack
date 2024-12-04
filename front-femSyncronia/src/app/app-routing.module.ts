@@ -67,6 +67,11 @@ const routes: Routes = [
     path: 'periodo',
     loadChildren: () => import('./formulario/periodo/periodo.module').then( m => m.PeriodoPageModule)
   },
+  {
+    path: 'datos-corporales',
+    loadChildren: () => import('./formulario/datos-corporales/datos-corporales.module').then( m => m.DatosCorporalesPageModule)
+  },
+
 
 
 

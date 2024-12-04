@@ -1,0 +1,98 @@
+<ion-content keyboard-attach scrollPadding="false">
+  <div class="center">
+    <div>
+      <h1>Datos corporales</h1>
+      <ion-text>
+        Necesitamos conocer algunos datos
+      </ion-text>
+      <ion-text>
+        sobre tu cuerpo.
+      </ion-text>
+      <ion-text style="margin-top: 10px;">
+        También influyen en tu periodo y nos
+      </ion-text>
+      <ion-text>
+        ayudarán a predecirla mejor.
+      </ion-text>
+    </div>
+    <form [formGroup]="formulario">
+      <div class="promedio-periodo">
+        <!-- Contenedor para Peso -->
+        <div class="input-container">
+          <div class="input-group">
+            <ion-item class="ion-no-padding"
+              [class.invalid]="formulario.get('peso')?.hasError('max') || formulario.get('peso')?.hasError('required') && formulario.get('peso')?.touched">
+              <ion-input #peso (input)="soloNumeros(peso)" maxlength="4" type="text" placeholder="Peso"
+                formControlName="peso">
+              </ion-input>
+            </ion-item>
+            <label for="peso" class="label-dias">kg</label>
+          </div>
+          <div class="contenedor-error">
+            <ion-text class="mensaje-error"
+              *ngIf="formulario.get('peso')?.hasError('required') && formulario.get('peso')?.touched">
+              El numero es requerido.
+            </ion-text>
+            <ion-text class="mensaje-error" *ngIf="formulario.get('peso')?.hasError('max')">
+              El numero de días excede el rango.
+            </ion-text>
+          </div>
+        </div>
+
+        <!-- Contenedor para Estatura -->
+        <div class="input-container">
+          <div class="input-group">
+            <ion-item class="ion-no-padding"
+              [class.invalid]="formulario.get('estatura')?.hasError('max') || formulario.get('estatura')?.hasError('required') && formulario.get('estatura')?.touched">
+              <ion-input #estatura (input)="soloNumeros(estatura)" maxlength="4" placeholder="Estatura" type="text"
+                formControlName="estatura">
+              </ion-input>
+            </ion-item>
+            <label for="estatura" class="label-dias">cm</label>
+          </div>
+          <div class="contenedor-error">
+            <ion-text class="mensaje-error"
+              *ngIf="formulario.get('estatura')?.hasError('required') && formulario.get('estatura')?.touched">
+              El numero es requerido.
+            </ion-text>
+            <ion-text class="mensaje-error" *ngIf="formulario.get('estatura')?.hasError('max')">
+              El numero de días excede el rango.
+            </ion-text>
+          </div>
+        </div>
+
+        <!-- Contenedor para Temperatura -->
+        <div class="input-container">
+          <div class="input-group">
+            <ion-item class="ion-no-padding"
+              [class.invalid]="formulario.get('temperatura')?.hasError('max') || formulario.get('temperatura')?.hasError('required') && formulario.get('temperatura')?.touched">
+              <ion-input #temperatura (input)="soloNumeros(temperatura)" maxlength="4" placeholder="Temperatura"
+                type="text" formControlName="temperatura">
+              </ion-input>
+            </ion-item>
+            <label for="temperatura" class="label-dias">°C</label>
+          </div>
+          <div class="contenedor-error">
+            <ion-text class="mensaje-error"
+              *ngIf="formulario.get('temperatura')?.hasError('required') && formulario.get('temperatura')?.touched">
+              El numero es requerido.
+            </ion-text>
+            <ion-text class="mensaje-error" *ngIf="formulario.get('temperatura')?.hasError('max')">
+              El numero de días excede el rango.
+            </ion-text>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="divisor"></div>
+
+    <div class="contenedor-boton">
+      <ion-button class="btn-continuar" [routerLink]="['/periodo']" type="submit">
+        Continuar
+      </ion-button>
+    </div>
+
+    <span><a [routerLink]="['/registro']">¿Necesitas ayuda?</a></span>
+  </div>
+</ion-content>
