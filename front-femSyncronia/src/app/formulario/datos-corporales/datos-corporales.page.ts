@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { IonInput } from '@ionic/angular';
 
 @Component({
   selector: 'app-datos-corporales',
@@ -8,39 +7,58 @@ import { IonInput } from '@ionic/angular';
   styleUrls: ['./datos-corporales.page.scss'],
 })
 export class DatosCorporalesPage implements OnInit {
-  formulario: FormGroup; // Definición del formulario
+  formulario: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.formulario = this.fb.group({
-      peso: ['', [Validators.required,
-      this.validarMaxNum
-      ]],
-      estatura: ['', [Validators.required,
-      this.validarMaxNum
-      ]],
-      temperatura: ['', [Validators.required,
-      this.validarMaxNum
-      ]]
-    }
-    )
+      peso: ['', [Validators.required,this.validarMaxPeso]],
+      estatura: ['', [Validators.required, this.validarMaxEstatura]],
+      temperatura: ['', [Validators.required, this.validarMaxTemperatura]],
+    });
   }
 
   ngOnInit() { }
 
-  validarMaxNum(control: AbstractControl): ValidationErrors | null {
-    const numero = control.value;
-    const esMenor = numero <= 45; // Compara si el número es menor o igual a 45
+  validarFormato(event: any, campo: string) {
+    let value = event.target.value || '';
+    value = value.replace(/[^0-9.]/g, '');
 
-    if (!esMenor) {
-      return { max: true }; // Si el número es mayor que 45, retorna el error
+    const puntoIndex = value.indexOf('.');
+    if (puntoIndex !== -1) {
+      const [entero, decimal] = value.split('.');
+      value = `${entero.slice(0, campo === 'temperatura' ? 2 : 3)}.${decimal.slice(0, 2)}`;
+    } else {
+      value = value.slice(0, campo === 'temperatura' ? 2 : 3);
     }
-    return null; // Si el número es válido, no retorna ningún error
+
+    event.target.value = value;
+    this.formulario.get(campo)?.setValue(value);
   }
 
-  soloNumeros(input: IonInput | null) {
-    if (input) {
-      const value = (input.value as string).replace(/[^0-9.]/g, '');
-      input.value = value;
+  // Validación de peso máximo
+  validarMaxPeso(control: AbstractControl): ValidationErrors | null {
+    const peso = parseFloat(control.value);
+    if (peso > 150) {
+      return { max: true };
     }
+    return null;
+  }
+
+  // Validación de estatura máxima
+  validarMaxEstatura(control: AbstractControl): ValidationErrors | null {
+    const estatura = parseFloat(control.value);
+    if (estatura > 200) {
+      return { max: true };
+    }
+    return null;
+  }
+
+  // Validación de temperatura máxima
+  validarMaxTemperatura(control: AbstractControl): ValidationErrors | null {
+    const temperatura = parseFloat(control.value);
+    if (temperatura > 45) {
+      return { max: true };
+    }
+    return null;
   }
 }

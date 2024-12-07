@@ -17,12 +17,12 @@
     </div>
     <form [formGroup]="formulario">
       <div class="promedio-periodo">
-        <!-- Contenedor para Peso -->
+        <!-- Campo Peso -->
         <div class="input-container">
           <div class="input-group">
             <ion-item class="ion-no-padding"
-              [class.invalid]="formulario.get('peso')?.hasError('max') || formulario.get('peso')?.hasError('required') && formulario.get('peso')?.touched">
-              <ion-input #peso (input)="soloNumeros(peso)" maxlength="4" type="text" placeholder="Peso"
+              [class.invalid]="formulario.get('peso')?.hasError('max')||formulario.get('peso')?.invalid && formulario.get('peso')?.touched">
+              <ion-input (ionInput)="validarFormato($event, 'peso')" type="text" placeholder="Peso"
                 formControlName="peso">
               </ion-input>
             </ion-item>
@@ -31,20 +31,20 @@
           <div class="contenedor-error">
             <ion-text class="mensaje-error"
               *ngIf="formulario.get('peso')?.hasError('required') && formulario.get('peso')?.touched">
-              El numero es requerido.
+              El peso es requerido.
             </ion-text>
             <ion-text class="mensaje-error" *ngIf="formulario.get('peso')?.hasError('max')">
-              El numero de días excede el rango.
+              El peso excede el limite permitido.
             </ion-text>
           </div>
         </div>
 
-        <!-- Contenedor para Estatura -->
+        <!-- Campo Estatura -->
         <div class="input-container">
           <div class="input-group">
             <ion-item class="ion-no-padding"
-              [class.invalid]="formulario.get('estatura')?.hasError('max') || formulario.get('estatura')?.hasError('required') && formulario.get('estatura')?.touched">
-              <ion-input #estatura (input)="soloNumeros(estatura)" maxlength="4" placeholder="Estatura" type="text"
+              [class.invalid]="formulario.get('estatura')?.hasError('max')||formulario.get('estatura')?.invalid && formulario.get('estatura')?.touched">
+              <ion-input (ionInput)="validarFormato($event, 'estatura')" type="text" placeholder="Estatura"
                 formControlName="estatura">
               </ion-input>
             </ion-item>
@@ -53,21 +53,21 @@
           <div class="contenedor-error">
             <ion-text class="mensaje-error"
               *ngIf="formulario.get('estatura')?.hasError('required') && formulario.get('estatura')?.touched">
-              El numero es requerido.
+              La estatura es requerida.
             </ion-text>
             <ion-text class="mensaje-error" *ngIf="formulario.get('estatura')?.hasError('max')">
-              El numero de días excede el rango.
+              La estatura excede el limite permitido.
             </ion-text>
           </div>
         </div>
 
-        <!-- Contenedor para Temperatura -->
+        <!-- Campo Temperatura -->
         <div class="input-container">
           <div class="input-group">
             <ion-item class="ion-no-padding"
-              [class.invalid]="formulario.get('temperatura')?.hasError('max') || formulario.get('temperatura')?.hasError('required') && formulario.get('temperatura')?.touched">
-              <ion-input #temperatura (input)="soloNumeros(temperatura)" maxlength="4" placeholder="Temperatura"
-                type="text" formControlName="temperatura">
+              [class.invalid]="formulario.get('temperatura')?.hasError('max')||formulario.get('temperatura')?.invalid && formulario.get('temperatura')?.touched">
+              <ion-input (ionInput)="validarFormato($event, 'temperatura')" type="text" placeholder="Temperatura"
+                formControlName="temperatura">
               </ion-input>
             </ion-item>
             <label for="temperatura" class="label-dias">°C</label>
@@ -75,10 +75,10 @@
           <div class="contenedor-error">
             <ion-text class="mensaje-error"
               *ngIf="formulario.get('temperatura')?.hasError('required') && formulario.get('temperatura')?.touched">
-              El numero es requerido.
+              La temperatura es requerida.
             </ion-text>
             <ion-text class="mensaje-error" *ngIf="formulario.get('temperatura')?.hasError('max')">
-              El numero de días excede el rango.
+              La temperatura excede el limite permitido.
             </ion-text>
           </div>
         </div>
@@ -86,13 +86,11 @@
     </form>
 
     <div class="divisor"></div>
-
     <div class="contenedor-boton">
-      <ion-button class="btn-continuar" [routerLink]="['/periodo']" type="submit">
+      <ion-button class="btn-continuar" [routerLink]="['/periodo']" type="submit" [disabled]="formulario.invalid">
         Continuar
       </ion-button>
     </div>
-
     <span><a [routerLink]="['/registro']">¿Necesitas ayuda?</a></span>
   </div>
 </ion-content>
