@@ -1,0 +1,96 @@
+<ion-content keyboard-attach scrollPadding="false">
+  <div class="center">
+    <div>
+      <h1>Datos corporales</h1>
+      <ion-text>
+        Necesitamos conocer algunos datos
+      </ion-text>
+      <ion-text>
+        sobre tu cuerpo.
+      </ion-text>
+      <ion-text style="margin-top: 10px;">
+        También influyen en tu periodo y nos
+      </ion-text>
+      <ion-text>
+        ayudarán a predecirla mejor.
+      </ion-text>
+    </div>
+    <form [formGroup]="formulario">
+      <div class="promedio-periodo">
+        <!-- Campo Peso -->
+        <div class="input-container">
+          <div class="input-group">
+            <ion-item class="ion-no-padding"
+              [class.invalid]="formulario.get('peso')?.hasError('max')||formulario.get('peso')?.invalid && formulario.get('peso')?.touched">
+              <ion-input (ionInput)="validarFormato($event, 'peso')" type="text" placeholder="Peso"
+                formControlName="peso">
+              </ion-input>
+            </ion-item>
+            <label for="peso" class="label-dias">kg</label>
+          </div>
+          <div class="contenedor-error">
+            <ion-text class="mensaje-error"
+              *ngIf="formulario.get('peso')?.hasError('required') && formulario.get('peso')?.touched">
+              El peso es requerido.
+            </ion-text>
+            <ion-text class="mensaje-error" *ngIf="formulario.get('peso')?.hasError('max')">
+              El peso excede el limite permitido.
+            </ion-text>
+          </div>
+        </div>
+
+        <!-- Campo Estatura -->
+        <div class="input-container">
+          <div class="input-group">
+            <ion-item class="ion-no-padding"
+              [class.invalid]="formulario.get('estatura')?.hasError('max')||formulario.get('estatura')?.invalid && formulario.get('estatura')?.touched">
+              <ion-input (ionInput)="validarFormato($event, 'estatura')" type="text" placeholder="Estatura"
+                formControlName="estatura">
+              </ion-input>
+            </ion-item>
+            <label for="estatura" class="label-dias">cm</label>
+          </div>
+          <div class="contenedor-error">
+            <ion-text class="mensaje-error"
+              *ngIf="formulario.get('estatura')?.hasError('required') && formulario.get('estatura')?.touched">
+              La estatura es requerida.
+            </ion-text>
+            <ion-text class="mensaje-error" *ngIf="formulario.get('estatura')?.hasError('max')">
+              La estatura excede el limite permitido.
+            </ion-text>
+          </div>
+        </div>
+
+        <!-- Campo Temperatura -->
+        <div class="input-container">
+          <div class="input-group">
+            <ion-item class="ion-no-padding"
+              [class.invalid]="formulario.get('temperatura')?.hasError('max')||formulario.get('temperatura')?.invalid && formulario.get('temperatura')?.touched">
+              <ion-input (ionInput)="validarFormato($event, 'temperatura')" type="text" placeholder="Temperatura"
+                formControlName="temperatura">
+              </ion-input>
+            </ion-item>
+            <label for="temperatura" class="label-dias">°C</label>
+          </div>
+          <div class="contenedor-error">
+            <ion-text class="mensaje-error"
+              *ngIf="formulario.get('temperatura')?.hasError('required') && formulario.get('temperatura')?.touched">
+              La temperatura es requerida.
+            </ion-text>
+            <ion-text class="mensaje-error" *ngIf="formulario.get('temperatura')?.hasError('max')">
+              La temperatura excede el limite permitido.
+            </ion-text>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="divisor"></div>
+    <div class="contenedor-boton">
+      <ion-button class="btn-continuar" [routerLink]="['/periodo']" type="submit" [disabled]="formulario.invalid">
+        Continuar
+      </ion-button>
+    </div>
+    <span><a [routerLink]="['/registro']">¿Necesitas ayuda?</a></span>
+  </div>
+</ion-content>
