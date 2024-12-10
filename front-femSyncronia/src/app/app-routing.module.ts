@@ -70,7 +70,11 @@ const routes: Routes = [
   {
     path: 'datos-corporales',
     loadChildren: () => import('./formulario/datos-corporales/datos-corporales.module').then( m => m.DatosCorporalesPageModule)
+  },  {
+    path: 'loading',
+    loadChildren: () => import('./formulario/loading/loading.module').then( m => m.LoadingPageModule)
   },
+
 
 
 

@@ -1,0 +1,69 @@
+/* Elimina fondo por defecto y establece un fondo */
+ion-content {
+    --background: none; /* Elimina el fondo por defecto */
+    background-image: url('../../../assets/img/login/fondo-login.svg'); /* Fondo con imagen */
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    background-position: center;
+}
+
+/* Contenedor principal centrado vertical y horizontal */
+.loading-container {
+  display: flex;
+  justify-content: center; /* Centrado horizontal */
+  align-items: center; /* Centrado vertical */
+  height: 100%; /* Asegura la altura total disponible */
+  padding: 0; /* Evita efectos no esperados de padding */
+}
+
+/* Contenedor con los elementos del progreso */
+.progress-container {
+    display: grid;
+    justify-content: center; /* Centra horizontalmente */
+    align-content: center; /* Centra verticalmente */
+    align-items: center; /* Alinea los elementos internos al centro */
+    min-height: 100vh; /* Cambia 100% a 100vh */
+}
+
+/* Dimensiones y propiedades del progreso visual */
+.progress-circle {
+  position: relative;
+  width: 225px;
+  height: 225px;
+}
+
+/* Estilado dinámico de progreso */
+.progress-ring {
+  width: 100%;
+  height: 100%;
+}
+
+.progress-segment {
+  stroke: #8c8c8c;
+  stroke-linecap: round;
+  stroke-dasharray: 85 200;
+  transition: stroke 0.5s ease;
+}
+
+.progress-segment.active {
+  stroke: #ff7f94;
+}
+
+/* Estilado del porcentaje dinámico centrado */
+.percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  font-weight: bold;
+  color: black;
+}
+
+/* Estilado de los mensajes */
+.loading-message {
+  margin-top: 10px;
+  font-size: 27px;
+  color: black;
+  text-align: center;
+}
