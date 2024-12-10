@@ -1,0 +1,57 @@
+<ion-content [fullscreen]="true">
+  <div class="progress-container">
+    <!-- Círculo de progreso dividido en 3 -->
+    <div class="progress-circle">
+      <svg class="progress-ring" viewBox="0 0 100 100">
+        <!-- Segmento 1 -->
+        <circle
+          class="progress-segment"
+          [class.active]="activeSegment === 1"
+          cx="50"
+          cy="50"
+          r="45"
+          stroke="#D3D3D3"
+          stroke-width="8"
+          stroke-dasharray="94.2 188.4"
+          transform="rotate(-90 50 50)"
+          fill="none"
+        ></circle>
+
+        <!-- Segmento 2 -->
+        <circle
+          class="progress-segment"
+          [class.active]="activeSegment === 2"
+          cx="50"
+          cy="50"
+          r="45"
+          stroke="#D3D3D3"
+          stroke-width="8"
+          stroke-dasharray="94.2 188.4"
+          transform="rotate(30 50 50)"
+          fill="none"
+        ></circle>
+
+        <!-- Segmento 3 -->
+        <circle
+          class="progress-segment"
+          [class.active]="activeSegment === 3"
+          cx="50"
+          cy="50"
+          r="45"
+          stroke="#D3D3D3"
+          stroke-width="8"
+          stroke-dasharray="94.2 188.4"
+          transform="rotate(150 50 50)"
+          fill="none"
+        ></circle>
+      </svg>
+
+      <!-- Porcentaje dinámico -->
+      <div class="percentage">{{ porcentaje }}%</div>
+    </div>
+
+    <!-- Mensaje -->
+    <div class="loading-message">Personalizando tu</div>
+    <div class="loading-message">experiencia...</div>
+  </div>
+</ion-content>
