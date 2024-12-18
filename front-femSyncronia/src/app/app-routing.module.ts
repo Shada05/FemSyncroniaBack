@@ -74,6 +74,10 @@ const routes: Routes = [
     path: 'loading',
     loadChildren: () => import('./formulario/loading/loading.module').then( m => m.LoadingPageModule)
   },
+  {
+    path: 'formulario-completado',
+    loadChildren: () => import('./formulario/formulario-completado/formulario-completado.module').then( m => m.FormularioCompletadoPageModule)
+  },
 
 
 
