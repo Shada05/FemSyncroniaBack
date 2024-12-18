@@ -61,7 +61,7 @@ enviarDatos() {
         await toast.present();
 
         // Redirige solo después del registro exitoso
-        //this.router.navigate(['/validar-codigo-regis']);
+        this.router.navigate(['/validar-codigo-regis']);
 
         this.formulario.reset();
       },
