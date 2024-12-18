@@ -1,0 +1,51 @@
+<ion-content [fullscreen]="true">
+  <ion-tabs>
+    <ion-tab tab="principal">
+      <div id="pagina-principal">
+        <ion-content>
+          <div class="center">Contenido principal</div>
+        </ion-content>
+      </div>
+    </ion-tab>
+    <ion-tab tab="calendario">
+      <div id="pagina-calendario">
+        <ion-content>
+          <div class="center">Contenido calendario</div>
+        </ion-content>
+      </div>
+    </ion-tab>
+    <ion-tab tab="grafica">
+      <div id="pagina-grafica">
+        <ion-content>
+          <div class="center">Contenido grafica</div>
+        </ion-content>
+      </div>
+    </ion-tab>
+    <ion-tab tab="buscar">
+      <div id="page-buscar">
+        <ion-content>
+          <div class="center">Contenido buscar</div>
+        </ion-content>
+      </div>
+    </ion-tab>
+
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="principal">
+        <ion-icon name="home-outline"></ion-icon>
+        Inicio
+      </ion-tab-button>
+      <ion-tab-button tab="calendario">
+        <ion-icon name="calendar-outline"></ion-icon>
+        Calendario
+      </ion-tab-button>
+      <ion-tab-button tab="grafica">
+        <ion-icon name="stats-chart-outline"></ion-icon>
+        Gráfica
+      </ion-tab-button>
+      <ion-tab-button tab="buscar">
+        <ion-icon name="search-outline"></ion-icon>
+        Buscar
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>
