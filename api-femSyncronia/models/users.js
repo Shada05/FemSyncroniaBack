@@ -22,7 +22,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true, // Agrega esta línea para la restricción única
+            validate: {
+                isEmail: true, // Validación de formato de email
+            }
         },
         profile_image: {
             type: DataTypes.STRING,
