@@ -70,13 +70,18 @@ const routes: Routes = [
   {
     path: 'datos-corporales',
     loadChildren: () => import('./formulario/datos-corporales/datos-corporales.module').then( m => m.DatosCorporalesPageModule)
-  },  {
+  },
+  {
     path: 'loading',
     loadChildren: () => import('./formulario/loading/loading.module').then( m => m.LoadingPageModule)
   },
   {
     path: 'formulario-completado',
     loadChildren: () => import('./formulario/formulario-completado/formulario-completado.module').then( m => m.FormularioCompletadoPageModule)
+  },
+  {
+    path: 'pantalla-principal',
+    loadChildren: () => import('./pantalla-principal/inicio/inicio.module').then( m => m.InicioPageModule)
   },
 
 

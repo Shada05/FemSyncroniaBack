@@ -1,0 +1,33 @@
+ion-content {
+    --background: none; /* Sin fondo de color por defecto */
+    background-image: url('../../../assets/img/login/Fondo-login.svg'); /* Imagen de fondo */
+    background-size: cover; /* La imagen cubre todo el área */
+    background-repeat: no-repeat; /* La imagen no se repite */
+    background-position: center; /* La imagen está centrada */
+    width: 100%; /* Ancho completo */
+    height: 100vh; /* Altura completa de la ventana */
+  }
+  
+  /* Estilo para centrar elementos en una cuadrícula */
+.center {
+    display: grid; /* Utiliza grid layout */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-content: center; /* Centra los elementos verticalmente */
+    align-items: center; /* Alinea los elementos en el centro */
+    gap: 20px; /* Espacio entre los elementos */
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Altura completa */
+    color: black;
+}
+
+ion-tab-bar {
+    --background: #ffffff; /* Fondo blanco para el tab-bar */
+    border-top: none;
+}
+
+ion-tab-button {
+    --background: #ffffff; /* Fondo blanco de los botones */
+    --color: #8e8e93; /* Color por defecto */
+    --color-selected: #ff4d7f; /* Color cuando está seleccionado */
+    font-size: 7px;
+}
