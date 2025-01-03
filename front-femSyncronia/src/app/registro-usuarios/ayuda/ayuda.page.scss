@@ -1,0 +1,116 @@
+ion-content {
+    --background: none; /* Elimina el fondo por defecto */
+    background-image: url('../../../assets/img/login/fondo-login.svg'); /* Fondo con imagen */    
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    background-position: center;
+}
+
+/* Estilos para centrar el contenido */
+.center {
+    display: grid;
+    justify-content: center; /* Centra horizontalmente */
+    align-content: center; /* Centra verticalmente */
+    align-items: center; /* Alinea los elementos internos al centro */
+    height: 100%; /* Tamaño del contenedor al 100% del viewport */
+    gap: 30px; /* Espacio entre los elementos */
+}
+
+/* Estilos para el título */
+h1 {
+    font-size: 27px;
+    color: black;
+}
+
+ion-text {
+    font-family: 'Open Sans';
+    font-size: 15px;
+    font-weight: 400;
+    display: block;
+    color: black;
+}
+
+/* Estilo para el ion-item del correo electrónico */
+ion-item {
+    --background: none; /* Sin fondo de color por defecto */
+    --color: #C8C8C8; /* Color del texto */
+    --border-color: #B9B9B9; /* Color del borde */
+    font-size: 17px; /* Tamaño de fuente */
+    height: 40px; /* Altura del elemento */
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Alinea los elementos en el centro verticalmente */
+    border-bottom: 1px solid; /* Solo el borde inferior */
+    margin-bottom: 30px;
+}  
+
+.invalid {
+    border-bottom-color: #FF7B7B !important; /* Color del borde inferior en caso de ser inválido */
+}
+
+/* Estilo para ion-input */
+ion-input {
+    color: #868686; /* Color del texto */
+    --highlight-color-valid: #868686;
+    --highlight-color-focused: none;
+}
+
+.invalid ion-input {
+    color: #FF7B7B; /* Color de texto cuando es inválido */
+    --highlight-color-invalid: #FF7B7B; /* Color del borde inferior cuando es inválido */
+}
+
+/* Estilo para ion-select */
+.categoria {
+    --padding-start: 15px;
+    --placeholder-color: #C8C8C8;
+    font-size: 17px;
+    --border-radius: 10px;
+    --background: #FFFFFF;
+    width: 301px;
+    height: 36px;
+    color: #868686;
+    --border-radius: 10px;
+    --inner-padding-end: 15px; /* Ajusta la separación del triángulo con el texto */
+    --highlight-color-invalid: none;
+    --highlight-color-focused: #868686;
+    --highlight-color-valid: none;
+    margin-bottom: 30px;
+}
+
+/* Estilo para ion-textarea */
+ion-textarea {
+    color: #868686; /* Color del texto */
+    font-size: 17px; /* Tamaño de texto */
+    width: 301px;
+    height: 190px;
+    --background: none;
+    --placeholder-color: #C8C8C8; /* Color del texto de placeholder */
+    --padding-start: 15px;
+    --padding-end: 15px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid #B9B9B9; /* Define el borde */
+}
+
+.contenedor-boton {
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    width: 100%;
+    margin-top: 30px;
+}
+
+/* Botón de enviar */
+.btn-enviar {
+    --border-radius: 50px; /* Radio de borde */
+    width: 302px; /* Ancho del botón */
+    height: 44px; /* Altura del botón */
+    text-transform: none; /* Transformación de texto */
+    font-family: 'Roboto-medium'; /* Familia de fuente */
+    --background: #FFB7BF; /* Color de fondo */
+    --color: white; /* Color de texto */
+    --box-shadow: none; /* Sin sombra */
+    font-size: 18px; /* Tamaño de fuente */
+    --background-activated:#FF8390;
+    --background-hover:#FF8390;
+}
