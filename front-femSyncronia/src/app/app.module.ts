@@ -11,7 +11,6 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot({
-    mode: 'ios',
     scrollAssist: false,
     scrollPadding: false
   }), AppRoutingModule, HttpClientModule],

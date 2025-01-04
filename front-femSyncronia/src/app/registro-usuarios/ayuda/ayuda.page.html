@@ -36,7 +36,7 @@
         <ion-textarea formControlName="mensaje" placeholder="Escribe tu mensaje aquí"></ion-textarea>
 
       <div class="contenedor-boton">
-        <ion-button class="btn-enviar" type="submit">
+        <ion-button class="btn-enviar" [routerLink]="['/correo-enviado']" [disabled]="formulario.invalid" type="submit">
           Enviar
         </ion-button>
       </div>
