@@ -1,6 +1,6 @@
 ion-content {
     --background: none; /* Sin fondo de color por defecto */
-    background-image: url('/assets/img/login/Fondo-login.svg'); /* Imagen de fondo */
+    background-image: url('/assets/img/pantalla-principal/fondo-tabs.svg'); /* Imagen de fondo */
     background-size: cover; /* La imagen cubre todo el área */
     background-repeat: no-repeat; /* La imagen no se repite */
     background-position: center; /* La imagen está centrada */
@@ -8,17 +8,42 @@ ion-content {
     height: 100vh; /* Altura completa de la ventana */
   }
   
-  /* Estilo para centrar elementos en una cuadrícula */
-.center {
-    display: grid; /* Utiliza grid layout */
-    justify-content: center; /* Centra los elementos horizontalmente */
-    align-content: center; /* Centra los elementos verticalmente */
-    align-items: center; /* Alinea los elementos en el centro */
-    gap: 20px; /* Espacio entre los elementos */
+/* Contenedor de la barra superior */
+.top-bar {
+    display: flex; /* Configura el contenedor como flexbox */
+    align-items: center; /* Centra verticalmente los elementos */
+    justify-content: space-between; /* Espacia los elementos uniformemente */
+    padding: 25px 16px; /* Espaciado interno: 10px arriba/abajo, 16px izquierda/derecha */
     width: 100%; /* Ancho completo */
-    height: 100%; /* Altura completa */
+    background-color: transparent; /* Fondo transparente */
+  }
+  
+  /* Ajusta el ícono de notificación */
+  .notificacion {
     color: black;
-}
+    height: 24px;
+    width: 24px;
+  }
+  
+  /* Ajusta el texto de bienvenida */
+  .bienvenida-text {
+    color: black;
+    text-align: center;
+    font-family: "Open Sans";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  
+  /* Ajusta la imagen de perfil */
+  .imagen-perfil {
+    width: 50px;
+    height: 50px;
+    object-fit: cover; /* Mantiene las proporciones de la imagen */
+    border-radius: 50%; /* Hace la imagen circular */
+    border: 1px solid white;
+  }  
 
 ion-tab-bar {
     --background: #ffffff; /* Fondo blanco para el tab-bar */

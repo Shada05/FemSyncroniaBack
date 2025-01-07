@@ -3,7 +3,13 @@
     <ion-tab tab="principal">
       <div id="pagina-principal">
         <ion-content>
-          <div class="center">Contenido principal</div>
+          <div class="top-bar">
+            <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg"></ion-icon>
+            <ion-text class="bienvenida-text">
+              Bienvenida
+            </ion-text>
+            <img class="imagen-perfil" [src]="profileImage" alt="Foto de perfil">
+          </div>
         </ion-content>
       </div>
     </ion-tab>
