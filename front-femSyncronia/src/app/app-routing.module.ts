@@ -82,7 +82,15 @@ const routes: Routes = [
   {
     path: 'pantalla-principal',
     loadChildren: () => import('./pantalla-principal/inicio/inicio.module').then( m => m.InicioPageModule)
+  },  {
+    path: 'ayuda',
+    loadChildren: () => import('./registro-usuarios/ayuda/ayuda.module').then( m => m.AyudaPageModule)
   },
+  {
+    path: 'correo-enviado',
+    loadChildren: () => import('./registro-usuarios/correo-enviado/correo-enviado.module').then( m => m.CorreoEnviadoPageModule)
+  },
+
 
 
 
