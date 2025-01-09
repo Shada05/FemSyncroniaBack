@@ -19,14 +19,14 @@ ion-content {
   }
   
   /* Ajusta el ícono de notificación */
-  .notificacion {
+.notificacion {
     color: black;
     height: 24px;
     width: 24px;
-  }
+}
   
   /* Ajusta el texto de bienvenida */
-  .bienvenida-text {
+.bienvenida-text {
     color: black;
     text-align: center;
     font-family: "Open Sans";
@@ -34,16 +34,105 @@ ion-content {
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-  }
+}
   
   /* Ajusta la imagen de perfil */
-  .imagen-perfil {
+.imagen-perfil {
     width: 50px;
     height: 50px;
     object-fit: cover; /* Mantiene las proporciones de la imagen */
     border-radius: 50%; /* Hace la imagen circular */
     border: 1px solid white;
-  }  
+}  
+
+/* Contenedor de información debajo de la barra superior */
+.info-periodo {
+  width: 324px;
+  height: 287px;
+  background: #E9E9E9;
+  margin: 17px auto; /* Centra horizontalmente */
+  border-radius: 20px; /* Bordes redondeados */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Espacia el contenido */
+  align-items: center; /* Centra horizontalmente los elementos */
+  padding: 16px; /* Espaciado interno */
+}
+
+/* Texto de encabezado "Retraso" */
+.info-periodo .titulo {
+  font-size: 24px;
+  font-weight: 600;
+  color: black;
+  text-align: center;
+  margin: 0;
+}
+
+/* Número grande "15" */
+.info-periodo .numero {
+  font-size: 64px;
+  font-weight: 600;
+  color: black;
+  text-align: center;
+  margin: 0;
+}
+
+/* Texto "días de tu periodo" */
+.info-periodo .subtitulo {
+  font-size: 24px;
+  font-weight: 600;
+  color: black;
+  text-align: center;
+  margin: 0;
+}
+
+/* Línea horizontal */
+.info-periodo .linea-horizontal {
+  width: 90%; /* Ancho de la línea */
+  height: 1px; /* Grosor de la línea */
+  background-color: #9D9D9D;
+  margin: 1px 0; /* Espaciado vertical */
+}
+
+/* Texto "Baja probabilidad de quedar embarazada" */
+.info-periodo .observacion {
+  font-size: 14px;
+  font-weight: normal;
+  color: black;
+  text-align: center;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Botón dentro del contenedor */
+.boton-informacion {
+  width: 223px; /* Ancho del botón */
+  height: 37px; /* Altura del botón */
+  margin-bottom: 8px; /* Asegura que el botón quede en la parte inferior */
+  --background: #ffff; /* Color de fondo del botón */
+  --color: #FF9CA7; /* Color del texto del botón */
+  --box-shadow: none; /* Sin sombra */
+  --border-radius: 50px; /* Radio de borde */
+  text-transform: none; /* Transformación de texto */
+  font-family: 'Roboto-medium'; /* Familia de fuente */
+  --background-activated: #FF8390;
+}
+
+/* Componentes adicionales */
+.info-sintomas, .info-consejos{
+  width: 319px;
+  height: 132px;
+  background: #FFFFFF; /* Fondo gris claro */
+  margin: 24px auto; /* Espaciado entre los componentes */
+  border-radius: 20px; /* Bordes redondeados */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  color: black; /* Color del texto */
+  font-weight: 600;
+}
 
 ion-tab-bar {
     --background: #ffffff; /* Fondo blanco para el tab-bar */

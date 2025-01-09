@@ -3,16 +3,36 @@
     <ion-tab tab="principal">
       <div id="pagina-principal">
         <ion-content>
+          <!-- Barra superior -->
           <div class="top-bar">
             <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg"></ion-icon>
-            <ion-text class="bienvenida-text">
-              Bienvenida
-            </ion-text>
+            <ion-text class="bienvenida-text">Bienvenida</ion-text>
             <img class="imagen-perfil" [src]="profileImage" alt="Foto de perfil">
+          </div>
+
+          <!-- Contenedor periodo -->
+          <div class="info-periodo">
+            <ion-text class="info-text titulo">Retraso</ion-text>
+            <ion-text class="numero">15</ion-text>
+            <ion-text class="info-text subtitulo">días de tu periodo</ion-text>
+            <div class="linea-horizontal"></div>
+            <ion-text class="info-text observacion">Baja probabilidad de quedar embarazada</ion-text>
+            <ion-button class="boton-informacion">Registrar</ion-button>
+          </div>
+
+          <!-- Contenedor síntomas -->
+          <div class="info-sintomas">
+            <ion-text>Espacio para los síntomas</ion-text>
+          </div>
+
+          <!-- Consejo del día -->
+          <div class="info-consejos">
+            <ion-text>Espacio para los consejos del día</ion-text>
           </div>
         </ion-content>
       </div>
     </ion-tab>
+
     <ion-tab tab="calendario">
       <div id="pagina-calendario">
         <ion-content>
@@ -20,15 +40,17 @@
         </ion-content>
       </div>
     </ion-tab>
+
     <ion-tab tab="grafica">
       <div id="pagina-grafica">
         <ion-content>
-          <div class="center">Contenido grafica</div>
+          <div class="center">Contenido gráfica</div>
         </ion-content>
       </div>
     </ion-tab>
+
     <ion-tab tab="buscar">
-      <div id="page-buscar">
+      <div id="pagina-buscar">
         <ion-content>
           <div class="center">Contenido buscar</div>
         </ion-content>
