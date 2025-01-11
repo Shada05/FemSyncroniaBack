@@ -1,4 +1,51 @@
-<ion-content>
+<ion-menu side="end" menuId="menu-perfil" contentId="contenido" width="223px">
+  <ion-content>
+    <!-- Espacio para la imagen de perfil -->
+    <div class="datos-perfil">
+      <img class="imagen-espacio-perfil" [src]="profileImage" alt="Foto de perfil">
+      <div class="info-usuario">
+        <ion-text class="nombre-usuario">Maria Hernandez</ion-text>
+        <div class="linea-separadora"></div>
+        <ion-text class="correo-usuario">maryhz43gmail.com</ion-text>
+      </div>
+    </div>
+
+    <!-- Secciones del menú -->
+    <ion-item button lines="none">
+      <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/circulo-de-usuario.svg"></ion-icon>
+      <ion-label>Mi perfil</ion-label>
+    </ion-item>
+    <ion-item button lines="none">
+      <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/comentarios.svg"></ion-icon>
+      <ion-label>Foro</ion-label>
+    </ion-item>
+    <ion-item button lines="none">
+      <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/cinta-de-punto-de-espalda.svg"></ion-icon>
+      <ion-label>Recordatorios</ion-label>
+    </ion-item>
+    <ion-item button lines="none">
+      <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/interrogatorio.svg"></ion-icon>
+      <ion-label>Ayuda</ion-label>
+    </ion-item>
+    <ion-item button lines="none">
+      <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/ajustes.svg"></ion-icon>
+      <ion-label>Configuración</ion-label>
+    </ion-item>
+    <ion-item button lines="none">
+      <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/salida.svg"></ion-icon>
+      <ion-label>Cerrar sesión</ion-label>
+    </ion-item>
+      <div class="logo-container">
+        <img class="logo" src="/assets/img/logo.svg" alt="Logo">
+        <div class="logo-textos">
+          <ion-text class="acerca-de">Acerca de</ion-text>
+          <ion-text class="fem-syncronia">FemSyncronia</ion-text>
+        </div>
+      </div>  
+  </ion-content>
+</ion-menu>
+
+<ion-content id="contenido">
   <ion-tabs>
     <ion-tab tab="principal">
       <div id="pagina-principal">
@@ -7,7 +54,7 @@
           <div class="top-bar">
             <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg"></ion-icon>
             <ion-text class="bienvenida-text">Bienvenida</ion-text>
-            <img class="imagen-perfil" [src]="profileImage" alt="Foto de perfil">
+            <img class="imagen-perfil" [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()">
           </div>
 
           <!-- Contenedor periodo -->

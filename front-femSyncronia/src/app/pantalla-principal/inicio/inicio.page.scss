@@ -18,14 +18,14 @@ ion-content {
     background-color: transparent; /* Fondo transparente */
   }
   
-  /* Ajusta el ícono de notificación */
+/* Ajusta el ícono de notificación */
 .notificacion {
     color: black;
     height: 24px;
     width: 24px;
 }
   
-  /* Ajusta el texto de bienvenida */
+/* Ajusta el texto de bienvenida */
 .bienvenida-text {
     color: black;
     text-align: center;
@@ -36,7 +36,7 @@ ion-content {
     line-height: normal;
 }
   
-  /* Ajusta la imagen de perfil */
+/* Ajusta la imagen de perfil */
 .imagen-perfil {
     width: 50px;
     height: 50px;
@@ -132,6 +132,124 @@ ion-content {
   font-size: 16px;
   color: black; /* Color del texto */
   font-weight: 600;
+}
+
+ion-menu {
+  --width: 243px;
+  ion-content {
+    --background: #ffffff; /* Establece un fondo blanco para el contenido del menú */
+    background-image: none; /* Asegúrate de que no haya imagen de fondo */
+  }
+}
+
+.datos-perfil {
+  height: 158px; /* Altura del contenedor */
+  background: #FCBCC3; /* Fondo del contenedor */
+  display: flex; /* Usar flexbox para disposición */
+  flex-direction: column; /* Coloca elementos en columna */
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  margin-bottom: 16px; /* Margen inferior opcional */
+  text-align: center; /* Centra el texto */
+}
+
+/* Imagen del perfil */
+.imagen-espacio-perfil {
+  width: 80px; /* Ancho de la imagen */
+  height: 80px; /* Altura de la imagen */
+  object-fit: cover; /* Ajusta la imagen */
+  border-radius: 50%; /* Hace la imagen circular */
+  border: 1px solid white; /* Borde opcional */
+  margin-bottom: 8px; /* Espaciado con el nombre */
+}
+
+/* Contenedor de la información del usuario */
+.info-usuario {
+  display: flex;
+  flex-direction: column; /* Coloca el contenido en columna */
+  align-items: center; /* Centra horizontalmente */
+}
+
+/* Estilo del nombre del usuario */
+.nombre-usuario {
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000; /* Color del texto */
+}
+
+/* Línea separadora */
+.linea-separadora {
+  width: 210px; /* Ancho fijo de la línea */
+  height: 1px; /* Altura de la línea */
+  background-color: #FFFFFF; /* Color de la línea */
+  margin: 4px 0; /* Espaciado superior e inferior */
+}
+
+/* Texto descriptivo del usuario */
+.correo-usuario {
+  font-size: 13px;
+  font-weight: 400;
+  color: #333333CF; /* Color del texto */
+}
+
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+ion-item{
+  --background:#ffff;
+  font-size: 20px;
+  font-weight: 600;
+  --color: black;
+}
+
+.icono{
+  font-size: 25px;
+  color:black;
+}
+
+/* Contenedor para el logo y los textos */
+.logo-container {
+  display: flex;
+  align-items: center; /* Centra verticalmente los elementos */
+  justify-content: center; /* Centra horizontalmente los elementos */
+  position: absolute; /* Fija el contenedor en una posición específica */
+  bottom: 20px; /* Lo coloca en la parte inferior */
+  width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+  padding: 10px 0; /* Espaciado opcional si lo necesitas */
+}
+
+/* Estilo de la imagen del logo */
+.logo {
+  width: 40px; /* Ajusta el tamaño del logo */
+  height: 40px; /* Ajusta el tamaño del logo */
+  object-fit: cover;
+  margin-right: 8px; /* Espaciado entre el logo y los textos */
+}
+
+/* Contenedor para los textos */
+.logo-textos {
+  display: flex;
+  flex-direction: column; /* Coloca los textos uno debajo del otro */
+  align-items: flex-start; /* Alinea los textos a la izquierda */
+}
+
+/* Estilo del texto 'Acerca de' */
+.acerca-de {
+  font-size: 17px;
+  font-weight: 400;
+  color: #333333;
+}
+
+/* Estilo del texto 'femSyncronia' */
+.fem-syncronia {
+  font-size: 17px;
+  font-weight: 600;
+  color: #FF4D7F; /* Color de destaque */
 }
 
 ion-tab-bar {
