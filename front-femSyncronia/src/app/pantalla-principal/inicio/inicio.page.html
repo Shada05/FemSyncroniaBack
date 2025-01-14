@@ -11,7 +11,7 @@
     </div>
 
     <!-- Secciones del menú -->
-    <ion-item button lines="none">
+    <ion-item button lines="none" [routerLink]="['/mi-perfil']">
       <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/circulo-de-usuario.svg"></ion-icon>
       <ion-label>Mi perfil</ion-label>
     </ion-item>
@@ -20,7 +20,8 @@
       <ion-label>Foro</ion-label>
     </ion-item>
     <ion-item button lines="none">
-      <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/cinta-de-punto-de-espalda.svg"></ion-icon>
+      <ion-icon class="icono" slot="start"
+        src="/assets/icons/pantalla-principal/cinta-de-punto-de-espalda.svg"></ion-icon>
       <ion-label>Recordatorios</ion-label>
     </ion-item>
     <ion-item button lines="none">
@@ -35,13 +36,13 @@
       <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/salida.svg"></ion-icon>
       <ion-label>Cerrar sesión</ion-label>
     </ion-item>
-      <div class="logo-container">
-        <img class="logo" src="/assets/img/logo.svg" alt="Logo">
-        <div class="logo-textos">
-          <ion-text class="acerca-de">Acerca de</ion-text>
-          <ion-text class="fem-syncronia">FemSyncronia</ion-text>
-        </div>
-      </div>  
+    <div class="logo-container">
+      <img class="logo" src="/assets/img/logo.svg" alt="Logo">
+      <div class="logo-textos">
+        <ion-text class="acerca-de">Acerca de</ion-text>
+        <ion-text class="fem-syncronia">FemSyncronia</ion-text>
+      </div>
+    </div>
   </ion-content>
 </ion-menu>
 

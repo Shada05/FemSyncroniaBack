@@ -1,0 +1,120 @@
+ion-content {
+    --background: none; /* Sin fondo de color por defecto */
+    background-image: url('/assets/img/pantalla-principal/fondo-tabs.svg'); /* Imagen de fondo */
+    background-size: cover; /* La imagen cubre todo el área */
+    background-repeat: no-repeat; /* La imagen no se repite */
+    background-position: center; /* La imagen está centrada */
+    width: 100%; /* Ancho completo */
+    height: 100vh; /* Altura completa de la ventana */
+    font-family: "Open Sans";
+}
+
+/* Contenedor principal que engloba todo el contenido */
+.contenedor-central {
+    display: flex;
+    flex-direction: column; /* Coloca los elementos en una columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+    justify-content: center; /* Centra los elementos verticalmente */
+    height: 100%; /* Asegura que ocupe toda la altura del contenido */
+}
+
+/* Estilos del contenedor del perfil */
+.contenedor-perfil {
+    display: flex;
+    align-items: center; /* Centra verticalmente los elementos */
+    justify-content: center; /* Centra horizontalmente los elementos */
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+    padding: 10px 0; /* Espaciado opcional si lo necesitas */
+}
+
+.foto-perfil {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 8px; /* Espaciado entre el logo y los textos */
+}
+
+.nombre {
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+}
+
+.apellido {
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+}
+
+.nombre-apellido {
+    display: flex;
+    flex-direction: column; /* Coloca los textos uno debajo del otro */
+    align-items: flex-start; /* Alinea los textos a la izquierda */
+}
+
+.correo {
+    font-size: 15px;
+    color: #9D9D9D;
+}
+
+/* Estilo para el título "Recordatorios" */
+.recordatorios-titulo {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #9D9D9D;
+    margin: 14px 0 0; /* Espaciado superior e inferior */
+    align-self: flex-start; /* Alinea a la izquierda */
+    padding-left: 70px;
+}
+
+/* Estilo para el contenedor de Recordatorios */
+.contenedor-recordatorios {
+    width: 320px;
+    height: 391px;
+    border-radius: 10px;
+    background: #FFE3E0;
+    margin: 0 auto 20px; /* Centrado horizontalmente y espaciado inferior */
+    display: flex;
+    align-items: center; /* Centra contenido verticalmente */
+    justify-content: center; /* Centra contenido horizontalmente */
+}
+
+/* Texto dentro del contenedor de Recordatorios */
+.contenido-recordatorios {
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+    text-align: center;
+}
+
+/* Estilo para el título "Detalles del periodo" */
+.detalles-periodo-titulo {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #9D9D9D;
+    margin: 14px 0 0; /* Espaciado superior e inferior */
+    align-self: flex-start; /* Alinea a la izquierda */
+    padding-left: 70px;
+}
+
+/* Estilo para el contenedor del periodo */
+.contenedor-periodo {
+    width: 320px;
+    height: 74px;
+    border-radius: 10px;
+    background: #FFE3E0;
+    margin: 0 auto; /* Centrado horizontalmente */
+    display: flex;
+    align-items: center; /* Centra contenido verticalmente */
+    justify-content: center; /* Centra contenido horizontalmente */
+}
+
+/* Texto dentro del contenedor del periodo */
+.contenido-periodo {
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+    text-align: center;
+}
