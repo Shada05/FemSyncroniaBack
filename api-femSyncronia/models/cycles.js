@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   cycles.init({
-    cycle_status: {
+    cycle_status: { //Activo, Inactivo, Predcición, cancelado
         type: DataTypes.INTEGER,
         allowNull: false
     },
