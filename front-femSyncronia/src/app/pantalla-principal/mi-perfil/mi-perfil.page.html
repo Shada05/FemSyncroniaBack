@@ -1,5 +1,11 @@
 <ion-content>
+   <!-- Botón de cerrar -->
+  <ion-button class="boton-cerrar" fill="clear" (click)="cerrarPantalla()">
+    <ion-icon name="close-outline"></ion-icon>
+  </ion-button>
+
   <div class="contenedor-central">
+    <!-- Perfil -->
     <div class="contenedor-perfil">
       <img class="foto-perfil" src="/assets/img/pantalla-principal/Foto-perfil.svg" alt="Foto de perfil">
       <div class="informacion-usuario">
@@ -11,16 +17,89 @@
       </div>
     </div>
 
-    <ion-text class="detalles-periodo-titulo">Detalles del periodo</ion-text>
-
-    <div class="contenedor-periodo">
-      <ion-text class="contenido-periodo">Información del periodo</ion-text>
+    <!-- Título "Detalles del periodo" -->
+    <ion-text class="titulo-seccion">Detalles del periodo</ion-text>
+    <div class="contenedor-seccion">
+      <div class="detalle">
+        <ion-icon class="icono" src="/assets/icons/editar-perfil/ciclo.svg"></ion-icon>
+        <ion-text class="texto-detalle">Duración del ciclo</ion-text>
+        <ion-text class="contador">5 días</ion-text>
+        <ion-icon class="icono-editar" src="/assets/icons/editar-perfil/editar.svg"></ion-icon>
+      </div>
+      <div class="detalle">
+        <ion-icon class="icono" src="/assets/icons/editar-perfil/sangre.svg"></ion-icon>
+        <ion-text class="texto-detalle">Duración del periodo</ion-text>
+        <ion-text class="contador">28 días</ion-text>
+        <ion-icon class="icono-editar" src="/assets/icons/editar-perfil/editar.svg"></ion-icon>
+      </div>
     </div>
 
-    <ion-text class="recordatorios-titulo">Recordatorios</ion-text>
-
-    <div class="contenedor-recordatorios">
-      <ion-text class="contenido-recordatorios">Aquí puedes agregar tus recordatorios.</ion-text>
+    <!-- Título "Recordatorios" -->
+    <ion-text class="titulo-seccion">Recordatorios</ion-text>
+    <div class="contenedor-seccion">
+      <div class="recordatorio">
+        <ion-icon class="icono-recordatorio" name="alarm-outline"></ion-icon>
+        <div class="texto-y-toggle">
+          <div class="texto-y-toggle-principal">
+            <ion-text class="titulo-recordatorio">Inicio de periodo</ion-text>
+            <ion-toggle></ion-toggle>
+          </div>
+          <ion-text class="subtitulo-recordatorio">Te notificaremos cuando comience tu periodo</ion-text>
+        </div>
+      </div>
+      <div class="recordatorio">
+        <ion-icon class="icono-recordatorio" name="alarm-outline"></ion-icon>
+        <div class="texto-y-toggle">
+          <div class="texto-y-toggle-principal">
+            <ion-text class="titulo-recordatorio">Registrar periodo</ion-text>
+            <ion-toggle></ion-toggle>
+          </div>
+          <ion-text class="subtitulo-recordatorio">Te recordaremos registrar tu periodo 2</ion-text>
+          <ion-text class="subtitulo-recordatorio">días después de que termine </ion-text>
+        </div>
+      </div>
+      <div class="recordatorio">
+        <ion-icon class="icono-recordatorio" name="alarm-outline"></ion-icon>
+        <div class="texto-y-toggle">
+          <div class="texto-y-toggle-principal">
+            <ion-text class="titulo-recordatorio">Fertilidad</ion-text>
+            <ion-toggle></ion-toggle>
+          </div>
+          <ion-text class="subtitulo-recordatorio">Te notificaremos cuando estés en tu</ion-text>
+          <ion-text class="subtitulo-recordatorio">periodo fertil</ion-text>
+        </div>
+      </div>
+      <div class="recordatorio">
+        <ion-icon class="icono-recordatorio" name="alarm-outline"></ion-icon>
+        <div class="texto-y-toggle">
+          <div class="texto-y-toggle-principal">
+            <ion-text class="titulo-recordatorio">Anticonceptivos</ion-text>
+            <ion-toggle></ion-toggle>
+          </div>
+          <ion-text class="subtitulo-recordatorio">Si utilizas anticonceptivos orales, te</ion-text>
+          <ion-text class="subtitulo-recordatorio">recordaremos la hora en que debes</ion-text>
+        </div>
+      </div>
+      <div class="recordatorio">
+        <ion-icon class="icono-recordatorio" name="alarm-outline"></ion-icon>
+        <div class="texto-y-toggle">
+          <div class="texto-y-toggle-principal">
+            <ion-text class="titulo-recordatorio">Temperatura</ion-text>
+            <ion-toggle></ion-toggle>
+          </div>
+          <ion-text class="subtitulo-recordatorio">Te recordaremos ingresar tu temperatura cada día</ion-text>
+        </div>
+      </div>
+      <div class="recordatorio">
+        <ion-icon class="icono-recordatorio" name="alarm-outline"></ion-icon>
+        <div class="texto-y-toggle">
+          <div class="texto-y-toggle-principal">
+            <ion-text class="titulo-recordatorio">Peso</ion-text>
+            <ion-toggle></ion-toggle>
+          </div>
+          <ion-text class="subtitulo-recordatorio">Te recordaremos ingresar tu peso cada 8 dias</ion-text>
+        </div>
+      </div>
     </div>
   </div>
 </ion-content>

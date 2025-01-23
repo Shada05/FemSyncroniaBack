@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular'; // Importa NavController
 
 @Component({
   selector: 'app-mi-perfil',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MiPerfilPage implements OnInit {
 
-  constructor() { }
+  constructor(private navCtrl: NavController) { } // Inyecta NavController
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  cerrarPantalla() {
+    this.navCtrl.back(); // Regresa a la pantalla anterior
   }
-
 }
