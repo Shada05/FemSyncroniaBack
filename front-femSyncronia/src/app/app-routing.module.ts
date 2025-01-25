@@ -90,6 +90,10 @@ const routes: Routes = [
     path: 'correo-enviado',
     loadChildren: () => import('./registro-usuarios/correo-enviado/correo-enviado.module').then( m => m.CorreoEnviadoPageModule)
   },
+  {
+    path: 'mi-perfil',
+    loadChildren: () => import('./pantalla-principal/mi-perfil/mi-perfil.module').then( m => m.MiPerfilPageModule)
+  },
 
 
 
