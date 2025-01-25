@@ -14,8 +14,12 @@ const patient_data_Controller = require('../controllers/patient_data');
 const report_status_Controller = require('../controllers/report_status');
 const reports_Controller = require('../controllers/reports');
 const symptoms_Controller = require('../controllers/symptoms.js');
-//const { uploadImage } = require('../controllers/imageController');
-//const upload = require('../middlewares/upload'); // Importa tu configuración de multer
+
+const { uploadImage } = require('../controllers/imageController');
+const upload = require('../middlewares/upload'); // Middleware de Multer
+
+// Ruta para subir imágenes
+router.post('/upload', upload.single('image'), uploadImage);
 
 
 // Rutas de usuario
@@ -115,8 +119,8 @@ router.get('/api/v1/symptoms/:id', symptoms_Controller.show);
 router.put('/api/v1/symptoms/:id', symptoms_Controller.update);
 router.delete('/api/v1/symptoms/:id', symptoms_Controller.destroy);
 
-//imagenes
-//router.post('/upload', upload.single('image'), uploadImage);
+
+
 
 
 module.exports = {
