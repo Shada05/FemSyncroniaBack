@@ -7,8 +7,6 @@ module.exports = {
       {
         birthdate: "1990-01-01",
         username: "issac213",
-        name: "Issac",
-        lastname: "Gutierrez",
         user_status: 1,
         email: "issac@example.com",
         profile_image: "profile.jpg",
@@ -19,8 +17,6 @@ module.exports = {
       {
         birthdate: "1990-01-01",
         username: "mally123",
-        name: "Mally",
-        lastname: "Gutierrez",
         user_status: 1,
         email: "mally@example.com",
         profile_image: "profile.jpg",
@@ -31,8 +27,6 @@ module.exports = {
       {
         birthdate: "1990-01-01",
         username: "diego213",
-        name: "Diego",
-        lastname: "Gutierrez",
         user_status: 1,
         email: "diego@example.com",
         profile_image: "profile.jpg",
