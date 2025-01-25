@@ -1,5 +1,17 @@
 const cycles  = require('../models').cycles;
 
+/*Nota importante:
+    Los sintomas tienen una valoración del 0 al 5 en la base de datos
+    0 = Ausente
+    1 = Leve
+    2 = Moderado
+    3 = Severo
+    4 = Muy Severo
+    5 = Máximo
+
+*/
+
+
 exports.store = async (req, res) => {
     const cycle = {
         user_id: req.body.user_id,

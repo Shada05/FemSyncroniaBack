@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 exports.store = async (req, res) => {
     try {
-        const { birthdate, username, user_status, email, password, profile_image, phone  } = req.body;
+        const { birthdate, username, name, lastname, user_status, email, password, profile_image, phone  } = req.body;
 
         // Verificar si el email ya está registrado
         const existingUser = await users.findOne({ where: { email } });
@@ -17,6 +17,8 @@ exports.store = async (req, res) => {
         // Crear el usuario con el email y la contraseña hash
         const newUser = await users.create({
             email,
+            name,
+            lastname,
             password: hashedPassword,
             phone,
             profile_image,
@@ -88,6 +90,8 @@ exports.update = async (req, res) => {
     let updatedData = {};
 
     if (req.body.birthdate != null) updatedData['birthdate']= req.body.birthdate;
+    if (req.body.name != null) updatedData['name']= req.body.name;
+    if (req.body.lastname != null) updatedData['lastname']= req.body.lastname;
     if (req.body.username != null) updatedData['username']= req.body.username;
     if (req.body.user_status != null) updatedData['user_status']= req.body.user_status;
     if (req.body.email != null) updatedData['email']= req.body.email;
