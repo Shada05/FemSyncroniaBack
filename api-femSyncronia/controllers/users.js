@@ -92,6 +92,7 @@ exports.update = async (req, res) => {
     if (req.body.birthdate != null) updatedData['birthdate']= req.body.birthdate;
     if (req.body.name != null) updatedData['name']= req.body.name;
     if (req.body.lastname != null) updatedData['lastname']= req.body.lastname;
+    if (req.body.phone != null) updatedData['phone']= req.body.phone;
     if (req.body.username != null) updatedData['username']= req.body.username;
     if (req.body.user_status != null) updatedData['user_status']= req.body.user_status;
     if (req.body.email != null) updatedData['email']= req.body.email;
