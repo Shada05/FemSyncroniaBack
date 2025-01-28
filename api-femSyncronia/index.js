@@ -4,7 +4,16 @@ const logger = require("morgan");
 const http = require('http');
 const dotenv = require('dotenv');
 const cors = require('cors'); // Importa cors
+const multer = require('multer');
+const storage = multer.memoryStorage(); // Almacena en memoria
+const upload = multer({ storage: storage });
 
+
+/*app.post('/api/upload', (req, res) => {
+    console.log(req.body);
+    console.log(req.files);
+    res.send('Archivo recibido');
+});*/
 // Configurar dotenv
 dotenv.config();
 

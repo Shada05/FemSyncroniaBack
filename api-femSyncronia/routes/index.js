@@ -15,13 +15,19 @@ const report_status_Controller = require('../controllers/report_status');
 const reports_Controller = require('../controllers/reports');
 const symptoms_Controller = require('../controllers/symptoms.js');
 
+const { uploadImage } = require('../controllers/imageController');
+const upload = require('../middlewares/upload'); // Middleware de Multer
+
+// Ruta para subir imágenes
+router.post('/upload', upload.single('image'), uploadImage);
+
 
 // Rutas de usuario
-router.post('/api/v1/usuario/', usuarioController.store);
-router.get('/api/v1/usuario/:id', usuarioController.show);
-router.get('/api/v1/usuario/', usuarioController.index);
-router.delete('/api/v1/usuario/:id', usuarioController.destroy);
-router.put('/usuarios/:id', usuarioController.update);
+router.post("/api/v1/usuario/", usuarioController.store);
+router.get("/api/v1/usuario/:id", usuarioController.show);
+router.get("/api/v1/usuario/", usuarioController.index);
+router.delete("/api/v1/usuario/:id", usuarioController.destroy);
+router.put("/usuarios/:id", usuarioController.update);
 
 // Rutas de emails
 router.post('/api/v1/emails', emailsController.store);
@@ -112,6 +118,10 @@ router.get('/api/v1/symptoms', symptoms_Controller.index);
 router.get('/api/v1/symptoms/:id', symptoms_Controller.show);
 router.put('/api/v1/symptoms/:id', symptoms_Controller.update);
 router.delete('/api/v1/symptoms/:id', symptoms_Controller.destroy);
+
+
+
+
 
 module.exports = {
    router
