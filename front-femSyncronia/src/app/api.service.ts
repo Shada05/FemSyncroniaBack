@@ -11,7 +11,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/api/v1/usuario`, { email, password });
+    return this.http.post(`${this.apiUrl}/usuario`, { email, password });
   }
 
   createUsuario(data: any): Observable<any> {
@@ -22,4 +22,7 @@ export class ApiService {
     return this.http.put(`${this.apiUrl}/users/${id}`, data);
   }
 
+  mostrarUsuario(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/users/${id}`);
+  }
 }

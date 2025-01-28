@@ -47,7 +47,7 @@
         </ion-col>
         <ion-col size="9">
           <ion-item class="ion-no-padding entradas">
-            <ion-input label="Número de teléfono" labelPlacement="floating" type="tel"></ion-input>
+            <ion-input [(ngModel)]="phoneNumber" label="Número de teléfono" labelPlacement="floating" type="tel"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -87,7 +87,7 @@
     <div class="divisor"></div>
 
     <div class="contenedor-boton">
-      <ion-button class="btn-continuar" [routerLink]="['/datos-guardados']" type="submit">
+      <ion-button class="btn-continuar" [routerLink]="['/datos-guardados']" (click)=" updateUserData()" type="submit">
         Continuar
       </ion-button>
     </div>
