@@ -15,18 +15,32 @@ export class DatosPersonalesPage implements OnInit {
   selectedMonth: string = '';
   selectedYear: number = 0;
   selectedLada: string = '';
-  phoneNumber: string = ''; // Número de teléfono ingresado por el usuario
+  phoneNumber: string = '';
+  nombre: string = '';
+  apellido: string = '';
 
   days: number[] = Array.from({ length: 31 }, (v, k) => k + 1);
   months: string[] = ['Ene.', 'Feb.', 'Mar.', 'Abr.', 'May.', 'Jun.', 'Jul.', 'Ago.', 'Sep.', 'Oct.', 'Nov.', 'Dic.'];
   years: number[] = Array.from({ length: 124 }, (v, k) => k + 1900);
 
-  userId: string = '1'; // ID del usuario para el ejemplo
+  userId: string | null = null; // Se obtiene dinámicamente
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
     this.selectedLada = '+52';
+    this.obtenerUsuarioId();
+  }
+
+  // Obtener el ID del usuario desde localStorage
+  obtenerUsuarioId() {
+    const idGuardado = localStorage.getItem('usuarioId');
+    if (idGuardado) {
+      this.userId = idGuardado;
+      console.log(this.userId);
+    } else {
+      console.error('No se encontró el ID del usuario en localStorage.');
+    }
   }
 
   // Función para cambiar la foto de perfil
@@ -51,22 +65,24 @@ export class DatosPersonalesPage implements OnInit {
 
   // Función para actualizar el usuario
   updateUserData() {
-    console.log('phoneNumber:', this.phoneNumber); // Verifica el teléfono
-    console.log('selectedDay:', this.selectedDay); // Verifica el día
-    console.log('selectedMonth:', this.selectedMonth); // Verifica el mes
-    console.log('selectedYear:', this.selectedYear); // Verifica el año
-  
+    if (!this.userId) {
+      console.error('Error: No se puede actualizar sin un ID de usuario.');
+      return;
+    }
+
     if (!this.phoneNumber.trim() || !this.selectedDay || !this.selectedMonth || !this.selectedYear) {
       console.error('Por favor, completa todos los campos requeridos.');
       return;
     }
-  
+
     const birthdate = `${this.selectedYear}-${this.formatMonth(this.selectedMonth)}-${this.selectedDay}`;
     const data = {
-      phone: `${this.selectedLada} ${this.phoneNumber}`,
+      name: this.nombre,
+      lastname: this.apellido,
       birthdate: birthdate,
+      phone: `${this.selectedLada} ${this.phoneNumber}`,
     };
-  
+
     this.apiService.updateUsuario(this.userId, data).subscribe(
       (response) => {
         console.log('Usuario actualizado exitosamente:', response);
@@ -76,7 +92,6 @@ export class DatosPersonalesPage implements OnInit {
       }
     );
   }
-  
 
   // Función para formatear el mes en números
   private formatMonth(month: string): string {
