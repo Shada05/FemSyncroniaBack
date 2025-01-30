@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ApiService } from '../../api.service';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-datos-personales',
@@ -25,7 +27,9 @@ export class DatosPersonalesPage implements OnInit {
 
   userId: string | null = null; // Se obtiene dinámicamente
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService,
+    private toastController: ToastController,
+    private router: Router) { }
 
   ngOnInit() {
     this.selectedLada = '+52';
@@ -72,6 +76,7 @@ export class DatosPersonalesPage implements OnInit {
 
     if (!this.phoneNumber.trim() || !this.selectedDay || !this.selectedMonth || !this.selectedYear) {
       console.error('Por favor, completa todos los campos requeridos.');
+      
       return;
     }
 
@@ -83,14 +88,22 @@ export class DatosPersonalesPage implements OnInit {
       phone: `${this.selectedLada} ${this.phoneNumber}`,
     };
 
-    this.apiService.updateUsuario(this.userId, data).subscribe(
-      (response) => {
+    this.apiService.updateUsuario(this.userId, data).subscribe({
+      next: async (response) => {
         console.log('Usuario actualizado exitosamente:', response);
+        this.router.navigate(['/datos-guardados']);
       },
-      (error) => {
+      error: async (error) => {
         console.error('Error al actualizar el usuario:', error);
+
+        const toast = await this.toastController.create({
+          message: 'Error al registrar. Intenta nuevamente.',
+          duration: 2000,
+          color: 'danger',
+        });
+        await toast.present();
       }
-    );
+    });
   }
 
   // Función para formatear el mes en números
