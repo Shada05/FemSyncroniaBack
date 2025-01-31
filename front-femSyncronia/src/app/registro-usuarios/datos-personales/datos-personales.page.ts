@@ -53,12 +53,23 @@ export class DatosPersonalesPage implements OnInit {
       const image = await Camera.getPhoto({
         quality: 90,
         allowEditing: false,
-        resultType: CameraResultType.DataUrl,
+        resultType: CameraResultType.Uri,
         source: CameraSource.Photos,
       });
 
-      if (image && image.dataUrl) {
-        this.profileImage = image.dataUrl;
+      if (image && image.webPath) {
+        const blob = await fetch(image.webPath).then((res) => res.blob());
+        const formData = new FormData();
+        formData.append('image', blob, 'profile.jpg');
+
+        this.apiService.uploadImage(formData).subscribe({
+          next: (response) => {
+            this.profileImage = response.imageUrl; // Guardar la URL devuelta por la API
+          },
+          error: (error) => {
+            console.error('Error al subir la imagen:', error);
+          }
+        });
       } else {
         console.log('No se seleccionó ninguna imagen.');
       }
@@ -66,6 +77,7 @@ export class DatosPersonalesPage implements OnInit {
       console.log('Error al seleccionar la imagen: ', error);
     }
   }
+
 
   // Función para actualizar el usuario
   updateUserData() {
@@ -76,7 +88,7 @@ export class DatosPersonalesPage implements OnInit {
 
     if (!this.phoneNumber.trim() || !this.selectedDay || !this.selectedMonth || !this.selectedYear) {
       console.error('Por favor, completa todos los campos requeridos.');
-      
+
       return;
     }
 
@@ -86,8 +98,9 @@ export class DatosPersonalesPage implements OnInit {
       lastname: this.apellido,
       birthdate: birthdate,
       phone: `${this.selectedLada} ${this.phoneNumber}`,
+      profile_image: this.profileImage
     };
-
+    console.log("🔵 URL de la imagen antes de enviarla a la API:", this.profileImage);
     this.apiService.updateUsuario(this.userId, data).subscribe({
       next: async (response) => {
         console.log('Usuario actualizado exitosamente:', response);

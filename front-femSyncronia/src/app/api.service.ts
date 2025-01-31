@@ -25,4 +25,10 @@ export class ApiService {
   mostrarUsuario(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/users/${id}`);
   }
+
+  uploadImage(formData: FormData): Observable<{ imageUrl: string }> {
+    return this.http.post<{ imageUrl: string }>('http://localhost:3000/upload', formData);
+  }
+  
 }
+
