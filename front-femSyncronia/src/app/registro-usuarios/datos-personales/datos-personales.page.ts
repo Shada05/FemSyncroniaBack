@@ -49,34 +49,36 @@ export class DatosPersonalesPage implements OnInit {
 
   // Función para cambiar la foto de perfil
   async changeProfilePicture() {
-    try {
-      const image = await Camera.getPhoto({
-        quality: 90,
-        allowEditing: false,
-        resultType: CameraResultType.Uri,
-        source: CameraSource.Photos,
+  try {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Photos,
+    });
+
+    if (image && image.webPath) {
+      const blob = await fetch(image.webPath).then((res) => res.blob());
+      const formData = new FormData();
+      formData.append('image', blob, 'profile.jpg');
+
+      this.apiService.uploadImage(formData).subscribe({
+        next: (response) => {
+          // Aquí asignas la URL de la imagen devuelta por la API
+          this.profileImage = response.imageUrl;
+          console.log('Imagen subida correctamente. URL:', this.profileImage);
+        },
+        error: (error) => {
+          console.error('Error al subir la imagen:', error);
+        }
       });
-
-      if (image && image.webPath) {
-        const blob = await fetch(image.webPath).then((res) => res.blob());
-        const formData = new FormData();
-        formData.append('image', blob, 'profile.jpg');
-
-        this.apiService.uploadImage(formData).subscribe({
-          next: (response) => {
-            this.profileImage = response.imageUrl; // Guardar la URL devuelta por la API
-          },
-          error: (error) => {
-            console.error('Error al subir la imagen:', error);
-          }
-        });
-      } else {
-        console.log('No se seleccionó ninguna imagen.');
-      }
-    } catch (error) {
-      console.log('Error al seleccionar la imagen: ', error);
+    } else {
+      console.log('No se seleccionó ninguna imagen.');
     }
+  } catch (error) {
+    console.log('Error al seleccionar la imagen: ', error);
   }
+}
 
 
   // Función para actualizar el usuario
