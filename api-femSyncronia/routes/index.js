@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path'); // Necesario para manejar rutas de archivos
 
 const cyclesController = require('../controllers/cycles');
 const crons_statusController = require('../controllers/crons_status');
@@ -20,7 +21,7 @@ const upload = require('../middlewares/upload'); // Middleware de Multer
 
 // Ruta para subir imágenes
 router.post('/upload', upload.single('image'), uploadImage);
-
+router.use('/iconos/sintomas', express.static(path.join(__dirname, '../iconos/sintomas')));
 
 // Rutas de usuario
 router.post("/api/v1/usuario/", usuarioController.store);

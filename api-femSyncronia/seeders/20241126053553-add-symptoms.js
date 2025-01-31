@@ -15,7 +15,7 @@ module.exports = {
         "frequency": "0",
         "type" : "0",
         "description": "Contracciones leves o dolorosas en el abdomen.",
-        "image": ""
+        "image": "/api-femSyncronia/iconos/sintomas/01.png"
       },
       {
         "name": "Dolor en los pechos",

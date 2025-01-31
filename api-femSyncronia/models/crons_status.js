@@ -22,9 +22,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false
         },
-        description: {
-          type: DataTypes.STRING,
-          allowNull: false
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false
         },
     createdAt: {
         allowNull: false, 
