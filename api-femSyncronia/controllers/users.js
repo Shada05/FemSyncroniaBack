@@ -97,6 +97,7 @@ exports.update = async (req, res) => {
     if (req.body.user_status != null) updatedData['user_status']= req.body.user_status;
     if (req.body.email != null) updatedData['email']= req.body.email;
     if (req.body.password != null) updatedData['password']= req.body.password;
+    if (req.body.profile_image != null) updatedData['profile_image']= req.body.profile_image;
 
 
     return await users.update(updatedData, {
