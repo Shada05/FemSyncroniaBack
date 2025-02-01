@@ -41,44 +41,41 @@ export class RegistroPage implements OnInit {
     }, { validators: this.passwordMatchValidator });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  // Método para enviar los datos usando ApiService
-enviarDatos() {
-  if (this.formulario.valid) {
-    const datos = this.formulario.value;
-    delete datos.confirmarPassword; // Eliminar campo no necesario para la API
+  enviarDatos() {
+    if (this.formulario.valid) {
+      const datos = this.formulario.value;
+      delete datos.confirmarPassword; // Eliminar campo no necesario para la API
 
-    this.apiService.createUsuario(datos).subscribe({
-      next: async (response) => {
-        console.log('Registro exitoso:', response);
+      this.apiService.createUsuario(datos).subscribe({
+        next: async (response) => {
+          console.log('Registro exitoso:', response);
 
-        const toast = await this.toastController.create({
-          message: 'Registro exitoso.',
-          duration: 2000,
-          color: 'success',
-        });
-        await toast.present();
+          // Guarda el ID del usuario en localStorage
+          if (response && response.id) {
+            localStorage.setItem('usuarioId', response.id);
+          }
 
-        // Redirige solo después del registro exitoso
-        this.router.navigate(['/validar-codigo-regis']);
+          // Redirige solo después del registro exitoso
+          this.router.navigate(['/validar-codigo-regis']);
 
-        this.formulario.reset();
-      },
-      error: async (error) => {
-        console.error('Error al registrar:', error);
+          this.formulario.reset();
+        },
+        error: async (error) => {
+          console.error('Error al registrar:', error);
 
-        const toast = await this.toastController.create({
-          message: 'Error al registrar. Intenta nuevamente.',
-          duration: 2000,
-          color: 'danger',
-        });
-        await toast.present();
-      },
-    });
-  } else {
-    console.error('Formulario inválido');
-  }
+          const toast = await this.toastController.create({
+            message: 'Error al registrar. Intenta nuevamente.',
+            duration: 2000,
+            color: 'danger',
+          });
+          await toast.present();
+        },
+      });
+    } else {
+      console.error('Formulario inválido');
+    }
   }
 
   alternarVisibilidadContrasena(campo: string) {

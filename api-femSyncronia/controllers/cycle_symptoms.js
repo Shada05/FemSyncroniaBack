@@ -5,8 +5,6 @@ exports.store = async (req, res) => {
         
         cycle_id: req.body.cycle_id,
         symptom_id: req.body.symptom_id
-       
-        
     }
     console.log(cycle);
 

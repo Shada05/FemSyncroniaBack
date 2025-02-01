@@ -6,15 +6,29 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:3000/api/v1'; // URL base de tu API
+  private apiUrl = 'http://localhost:3000'; // URL base de tu API
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/api/v1/usuario`, { email, password });
   }
 
   createUsuario(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/users/`, data);
+    return this.http.post(`${this.apiUrl}/api/v1/users`, data);
   }
+
+  updateUsuario(id: string, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/api/v1/users/${id}`, data);
+  }
+
+  mostrarUsuario(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/api/v1/users/${id}`);
+  }
+
+  uploadImage(formData: FormData): Observable<{ imageUrl: string }> {
+    return this.http.post<{ imageUrl: string }>(`${this.apiUrl}/upload`, formData);
+  }
+
 }
+
