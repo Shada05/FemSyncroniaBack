@@ -11,6 +11,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class DatosPersonalesPage implements OnInit {
   profileImage: string = '../../../assets/img/registro/defaul-perfil.svg';
+  selectedImage: Blob | null = null; // Variable temporal para almacenar la imagen seleccionada
 
   // Variables para los selects
   selectedDay: number = 0;
@@ -58,7 +59,10 @@ export class DatosPersonalesPage implements OnInit {
       });
 
       if (image && image.webPath) {
-        this.profileImage = image.webPath;
+        const blob = await fetch(image.webPath).then((res) => res.blob());
+        this.selectedImage = blob; // Almacenar la imagen seleccionada temporalmente
+        this.profileImage = image.webPath; // Mostrar la imagen seleccionada en la vista
+        console.log('Imagen seleccionada correctamente.');
       } else {
         console.log('No se seleccionó ninguna imagen.');
       }
@@ -67,72 +71,67 @@ export class DatosPersonalesPage implements OnInit {
     }
   }
 
-  // Función para actualizar el usuario
-  async updateUserData() {
-    if (!this.userId) {
-      console.error('Error: No se puede actualizar sin un ID de usuario.');
-      return;
-    }
-  
-    if (!this.phoneNumber.trim() || !this.selectedDay || !this.selectedMonth || !this.selectedYear) {
-      console.error('Por favor, completa todos los campos requeridos.');
-      return;
-    }
-  
+// Función para actualizar el usuario
+async updateUserData() {
+  if (!this.userId) {
+    console.error('Error: No se puede actualizar sin un ID de usuario.');
+    return;
+  }
+
+  if (!this.phoneNumber.trim() || !this.selectedDay || !this.selectedMonth || !this.selectedYear) {
+    console.error('Por favor, completa todos los campos requeridos.');
+    return;
+  }
+
+  const birthdate = `${this.selectedYear}-${this.formatMonth(this.selectedMonth)}-${this.selectedDay}`;
+  const data = {
+    name: this.nombre,
+    lastname: this.apellido,
+    birthdate: birthdate,
+    phone: `${this.selectedLada} ${this.phoneNumber}`,
+    profile_image: this.profileImage // URL de la imagen por defecto o la que ya estaba
+  };
+
+  // Si hay una imagen seleccionada, la subimos primero
+  if (this.selectedImage) {
+    const formData = new FormData();
+    formData.append('image', this.selectedImage, 'profile.jpg');
+
     try {
-      // Subir la imagen si se ha seleccionado una nueva
-      if (this.profileImage && this.profileImage.startsWith('blob:')) {
-        const blob = await fetch(this.profileImage).then((res) => res.blob());
-        const formData = new FormData();
-        formData.append('image', blob, 'profile.jpg');
-  
-        // Subir la imagen y manejar el caso en que imageResponse sea undefined
-        const imageResponse = await this.apiService.uploadImage(formData).toPromise();
-        if (!imageResponse || !imageResponse.imageUrl) {
-          console.log(imageResponse?.imageUrl)
-          throw new Error('No se pudo subir la imagen o no se recibió una URL válida.');
-        }
-        this.profileImage = imageResponse.imageUrl;
+      const response = await this.apiService.uploadImage(formData).toPromise();
+      
+      // Verificamos si la respuesta es válida
+      if (response && response.imageUrl) {
+        data.profile_image = response.imageUrl; // Actualizamos la URL de la imagen en los datos del usuario
+        console.log('Imagen subida correctamente. URL:', data.profile_image);
+      } else {
+        console.error('Error: La respuesta de la API no contiene la URL de la imagen.');
+        return;
       }
-  
-      const birthdate = `${this.selectedYear}-${this.formatMonth(this.selectedMonth)}-${this.selectedDay}`;
-      const data = {
-        name: this.nombre,
-        lastname: this.apellido,
-        birthdate: birthdate,
-        phone: `${this.selectedLada} ${this.phoneNumber}`,
-        profile_image: this.profileImage
-      };
-  
-      console.log("🔵 URL de la imagen antes de enviarla a la API:", this.profileImage);
-  
-      this.apiService.updateUsuario(this.userId, data).subscribe({
-        next: async (response) => {
-          console.log('Usuario actualizado exitosamente:', response);
-          this.router.navigate(['/datos-guardados']);
-        },
-        error: async (error) => {
-          console.error('Error al actualizar el usuario:', error);
-  
-          const toast = await this.toastController.create({
-            message: 'Error al registrar. Intenta nuevamente.',
-            duration: 2000,
-            color: 'danger',
-          });
-          await toast.present();
-        }
-      });
     } catch (error) {
-      console.error('Error al subir la imagen o actualizar los datos:', error);
-  
+      console.error('Error al subir la imagen:', error);
+      return;
+    }
+  }
+
+  // Actualizar los datos del usuario
+  this.apiService.updateUsuario(this.userId, data).subscribe({
+    next: async (response) => {
+      console.log('Usuario actualizado exitosamente:', response);
+      this.router.navigate(['/datos-guardados']);
+    },
+    error: async (error) => {
+      console.error('Error al actualizar el usuario:', error);
+
       const toast = await this.toastController.create({
-        message: 'Error al subir la imagen. Intenta nuevamente.',
+        message: 'Error al registrar. Intenta nuevamente.',
         duration: 2000,
         color: 'danger',
       });
       await toast.present();
     }
-  }
+  });
+}
 
   // Función para formatear el mes en números
   private formatMonth(month: string): string {

@@ -19,11 +19,11 @@ export class ApiService {
   }
 
   updateUsuario(id: string, data: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/api/v1/users${id}`, data);
+    return this.http.put(`${this.apiUrl}/api/v1/users/${id}`, data);
   }
 
   mostrarUsuario(id: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/api/v1/users${id}`);
+    return this.http.get(`${this.apiUrl}/api/v1/users/${id}`);
   }
 
   uploadImage(formData: FormData): Observable<{ imageUrl: string }> {
