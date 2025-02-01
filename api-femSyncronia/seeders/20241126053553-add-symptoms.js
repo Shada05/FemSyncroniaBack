@@ -300,168 +300,168 @@ module.exports = {
         "frequency": "0",
         "type" : "2",
         "description": "Erupciones cutáneas con enrojecimiento o inflamación.",
-        "image": "http://localhost:3000/iconos/sintomas/40.png"
+        "image": "http://localhost:3000/iconos/sintomas/41.png"
       },
       {
         "name": "Irritación",
         "frequency": "0",
         "type" : "2",
         "description": "Enrojecimiento o molestia en la piel.",
-        "image": "http://localhost:3000/iconos/sintomas/41.png"
+        "image": "http://localhost:3000/iconos/sintomas/42.png"
       },
       {
         "name": "Sequedad",
         "frequency": "0",
         "type" : "2",
         "description": "Relacionada con piel áspera o deshidratada.",
-        "image": "http://localhost:3000/iconos/sintomas/42.png"
+        "image": "http://localhost:3000/iconos/sintomas/43.png"
       },//Aquí termina los problemas de piel e inicia las emociones
       {
         "name": "feliz",
         "frequency": "0",
         "type" : "3",
         "description" : "Plenitud y alegría en el momento presente.",
-        "image": "http://localhost:3000/iconos/sintomas/43.png"
+        "image": "http://localhost:3000/iconos/sintomas/44.png"
       },
       {
         "name": "alegre",
         "frequency": "0",
         "type" : "3",
         "description" : "Estado de felicidad y entusiasmo.",
-        "image": "http://localhost:3000/iconos/sintomas/44.png"
+        "image": "http://localhost:3000/iconos/sintomas/45.png"
       },
       {
         "name": "orgullosa",
         "frequency": "0",
         "type" : "3",
         "description" : "Satisfacción personal por logros propios.",
-        "image": "http://localhost:3000/iconos/sintomas/45.png"
+        "image": "http://localhost:3000/iconos/sintomas/46.png"
       },
       {
         "name": "tranquila",
         "frequency": "0",
         "type" : "3",
         "description" : "Estado de calma y relajación.",
-        "image": "http://localhost:3000/iconos/sintomas/46.png"
+        "image": "http://localhost:3000/iconos/sintomas/47.png"
       },
       {
         "name": "neutral",
         "frequency": "0",
         "type" : "3",
         "description" : "Ausencia de emoción o preferencia.",
-        "image": "http://localhost:3000/iconos/sintomas/47.png"
+        "image": "http://localhost:3000/iconos/sintomas/48.png"
       },
       {
         "name": "triste",
         "frequency": "0",
         "type" : "3",
         "description" : "Sentimiento de melancolía o pesar.",
-        "image": "http://localhost:3000/iconos/sintomas/48.png"
+        "image": "http://localhost:3000/iconos/sintomas/49.png"
       },
       {
         "name": "deprimida",
         "frequency": "0",
         "type" : "3",
         "description" : "Estado persistente de tristeza y desmotivación.",
-        "image": "http://localhost:3000/iconos/sintomas/49.png"
+        "image": "http://localhost:3000/iconos/sintomas/50.png"
       },
       {
         "name": "enojada",
         "frequency": "0",
         "type" : "3",
         "description" : "Sentimiento de irritación intensa o desagrado",
-        "image": "http://localhost:3000/iconos/sintomas/50.png"
+        "image": "http://localhost:3000/iconos/sintomas/51.png"
       },
       {
         "name": "irritada",
         "frequency": "0",
         "type" : "3",
         "description" : "Reacción fácil hacia el enojo o incomodidad.",
-        "image": "http://localhost:3000/iconos/sintomas/51.png"
+        "image": "http://localhost:3000/iconos/sintomas/52.png"
       },
       {
         "name": "sensible",
         "frequency": "0",
         "type" : "3",
         "description" : " Propensa a reaccionar emocionalmente con facilidad.",
-        "image": "http://localhost:3000/iconos/sintomas/52.png"
+        "image": "http://localhost:3000/iconos/sintomas/53.png"
       },
       {
         "name": "tensa",
         "frequency": "0",
         "type" : "3",
         "description" : "Sensación de rigidez física o emocional.",
-        "image": "http://localhost:3000/iconos/sintomas/53.png"
+        "image": "http://localhost:3000/iconos/sintomas/54.png"
       },
       {
         "name": "rara",
         "frequency": "0",
         "type" : "3",
         "description" : "Sensación de ser diferente o inusual.",
-        "image": "http://localhost:3000/iconos/sintomas/54.png"
+        "image": "http://localhost:3000/iconos/sintomas/55.png"
       },
       {
         "name": "estresada",
         "frequency": "0",
         "type" : "3",
         "description" : "Sensación de presión o tensión emocional.",
-        "image": "http://localhost:3000/iconos/sintomas/55.png"
+        "image": "http://localhost:3000/iconos/sintomas/56.png"
       },
       {
         "name": "ansiosa",
         "frequency": "0",
         "type" : "3",
         "description" : "Sensación de nerviosismo o inquietud.",
-        "image": "http://localhost:3000/iconos/sintomas/56.png"
+        "image": "http://localhost:3000/iconos/sintomas/57.png"
       },
       {
         "name": "angustiada",
         "frequency": "0",
         "type" : "3",
         "description" : "Ansiedad o preocupación extrema.",
-        "image": "http://localhost:3000/iconos/sintomas/57.png"
+        "image": "http://localhost:3000/iconos/sintomas/58.png"
       },
       {
         "name": "insegura",
         "frequency": "0",
         "type" : "3",
         "description" : "Sentimiento de duda sobre si misma o su entorno.",
-        "image": "http://localhost:3000/iconos/sintomas/58.png"
+        "image": "http://localhost:3000/iconos/sintomas/59.png"
       },
       {
         "name": "distraída",
         "frequency": "0",
         "type" : "3",
         "description" : "Falta de concentración por pensamientos o cosas externos.",
-        "image": "http://localhost:3000/iconos/sintomas/59.png"
+        "image": "http://localhost:3000/iconos/sintomas/60.png"
       },
       {
         "name": "olvidadiza",
         "frequency": "0",
         "type" : "3",
         "description" : "Tendencia a no recordar cosas fácilmente.",
-        "image": "http://localhost:3000/iconos/sintomas/60.png"
+        "image": "http://localhost:3000/iconos/sintomas/61.png"
       },
       {
         "name": "exhausta",
         "frequency": "0",
         "type" : "3",
         "description" : "Sentirse físicamente y mentalmente agotada.",
-        "image": "http://localhost:3000/iconos/sintomas/61.png"
+        "image": "http://localhost:3000/iconos/sintomas/62.png"
       },
       {
         "name": "libidinosa",
         "frequency": "0",
         "type" : "3",
         "description" : "Sentimiento fuerte de deseo físico.",
-        "image": "http://localhost:3000/iconos/sintomas/62.png"
+        "image": "http://localhost:3000/iconos/sintomas/63.png"
       },
       {
         "name": "coqueta",
         "frequency": "0",
         "type" : "3",
         "description" : "Sensación de seguridad y atractivo, con deseo de interactuar de manera romántica.",
-        "image": "http://localhost:3000/iconos/sintomas/63.png"
+        "image": "http://localhost:3000/iconos/sintomas/64.png"
       },
 
       {//Aquí termina las emociones e inician los fluidos
@@ -469,7 +469,7 @@ module.exports = {
         "frequency": "0",
         "type" : "4",
         "description" : "Apertura o dilatación del cuello uterino.",
-        "image": "http://localhost:3000/iconos/sintomas/64.png"
+        "image": "http://localhost:3000/iconos/sintomas/65.png"
 
       },
       {
@@ -477,98 +477,98 @@ module.exports = {
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción vaginal producida por el cuello uterino.",
-        "image": "http://localhost:3000/iconos/sintomas/65.png"
+        "image": "http://localhost:3000/iconos/sintomas/66.png"
       },
       {
         "name": "Firmeza cervical",
         "frequency": "0",
         "type" : "4",
         "description" : "Consistencia del cuello uterino, de suave a dura.",
-        "image": "http://localhost:3000/iconos/sintomas/66.png"
+        "image": "http://localhost:3000/iconos/sintomas/67.png"
       },
       {
         "name": "Fluido seco",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción cervical escasa o ausente.",
-        "image": "http://localhost:3000/iconos/sintomas/67.png"
+        "image": "http://localhost:3000/iconos/sintomas/68.png"
       },
       {
         "name": "Fluido pegajoso",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción viscosa y espesa.",
-        "image": "http://localhost:3000/iconos/sintomas/68.png"
+        "image": "http://localhost:3000/iconos/sintomas/69.png"
       },
       {
         "name": "Fluido cremoso",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción espesa y de textura similar a la crema.",
-        "image": "http://localhost:3000/iconos/sintomas/69.png"
+        "image": "http://localhost:3000/iconos/sintomas/70.png"
       },
       {
         "name": "Fluido acuoso",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción líquida y transparente.",
-        "image": "http://localhost:3000/iconos/sintomas/70.png"
+        "image": "http://localhost:3000/iconos/sintomas/71.png"
       },
       {
         "name": "Fluido clara de huevo",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción elástica y resbaladiza similar a la clara de huevo.",
-        "image": "http://localhost:3000/iconos/sintomas/71.png"
+        "image": "http://localhost:3000/iconos/sintomas/72.png"
       },
       {
         "name": "Fluido requesón",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción espesa, grumosa, similar al queso.",
-        "image": "http://localhost:3000/iconos/sintomas/72.png"
+        "image": "http://localhost:3000/iconos/sintomas/73.png"
       },
       {
         "name": "Fluido verde",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción de color verde, generalmente por infección.",
-        "image": "http://localhost:3000/iconos/sintomas/73.png"
+        "image": "http://localhost:3000/iconos/sintomas/74.png"
       },
       {
         "name": "Fluido con sangre",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción que contiene sangre, de aspecto rojizo.",
-        "image": "http://localhost:3000/iconos/sintomas/74.png"
+        "image": "http://localhost:3000/iconos/sintomas/75.png"
       },
       {
         "name": "Fluido con mal olor",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción vaginal con un olor desagradable.",
-        "image": "http://localhost:3000/iconos/sintomas/75.png"
+        "image": "http://localhost:3000/iconos/sintomas/76.png"
       },
       {
         "name": "Retención de líquidos",
         "frequency": "0",
         "type" : "4",
         "description" : "Acumulación anormal de líquidos en el cuerpo.",
-        "image": "http://localhost:3000/iconos/sintomas/76.png"
+        "image": "http://localhost:3000/iconos/sintomas/77.png"
       },
       {
         "name": "Manchado",
         "frequency": "0",
         "type" : "4",
         "description" : "Sangrado leve o irregular fuera del período.",
-        "image": "http://localhost:3000/iconos/sintomas/77.png"
+        "image": "http://localhost:3000/iconos/sintomas/78.png"
       },
       {
         "name": "Sangrado",
         "frequency": "0",
         "type" : "4",
         "description" : "Pérdida de sangre, generalmente más abundante.",
-        "image": "http://localhost:3000/iconos/sintomas/78.png"
+        "image": "http://localhost:3000/iconos/sintomas/79.png"
       },
       //Aqui empiezan preguntas sobre actos sexuales
       {
@@ -576,35 +576,35 @@ module.exports = {
         "frequency": "0",
         "type" : "5",
         "description" : "Si tiene acto sexual o no",
-        "image": "http://localhost:3000/iconos/sintomas/79.png"
+        "image": "http://localhost:3000/iconos/sintomas/80.png"
       },
       {
         "name": "Relacion sexual con protección",
         "frequency": "0",
         "type" : "5",
         "description" : "si uso proteccion o no en el acto",
-        "image": "http://localhost:3000/iconos/sintomas/80.png"
+        "image": "http://localhost:3000/iconos/sintomas/81.png"
       },
       {
         "name": "Orgasmo",
         "frequency": "0",
         "type" : "5",
         "description" : "orgasmo ",
-        "image": "http://localhost:3000/iconos/sintomas/81.png"
+        "image": "http://localhost:3000/iconos/sintomas/82.png"
       },
       {
         "name": "Ocasiones que lo hizo",
         "frequency": "0",
         "type" : "5",
         "description" : "cantidad de heces que lo hizo",
-        "image": "http://localhost:3000/iconos/sintomas/82.png"
+        "image": "http://localhost:3000/iconos/sintomas/83.png"
       },
       {
         "name": "Personas con las que lo hizo",
         "frequency": "0",
         "type" : "5",
         "description": "cantidad de personas con las que lo hizo",
-        "image": "http://localhost:3000/iconos/sintomas/83.png"
+        "image": "http://localhost:3000/iconos/sintomas/84.png"
         }
 
     ]);
