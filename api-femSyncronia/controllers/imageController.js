@@ -14,7 +14,7 @@ exports.uploadImage = (req, res) => {
       size: req.file.size,
     };
 
-    const imageUrl = 'http://localhost:3000/uploads/${req.file.filename}'; // URL de la imagen
+    const imageUrl = `http://localhost:3000/uploads/${req.file.filename}`; // URL de la imagen
 
     res.status(200).json({ message: 'Imagen subida exitosamente.', imageUrl });
   } catch (error) {
