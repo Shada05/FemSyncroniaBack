@@ -49,76 +49,89 @@ export class DatosPersonalesPage implements OnInit {
 
   // Función para cambiar la foto de perfil
   async changeProfilePicture() {
-  try {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Photos,
-    });
-
-    if (image && image.webPath) {
-      const blob = await fetch(image.webPath).then((res) => res.blob());
-      const formData = new FormData();
-      formData.append('image', blob, 'profile.jpg');
-
-      this.apiService.uploadImage(formData).subscribe({
-        next: (response) => {
-          // Aquí asignas la URL de la imagen devuelta por la API
-          this.profileImage = response.imageUrl;
-          console.log('Imagen subida correctamente. URL:', this.profileImage);
-        },
-        error: (error) => {
-          console.error('Error al subir la imagen:', error);
-        }
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.Uri,
+        source: CameraSource.Photos,
       });
-    } else {
-      console.log('No se seleccionó ninguna imagen.');
-    }
-  } catch (error) {
-    console.log('Error al seleccionar la imagen: ', error);
-  }
-}
 
+      if (image && image.webPath) {
+        this.profileImage = image.webPath;
+      } else {
+        console.log('No se seleccionó ninguna imagen.');
+      }
+    } catch (error) {
+      console.log('Error al seleccionar la imagen: ', error);
+    }
+  }
 
   // Función para actualizar el usuario
-  updateUserData() {
+  async updateUserData() {
     if (!this.userId) {
       console.error('Error: No se puede actualizar sin un ID de usuario.');
       return;
     }
-
+  
     if (!this.phoneNumber.trim() || !this.selectedDay || !this.selectedMonth || !this.selectedYear) {
       console.error('Por favor, completa todos los campos requeridos.');
-
       return;
     }
-
-    const birthdate = `${this.selectedYear}-${this.formatMonth(this.selectedMonth)}-${this.selectedDay}`;
-    const data = {
-      name: this.nombre,
-      lastname: this.apellido,
-      birthdate: birthdate,
-      phone: `${this.selectedLada} ${this.phoneNumber}`,
-      profile_image: this.profileImage
-    };
-    console.log("🔵 URL de la imagen antes de enviarla a la API:", this.profileImage);
-    this.apiService.updateUsuario(this.userId, data).subscribe({
-      next: async (response) => {
-        console.log('Usuario actualizado exitosamente:', response);
-        this.router.navigate(['/datos-guardados']);
-      },
-      error: async (error) => {
-        console.error('Error al actualizar el usuario:', error);
-
-        const toast = await this.toastController.create({
-          message: 'Error al registrar. Intenta nuevamente.',
-          duration: 2000,
-          color: 'danger',
-        });
-        await toast.present();
+  
+    try {
+      // Subir la imagen si se ha seleccionado una nueva
+      if (this.profileImage && this.profileImage.startsWith('blob:')) {
+        const blob = await fetch(this.profileImage).then((res) => res.blob());
+        const formData = new FormData();
+        formData.append('image', blob, 'profile.jpg');
+  
+        // Subir la imagen y manejar el caso en que imageResponse sea undefined
+        const imageResponse = await this.apiService.uploadImage(formData).toPromise();
+        if (!imageResponse || !imageResponse.imageUrl) {
+          console.log(imageResponse?.imageUrl)
+          throw new Error('No se pudo subir la imagen o no se recibió una URL válida.');
+        }
+        this.profileImage = imageResponse.imageUrl;
       }
-    });
+  
+      const birthdate = `${this.selectedYear}-${this.formatMonth(this.selectedMonth)}-${this.selectedDay}`;
+      const data = {
+        name: this.nombre,
+        lastname: this.apellido,
+        birthdate: birthdate,
+        phone: `${this.selectedLada} ${this.phoneNumber}`,
+        profile_image: this.profileImage
+      };
+  
+      console.log("🔵 URL de la imagen antes de enviarla a la API:", this.profileImage);
+  
+      this.apiService.updateUsuario(this.userId, data).subscribe({
+        next: async (response) => {
+          console.log('Usuario actualizado exitosamente:', response);
+          this.router.navigate(['/datos-guardados']);
+        },
+        error: async (error) => {
+          console.error('Error al actualizar el usuario:', error);
+  
+          const toast = await this.toastController.create({
+            message: 'Error al registrar. Intenta nuevamente.',
+            duration: 2000,
+            color: 'danger',
+          });
+          await toast.present();
+        }
+      });
+    } catch (error) {
+      console.error('Error al subir la imagen o actualizar los datos:', error);
+  
+      const toast = await this.toastController.create({
+        message: 'Error al subir la imagen. Intenta nuevamente.',
+        duration: 2000,
+        color: 'danger',
+      });
+      await toast.present();
+    }
   }
 
   // Función para formatear el mes en números
