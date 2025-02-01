@@ -22,6 +22,7 @@ const upload = require('../middlewares/upload'); // Middleware de Multer
 // Ruta para subir imágenes
 router.post('/upload', upload.single('image'), uploadImage);
 router.use('/iconos/sintomas', express.static(path.join(__dirname, '../iconos/sintomas')));
+router.use('/uploads', express.static('uploads')); // Servir archivos estáticos
 
 // Rutas de usuario
 router.post("/api/v1/usuario/", usuarioController.store);
