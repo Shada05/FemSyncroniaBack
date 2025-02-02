@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
-import { ApiService } from '../../api.service' // Importa el servicio
+import { ApiService } from '../../services/api.service' // Importa el servicio
 import { Router } from '@angular/router';
 
 @Component({
