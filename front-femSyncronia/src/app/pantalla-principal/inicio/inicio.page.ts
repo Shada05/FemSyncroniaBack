@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular'; // Importa el controlador del menú
-import { ApiService } from '../../api.service';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-inicio',
