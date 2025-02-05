@@ -62,6 +62,22 @@ exports.show = async (req, res) => {
     return res.status(200).send(user);
 }
 
+exports.show_email = async (req, res) => {
+    const email = req.params.email; // Se obtiene el email de los parámetros
+
+    const user = await users.findOne({
+        where: {
+            email: email // Busca directamente por el string
+        }
+    });
+
+    if (user) {
+        return res.status(200).send(user); // Devuelve el usuario si se encuentra
+    } else {
+        return res.status(404).send({ message: 'Usuario no encontrado' }); // Devuelve un mensaje si no se encuentra
+    }
+};
+
 exports.destroy = async (req, res) => {
     const id = parseInt(req.params.id);
 
@@ -119,4 +135,5 @@ exports.update = async (req, res) => {
             res.status(400).send(error);
         }
     );
+    
 };

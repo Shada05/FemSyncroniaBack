@@ -2,7 +2,10 @@ const cycles  = require('../models').cycles;
 
 /*Nota importante:
     Los sintomas tienen una valoración del 0 al 5 en la base de datos
-    0 = Ausente
+    Por cada sintoma se van a hacer 1 modelo con regresion lineal para predecir el valor de los sintomas
+    
+
+    0 = Sin sintoma
     1 = Leve
     2 = Moderado
     3 = Severo
@@ -82,7 +85,8 @@ exports.store = async (req, res) => {
         AS_2: req.body.AS_2,
         AS_3: req.body.AS_3,
         AS_4: req.body.AS_4,
-        AS_5: req.body.AS_5
+        AS_5: req.body.AS_5,
+        notes: req.body.notes
     }
     console.log(cycle);
 
@@ -212,6 +216,7 @@ exports.update = async (req, res) => {
     if (req.body.AS_3 != null) updatedData['AS_3']= req.body.AS_3;
     if (req.body.AS_4 != null) updatedData['AS_4']= req.body.AS_4;
     if (req.body.AS_5 != null) updatedData['AS_5']= req.body.AS_5;
+    if (req.body.notes != null) updatedData['notes']= req.body.notes;
     return await cycles.update(updatedData, {
         where: {
             id: id
