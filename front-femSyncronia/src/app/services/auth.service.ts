@@ -19,18 +19,28 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/verificar-token`, { headers });
   }
 
-  //Método para guardar el token
+  // Método para guardar el token
   async guardarToken(token: string) {
     return await this.storage.set('authToken', token);
   }
 
-  //Método para obtener el token
-  async obtenerToken(): Promise <string | null> {
+  // Método para obtener el token
+  async obtenerToken(): Promise<string | null> {
     return await this.storage.get('authToken');
   }
-  
+
   // Método de login
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, { email, password });
+  }
+
+  // Método de registro
+  register(id: string, email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, { id, email });
+  }
+
+  // Método para cerrar sesión
+  async cerrarSesion(): Promise<void> {
+    await this.storage.remove('authToken'); // Elimina el token del almacenamiento
   }
 }
