@@ -342,6 +342,9 @@ module.exports = {
         allowNull: false,
         defaultValue: 0
       },
+      notes: {
+        type: Sequelize.STRING
+      },
       createdAt: {
           type: Sequelize.DATE,
           allowNull: false,

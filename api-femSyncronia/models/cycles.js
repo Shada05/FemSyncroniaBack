@@ -366,6 +366,11 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: 0
     },
     //Aqui terminan los actos sexual
+    notes: { //Personas (Cantidad)
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: ""
+    },
     createdAt: {
         allowNull: false, 
         type: DataTypes.DATE,
