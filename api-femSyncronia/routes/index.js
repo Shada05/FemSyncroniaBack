@@ -17,7 +17,22 @@ const reports_Controller = require('../controllers/reports');
 const symptoms_Controller = require('../controllers/symptoms.js');
 
 const { uploadImage } = require('../controllers/imageController');
-const upload = require('../middlewares/upload'); // Middleware de Multer
+const upload = require('../middlewares/upload');
+const  auth_controller = require('../controllers/authcontroller');
+const { authenticateToken } = require('../middlewares/auth');
+const { enviarCodigoVerificacion, validarCodigo } = require('../controllers/emailController');
+
+// Ruta de login
+router.post('/login', auth_controller.login);
+
+// Ruta para verificar el token
+router.get('/verificar-token', authenticateToken, auth_controller.verificarToken);
+// Ruta para registrar un nuevo usuario
+router.post('/register', auth_controller.register);
+
+// Rutas para enviar y validar el código de verificación
+router.post('/enviar-codigo', enviarCodigoVerificacion);
+router.post('/validar-codigo', validarCodigo);
 
 // Ruta para subir imágenes
 router.post('/upload', upload.single('image'), uploadImage);

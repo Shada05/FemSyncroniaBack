@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular'; // Importa el controlador del menú
+import { MenuController } from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
@@ -11,7 +13,7 @@ export class InicioPage implements OnInit {
   profileImage: string = '/assets/img/pantalla-principal/Foto-perfil.svg'; // Ruta de la imagen de perfil
   userId: string | null = null;
 
-  constructor(private menuCtrl: MenuController, private apiService: ApiService) { } // Inyecta el controlador del menú
+  constructor(private menuCtrl: MenuController, private apiService: ApiService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.obtenerUsuarioId();
@@ -53,7 +55,7 @@ export class InicioPage implements OnInit {
       console.error('No se encontró el ID del usuario.');
     }
   }
-  
+
   /**
    * Abre el menú lateral cuando se hace clic en la imagen de perfil
    */
@@ -73,5 +75,10 @@ export class InicioPage implements OnInit {
    */
   async isMenuOpen(): Promise<boolean> {
     return this.menuCtrl.isOpen('menu-perfil'); // Retorna el estado del menú con el ID 'menu-perfil'
+  }
+
+  async logout() {
+    await this.authService.cerrarSesion(); // Cierra la sesión
+    this.router.navigate(['/login']); // Redirige al usuario a la página de login
   }
 }
