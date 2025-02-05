@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IonInput } from '@ionic/angular';
+import { AuthService } from '../../services/auth.service';
+import { CodigoService } from 'src/app/services/codigo.service';
 @Component({
   selector: 'app-validar-codigo',
   templateUrl: './validar-codigo.page.html',
@@ -8,6 +10,7 @@ import { IonInput } from '@ionic/angular';
 })
 export class ValidarCodigoPage implements OnInit {
   formulario: FormGroup;
+  correo: string = '';
 
   @ViewChild('codigo1', { static: false }) codigo1: IonInput | null = null;
   @ViewChild('codigo2', { static: false }) codigo2: IonInput | null = null;
@@ -16,7 +19,7 @@ export class ValidarCodigoPage implements OnInit {
   @ViewChild('codigo5', { static: false }) codigo5: IonInput | null = null;
   @ViewChild('codigo6', { static: false }) codigo6: IonInput | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private codigo: CodigoService) {
     this.formulario = this.fb.group({
       codigo1: ['', [Validators.required, Validators.pattern('^[0-9]$')]],
       codigo2: ['', [Validators.required, Validators.pattern('^[0-9]$')]],
@@ -28,6 +31,7 @@ export class ValidarCodigoPage implements OnInit {
   }
 
   ngOnInit() {
+    this.obtenerCorreo();
   }
 
   moverFoco(inputActual: IonInput | null, siguienteInput: IonInput | null) {
@@ -55,12 +59,29 @@ export class ValidarCodigoPage implements OnInit {
     }
   }
 
-  enviarCodigo() {
+  async obtenerCorreo() {
+    const token = await this.authService.obtenerToken();
+    if (token) {
+      this.authService.verificarToken(token).subscribe(response => {
+        this.correo = response.user.email;
+        console.log('Correo obtenido del token:', this.correo);
+      }, error => {
+        console.log('Error al obtener el correo:', error);
+      });
+    } else {
+      console.log('No hay token almacenado.');
+    }
+  }
+
+
+  validarCodigo() {
     if (this.formulario.valid) {
       const codigo = Object.values(this.formulario.value).join('');
       console.log('Código ingresado:', codigo);
-      // Aquí deberías enviar el código al backend
-      // Ejemplo: this.miServicio.enviarCodigo(codigo).subscribe(response => { ... });
+
+      this.codigo.validarCodigo(this.correo, codigo).subscribe(response => {
+
+      });
     } else {
       console.log('El formulario no es válido.');
     }
