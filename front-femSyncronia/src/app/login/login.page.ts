@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ApiService } from '../api.service';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,26 +13,42 @@ export class LoginPage implements OnInit {
   passwordVisible = false;
   mostrarIcono = false;
 
-  constructor(private fb: FormBuilder, private apiService: ApiService) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.formulario = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
-  enviarDatos() {
+  ngOnInit() { }
+
+  login() {
     if (this.formulario.valid) {
       const { email, password } = this.formulario.value;
-      this.apiService.login(email, password).subscribe({
-        next: (response) => {
-          console.log('Respuesta del servidor:', response);
+  
+      this.authService.login(email, password).subscribe(
+        async (response) => {
+          if (response?.token) {
+            await this.authService.guardarToken(response.token);
+            this.router.navigate(['/pantalla-principal']);
+          } else {
+            alert('Error: No se recibió un token válido.');
+          }
         },
-        error: (error) => {
-          console.error('Error al iniciar sesión:', error);
+        (error) => {
+          if (error.error?.message) {
+            if (error.error.message === 'Usuario no encontrado.') {
+              this.formulario.get('email')?.setErrors({ usuarioNoEncontrado: true });
+            } else if (error.error.message === 'Contraseña incorrecta.') {
+              this.formulario.get('password')?.setErrors({ contrasenaIncorrecta: true });
+            }
+          }
         }
-      });
-    } else {
-      console.log('Formulario inválido');
+      );
     }
   }
 
@@ -41,10 +58,14 @@ export class LoginPage implements OnInit {
 
   alternarIcono() {
     const passwordControl = this.formulario.get('password');
-    if (passwordControl) {
-      this.mostrarIcono = passwordControl.value.trim() !== '';
-    }
+    this.mostrarIcono = passwordControl?.value.trim() !== '';
   }
 
-  ngOnInit() {}
+  static usuarioNoEncontrado(control: AbstractControl): ValidationErrors | null {
+    return control.value ? { usuarioNoEncontrado: true } : null;
+  }
+
+  static contrasenaIncorrecta(control: AbstractControl): ValidationErrors | null {
+    return control.value ? { contrasenaIncorrecta: true } : null;
+  }
 }

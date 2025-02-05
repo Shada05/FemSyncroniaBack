@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { ApiService } from '../../api.service';
+import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 

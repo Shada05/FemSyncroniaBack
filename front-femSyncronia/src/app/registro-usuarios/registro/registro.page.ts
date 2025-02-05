@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
-import { ApiService } from '../../api.service' // Importa el servicio
+import { ApiService } from '../../services/api.service'; // Importa el servicio
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { CodigoService } from 'src/app/services/codigo.service'; // Importa el servicio de código
 
 @Component({
   selector: 'app-registro',
@@ -20,8 +22,9 @@ export class RegistroPage implements OnInit {
     private fb: FormBuilder,
     private apiService: ApiService, // Inyecta el servicio
     private toastController: ToastController,
-    private router: Router // Inyecta el Router
-
+    private router: Router, // Inyecta el Router
+    private auth: AuthService,
+    private codigoService: CodigoService // Inyecta el servicio de código
   ) {
     this.formulario = this.fb.group({
       username: ['', Validators.required],
@@ -43,7 +46,7 @@ export class RegistroPage implements OnInit {
 
   ngOnInit() { }
 
-  enviarDatos() {
+  registrar() {
     if (this.formulario.valid) {
       const datos = this.formulario.value;
       delete datos.confirmarPassword; // Eliminar campo no necesario para la API
@@ -52,9 +55,25 @@ export class RegistroPage implements OnInit {
         next: async (response) => {
           console.log('Registro exitoso:', response);
 
-          // Guarda el ID del usuario en localStorage
+          // Guarda el ID del usuario en ionic storage
           if (response && response.id) {
-            localStorage.setItem('usuarioId', response.id);
+            this.auth.register(response.id, response.email).subscribe(
+              async (response) => {
+                console.log('Usuario registrado con éxito', response);
+
+                // Almacenar el token en Ionic Storage
+                const token = response.token;
+                if (token) {
+                  await this.auth.guardarToken(token);
+                  console.log('Token guardado en Storage');
+
+                  // Enviar el código de verificación después de guardar el token
+                  this.enviarCodigoVerificacion(datos.email);
+                }
+              },
+              (error) => {
+                console.error('Error al registrar usuario', error);
+              });
           }
 
           // Redirige solo después del registro exitoso
@@ -76,6 +95,24 @@ export class RegistroPage implements OnInit {
     } else {
       console.error('Formulario inválido');
     }
+  }
+
+  // Función para enviar el código de verificación
+  enviarCodigoVerificacion(email: string) {
+    this.codigoService.enviarCodigo(email).subscribe(
+      async (response) => {
+        console.log('Código de verificación enviado:', response);
+      },
+      async (error) => {
+        console.error('Error al enviar el código de verificación:', error);
+        const toast = await this.toastController.create({
+          message: 'Error al enviar el código de verificación. Intenta nuevamente.',
+          duration: 2000,
+          color: 'danger',
+        });
+        await toast.present();
+      }
+    );
   }
 
   alternarVisibilidadContrasena(campo: string) {
