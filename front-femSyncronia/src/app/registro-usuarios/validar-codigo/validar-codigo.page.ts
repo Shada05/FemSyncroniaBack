@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IonInput } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import { CodigoService } from 'src/app/services/codigo.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-validar-codigo',
   templateUrl: './validar-codigo.page.html',
@@ -19,7 +21,10 @@ export class ValidarCodigoPage implements OnInit {
   @ViewChild('codigo5', { static: false }) codigo5: IonInput | null = null;
   @ViewChild('codigo6', { static: false }) codigo6: IonInput | null = null;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private codigo: CodigoService) {
+  constructor(private fb: FormBuilder,
+    private authService: AuthService,
+    private codigo: CodigoService,
+    private router: Router,) {
     this.formulario = this.fb.group({
       codigo1: ['', [Validators.required, Validators.pattern('^[0-9]$')]],
       codigo2: ['', [Validators.required, Validators.pattern('^[0-9]$')]],
@@ -79,11 +84,37 @@ export class ValidarCodigoPage implements OnInit {
       const codigo = Object.values(this.formulario.value).join('');
       console.log('Código ingresado:', codigo);
 
-      this.codigo.validarCodigo(this.correo, codigo).subscribe(response => {
-
-      });
+      this.codigo.validarCodigo(this.correo, codigo).subscribe(
+        response => {
+          if (response.valido) {
+            // Código correcto
+            console.log('Código válido:', response.mensaje);
+            // redirigir solo si es válido el codigo
+            this.router.navigate(['/confirmacion-registro']);
+          } else {
+            // Código incorrecto o expirado
+            console.log('Error:', response.mensaje);
+            this.marcarInputsComoInvalidos(); // Marcar todos los inputs como inválidos
+          }
+        },
+        error => {
+          // Manejo de errores de la solicitud
+          console.error('Error al validar el código:', error);
+          this.marcarInputsComoInvalidos(); // Marcar todos los inputs como inválidos
+        }
+      );
     } else {
       console.log('El formulario no es válido.');
+      this.marcarInputsComoInvalidos(); // Marcar todos los inputs como inválidos
     }
+  }
+
+  marcarInputsComoInvalidos() {
+    // Marcar todos los controles del formulario como inválidos y tocados
+    Object.keys(this.formulario.controls).forEach(key => {
+      const control = this.formulario.get(key);
+      control?.setErrors({ 'invalid': true }); // Agregar un error personalizado
+      control?.markAsTouched(); // Marcar como tocado
+    });
   }
 }
