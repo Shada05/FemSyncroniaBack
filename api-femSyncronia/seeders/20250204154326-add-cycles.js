@@ -21,6 +21,7 @@ module.exports = {
         DM_8: 4,
         DM_9: 1,
         DM_10: 1,
+        DM_11: 5,
       },
       {
         cycle_status: 1,
@@ -39,6 +40,7 @@ module.exports = {
         DM_8: 0,
         DM_9: 1,
         DM_10: 1,
+        DM_11: 5,
       },
       {
         cycle_status: 1,
@@ -57,6 +59,7 @@ module.exports = {
         DM_8: 4,
         DM_9: 1,
         DM_10: 1,
+        DM_11: 5,
       },
       {
         cycle_status: 1,
@@ -75,6 +78,7 @@ module.exports = {
         DM_8: 4,
         DM_9: 1,
         DM_10: 1,
+        DM_11: 5,
       }
     ]);
   },

@@ -30,7 +30,7 @@ try:
         record = cursor.fetchone()
         print("Conectado a la base de datos:", record)
                 # Ejecutar la consulta para obtener los datos de la tabla "symptoms"
-        cursor.execute("SELECT * FROM cycles;")
+        cursor.execute("SELECT id, user_id, DM_1 FROM cycles WHERE 1;")
         records = cursor.fetchall()
 
         # Imprimir los registros obtenidosN
@@ -44,31 +44,3 @@ try:
         print("Conexión cerrada")
 except Error as e:
     print("Error al conectar a MySQL", e)
-
-
-
-from sqlalchemy import create_engine, Table, MetaData, select
-
-# Configura la conexión a la base de datos
-# Cambia 'sqlite:///database.db' por tu cadena de conexión
-engine = create_engine('database.db')
-connection = engine.connect()
-metadata = MetaData()
-
-# Define la tabla 'Cycles'
-cycles_table = Table('Cycles', metadata, autoload_with=engine)
-
-# Consulta para filtrar registros con status = 1 y obtener DM_1
-query = select([cycles_table.c.DM_1]).where(cycles_table.c.status == 1)
-
-# Ejecuta la consulta
-result = connection.execute(query)
-
-# Obtén todos los valores de DM_1 en un arreglo
-dm_1_values = [row.DM_1 for row in result]
-
-# Muestra el arreglo
-print(dm_1_values)
-
-# Cierra la conexión
-connection.close()
