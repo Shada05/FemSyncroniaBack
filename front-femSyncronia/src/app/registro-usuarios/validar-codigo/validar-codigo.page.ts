@@ -109,14 +109,9 @@ export class ValidarCodigoPage implements OnInit {
             console.log('Código válido:', response.mensaje);
             // redirigir solo si es válido el codigo
             this.router.navigate(['/confirmacion-registro']);
-          } else {
-            // Código incorrecto o expirado
-            console.log('Error:', response.mensaje);
-            this.marcarInputsComoInvalidos(); // Marcar todos los inputs como inválidos
           }
         },
         async (error) => {
-          // Verifica si el error tiene un mensaje válido desde el backend
           const mensajeError = error.error.mensaje;
 
           console.error('Error al validar el código:', error.error.mensaje);
