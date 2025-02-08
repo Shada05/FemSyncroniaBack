@@ -4,6 +4,7 @@ import { IonInput } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import { CodigoService } from 'src/app/services/codigo.service';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-validar-codigo',
@@ -24,6 +25,7 @@ export class ValidarCodigoPage implements OnInit {
   constructor(private fb: FormBuilder,
     private authService: AuthService,
     private codigo: CodigoService,
+    private toastController: ToastController,
     private router: Router,) {
     this.formulario = this.fb.group({
       codigo1: ['', [Validators.required, Validators.pattern('^[0-9]$')]],
@@ -79,13 +81,29 @@ export class ValidarCodigoPage implements OnInit {
   }
 
 
+  reenviarCodigo() {
+    this.codigo.enviarCodigo(this.correo).subscribe(
+      async (response) => {
+        console.log('Código de verificación enviado:', response);
+      },
+      async (error) => {
+        console.error('Error al enviar el código de verificación:', error);
+        const toast = await this.toastController.create({
+          message: 'Error al enviar el código de verificación. Intenta nuevamente.',
+          duration: 2000,
+          color: 'danger',
+        });
+        await toast.present();
+      }
+    );
+  }
   validarCodigo() {
     if (this.formulario.valid) {
       const codigo = Object.values(this.formulario.value).join('');
       console.log('Código ingresado:', codigo);
 
       this.codigo.validarCodigo(this.correo, codigo).subscribe(
-        response => {
+        async (response) => {
           if (response.valido) {
             // Código correcto
             console.log('Código válido:', response.mensaje);
@@ -97,11 +115,22 @@ export class ValidarCodigoPage implements OnInit {
             this.marcarInputsComoInvalidos(); // Marcar todos los inputs como inválidos
           }
         },
-        error => {
-          // Manejo de errores de la solicitud
-          console.error('Error al validar el código:', error);
+        async (error) => {
+          // Verifica si el error tiene un mensaje válido desde el backend
+          const mensajeError = error.error.mensaje;
+
+          console.error('Error al validar el código:', error.error.mensaje);
+
+          const toast = await this.toastController.create({
+            message: mensajeError,
+            duration: 2000,
+            color: 'danger',
+          });
+
+          await toast.present();
           this.marcarInputsComoInvalidos(); // Marcar todos los inputs como inválidos
         }
+
       );
     } else {
       console.log('El formulario no es válido.');

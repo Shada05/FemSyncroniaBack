@@ -4,7 +4,7 @@
       <h1>Consulta tu</h1>
       <h1>correo electrónico</h1>
       <ion-text style="margin-top: 10px;">
-        Te hemos enviado un código de 
+        Te hemos enviado un código de
       </ion-text>
       <ion-text>
         verificación a tu correo anteriormente
@@ -63,17 +63,14 @@
 
       <!-- Contenedor de botones y línea divisoria -->
       <div class="contenedor-botones">
-        <ion-button class="btn-validar" type="button" [disabled]="formulario.invalid" (click)="validarCodigo()"
-          [routerLink]="['/confirmacion-registro']">
+        <ion-button class="btn-validar" type="button" [disabled]="formulario.invalid" (click)="validarCodigo()">
           Validar
         </ion-button>
 
         <div class="divisor"></div>
-        <ion-button class="btn-enviar-codigo" type="button" id="open-toast">
+        <ion-button class="btn-enviar-codigo" type="button" (click)="reenviarCodigo()">
           Reenviar Código
         </ion-button>
-        <ion-toast trigger="open-toast" message="Se le a reenviado su código de verificación con éxito" position="top"
-          [duration]="3000"></ion-toast>
       </div>
     </form>
   </div>

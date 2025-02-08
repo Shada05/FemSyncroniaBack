@@ -1,0 +1,21 @@
+<ion-content class="ion-padding">
+  <p>La contraseña debe cumplir con:</p>
+  <ul>
+    <li [class.valid]="hasMinLength">
+      <ion-icon [name]="hasMinLength ? 'checkmark' : 'close'"></ion-icon>
+      Mínimo 8 caracteres
+    </li>
+    <li [class.valid]="hasNumber">
+      <ion-icon [name]="hasNumber ? 'checkmark' : 'close'"></ion-icon>
+      Al menos un número
+    </li>
+    <li [class.valid]="hasSpecialChar">
+      <ion-icon [name]="hasSpecialChar ? 'checkmark' : 'close'"></ion-icon>
+      Un carácter especial
+    </li>
+    <li [class.valid]="hasUppercase">
+      <ion-icon [name]="hasUppercase ? 'checkmark' : 'close'"></ion-icon>
+      Al menos una mayúscula
+    </li>
+  </ul>
+</ion-content>

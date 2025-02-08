@@ -66,7 +66,6 @@ export class RegistroPage implements OnInit {
                 if (token) {
                   await this.auth.guardarToken(token);
                   console.log('Token guardado en Storage');
-
                   // Enviar el código de verificación después de guardar el token
                   this.enviarCodigoVerificacion(datos.email);
                 }

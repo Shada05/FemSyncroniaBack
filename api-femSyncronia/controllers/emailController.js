@@ -1,7 +1,5 @@
-// src/controllers/emailController.js
 const { generarCodigo, enviarCodigo } = require('../middlewares/emailService');
 
-// Almacenamiento temporal (en producción usa una base de datos)
 const codigosTemporales = {};
 
 exports.enviarCodigoVerificacion = async (req, res) => {
@@ -27,20 +25,22 @@ exports.enviarCodigoVerificacion = async (req, res) => {
 };
 
 exports.validarCodigo = (req, res) => {
-    const { email, codigoIngresado } = req.body;
-
+    const { email, codigo } = req.body;
+    // Verifica si el correo existe en el almacenamiento temporal
     const codigoGuardado = codigosTemporales[email];
-
     if (!codigoGuardado) {
         return res.status(400).json({ valido: false, mensaje: "Código no encontrado." });
     }
 
+    // Verifica si el código ha expirado
     if (Date.now() > codigoGuardado.expiracion) {
         delete codigosTemporales[email]; // Elimina el código expirado
         return res.status(400).json({ valido: false, mensaje: "Código expirado." });
     }
 
-    if (codigoGuardado.codigo === parseInt(codigoIngresado)) {
+    // Compara el código recibido con el código guardado
+    // Asegúrate de que ambos sean del mismo tipo (números o cadenas)
+    if (codigoGuardado.codigo.toString() === codigo.toString()) {
         delete codigosTemporales[email]; // Elimina el código después de validar
         return res.status(200).json({ valido: true, mensaje: "Código correcto." });
     } else {
