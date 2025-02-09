@@ -1,0 +1,175 @@
+ion-content {
+    --background: none; /* Elimina el fondo por defecto */
+    background-image: url('../../../assets/img/login/fondo-login.svg'); /* Fondo con imagen */
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    background-position: center;
+}
+
+/* Estilos para centrar el contenido */
+.center {
+    display: grid; /* Utiliza grid layout */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-content: center; /* Centra los elementos verticalmente */
+    align-items: center; /* Alinea los elementos en el centro */
+    gap: 20px; /* Espacio entre los elementos */
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Altura completa */
+    padding-top: 50px; /* Espacio superior sin crear desplazamiento */
+}
+
+/* Estilos para el título */
+h1 {
+    font-size: 27px;
+    margin: 0;
+    color: black;
+}
+
+/* Estilos para los textos */
+ion-text {
+    font-family: 'Open Sans';
+    font-size: 15px;
+    font-weight: 400;
+    display: block;
+    color: black;
+}
+
+.color-texto {
+    color: #585858;
+    font-family: "Open Sans";
+    font-size: 17px;
+}
+
+/* Contenedor de síntomas */
+.contenedor-sintomas {
+    width: 100%;
+    max-width: 350px;
+    height: 370px;
+    background-color: transparent;
+    overflow-y: auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Personalización del scrollbar */
+.contenedor-sintomas::-webkit-scrollbar {
+    width: 5px; /* Ancho de la barra de scroll */
+}
+
+.contenedor-sintomas::-webkit-scrollbar-track {
+    background: white; /* Fondo de la barra de scroll */
+}
+
+.contenedor-sintomas::-webkit-scrollbar-thumb {
+    background: #FF9CA7; /* Color del indicador */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+
+/* Tarjeta de síntoma */
+.sintoma-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(33.33% - 2px);
+    height: 120px;
+    box-shadow: none;
+    border-radius: 10px;
+    background: none;
+    margin: 0; 
+    padding: 0; /* Elimina el padding de las tarjetas */
+}
+
+/* Imagen del síntoma */
+.sintoma-imagen {
+    width: 50px; 
+    height: 50px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Ajuste para el texto dentro de la tarjeta */
+ion-item {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    --background: transparent;
+    width: 100%;
+    color: black;
+}
+
+.sintoma-texto {
+    text-align: center;
+    font-size: 13px; /* Tamaño más pequeño */
+    font-weight: 400;
+    color: black;
+    display: block;
+    width: 100%;
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 14px; /* Espaciado entre líneas */
+}
+
+
+/* Contenedor de estrellas con espacio fijo */
+.estrellas-container {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    width: 100%;
+    padding: 5px 0;
+    background: transparent;
+    border-radius: 10px;
+    min-height: 30px; /* Mantiene el espacio incluso cuando no hay estrellas */
+}
+
+/* Estilo para las estrellas */
+.estrella {
+    font-size: 15px; /* Tamaño más grande */
+    color: #FFD700;
+    cursor: pointer;
+}
+
+/* Estilo para el divisor */
+.divisor {
+    width: 100%; /* Ancho completo */
+    height: 1px; /* Altura de 1px */
+    background-color: #B9B9B9; /* Color de la línea */
+    margin: 2px auto; /* Margen arriba y abajo */
+    position: relative; /* Posición relativa */
+}
+
+.contenedor-boton {
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-continuar {
+    --border-radius: 50px; /* Radio de borde */
+    width: 302px; /* Ancho del botón */
+    height: 44px; /* Altura del botón */
+    text-transform: none; /* Transformación de texto */
+    font-family: 'Roboto-medium'; /* Familia de fuente */
+    --background: #FFB7BF; /* Color de fondo */
+    --color: white; /* Color de texto */
+    --box-shadow: none; /* Sin sombra */
+    font-size: 18px; /* Tamaño de fuente */
+    --background-activated: #FF8390;
+    --background-hover: #FF8390;
+}
+
+/* Estilo para los span */
+span {
+    font-size: 13px; /* Tamaño de fuente */
+    text-align: center; /* Texto centrado */
+    color: #838383; /* Color del texto */
+}
+
+/* Estilo para los enlaces dentro de span */
+span a {
+    text-decoration: none; /* Sin subrayado */
+}

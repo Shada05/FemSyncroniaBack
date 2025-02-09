@@ -1,0 +1,45 @@
+<ion-content>
+  <div class="center">
+    <div>
+      <h1>¿Qué síntomas</h1>
+      <h1>presentas?</h1>
+      <ion-text>
+        Nuestro periodo tiene a afectar varios
+      </ion-text>
+      <ion-text>
+        factores de nuestra vida cotidiana.
+      </ion-text>
+    </div>
+    <!-- Contenedor de síntomas -->
+    <div class="contenedor-sintomas">
+      <!-- Tarjeta de síntoma -->
+      <ion-card class="sintoma-card" *ngFor="let sintoma of sintomas">
+        <ion-item lines="none">
+          <ion-text class="sintoma-texto">{{ sintoma.nombre }}</ion-text>
+        </ion-item>
+        <ion-img [src]="sintoma.imagen" (click)="toggleEstrellas(sintoma)" class="sintoma-imagen"></ion-img>
+        <!-- Sistema de estrellas -->
+        <div class="estrellas-container">
+          <ion-icon *ngFor="let estrella of [1, 2, 3, 4, 5]"
+            [name]="estrella <= sintoma.estrellas ? 'star' : 'star'" 
+            (click)="calificar(sintoma, estrella)"
+            class="estrella" 
+            [style.color]="estrella <= sintoma.estrellas ? '#FFD700' : '#c4c4c4'"
+            [style.visibility]="sintoma.mostrarEstrellas ? 'visible' : 'hidden'">
+          </ion-icon>
+        </div>
+
+      </ion-card>
+    </div>
+
+    <div class="divisor"></div>
+
+    <div class="contenedor-boton">
+      <ion-button class="btn-continuar" [routerLink]="['/datos-corporales']" type="submit">
+        Continuar
+      </ion-button>
+    </div>
+
+    <span><a [routerLink]="['/registro']">¿Necesitas ayuda?</a></span>
+  </div>
+</ion-content>
