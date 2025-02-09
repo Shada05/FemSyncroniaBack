@@ -203,9 +203,11 @@ span a {
   --border-width: 1px; /* Ancho de borde */
 }
 
-ion-popover::part(content) {
-  border-radius: 15px; /* Aplica el borde redondeado */
-  --width:270px;
+ion-popover {
+  --background: #E4E4E4;
+  --backdrop-opacity: 0.6;
+  --box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.6);
+  --width: 300px;
 }
 
 ion-popover ion-content{
