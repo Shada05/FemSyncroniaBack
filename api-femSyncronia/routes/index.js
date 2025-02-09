@@ -60,7 +60,7 @@ router.post('/api/v1/users', usersController.store);
 // Ruta para listar todos los usuarios
 router.get('/api/v1/users', usersController.index);
 // Ruta para mostrar un solo usuario por ID
-router.get('/api/v1/users/:email', usersController.show_email);
+//router.get('/api/v1/users/:email', usersController.show_email);
 router.get('/api/v1/users/:id', usersController.show);
 // Ruta para actualizar un usuario
 router.put('/api/v1/users/:id', usersController.update);
