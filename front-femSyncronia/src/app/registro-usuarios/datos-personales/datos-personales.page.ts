@@ -3,6 +3,7 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-datos-personales',
@@ -30,7 +31,8 @@ export class DatosPersonalesPage implements OnInit {
 
   constructor(private apiService: ApiService,
     private toastController: ToastController,
-    private router: Router) { }
+    private router: Router,
+    private auth: AuthService) { }
 
   ngOnInit() {
     this.selectedLada = '+52';
@@ -38,13 +40,17 @@ export class DatosPersonalesPage implements OnInit {
   }
 
   // Obtener el ID del usuario desde localStorage
-  obtenerUsuarioId() {
-    const idGuardado = localStorage.getItem('usuarioId');
-    if (idGuardado) {
-      this.userId = idGuardado;
-      console.log(this.userId);
+  async obtenerUsuarioId() {
+    const token = await this.auth.obtenerToken();
+    if (token) {
+      this.auth.verificarToken(token).subscribe(response => {
+        this.userId = response.user.id;
+        console.log('ID obtenido del token:', this.userId);
+      }, error => {
+        console.log('Error al obtener el ID:', error);
+      });
     } else {
-      console.error('No se encontró el ID del usuario en localStorage.');
+      console.log('No hay token almacenado.');
     }
   }
 
