@@ -26,5 +26,8 @@ export class ApiService {
     return this.http.post<{ imageUrl: string }>(`${this.apiUrl}/upload`, formData);
   }
 
+  obtenerSintomas(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/api/v1/symptoms`);
+  }
 }
 

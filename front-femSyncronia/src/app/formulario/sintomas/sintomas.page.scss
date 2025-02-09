@@ -81,6 +81,34 @@ ion-text {
     padding: 0; /* Elimina el padding de las tarjetas */
 }
 
+/* Animación para las tarjetas calificadas */
+.calificado {
+    animation: resaltar 1.5s infinite; /* Aplicar animación */
+    border: 2px solid #E0E0E0; /* Borde gris claro */
+    background-color: rgba(224, 224, 224, 0.1); /* Fondo semi-transparente */
+  }
+  
+  /* Definir la animación */
+  @keyframes resaltar {
+    0% {
+      transform: scale(1); /* Tamaño normal */
+    }
+    50% {
+      transform: scale(1.02); /* Escalar ligeramente */
+      box-shadow: 0 0 10px rgba(224, 224, 224, 0.3); /* Sombra gris muy ligera */
+    }
+    100% {
+      transform: scale(1); /* Volver al tamaño normal */
+    }
+}
+
+/* Contenedor de cada grupo de síntomas */
+.lista-sintomas {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se acomoden en varias filas */
+    justify-content: center; /* Centra los síntomas */
+}
+
 /* Imagen del síntoma */
 .sintoma-imagen {
     width: 50px; 
@@ -88,6 +116,21 @@ ion-text {
     object-fit: cover;
     border-radius: 10px;
     cursor: pointer;
+}
+
+/* Contenedor de la imagen */
+.imagen-contenedor {
+    position: relative; /* Permite posicionar el ícono de manera absoluta */
+    display: inline-block; /* Ajusta el tamaño al contenido */
+}
+  
+/* Estilos para el ícono de exclamación */
+.icono-exclamacion {
+    position: absolute; /* Posiciona el ícono de manera absoluta */
+    top: 0; /* Alinea en la parte superior */
+    right: -15px; /* Alinea en la parte derecha */
+    font-size: 13px; /* Tamaño del ícono */
+    border-radius: 50%; /* Bordes redondeados */
 }
 
 /* Ajuste para el texto dentro de la tarjeta */
@@ -102,7 +145,7 @@ ion-item {
 
 .sintoma-texto {
     text-align: center;
-    font-size: 13px; /* Tamaño más pequeño */
+    font-size: 12px;
     font-weight: 400;
     color: black;
     display: block;
@@ -111,7 +154,6 @@ ion-item {
     word-wrap: break-word;
     line-height: 14px; /* Espaciado entre líneas */
 }
-
 
 /* Contenedor de estrellas con espacio fijo */
 .estrellas-container {
