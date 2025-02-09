@@ -82,7 +82,8 @@ const routes: Routes = [
   {
     path: 'pantalla-principal',
     loadChildren: () => import('./pantalla-principal/inicio/inicio.module').then( m => m.InicioPageModule)
-  },  {
+  },
+  {
     path: 'ayuda',
     loadChildren: () => import('./registro-usuarios/ayuda/ayuda.module').then( m => m.AyudaPageModule)
   },
@@ -94,12 +95,6 @@ const routes: Routes = [
     path: 'mi-perfil',
     loadChildren: () => import('./pantalla-principal/mi-perfil/mi-perfil.module').then( m => m.MiPerfilPageModule)
   },
-
-
-
-
-
-
 
 ];
 

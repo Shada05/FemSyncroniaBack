@@ -13,7 +13,8 @@ import { IonicStorageModule } from '@ionic/storage-angular';
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot({
     scrollAssist: false,
-    scrollPadding: false
+    scrollPadding: false,
+    mode: 'ios'
   }), AppRoutingModule, IonicStorageModule.forRoot(), HttpClientModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
