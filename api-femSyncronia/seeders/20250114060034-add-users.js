@@ -18,7 +18,7 @@ module.exports = {
       },
       {
         birthdate: "1990-01-01",
-        username: "mally123",
+        username: "User00",
         user_status: 1,
         name: "Mally",
         lastname: "Hernandez",
@@ -39,7 +39,19 @@ module.exports = {
         password: "hashedpassword3",
         phone: "3315156189",
         token: "sometoken"
-      }
+      },
+      {
+        birthdate: "2005-01-01",
+        username: "user1",
+        user_status: 1,
+        name: "Prueba1",
+        lastname: "Ruiz",
+        email: "prueba1@example.com",
+        profile_image: "profile.jpg",
+        password: "hashedpassword3",
+        phone: "3345896231",
+        token: "sometoken"
+      },
     ]);
   },
 
