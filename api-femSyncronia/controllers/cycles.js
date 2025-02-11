@@ -121,6 +121,24 @@ exports.show = async (req, res) => {
     return res.status(200).send(cycle);
 }
 
+exports.show_tables = async (req, res) => {
+    const id = parseInt(req.params.id);
+    const cycle = await cycles.findOne({
+        where: {
+            id: id
+        }
+    });
+
+    if (!cycle) {
+        return res.status(404).send({ message: 'Cycle not found' });
+    }
+
+    // Seleccionar solo los campos weight y temperature
+    const { user_id, weight, temperature } = cycle;
+
+    return res.status(200).send({user_id, weight, temperature });
+};
+
 exports.destroy = async (req, res) => {
     const id = parseInt(req.params.id);
 
@@ -217,6 +235,7 @@ exports.update = async (req, res) => {
     if (req.body.AS_4 != null) updatedData['AS_4']= req.body.AS_4;
     if (req.body.AS_5 != null) updatedData['AS_5']= req.body.AS_5;
     if (req.body.notes != null) updatedData['notes']= req.body.notes;
+    
     return await cycles.update(updatedData, {
         where: {
             id: id

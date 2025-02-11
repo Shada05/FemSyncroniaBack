@@ -2,9 +2,9 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 
-# Generar datos de ejemplo
-x = np.arange(1, 4)  # Valores de x del 1 al 100 (consecutivos)
-y = np.random.randint(0, 7, 3)  # Valores de y enteros aleatorios entre 0 y 6
+# Usar los datos obtenidos del primer código
+x = np.array(x_data)  # Convertir a un array de numpy
+y = np.array(y_data)  # Convertir a un array de numpy
 
 # Reshape de x para que sea una matriz de una columna (requerido por scikit-learn)
 x = x.reshape(-1, 1)
@@ -21,8 +21,8 @@ y_pred = modelo.predict(x)
 # Visualizar los resultados
 plt.scatter(x, y, color='blue', label='Intensidad del sintoma')
 plt.plot(x, y_pred, color='red', label='cantidad de ciclos')
-plt.xlabel('x (1 a 100)')
-plt.ylabel('y (0 a 6)')
+plt.xlabel('x (id)')
+plt.ylabel('y (DM_1)')
 plt.title('Regresión Lineal (Predicción): y en función de x')
 plt.legend()
 plt.grid(True)
