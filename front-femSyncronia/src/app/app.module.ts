@@ -8,9 +8,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { SintomaPopoverComponent } from './componentes/sintoma-popover/sintoma-popover.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SintomaPopoverComponent],
   imports: [BrowserModule, IonicModule.forRoot({
     scrollAssist: false,
     scrollPadding: false,

@@ -23,12 +23,12 @@ export class AppComponent implements OnInit {
   async verificarPrimeraApertura() {
     // Obtiene el estado de la primera apertura desde el servicio
     const esPrimeraVez = await this.primeraAperturaService.verificar();
-    console.log('¿Es la primera vez?', esPrimeraVez); 
+    console.log('¿Es la primera vez?', esPrimeraVez);
 
     if (esPrimeraVez) {
       // Si es la primera vez, redirige a la pantalla de inicio
       this.router.navigate(['/inicio']);
-      
+
       // Marca que ya no es la primera vez
       await this.primeraAperturaService.asignar(false);
       console.log('Estado actualizado a:', await this.primeraAperturaService.obtener());
@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
   async verificarAutenticacion() {
     // Obtiene el token de autenticación almacenado
     const token = await this.authService.obtenerToken();
-    
+
     if (token) {
       // Verifica si el token es válido
       this.authService.verificarToken(token).subscribe(

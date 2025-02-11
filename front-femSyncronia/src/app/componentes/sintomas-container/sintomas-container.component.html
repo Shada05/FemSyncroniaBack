@@ -1,0 +1,27 @@
+<div class="contenedor-sintomas">
+  <!-- Iterar sobre los tipos de síntomas -->
+  <div *ngFor="let tipo of tiposSintomas">
+    <ion-text class="tipo-sintoma">{{ obtenerNombreTipo(tipo.id) }}</ion-text>
+
+    <div class="lista-sintomas">
+      <ion-card class="sintoma-card" *ngFor="let sintoma of sintomasPorTipo[tipo.id]"
+        [ngClass]="{ 'calificado': sintoma.mostrarEstrellas || sintoma.estrellas > 0 }">
+        <ion-item lines="none">
+          <ion-text class="sintoma-texto">{{ sintoma.nombre }}</ion-text>
+        </ion-item>
+        <div class="imagen-contenedor">
+          <ion-img [src]="sintoma.imagen" (click)="toggleEstrellas(sintoma)" class="sintoma-imagen"></ion-img>
+          <ion-icon name="alert-circle-outline" class="icono-exclamacion" (click)="mostrarPopover($event, sintoma)">
+          </ion-icon>
+        </div>
+        <div class="estrellas-container">
+          <ion-icon *ngFor="let estrella of [1, 2, 3, 4, 5]" [name]="estrella <= sintoma.estrellas ? 'star' : 'star'"
+            (click)="calificar(sintoma, estrella)" class="estrella"
+            [style.color]="estrella <= sintoma.estrellas ? '#FFD700' : '#c4c4c4'"
+            [style.visibility]="sintoma.mostrarEstrellas ? 'visible' : 'hidden'">
+          </ion-icon>
+        </div>
+      </ion-card>
+    </div>
+  </div>
+</div>
