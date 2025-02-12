@@ -253,13 +253,31 @@ ion-item{
 }
 
 ion-tab-bar {
-    --background: #ffffff; /* Fondo blanco para el tab-bar */
-    border-top: none;
+  --background: #ffffff; /* Fondo blanco para el tab-bar */
+  border-top: none;
 }
 
 ion-tab-button {
-    --background: #ffffff; /* Fondo blanco de los botones */
-    --color: #8e8e93; /* Color por defecto */
-    --color-selected: #ff4d7f; /* Color cuando está seleccionado */
-    font-size: 7px;
+  --background: #ffffff; /* Fondo blanco de los botones */
+  --color: #8e8e93; /* Color por defecto */
+  --color-selected: #ff4d7f; /* Color cuando está seleccionado */
+  font-size: 7px;
+}
+
+.controles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px;
+  min-height: 30px;
+}
+
+.mes-año {
+  color: black;
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }

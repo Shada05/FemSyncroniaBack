@@ -84,10 +84,32 @@
     <ion-tab tab="calendario">
       <div id="pagina-calendario">
         <ion-content>
-          <div class="center">Contenido calendario</div>
+          <!-- Barra superior -->
+          <div class="top-bar">
+            <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg"></ion-icon>
+            <ion-text class="bienvenida-text">Bienvenida</ion-text>
+            <img class="imagen-perfil" [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()">
+          </div>
+
+          <!-- Controles de navegación fuera del calendario -->
+          <div class="controles">
+            <ion-button (click)="mesAnterior()" fill="clear">
+              <ion-icon name="chevron-back-outline"></ion-icon>
+            </ion-button>
+            <div class="mes-año">
+              {{ mesActual }} {{ anoActual }}
+            </div>
+            <ion-button (click)="mesSiguiente()" fill="clear">
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </ion-button>
+          </div>
+
+          <!-- Pasar mesActual y anoActual a app-calendario-ciclo -->
+          <app-calendario-ciclo [mesActual]="mesActual" [anoActual]="anoActual"></app-calendario-ciclo>
         </ion-content>
       </div>
     </ion-tab>
+
 
     <ion-tab tab="grafica">
       <div id="pagina-grafica">

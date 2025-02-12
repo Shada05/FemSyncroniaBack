@@ -14,6 +14,11 @@ export class InicioPage implements OnInit {
   userId: string | null = null;
   nombreCompleto: string = '';
   email: string = '';
+  
+  // Propiedades para manejar el mes y el año
+  mesActual: number = 0;
+  anoActual: number = 0;
+  fechaActual: Date = new Date();
 
   constructor(
     private menuCtrl: MenuController,
@@ -24,6 +29,7 @@ export class InicioPage implements OnInit {
 
   ngOnInit() {
     this.cargarUsuario(); // Llama a la función para cargar los datos del usuario
+    this.actualizarMes(this.fechaActual); // Inicializa el mes y año con la fecha actual
   }
 
   // Función para cargar los datos del usuario y la imagen de perfil
@@ -40,7 +46,7 @@ export class InicioPage implements OnInit {
             this.apiService.mostrarUsuario(this.userId).subscribe({
               next: (userData) => {
                 // Guarda los datos del usuario
-                this.nombreCompleto = `${userData.name} ${userData.lastname}`
+                this.nombreCompleto = `${userData.name} ${userData.lastname}`;
                 this.email = userData.email;
 
                 // Carga la imagen de perfil si existe
@@ -95,5 +101,25 @@ export class InicioPage implements OnInit {
   async logout() {
     await this.authService.cerrarSesion(); // Cierra la sesión
     this.router.navigate(['/login']); // Redirige al usuario a la página de login
+  }
+
+  /**
+   * Actualiza el mes y año mostrados
+   */
+  actualizarMes(fecha: Date) {
+    this.mesActual = fecha.getMonth(); // Esto es un número
+    this.anoActual = fecha.getFullYear(); // Esto también es un número
+  }
+
+  // Retroceder al mes anterior
+  mesAnterior() {
+    this.fechaActual.setMonth(this.fechaActual.getMonth() - 1);
+    this.actualizarMes(this.fechaActual);
+  }
+
+  // Avanzar al siguiente mes
+  mesSiguiente() {
+    this.fechaActual.setMonth(this.fechaActual.getMonth() + 1);
+    this.actualizarMes(this.fechaActual);
   }
 }

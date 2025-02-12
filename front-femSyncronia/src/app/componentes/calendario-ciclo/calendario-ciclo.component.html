@@ -1,0 +1,14 @@
+<!-- Contenedor del calendario -->
+<div class="calendario-container">
+  <!-- Días de la semana -->
+  <div class="dias-semana">
+    <div *ngFor="let dia of diasSemana" class="dia">{{ dia }}</div>
+  </div>
+
+  <div class="dias-mes">
+    <div *ngFor="let diaObj of diasMes"
+      [ngClass]="{'dia-actual': diaObj.tipo === 'actual', 'dia-tenue': diaObj.tipo !== 'actual'}">
+      {{ diaObj.dia }}
+    </div>
+  </div>
+</div>
