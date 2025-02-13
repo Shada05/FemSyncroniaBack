@@ -13,19 +13,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       cycle_status: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER // 1 = Activo, 2 = Predicción
       },
       weight: {
         type: Sequelize.FLOAT
       },
       temperature: {
         type: Sequelize.FLOAT
-      },
-      start_date: {
-        type: Sequelize.DATE
-      },
-      end_date: {
-        type: Sequelize.DATE
       },
       DM_1: {
         type: Sequelize.INTEGER,
@@ -117,6 +111,7 @@ module.exports = {
         allowNull: false,
         defaultValue: 0
       },
+      //Malestares
       M_1: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -217,6 +212,7 @@ module.exports = {
         allowNull: false,
         defaultValue: 0
       },
+
       PP_1: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -242,6 +238,113 @@ module.exports = {
         allowNull: false,
         defaultValue: 0
       },
+      //Emociones
+      E_1: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_2: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_3: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_4: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_5: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_6: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_7: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_8: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_9: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_10: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_11: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_12: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_13: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_14: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_15: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_16: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_17: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_18: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_19: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_20: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      E_21: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      //Fluidos
       F_1: {
         type: Sequelize.INTEGER,
         allowNull: false,

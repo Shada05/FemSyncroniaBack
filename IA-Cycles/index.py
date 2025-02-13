@@ -35,7 +35,7 @@ try:
         print("Conectado a la base de datos:", record)
 
         # Ejecutar la consulta para obtener los datos de la tabla "cycles"
-        cursor.execute("SELECT id, DM_1 FROM cycles WHERE 1;")
+        cursor.execute("SELECT id, DM_1 FROM cycles WHERE ;")
         records = cursor.fetchall()
 
         # Almacenar los datos en las variables x_data e y_data

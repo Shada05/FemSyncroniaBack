@@ -30,14 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.FLOAT,
         allowNull: false
     },
-    start_date: {
-        type: DataTypes.DATE,
-        allowNull: false
-    },
-    end_date: {
-        type: DataTypes.DATE,
-        allowNull: false
-    },
+    //Datos relevantes para el ciclo mestrual
     DM_1: { //Colicos
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -260,6 +253,113 @@ module.exports = (sequelize, DataTypes) => {
     },
 
     //Aqui terminan los problemas de piel
+    //Aqui empiezan las emociones
+    E_1: { //Feliz
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_2: { //Alegre
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_3: { //Orgullosa
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_4: { //Tranquila
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_5: { //Neutral
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_6: { //Triste
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_7: { //Deprimida
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_8: { //Enojada
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_9: { //Irritada
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_10: { //Sensible
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_11: { //Tensa
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_12: { //Rara
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_13: { //Estresada
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_14: { //Ansiosa
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_15: { //Angustida
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_16: { //insegura
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_17: { //distraida
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_18: { //olvidadiza
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_19: { //exhausta
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_20: { //libidinosa
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+    E_21: { //Coqueta
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
+   
     //Aqui empiezan los fluidos
     
     F_1: { //Abertura cervical
