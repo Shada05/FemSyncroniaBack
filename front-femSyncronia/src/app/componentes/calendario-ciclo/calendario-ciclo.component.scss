@@ -1,6 +1,6 @@
 .calendario-container {
-    width: 312px;
-    height: 228px;
+    width: 352px;
+    height: 245px;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -34,35 +34,32 @@
     flex-grow: 1;
 }
 
-
 .dias-mes .dia {
     position: relative;
     color: black;
     padding: 4px 0;
+    padding-bottom: 8px; /* Espacio adicional para compensar el borde */
 }
 
 .indice-dia {
     position: absolute;
     top: 2px;
     right: 2px;
-    font-size: 0.75em;
+    font-size: 9px;
     color: #FF8390;
-    font-weight: bold;
 }
 
 .dia-tenue {
-    color: #6C7470;
-    /* Color más tenue para los días del mes anterior y siguiente */
+    color: #6C7470; /* Color más tenue para los días del mes anterior y siguiente */
 }
 
 .dia-actual {
-    color: #0A1811;
-    /* Color normal para los días del mes actual */
+    color: #0A1811; /* Color normal para los días del mes actual */
 }
 
-.hoy {
-    color: #FF8390;
+/* Asegúrate de que la clase "hoy" tenga mayor prioridad */
+.dias-mes .dia.hoy {
+    color: #FF8390; /* Color para el día actual */
     border-bottom: 2px solid #FF8390;
-    font-weight: bold;
+    padding-bottom: 6px; /* Ajustar el padding para que el borde no afecte el tamaño */
 }
-

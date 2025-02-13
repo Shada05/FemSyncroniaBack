@@ -1,4 +1,3 @@
-<!-- Contenedor del calendario -->
 <div class="calendario-container">
   <!-- Días de la semana -->
   <div class="dias-semana">
@@ -11,7 +10,8 @@
         'dia-actual': diaObj.tipo === 'actual', 
         'dia-tenue': diaObj.tipo !== 'actual',
         'hoy': esHoy(diaObj)
-      }">
+      }" class="dia">
+      <div class="indice-dia" *ngIf="diaObj.indice !== null">{{ diaObj.indice }}</div>
       {{ diaObj.dia }}
     </div>
   </div>
