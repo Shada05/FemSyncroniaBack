@@ -14,12 +14,14 @@ export class InicioPage implements OnInit {
   userId: string | null = null;
   nombreCompleto: string = '';
   email: string = '';
-  
+
   // Propiedades para manejar el mes y el año
   mesActual: number = 0;
   anoActual: number = 0;
   fechaActual: Date = new Date();
-
+  // Propiedades para el ciclo menstrual
+  inicioCiclo: string = '2025-02-01'; // Definir un valor por defecto o obtenerlo de la API
+  finCiclo: string = '2025-02-28';
   constructor(
     private menuCtrl: MenuController,
     private apiService: ApiService,
@@ -74,6 +76,12 @@ export class InicioPage implements OnInit {
     }
   }
 
+  // Esta función podría obtener datos de una API en el futuro
+  cargarFechasCiclo() {
+    // Aquí puedes obtener la información desde la API
+    this.inicioCiclo = '2024-02-01'; // Cambiar esto según sea necesario
+    this.finCiclo = '2024-02-28';
+  }
   /**
    * Abre el menú lateral cuando se hace clic en la imagen de perfil
    */
@@ -121,5 +129,14 @@ export class InicioPage implements OnInit {
   mesSiguiente() {
     this.fechaActual.setMonth(this.fechaActual.getMonth() + 1);
     this.actualizarMes(this.fechaActual);
+  }
+
+  //Obtiene el nombre del mes
+  obtenerNombreMes(mes: number): string {
+    const nombresMeses = [
+      'Ene.', 'Feb.', 'Mar.', 'Abr.', 'May.', 'Jun.',
+      'Jul.', 'Ago.', 'Sep.', 'Oct.', 'Nov.', 'Dic.'
+    ];
+    return nombresMeses[mes];
   }
 }

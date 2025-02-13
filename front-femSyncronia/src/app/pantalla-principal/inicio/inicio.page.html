@@ -87,23 +87,15 @@
           <!-- Barra superior -->
           <div class="top-bar">
             <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg"></ion-icon>
-            <ion-text class="bienvenida-text">Bienvenida</ion-text>
-            <img class="imagen-perfil" [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()">
-          </div>
-
-          <!-- Controles de navegación fuera del calendario -->
-          <div class="controles">
             <ion-button (click)="mesAnterior()" fill="clear">
               <ion-icon name="chevron-back-outline"></ion-icon>
             </ion-button>
-            <div class="mes-año">
-              {{ mesActual }} {{ anoActual }}
-            </div>
+            <ion-text class="mes-año">{{ obtenerNombreMes(mesActual) }} {{ anoActual }}</ion-text>
             <ion-button (click)="mesSiguiente()" fill="clear">
               <ion-icon name="chevron-forward-outline"></ion-icon>
             </ion-button>
+            <img class="imagen-perfil" [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()">
           </div>
-
           <!-- Pasar mesActual y anoActual a app-calendario-ciclo -->
           <app-calendario-ciclo [mesActual]="mesActual" [anoActual]="anoActual"></app-calendario-ciclo>
         </ion-content>

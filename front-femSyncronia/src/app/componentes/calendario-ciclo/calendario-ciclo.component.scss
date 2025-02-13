@@ -36,8 +36,18 @@
 
 
 .dias-mes .dia {
+    position: relative;
     color: black;
     padding: 4px 0;
+}
+
+.indice-dia {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 0.75em;
+    color: #FF8390;
+    font-weight: bold;
 }
 
 .dia-tenue {
@@ -49,3 +59,10 @@
     color: #0A1811;
     /* Color normal para los días del mes actual */
 }
+
+.hoy {
+    color: #FF8390;
+    border-bottom: 2px solid #FF8390;
+    font-weight: bold;
+}
+

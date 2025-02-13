@@ -10,13 +10,14 @@ ion-content {
   
 /* Contenedor de la barra superior */
 .top-bar {
-    display: flex; /* Configura el contenedor como flexbox */
-    align-items: center; /* Centra verticalmente los elementos */
-    justify-content: space-between; /* Espacia los elementos uniformemente */
-    padding: 25px 16px; /* Espaciado interno: 10px arriba/abajo, 16px izquierda/derecha */
-    width: 100%; /* Ancho completo */
-    background-color: transparent; /* Fondo transparente */
-  }
+  height: 100px;  
+  display: flex; /* Configura el contenedor como flexbox */
+  align-items: center; /* Centra verticalmente los elementos */
+  justify-content: space-between; /* Espacia los elementos uniformemente */
+  padding: 25px 16px; /* Espaciado interno: 10px arriba/abajo, 16px izquierda/derecha */
+  width: 100%; /* Ancho completo */
+  background-color: transparent; /* Fondo transparente */
+}
   
 /* Ajusta el ícono de notificación */
 .notificacion {
@@ -263,13 +264,10 @@ ion-tab-button {
   --color-selected: #ff4d7f; /* Color cuando está seleccionado */
   font-size: 7px;
 }
-
-.controles {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 4px;
-  min-height: 30px;
+ion-button {
+  --color: black;
+  margin: 0; /* Elimina márgenes no deseados */
+  padding: 0; /* Elimina padding no deseado */
 }
 
 .mes-año {

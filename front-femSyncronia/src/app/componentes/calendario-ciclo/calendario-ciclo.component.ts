@@ -8,8 +8,8 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
   styleUrls: ['./calendario-ciclo.component.scss'],
 })
 export class CalendarioCicloComponent implements OnInit, OnChanges {
-  @Input() mesActual: number = 0; // Asegúrate de que mesActual sea un número
-  @Input() anoActual: number = 0; // Asegúrate de que anoActual sea un número
+  @Input() mesActual: number = 0;
+  @Input() anoActual: number = 0;
   diasSemana: string[] = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
   diasMes: { dia: number; tipo: string }[] = [];
   fechaActual: Date;
@@ -30,8 +30,8 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
 
   actualizarCalendario() {
     this.diasMes = [];
-    const primerDiaMes = new Date(this.anoActual, this.mesActual, 1); // mesActual debe ser un número
-    const ultimoDiaMes = new Date(this.anoActual, this.mesActual + 1, 0); // mesActual debe ser un número
+    const primerDiaMes = new Date(this.anoActual, this.mesActual, 1);
+    const ultimoDiaMes = new Date(this.anoActual, this.mesActual + 1, 0);
 
     // Obtener días del mes anterior
     const primerDiaSemana = primerDiaMes.getDay();
@@ -52,5 +52,11 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
     while (this.diasMes.length < totalCeldas) {
       this.diasMes.push({ dia: diaSiguiente++, tipo: 'siguiente' });
     }
+  }
+
+  esHoy(diaObj: { dia: number; tipo: string }): boolean {
+    const hoy = new Date();
+    return diaObj.dia === hoy.getDate() && diaObj.tipo === 'actual' &&
+      this.mesActual === hoy.getMonth() && this.anoActual === hoy.getFullYear();
   }
 }
