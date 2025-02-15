@@ -1,3 +1,4 @@
+/* 📌 Contenedor principal del calendario */
 .calendario-container {
     width: 352px;
     height: 245px;
@@ -6,13 +7,13 @@
     flex-direction: column;
     border-radius: 20px;
     overflow: hidden;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 0 auto; /* Centrado horizontal */
     padding: 10px;
+    position: relative; /* Si es necesario, para que se pueda controlar el z-index */
+    z-index: 1; /* Asegura que el calendario esté por debajo de otros elementos si se necesita */
 }
 
+/* Contenedor de los días de la semana (encabezado) */
 .dias-semana {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -20,11 +21,13 @@
     padding: 8px 0;
 }
 
+/* Estilo de cada día de la semana */
 .dias-semana .dia {
     color: #7b827e;
     font-weight: bold;
 }
 
+/* Contenedor de los días del mes */
 .dias-mes {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -34,6 +37,7 @@
     flex-grow: 1;
 }
 
+/* Estilo base para cada día del mes */
 .dias-mes .dia {
     position: relative;
     color: black;
@@ -41,25 +45,35 @@
     padding-bottom: 8px; /* Espacio adicional para compensar el borde */
 }
 
+/* Estilo del índice de cada día */
 .indice-dia {
     position: absolute;
     top: 2px;
     right: 2px;
     font-size: 9px;
-    color: #FF8390;
+    color: #868686;
 }
 
-.dia-tenue {
-    color: #6C7470; /* Color más tenue para los días del mes anterior y siguiente */
+/* Estilo para los días del mes anterior y siguiente (tenue) */
+.dias-mes .dia.dia-tenue {
+    color: #6C7470 !important;  /* Se usa !important para garantizar que el color no sea sobrescrito */
+    opacity: 0.7;              /* Hace que se vea un poco más apagado */
 }
 
-.dia-actual {
-    color: #0A1811; /* Color normal para los días del mes actual */
+/* Estilo para los días del mes actual */
+.dias-mes .dia.dia-actual {
+    color: #0A1811;
 }
 
-/* Asegúrate de que la clase "hoy" tenga mayor prioridad */
+/* Estilo para el día actual (hoy) */
 .dias-mes .dia.hoy {
-    color: #FF8390; /* Color para el día actual */
+    color: #FF8390 !important;  /* Se usa !important para que el día actual tenga prioridad sobre otros estilos */
     border-bottom: 2px solid #FF8390;
-    padding-bottom: 6px; /* Ajustar el padding para que el borde no afecte el tamaño */
+    padding-bottom: 6px;
+}
+
+/* Contenedor de información del día (evitar superposición) */
+.info-dia {
+    position: relative;
+    z-index: 2; /* Asegura que esté encima del calendario */
 }

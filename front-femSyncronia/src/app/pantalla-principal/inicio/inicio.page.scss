@@ -279,3 +279,36 @@ ion-button {
   font-weight: 600;
   line-height: normal;
 }
+
+/* Contenedor de información del día */
+.info-dia {
+  width: 350px; /* Ancho fijo */
+  height: 350px; /* Altura fija */
+  background: #ffffff; /* Fondo blanco */
+  border-radius: 20px; /* Bordes redondeados */
+  margin: 24px auto; /* Centra el contenedor y agrega margen superior */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Alinea el contenido en la parte superior */
+  padding: 16px; /* Espaciado interno */
+}
+
+/* Contenido dentro del contenedor */
+.contenido-info-dia {
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+  text-align: center; /* Centra el texto */
+}
+
+.contenido-info-dia h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #000000; /* Color del texto */
+  margin-bottom: 16px; /* Espaciado inferior */
+}
+
+.contenido-info-dia p {
+  font-size: 16px;
+  font-weight: 400;
+  color: #333333; /* Color del texto */
+}

@@ -20,8 +20,8 @@ export class InicioPage implements OnInit {
   anoActual: number = 0;
   fechaActual: Date = new Date();
   // Propiedades para el ciclo menstrual
-  inicioCiclo: string = '2025-02-01'; // Definir un valor por defecto o obtenerlo de la API
-  finCiclo: string = '2025-02-28';
+  fechaInicio = new Date(2025, 1, 15); // 1 de Octubre de 2023
+  fechaFin = new Date(2025, 1, 28); // 15 de Octubre de 2023
   constructor(
     private menuCtrl: MenuController,
     private apiService: ApiService,
@@ -77,11 +77,11 @@ export class InicioPage implements OnInit {
   }
 
   // Esta función podría obtener datos de una API en el futuro
-  cargarFechasCiclo() {
+ /* cargarFechasCiclo() {
     // Aquí puedes obtener la información desde la API
     this.inicioCiclo = '2024-02-01'; // Cambiar esto según sea necesario
     this.finCiclo = '2024-02-28';
-  }
+  }*/
   /**
    * Abre el menú lateral cuando se hace clic en la imagen de perfil
    */

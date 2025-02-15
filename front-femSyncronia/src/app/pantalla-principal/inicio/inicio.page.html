@@ -96,8 +96,20 @@
             </ion-button>
             <img class="imagen-perfil" [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()">
           </div>
-          <!-- Pasar mesActual y anoActual a app-calendario-ciclo -->
-          <app-calendario-ciclo [mesActual]="mesActual" [anoActual]="anoActual"></app-calendario-ciclo>
+
+          <!-- Componente del calendario -->
+          <app-calendario-ciclo [mesActual]="mesActual" [anoActual]="anoActual" [fechaInicio]="fechaInicio"
+            [fechaFin]="fechaFin">
+          </app-calendario-ciclo>
+
+          <!-- Contenedor de información del día -->
+          <div class="info-dia">
+            <!-- Aquí irá la información del día seleccionado -->
+            <div class="contenido-info-dia">
+              <h2>Información del Día</h2>
+              <p>Detalles sobre el día seleccionado.</p>
+            </div>
+          </div>
         </ion-content>
       </div>
     </ion-tab>
