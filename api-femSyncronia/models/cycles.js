@@ -19,8 +19,12 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false
     },
     user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'users', // Nombre de la tabla a la que hace referencia
+            key: 'id'       // Columna de la tabla referenciada
+        }
     },
     weight: {
         type: DataTypes.FLOAT,

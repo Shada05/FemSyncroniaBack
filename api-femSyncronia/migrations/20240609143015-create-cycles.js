@@ -10,7 +10,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       user_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'users',
+          key: 'id'
+        }
       },
       cycle_status: {
         type: Sequelize.INTEGER // 1 = Activo, 2 = Predicción
