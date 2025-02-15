@@ -14,12 +14,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   user_status.init({
-    name: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false
       },
-    status: {
+      status: {
         type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      description: {
+        type: DataTypes.STRING,
         allowNull: false
       },
     createdAt: {

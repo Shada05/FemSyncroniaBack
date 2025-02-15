@@ -1,0 +1,77 @@
+ion-content {
+    --background: none; /* Elimina el fondo por defecto */
+    background-image: url('../../../assets/img/login/fondo-login.svg'); /* Fondo con imagen */
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+    background-repeat: no-repeat; /* Evita la repetición de la imagen */
+    background-position: center;
+}
+
+/* Estilos para centrar el contenido */
+.center {
+    display: grid; /* Utiliza grid layout */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-content: center; /* Centra los elementos verticalmente */
+    align-items: center; /* Alinea los elementos en el centro */
+    gap: 20px; /* Espacio entre los elementos */
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Altura completa */
+    padding-top: 50px; /* Espacio superior sin crear desplazamiento */
+}
+
+/* Estilos para el título */
+h1 {
+    font-size: 27px;
+    margin: 0;
+    color: black;
+}
+
+/* Estilos para los textos */
+ion-text {
+    font-family: 'Open Sans';
+    font-size: 15px;
+    font-weight: 400;
+    display: block;
+    color: black;
+}
+
+/* Estilo para el divisor */
+.divisor {
+    width: 100%; /* Ancho completo */
+    height: 1px; /* Altura de 1px */
+    background-color: #B9B9B9; /* Color de la línea */
+    margin: 2px auto; /* Margen arriba y abajo */
+    position: relative; /* Posición relativa */
+}
+
+.contenedor-boton {
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-continuar {
+    --border-radius: 50px; /* Radio de borde */
+    width: 302px; /* Ancho del botón */
+    height: 44px; /* Altura del botón */
+    text-transform: none; /* Transformación de texto */
+    font-family: 'Roboto-medium'; /* Familia de fuente */
+    --background: #FFB7BF; /* Color de fondo */
+    --color: white; /* Color de texto */
+    --box-shadow: none; /* Sin sombra */
+    font-size: 18px; /* Tamaño de fuente */
+    --background-activated: #FF8390;
+    --background-hover: #FF8390;
+}
+
+/* Estilo para los span */
+span {
+    font-size: 13px; /* Tamaño de fuente */
+    text-align: center; /* Texto centrado */
+    color: #838383; /* Color del texto */
+}
+
+/* Estilo para los enlaces dentro de span */
+span a {
+    text-decoration: none; /* Sin subrayado */
+}

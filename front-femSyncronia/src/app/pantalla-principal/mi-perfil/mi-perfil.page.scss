@@ -1,0 +1,169 @@
+ion-content {
+    --background: none; /* Sin fondo de color por defecto */
+    background-image: url('/assets/img/pantalla-principal/fondo-tabs.svg'); /* Imagen de fondo */
+    background-size: cover; /* La imagen cubre todo el área */
+    background-repeat: no-repeat; /* La imagen no se repite */
+    background-position: center; /* La imagen está centrada */
+    width: 100%; /* Ancho completo */
+    height: 100vh; /* Altura completa de la ventana */
+    font-family: "Open Sans";
+}
+
+.boton-cerrar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    font-size: 24px;
+    color: black;
+}
+
+.boton-cerrar ion-icon {
+    font-size: 30px;
+}
+
+/* Contenedor principal que engloba todo el contenido */
+.contenedor-central {
+    display: flex;
+    flex-direction: column; /* Coloca los elementos en una columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+    justify-content: flex-start; /* Alinea los elementos verticalmente hacia arriba */
+    height: 100%; /* Asegura que ocupe toda la altura del contenido */
+    padding-top: 20px;
+}
+
+/* Estilo general para los títulos */
+.titulo-seccion {
+    font-size: 15px;
+    font-weight: 600;
+    color: #9D9D9D;
+    margin-left: 60px;
+    width: 320px; /* Asegura que el ancho sea el mismo que las secciones */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+/* Contenedor del perfil */
+.contenedor-perfil {
+    display: flex;
+    align-items: center; /* Centra verticalmente los elementos */
+    justify-content: center; /* Centra horizontalmente los elementos */
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+    padding: 10px 0; /* Espaciado opcional */
+}
+
+.foto-perfil {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-right: 8px; /* Espaciado entre el logo y los textos */
+}
+
+.nombre {
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+}
+
+.apellido {
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+}
+
+.nombre-apellido {
+    display: flex;
+    flex-direction: column; /* Coloca los textos uno debajo del otro */
+    align-items: flex-start; /* Alinea los textos a la izquierda */
+}
+
+.correo {
+    font-size: 15px;
+    color: #9D9D9D;
+}
+
+/* Contenedor de las secciones */
+.contenedor-seccion {
+    width: 355px; /* Ancho fijo para las secciones */
+    margin: 0 auto 20px; /* Centrado horizontalmente con espaciado inferior */
+    border-radius: 10px;
+    background: #FFE3E0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaciado interno entre los elementos */
+    padding: 17px;
+}
+
+/* Detalle */
+.detalle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icono {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+.icono-editar {
+    width: 20px;
+    height: 20px;
+    margin-left: 8px;
+    color: #A14467;
+}
+
+.texto-detalle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+    flex: 1;
+}
+
+.contador {
+    font-size: 16px;
+    font-weight: 600;
+    color: #FF9CA7;
+}
+
+/* Recordatorios */
+.recordatorio {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icono-recordatorio {
+    font-size: 30px;
+    color: #A14467;
+}
+
+.texto-y-toggle {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.texto-y-toggle-principal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.titulo-recordatorio {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+}
+
+.subtitulo-recordatorio {
+    font-size: 15px;
+    font-weight: 400;
+    color: #9D9D9D;
+}
+
+ion-toggle {
+    --track-background: #00000040;
+    --handle-background-checked: #FF4D7F;
+    --track-background-checked: #FF4D7F7D;
+}

@@ -83,10 +83,21 @@ const routes: Routes = [
     path: 'pantalla-principal',
     loadChildren: () => import('./pantalla-principal/inicio/inicio.module').then( m => m.InicioPageModule)
   },
-
-
-
-
+  {
+    path: 'ayuda',
+    loadChildren: () => import('./registro-usuarios/ayuda/ayuda.module').then( m => m.AyudaPageModule)
+  },
+  {
+    path: 'correo-enviado',
+    loadChildren: () => import('./registro-usuarios/correo-enviado/correo-enviado.module').then( m => m.CorreoEnviadoPageModule)
+  },
+  {
+    path: 'mi-perfil',
+    loadChildren: () => import('./pantalla-principal/mi-perfil/mi-perfil.module').then( m => m.MiPerfilPageModule)
+  },  {
+    path: 'sintomas',
+    loadChildren: () => import('./formulario/sintomas/sintomas.module').then( m => m.SintomasPageModule)
+  },
 
 
 ];

@@ -1,0 +1,45 @@
+<ion-content>
+  <div class="center">
+    <div>
+      <h1>Contáctanos</h1>
+      <ion-text>
+        Envíanos un mensaje y responderemos
+      </ion-text>
+      <ion-text>
+        lo antes posible para poder mejorar el
+      </ion-text>
+      <ion-text>
+        servicio y experiencia de FemSyncronia.
+      </ion-text>
+    </div>
+
+    <form [formGroup]="formulario" (ngSubmit)="enviarFormulario()" novalidate>
+
+      <!-- Campo de Correo Electrónico -->
+      <ion-item lines="none" class="ion-no-padding"
+        [class.invalid]="formulario.get('email')?.invalid && formulario.get('email')?.touched">
+        <ion-input formControlName="email" label="Correo electrónico" labelPlacement="floating" type="email"
+          name="email" required>
+        </ion-input>
+      </ion-item>
+
+      <!-- Ion-Select para Categoría -->
+        <ion-select class="categoria" formControlName="categoria" placeholder="Motivo" interface="popover">
+          <ion-select-option value="sugerencia">Sugerencia</ion-select-option>
+          <ion-select-option value="aclaracion">Aclaración</ion-select-option>
+          <ion-select-option value="informe">Informe</ion-select-option>
+          <ion-select-option value="queja">Queja</ion-select-option>
+          <ion-select-option value="otra">Otra</ion-select-option>
+        </ion-select>
+
+      <!-- Cuadro de Texto -->
+        <ion-textarea formControlName="mensaje" placeholder="Escribe tu mensaje aquí"></ion-textarea>
+
+      <div class="contenedor-boton">
+        <ion-button class="btn-enviar" [routerLink]="['/correo-enviado']" [disabled]="formulario.invalid" type="submit">
+          Enviar
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

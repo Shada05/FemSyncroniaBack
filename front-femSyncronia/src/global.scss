@@ -35,3 +35,10 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+/* Archivo global.scss */
+.custom-popover{
+  --background:#E4E4E4;
+  --width: 200px;
+  --box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.6);
+}

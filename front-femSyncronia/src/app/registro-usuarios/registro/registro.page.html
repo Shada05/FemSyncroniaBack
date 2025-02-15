@@ -7,7 +7,7 @@
     </div>
 
     <!-- Formulario de registro -->
-    <form [formGroup]="formulario" (ngSubmit)="enviarDatos()" novalidate>
+    <form [formGroup]="formulario" (ngSubmit)="registrar()" novalidate>
 
       <!-- Campo de Usuario -->
       <ion-item lines="none" class="ion-no-padding"
@@ -42,49 +42,49 @@
       <!-- Campo de Contraseña -->
       <ion-item lines="none" class="ion-no-padding"
         [class.invalid]="formulario.get('password')?.invalid && formulario.get('password')?.touched">
-        <ion-input formControlName="password" label="Contraseña" labelPlacement="floating"
+        <ion-input id="contra" formControlName="password" label="Contraseña" labelPlacement="floating"
           [type]="passwordVisible ? 'text' : 'password'" (input)="alternarIcono('password')"></ion-input>
         <ion-icon class="icono" *ngIf="mostrarIconoPassword" slot="end"
           name="{{ passwordVisible ? 'eye-off-outline' : 'eye-outline' }}"
           (click)="alternarVisibilidadContrasena('password')"></ion-icon>
-        <div class="">
-          <ion-text class="tooltip-mensaje"
-          *ngIf="formulario.get('password')?.touched">
-          <ion-icon [name]="formulario.get('password')?.hasError('faltaLongitud') ? 'close' : 'checkmark'"
-          [class.valido]="!formulario.get('password')?.hasError('faltaLongitud')"
-          [class.invalido]="formulario.get('password')?.hasError('faltaLongitud')"></ion-icon>
-          La contraseña debe tener al menos 8 caracteres.
-        </ion-text>
-        <ion-text class="tooltip-mensaje"
-          *ngIf="formulario.get('password')?.touched ">
-          <ion-icon [name]="formulario.get('password')?.hasError('faltaMayuscula') ? 'close' : 'checkmark'"
-          [class.valido]="!formulario.get('password')?.hasError('faltaMayuscula')"
-          [class.invalido]="formulario.get('password')?.hasError('faltaMayuscula')"></ion-icon>
-          La contraseña debe contener al menos una letra mayúscula.
-        </ion-text>
-        <ion-text class="tooltip-mensaje"
-          *ngIf="formulario.get('password')?.touched">
-          <ion-icon [name]="formulario.get('password')?.hasError('faltaNumero') ? 'close' : 'checkmark'"
-          [class.valido]="!formulario.get('password')?.hasError('faltaNumero')"
-          [class.invalido]="formulario.get('password')?.hasError('faltaNumero')"></ion-icon>
-          La contraseña debe contener al menos un número.
-        </ion-text>
-        <ion-text class="tooltip-mensaje"
-          *ngIf="formulario.get('password')?.touched">
-          <ion-icon [name]="formulario.get('password')?.hasError('faltaEspecial') ? 'close' : 'checkmark'"
-          [class.valido]="!formulario.get('password')?.hasError('faltaEspecial')"
-          [class.invalido]="formulario.get('password')?.hasError('faltaEspecial')"></ion-icon>
-          La contraseña debe contener al menos un carácter especial.
-        </ion-text>
-        </div>
+        <ion-popover trigger="contra" [keyboardClose]="false" event="click" [showBackdrop]="false">
+          <ng-template>
+            <ion-content class="ion-padding">
+              <ion-text class="tooltip-mensaje">
+                <ion-icon [name]="formulario.get('password')?.hasError('faltaLongitud') ? 'close' : 'checkmark'"
+                  [class.valido]="!formulario.get('password')?.hasError('faltaLongitud')"
+                  [class.invalido]="formulario.get('password')?.hasError('faltaLongitud')"></ion-icon>
+                Tener al menos 8 caracteres.
+              </ion-text>
+              <ion-text class="tooltip-mensaje">
+                <ion-icon [name]="formulario.get('password')?.hasError('faltaMayuscula') ? 'close' : 'checkmark'"
+                  [class.valido]="!formulario.get('password')?.hasError('faltaMayuscula')"
+                  [class.invalido]="formulario.get('password')?.hasError('faltaMayuscula')"></ion-icon>
+                Incluir una mayúscula y una minúscula.
+              </ion-text>
+              <ion-text class="tooltip-mensaje">
+                <ion-icon [name]="formulario.get('password')?.hasError('faltaNumero') ? 'close' : 'checkmark'"
+                  [class.valido]="!formulario.get('password')?.hasError('faltaNumero')"
+                  [class.invalido]="formulario.get('password')?.hasError('faltaNumero')"></ion-icon>
+                Incluir un numero.
+              </ion-text>
+              <ion-text class="tooltip-mensaje">
+                <ion-icon [name]="formulario.get('password')?.hasError('faltaEspecial') ? 'close' : 'checkmark'"
+                  [class.valido]="!formulario.get('password')?.hasError('faltaEspecial')"
+                  [class.invalido]="formulario.get('password')?.hasError('faltaEspecial')"></ion-icon>
+                Incluir un caracter especial.
+              </ion-text>
+            </ion-content>
+          </ng-template>
+        </ion-popover>
       </ion-item>
       <div class="contenedor-error">
         <ion-text class="mensaje-error"
-        *ngIf="formulario.get('password')?.hasError('required') && formulario.get('password')?.touched">
-        <ion-icon name="close"></ion-icon>
-        La contraseña es requerida.
-      </ion-text>
+          *ngIf="formulario.get('password')?.hasError('required') && formulario.get('password')?.touched">
+          La contraseña es requerida.
+        </ion-text>
       </div>
+
       <!-- Campo de Confirmar Contraseña -->
       <ion-item lines="none" class="ion-no-padding"
         [class.invalid]="formulario.get('confirmarPassword')?.invalid && formulario.get('confirmarPassword')">
@@ -108,7 +108,7 @@
       </div>
 
       <!-- Botón de Registrarse -->
-      <ion-button class="btn-registrarse btn-config" type="submit" [disabled]="formulario.invalid" >
+      <ion-button class="btn-registrarse btn-config" type="submit" [disabled]="formulario.invalid">
         Registrarse
       </ion-button>
     </form>

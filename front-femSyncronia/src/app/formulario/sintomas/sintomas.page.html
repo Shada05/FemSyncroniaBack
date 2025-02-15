@@ -1,0 +1,27 @@
+<ion-content>
+  <div class="center">
+    <div>
+      <h1>¿Qué síntomas</h1>
+      <h1>presentas?</h1>
+      <ion-text>
+        Nuestro periodo tiene a afectar varios
+      </ion-text>
+      <ion-text>
+        factores de nuestra vida cotidiana.
+      </ion-text>
+    </div>
+
+    <!-- Componente para los sintomas -->
+    <app-sintomas-container [sintomas]="sintomas" [sintomasPorTipo]="sintomasPorTipo"></app-sintomas-container>
+
+    <div class="divisor"></div>
+
+    <div class="contenedor-boton">
+      <ion-button class="btn-continuar" type="submit" (click)="enviarSintomas()">
+        Continuar
+      </ion-button>
+    </div>
+
+    <span><a [routerLink]="['/registro']">¿Necesitas ayuda?</a></span>
+  </div>
+</ion-content>
