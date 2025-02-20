@@ -49,18 +49,18 @@ export class RegistroPage implements OnInit {
   registrar() {
     if (this.formulario.valid) {
       const datos = this.formulario.value;
-      delete datos.confirmarPassword; // Eliminar campo no necesario para la API
-
+      delete datos.confirmarPassword;
+  
       this.apiService.createUsuario(datos).subscribe({
         next: async (response) => {
           console.log('Registro exitoso:', response);
-
+  
           // Guarda el ID del usuario en ionic storage
           if (response && response.id) {
             this.auth.register(response.id, response.email).subscribe(
               async (response) => {
                 console.log('Usuario registrado con éxito', response);
-
+  
                 // Almacenar el token en Ionic Storage
                 const token = response.token;
                 if (token) {
@@ -74,15 +74,12 @@ export class RegistroPage implements OnInit {
                 console.error('Error al registrar usuario', error);
               });
           }
-
-          // Redirige solo después del registro exitoso
-          this.router.navigate(['/validar-codigo-regis']);
-
+  
           this.formulario.reset();
         },
         error: async (error) => {
           console.error('Error al registrar:', error);
-
+  
           const toast = await this.toastController.create({
             message: 'Error al registrar. Intenta nuevamente.',
             duration: 2000,
@@ -97,22 +94,23 @@ export class RegistroPage implements OnInit {
   }
 
   // Función para enviar el código de verificación
-  enviarCodigoVerificacion(email: string) {
-    this.codigoService.enviarCodigo(email).subscribe(
-      async (response) => {
-        console.log('Código de verificación enviado:', response);
-      },
-      async (error) => {
-        console.error('Error al enviar el código de verificación:', error);
-        const toast = await this.toastController.create({
-          message: 'Error al enviar el código de verificación. Intenta nuevamente.',
-          duration: 2000,
-          color: 'danger',
-        });
-        await toast.present();
-      }
-    );
+  async enviarCodigoVerificacion(email: string) {
+  try {
+    const response = await this.codigoService.enviarCodigo(email).toPromise();
+    console.log('Código de verificación enviado:', response);
+    
+    this.router.navigate(['/validar-codigo-regis']);
+  } catch (error) {
+    console.error('Error al enviar el código de verificación:', error);
+    
+    const toast = await this.toastController.create({
+      message: 'Error al enviar el código de verificación. Intenta nuevamente.',
+      duration: 2000,
+      color: 'danger',
+    });
+    await toast.present();
   }
+}
 
   alternarVisibilidadContrasena(campo: string) {
     if (campo === 'password') {
