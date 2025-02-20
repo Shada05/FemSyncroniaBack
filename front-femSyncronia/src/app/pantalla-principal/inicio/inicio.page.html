@@ -99,15 +99,45 @@
 
           <!-- Componente del calendario -->
           <app-calendario-ciclo [mesActual]="mesActual" [anoActual]="anoActual" [fechaInicio]="fechaInicio"
-            [fechaFin]="fechaFin">
+            [fechaFin]="fechaFin" (diaSeleccionado)="actualizarDiaSeleccionado($event)">
           </app-calendario-ciclo>
 
           <!-- Contenedor de información del día -->
           <div class="info-dia">
-            <!-- Aquí irá la información del día seleccionado -->
-            <div class="contenido-info-dia">
-              <h2>Información del Día</h2>
-              <p>Detalles sobre el día seleccionado.</p>
+            <!-- Etiquetas en la parte superior izquierda -->
+            <div class="etiquetas-superiores">
+              <div class="etiqueta-dia-actual">{{ diaActual }} {{ obtenerNombreMes(mesActual) }}</div>
+              <!-- Día actual -->
+              <div class="etiqueta-indice-ciclo">día del ciclo {{ indice }}</div> <!-- Número del índice -->
+            </div>
+
+            <!-- Botón en la parte superior derecha -->
+            <ion-button class="boton-editar">
+              Editar
+            </ion-button>
+
+            <!-- Contenedores adicionales con data-attributes -->
+            <div class="contenedor-adicional">
+              <div class="contenedor-item" data-tipo="baja">
+                <span class="item-texto">Baja</span>
+                <div class="linea-divisora"></div>
+                <span class="texto-derecha">Información</span>
+              </div>
+              <div class="contenedor-item" data-tipo="peso">
+                <span class="item-texto">Peso</span>
+                <div class="linea-divisora"></div>
+                <span class="texto-derecha">70kg</span>
+              </div>
+              <div class="contenedor-item" data-tipo="temp">
+                <span class="item-texto">Temp</span>
+                <div class="linea-divisora"></div>
+                <span class="texto-derecha">36.5°C</span>
+              </div>
+              <div class="contenedor-item" data-tipo="otro">
+                <span class="item-texto">Otro</span>
+                <div class="linea-divisora"></div>
+                <span class="texto-derecha">Ejemplo</span>
+              </div>
             </div>
           </div>
         </ion-content>

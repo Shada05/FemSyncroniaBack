@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-calendario-ciclo',
@@ -10,6 +10,8 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
   @Input() anoActual: number = 0;
   @Input() fechaInicio: Date = new Date();
   @Input() fechaFin: Date = new Date();
+
+  @Output() diaSeleccionado = new EventEmitter<{ diaActual: number, indice: number }>();
 
   diasSemana: string[] = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
   diasMes: { dia: number; tipo: string; indice?: number | null }[] = [];
@@ -35,10 +37,10 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
     const ultimoDiaMes = new Date(this.anoActual, this.mesActual + 1, 0);
     const primerDiaSemana = primerDiaMes.getDay();
     const ultimoDiaMesAnterior = new Date(this.anoActual, this.mesActual, 0).getDate();
-
+  
     const diferenciaDias = Math.floor((this.fechaFin.getTime() - this.fechaInicio.getTime()) / (1000 * 60 * 60 * 24)) + 1;
     let contadorIndice = (diferenciaDias - (primerDiaSemana % diferenciaDias)) % diferenciaDias;
-
+  
     // Días del mes anterior
     for (let i = primerDiaSemana - 1; i >= 0; i--) {
       this.diasMes.push({
@@ -48,7 +50,7 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
       });
       contadorIndice++;
     }
-
+  
     // Días del mes actual
     for (let i = 1; i <= ultimoDiaMes.getDate(); i++) {
       this.diasMes.push({
@@ -58,7 +60,7 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
       });
       contadorIndice++;
     }
-
+  
     // Días del mes siguiente
     let diaSiguiente = 1;
     while (this.diasMes.length < 42) {
@@ -68,6 +70,15 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
         indice: (contadorIndice % diferenciaDias) + 1,
       });
       contadorIndice++;
+    }
+  
+    // Buscar el día actual e índice
+    const diaHoy = this.diasMes.find(dia => dia.dia === this.fechaActual.getDate() && dia.tipo === 'actual');
+    if (diaHoy) {
+      this.diaSeleccionado.emit({
+        diaActual: diaHoy.dia,
+        indice: diaHoy.indice ?? 1, // Asegura que el índice tenga valor
+      });
     }
   }
 

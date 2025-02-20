@@ -280,35 +280,112 @@ ion-button {
   line-height: normal;
 }
 
-/* Contenedor de información del día */
+/* Contenedor principal */
 .info-dia {
-  width: 350px; /* Ancho fijo */
-  height: 350px; /* Altura fija */
-  background: #ffffff; /* Fondo blanco */
-  border-radius: 20px; /* Bordes redondeados */
-  margin: 24px auto; /* Centra el contenedor y agrega margen superior */
+  width: 350px;
+  background: transparent;
+  border-radius: 20px;
+  margin: 24px auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Alinea el contenido en la parte superior */
-  padding: 16px; /* Espaciado interno */
+  padding: 16px;
+  position: relative;
 }
 
-/* Contenido dentro del contenedor */
-.contenido-info-dia {
-  width: 100%; /* Ocupa todo el ancho del contenedor */
-  text-align: center; /* Centra el texto */
+/* Etiquetas superiores */
+.etiquetas-superiores {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
-.contenido-info-dia h2 {
-  font-size: 24px;
-  font-weight: 600;
-  color: #000000; /* Color del texto */
-  margin-bottom: 16px; /* Espaciado inferior */
-}
-
-.contenido-info-dia p {
+.etiqueta-dia-actual{
   font-size: 16px;
-  font-weight: 400;
-  color: #333333; /* Color del texto */
+  font-style: normal;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.etiqueta-indice-ciclo{
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  color: #7B7A7A;
+}
+/* Botón de editar */
+.boton-editar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 150px;
+  height: 10px;
+  --background: #FFF;
+  --border-radius: 50px;
+  --color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: none;
+  --color:#FF9CA7;
+  --background-activated: #F2F2F2;
+}
+
+/* Contenedores adicionales */
+.contenedor-adicional {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+}
+
+.contenedor-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Alinea los elementos uniformemente */
+  padding: 8px 0;
+  position: relative;
+}
+
+/* Texto izquierdo */
+.item-texto {
+  font-size: 16px;
+  color: #333;
+  flex: 1; /* Que ocupe el espacio necesario */
+  text-align: left;
+}
+
+/* Línea divisora */
+.linea-divisora {
+  width: 2px;
+  height: 24px;
+  margin: 0 10px; /* Espaciado entre texto e línea */
+  align-self: center;
+}
+
+/* Texto derecho */
+.texto-derecha {
+  font-size: 16px;
+  color: #333;
+  flex: 1;
+  text-align: left;
+}
+
+/* Colores específicos para cada línea */
+.contenedor-item[data-tipo="baja"] .linea-divisora {
+  background-color: #C5E1A5;;
+}
+
+.contenedor-item[data-tipo="peso"] .linea-divisora {
+  background-color: #FFB3C9;;
+}
+
+.contenedor-item[data-tipo="temp"] .linea-divisora {
+  background-color: #D5B3FF;
+}
+
+.contenedor-item[data-tipo="otro"] .linea-divisora {
+  background-color: #FFD9B3;
 }
