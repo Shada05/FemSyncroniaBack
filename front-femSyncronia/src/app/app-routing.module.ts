@@ -98,6 +98,10 @@ const routes: Routes = [
     path: 'sintomas',
     loadChildren: () => import('./formulario/sintomas/sintomas.module').then( m => m.SintomasPageModule)
   },
+  {
+    path: 'registro-sintomas',
+    loadChildren: () => import('./pantalla-principal/registro-sintomas/registro-sintomas.module').then( m => m.RegistroSintomasPageModule)
+  },
 
 
 ];
