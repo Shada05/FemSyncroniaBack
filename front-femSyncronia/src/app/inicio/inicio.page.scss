@@ -92,25 +92,11 @@ ion-content {
   .sesion-button{
     --background: #FFB7BF;
     --color: white;
-    --border-radius: 15px;
-    --padding-start: 20px;
-    --padding-end: 20px;
-    --border-color: #FFB7BF;
+    --border-radius: 50px;
     --border-style: solid;
-    --border-width: 1px;
-    --box-shadow:none;
     width: 302px;
-    height: 39px;
-    font-family: 'Roboto';
+    min-height: 50px;
     font-weight: 600;
-    text-transform: none;
     font-size: 18px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  /* Efecto hover para el botón */
-  ion-button:hover {
-    --background: white;
-    --color: #FF94A0;
   }
   

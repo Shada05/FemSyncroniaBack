@@ -162,6 +162,7 @@ ion-content {
     --border-style: solid; /* Estilo del borde */
     --border-width: 1px; /* Ancho del borde */
     --box-shadow: none; /* Sin sombra */
+    min-height: 44px;
     font-size: 18px; /* Tamaño de fuente */
     transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave para color de fondo y texto */
   }
@@ -175,6 +176,7 @@ ion-content {
   /* Estilo para el botón de Google */
   .btn-Google {
     font-size: 18px; /* Tamaño de fuente */
+    min-height: 44px;
     --color: black; /* Color del texto */
     --background: rgba(0, 0, 0, 0.09); /* Color de fondo */
     --box-shadow: none; /* Sin sombra */
