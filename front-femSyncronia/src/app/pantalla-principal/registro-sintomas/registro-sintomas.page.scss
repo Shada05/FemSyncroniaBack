@@ -1,16 +1,16 @@
 ion-content {
-    --background: none; /* Sin fondo de color por defecto */
-    background-image: url('/assets/img/pantalla-principal/fondo-tabs.svg'); /* Imagen de fondo */
-    background-size: cover; /* La imagen cubre todo el área */
-    background-repeat: no-repeat; /* La imagen no se repite */
-    background-position: center; /* La imagen está centrada */
-    width: 100%; /* Ancho completo */
-    height: 100vh; /* Altura completa de la ventana */
-  }
-  
+  --background: none; /* Sin fondo de color por defecto */
+  background-image: url('/assets/img/pantalla-principal/fondo-tabs.svg'); /* Imagen de fondo */
+  background-size: cover; /* La imagen cubre todo el área */
+  background-repeat: no-repeat; /* La imagen no se repite */
+  background-position: center; /* La imagen está centrada */
+  width: 100%; /* Ancho completo */
+  height: 100vh; /* Altura completa de la ventana */
+}
+
 /* Contenedor de la barra superior */
 .top-bar {
-  height: 100px;  
+  height: 100px;
   display: flex; /* Configura el contenedor como flexbox */
   align-items: center; /* Centra verticalmente los elementos */
   justify-content: space-between; /* Espacia los elementos uniformemente */
@@ -18,45 +18,53 @@ ion-content {
   width: 100%; /* Ancho completo */
   background-color: transparent; /* Fondo transparente */
 }
-  
+
 /* Ajusta el ícono de notificación */
 .notificacion {
-    color: black;
-    height: 24px;
-    width: 24px;
-}
-  
-/* Ajusta el texto de bienvenida */
-.bienvenida-text {
-    color: black;
-    text-align: center;
-    font-family: "Open Sans";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-}
-  
-/* Ajusta la imagen de perfil */
-.imagen-perfil {
-    width: 50px;
-    height: 50px;
-    object-fit: cover; /* Mantiene las proporciones de la imagen */
-    border-radius: 50%; /* Hace la imagen circular */
-    border: 1px solid white;
+  color: black;
+  height: 24px;
+  width: 24px;
 }
 
-/* Estilos para el contenedor del período */
-.periodo-container {
-  width: 320px;
-  height: 47px;
+/* Ajusta el texto de bienvenida */
+.bienvenida-text {
+  color: black;
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+/* Ajusta la imagen de perfil */
+.imagen-perfil {
+  width: 50px;
+  height: 50px;
+  object-fit: cover; /* Mantiene las proporciones de la imagen */
+  border-radius: 50%; /* Hace la imagen circular */
+  border: 1px solid white;
+}
+
+/* Estilos comunes para los contenedores (período, sangrado, síntomas) */
+.periodo-container,
+.sangrado-container,
+.sintomas-container {
+  width: 90%; /* Ocupa el 100% del ancho disponible */
+  max-width: 600px; /* Ancho máximo para evitar que se vea demasiado ancho en pantallas grandes */
+  margin: 16px auto; /* Centrado y margen superior */
   border-radius: 10px;
-  background-color: #FFE3E0; /* Fondo blanco */
+  background-color: #FFE3E0; /* Fondo rosado */
+  padding: 16px; /* Espaciado interno */
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+/* Estilos específicos para el contenedor del período */
+.periodo-container {
+  height: 47px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px; /* Espaciado interno */
-  margin: 16px auto; /* Centrado y margen superior */
 }
 
 /* Estilos para el texto del período */
@@ -72,24 +80,20 @@ ion-content {
   width: 186px;
   height: 24px;
   min-height: 24px;
-  --background:white;
+  --color:#FF9CA7;
+  --background: white;
   font-family: "Roboto";
   font-size: 15px;
   font-weight: 600;
   padding: 0;
 }
 
-/* Estilos para el contenedor del sangrado */
+/* Estilos específicos para el contenedor del sangrado */
 .sangrado-container {
-  width: 320px;
   height: 47px;
-  border-radius: 10px;
-  background: #FFE3E0; /* Fondo blanco */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px; /* Espaciado interno */
-  margin: 16px auto; /* Centrado y margen superior */
 }
 
 /* Estilos para el texto del sangrado */
@@ -103,11 +107,89 @@ ion-content {
 /* Estilos para el contenedor de las gotas */
 .gotas-container {
   display: flex;
-  gap: 8px; /* Espacio entre las gotas */
+  gap: 2px; /* Espacio reducido entre las gotas */
+  align-items: center;
 }
 
-/* Estilos para cada gota (icono de agua) */
-.gotas-container ion-icon {
-  color: #C4C4C4; /* Color azul para las gotas */
+/* Estilos base para las gotas */
+.gota {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Estilos específicos para el contenedor de síntomas */
+.sintomas-container {
+  padding-top: 16px; /* Espacio adicional en la parte superior */
+}
+
+/* Estilos para el texto "Síntomas" */
+.texto-sintomas {
+  color: black;
+  font-family: "Open Sans";
   font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px; /* Espacio entre el texto y el componente */
+  display: block; /* Asegura que el texto ocupe su propia línea */
+}
+
+/* Contenedor para las notas */
+.notas-container {
+  width: 90%;
+  max-width: 600px;
+  height: 120px;
+  margin: 16px auto;
+  border-radius: 10px;
+  background-color: #FFE3E0;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Estilos para el texto "Notas" */
+.texto-notas {
+  color: black;
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Contenedor del textarea y el ícono */
+.textarea-contenedor {
+  position: relative; /* Permite posicionar el ícono de manera absoluta */
+}
+
+/* Estilos para el ícono */
+.icono-notas {
+  position: absolute;
+  left: 8px;
+  top: 12px; /* Ajusta este valor para alinear el ícono con el texto */
+  width: 12px; /* Tamaño del ícono */
+  height: 12px;
+  z-index: 2; /* Asegura que el ícono esté sobre el textarea */
+  filter: brightness(0) saturate(100%) invert(47%) sepia(0%) saturate(0%) hue-rotate(130deg) brightness(93%) contrast(89%);
+}
+
+/* Estilos para el textarea de notas */
+.textarea-notas {
+  width: 100%;
+  height: 60px;
+  background-color: #FFD3D8;
+  border-radius: 10px;
+  font-family: "Open Sans";
+  font-size: 13px;
+  color: black;
+  resize: none;
+  padding-left: 25px; /* Espacio para el ícono */
+  padding-right: 25px;
+  box-sizing: border-box;
+  z-index: 1; /* Asegura que el textarea esté detrás del ícono */
+}
+
+/* Estilos para el placeholder del textarea */
+.textarea-notas::placeholder {
+  color: #747474;
+  font-style: italic;
 }

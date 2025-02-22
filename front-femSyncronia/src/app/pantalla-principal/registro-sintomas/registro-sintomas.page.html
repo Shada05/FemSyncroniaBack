@@ -14,13 +14,29 @@
 
   <!-- Contenedor para el sangrado -->
   <div class="sangrado-container">
-    <span class="texto-sangrado">Sangrado</span>
+    <ion-text class="texto-sangrado">Sangrado</ion-text>
     <div class="gotas-container">
-      <ion-icon name="water"></ion-icon>
-      <ion-icon name="water"></ion-icon>
-      <ion-icon name="water"></ion-icon>
-      <ion-icon name="water"></ion-icon>
-      <ion-icon name="water"></ion-icon>
+      <img *ngFor="let gota of [1,2,3,4,5]"
+        [src]="gota <= sangradoGotas ? 'assets/icons/pantalla-principal/gota-llena.svg' : 'assets/icons/pantalla-principal/gota-vacia.svg'"
+        (click)="calificarSangrado(gota)" class="gota" [ngClass]="{ 'gota-activa': gota <= sangradoGotas }">
+    </div>
+  </div>
+
+  <!-- Contenedor para los síntomas -->
+  <div class="sintomas-container">
+    <ion-text class="texto-sintomas">Síntomas</ion-text>
+    <app-sintomas-container [sintomas]="sintomas" [sintomasPorTipo]="sintomasPorTipo"></app-sintomas-container>
+  </div>
+
+  <!-- Contenedor para las notas -->
+  <div class="notas-container">
+    <ion-text class="texto-notas">Notas</ion-text>
+    <div class="textarea-contenedor">
+      <!-- Ícono de notas -->
+      <img src="assets/icons/pantalla-principal/editar.svg" class="icono-notas" *ngIf="!notasValue" />
+      <!-- Textarea -->
+      <ion-textarea class="textarea-notas" placeholder="Escribe tus notas aquí..."
+        [(ngModel)]="notasValue"></ion-textarea>
     </div>
   </div>
 </ion-content>

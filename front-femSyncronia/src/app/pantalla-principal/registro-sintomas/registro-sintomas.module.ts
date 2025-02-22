@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { RegistroSintomasPageRoutingModule } from './registro-sintomas-routing.module';
 
 import { RegistroSintomasPage } from './registro-sintomas.page';
+import { SintomasPageModule } from 'src/app/formulario/sintomas/sintomas.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RegistroSintomasPageRoutingModule
+    RegistroSintomasPageRoutingModule,
+    SintomasPageModule
   ],
   declarations: [RegistroSintomasPage]
 })

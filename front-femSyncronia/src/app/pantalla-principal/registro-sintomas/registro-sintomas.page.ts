@@ -1,25 +1,62 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-registro-sintomas',
   templateUrl: './registro-sintomas.page.html',
   styleUrls: ['./registro-sintomas.page.scss'],
 })
+
 export class RegistroSintomasPage implements OnInit {
   profileImage: string = '/assets/img/pantalla-principal/Foto-perfil.svg';
   userId: string | null = null;
+  sangradoGotas: number = 0;
+  sintomas: any[] = [];
+  sintomasPorTipo: { [key: number]: any[] } = {};
+  sintomaSeleccionado: any = null;
+  notasValue: string = ''; // Asegúrate de que esté inicializado
 
   constructor(
     private apiService: ApiService,
     private authService: AuthService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.cargarUsuario();
+    this.obtenerSintomas();
   }
 
-  // Función para cargar los datos del usuario y la imagen de perfil
+  async obtenerSintomas() {
+    try {
+      const data = await lastValueFrom(this.apiService.obtenerSintomas());
+
+      // Inicializar el objeto de síntomas por tipo
+      this.sintomasPorTipo = { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [] };
+
+      // Mapear los síntomas y organizarlos por tipo
+      this.sintomas = data.map((sintoma: any) => ({
+        nombre: sintoma.name,
+        imagen: sintoma.image,
+        descripcion: sintoma.description,
+        mostrarEstrellas: false,
+        estrellas: 0,
+        tipo: sintoma.type
+      }));
+
+      // Agrupar los síntomas por tipo
+      this.sintomas.forEach(sintoma => {
+        if (this.sintomasPorTipo[sintoma.tipo] !== undefined) {
+          this.sintomasPorTipo[sintoma.tipo].push(sintoma);
+        }
+      });
+
+    } catch (error) {
+      console.error('Error al obtener los síntomas:', error);
+    }
+  }
+
   async cargarUsuario() {
     const token = await this.authService.obtenerToken();
     if (token) {
@@ -55,5 +92,18 @@ export class RegistroSintomasPage implements OnInit {
     } else {
       console.log('No hay token almacenado.');
     }
+  }
+
+  calificarSangrado(gota: number) {
+    if (this.sangradoGotas === gota) {
+      this.sangradoGotas = 0; // Si hace clic en la misma gota, reinicia
+    } else {
+      this.sangradoGotas = gota; // Asigna la nueva calificación
+    }
+  }
+
+  // Función para manejar el evento de entrada en el textarea
+  onNotasInput(event: any) {
+    console.log('Valor de notasValue:', this.notasValue); // Depuración
   }
 }
