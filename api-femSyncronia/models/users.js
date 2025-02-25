@@ -52,6 +52,42 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true
         },
+        when_your_period_came: { //cuando llego tu periodo?
+            type: DataTypes.DATE,
+            allowNull: true
+          },
+        recording_period:{ //0=No, 1=Si, 2=Aveces
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        Have_symptoms:{ //0=No, 1=Si, 2=Aveces
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        Affects_skin:{//0=No, 1=Si, 2= No lo se
+            type:DataTypes.INTEGER,
+            allowNull: true
+        },
+        Affects_weight:{//0=No, 1=Si, 2= No lo se
+            type:DataTypes.INTEGER,
+            allowNull: true
+        },
+        Affects_dream:{//0=No, 1=Si, 2= No lo se
+            type:DataTypes.INTEGER,
+            allowNull: true
+        },
+        Affects_energy:{//0=No, 1=Si, 2= No lo se
+            type:DataTypes.INTEGER,
+            allowNull: true
+        },
+        Affects_appetite:{//0=No, 1=Si, 2= No lo se
+            type:DataTypes.INTEGER,
+            allowNull: true
+        },
+        Affects_humour:{//0=No, 1=Si, 2= No lo se
+            type:DataTypes.INTEGER,
+            allowNull: true
+        },
         createdAt: {
             allowNull: false, 
             type: DataTypes.DATE,

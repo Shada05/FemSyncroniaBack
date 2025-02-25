@@ -1,13 +1,15 @@
-const values_users  = require('../models').values_users;
+const cycle_calendar  = require('../models').cycle_calendar;
 
 exports.store = async (req, res) => {
     const values = {
         
-        id_user: req.body.id_user,
-        weight: req.body.weight,
-        temperature: req.body.temperature,
-        start_date: req.body.start_date,
-        end_date: req.body.end_date
+        cycle_status: req.body.cycle_status,
+        Start_day: req.body.Start_day,
+        Finish_day: req.body.Finish_day,
+        average_periodo: req.body.average_periodo,
+        average_ciclo: req.body.average_ciclo,
+        average_periodo: req.body.average_periodo,
+        Regular_cycle: req.body.Regular_cycle
         
     }
     console.log(values);
@@ -70,11 +72,12 @@ exports.update = async (req, res) => {
     const id = parseInt(req.params.id);
     let updatedData = {};
 
-    if (req.body.values_status != null) updatedData['valuess_status']= req.body.values_status;
-    if (req.body.weight != null) updatedData['weight']= req.body.weigth;
-    if (req.body.temperature != null) updatedData['temperature']= req.body.temperature;
-    if (req.body.start_date != null) updatedData['start_date']= req.body.start_date;
-    if (req.body.end_date != null) updatedData['end_date']= req.body.end_date;
+    if (req.body.cycle_status != null) updatedData['cycle_status']= req.body.cycle_status;
+    if (req.body.Start_day != null) updatedData['Start_day']= req.body.weigth;
+    if (req.body.Finish_day != null) updatedData['Finish_day']= req.body.Finish_day;
+    if (req.body.average_periodo != null) updatedData['average_periodo']= req.body.average_periodo;
+    if (req.body.average_ciclo != null) updatedData['average_ciclo']= req.body.average_ciclo;
+    if (req.body.Regular_cycle != null) updatedData['Regular_cycle']= req.body.Regular_cycle;
 
     return await valuess.update(updatedData, {
         where: {

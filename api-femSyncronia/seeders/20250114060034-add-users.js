@@ -52,6 +52,18 @@ module.exports = {
         phone: "3345896231",
         token: "sometoken"
       },
+      {
+        birthdate: "2005-01-01",
+        username: "user5",
+        user_status: 1, // 1 = active, 0 = inactive
+        name: "Prueba5",
+        lastname: "Ruiz",
+        email: "prueba1@example.com",
+        profile_image: "profile.jpg",
+        password: "hashedpassword3",
+        phone: "3345896231",
+        token: "sometoken"
+      },
     ]);
   },
 
