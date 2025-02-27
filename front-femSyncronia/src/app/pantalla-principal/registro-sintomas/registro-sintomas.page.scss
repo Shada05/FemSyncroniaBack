@@ -49,11 +49,12 @@
   border: 1px solid white;
 }
 
-/* Estilos comunes para los contenedores (período, sangrado, síntomas) */
+/* Estilos comunes para los contenedores (período, sangrado, síntomas, acto sexual) */
 .periodo-container,
 .sangrado-container,
-.sintomas-container {
-  width: 90%; /* Ocupa el 100% del ancho disponible */
+.sintomas-container,
+.acto-sexual-container {
+  width: 90%; /* Ocupa el 90% del ancho disponible */
   max-width: 600px; /* Ancho máximo para evitar que se vea demasiado ancho en pantallas grandes */
   margin: 16px auto; /* Centrado y margen superior */
   border-radius: 10px;
@@ -70,27 +71,6 @@
   justify-content: space-between;
 }
 
-/* Estilos para el texto del período */
-.texto-periodo {
-  color: black;
-  font-family: "Open Sans";
-  font-size: 16px;
-  font-weight: 600;
-}
-
-/* Estilos para el botón "He comenzado" */
-.boton-comenzado {
-  width: 186px;
-  height: 24px;
-  min-height: 24px;
-  --color:#FF9CA7;
-  --background: white;
-  font-family: "Roboto";
-  font-size: 15px;
-  font-weight: 600;
-  padding: 0;
-}
-
 /* Estilos específicos para el contenedor del sangrado */
 .sangrado-container {
   height: 47px;
@@ -99,7 +79,70 @@
   justify-content: space-between;
 }
 
-/* Estilos para el texto del sangrado */
+/* Estilos específicos para el contenedor de síntomas */
+.sintomas-container {
+  padding-top: 16px; /* Espacio adicional en la parte superior */
+}
+
+/* Estilos específicos para el contenedor de acto sexual */
+.acto-sexual-container {
+  height: 448px; /* Altura específica para el contenedor de acto sexual */
+}
+
+/* Resto de los estilos (sin cambios) */
+.top-bar {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 16px;
+  width: 100%;
+  background-color: transparent;
+}
+
+.notificacion {
+  color: black;
+  height: 24px;
+  width: 24px;
+}
+
+.bienvenida-text {
+  color: black;
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.imagen-perfil {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+.texto-periodo {
+  color: black;
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.boton-comenzado {
+  width: 186px;
+  height: 24px;
+  min-height: 24px;
+  --color: #FF9CA7;
+  --background: white;
+  font-family: "Roboto";
+  font-size: 15px;
+  font-weight: 600;
+  padding: 0;
+}
+
 .texto-sangrado {
   color: black;
   font-family: "Open Sans";
@@ -107,14 +150,12 @@
   font-weight: 600;
 }
 
-/* Estilos para el contenedor de las gotas */
 .gotas-container {
   display: flex;
-  gap: 2px; /* Espacio reducido entre las gotas */
+  gap: 2px;
   align-items: center;
 }
 
-/* Estilos base para las gotas */
 .gota {
   width: 16px;
   height: 16px;
@@ -122,22 +163,15 @@
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-/* Estilos específicos para el contenedor de síntomas */
-.sintomas-container {
-  padding-top: 16px; /* Espacio adicional en la parte superior */
-}
-
-/* Estilos para el texto "Síntomas" */
 .texto-sintomas {
   color: black;
   font-family: "Open Sans";
   font-size: 16px;
   font-weight: 600;
-  margin-bottom: 12px; /* Espacio entre el texto y el componente */
-  display: block; /* Asegura que el texto ocupe su propia línea */
+  margin-bottom: 12px;
+  display: block;
 }
 
-/* Contenedor para las notas */
 .notas-container {
   width: 90%;
   max-width: 600px;
@@ -149,7 +183,6 @@
   box-sizing: border-box;
 }
 
-/* Estilos para el texto "Notas" */
 .texto-notas {
   color: black;
   font-family: "Open Sans";
@@ -159,23 +192,20 @@
   display: block;
 }
 
-/* Contenedor del textarea y el ícono */
 .textarea-contenedor {
-  position: relative; /* Permite posicionar el ícono de manera absoluta */
+  position: relative;
 }
 
-/* Estilos para el ícono */
 .icono-notas {
   position: absolute;
   left: 8px;
-  top: 12px; /* Ajusta este valor para alinear el ícono con el texto */
-  width: 12px; /* Tamaño del ícono */
+  top: 12px;
+  width: 12px;
   height: 12px;
-  z-index: 2; /* Asegura que el ícono esté sobre el textarea */
+  z-index: 2;
   filter: brightness(0) saturate(100%) invert(47%) sepia(0%) saturate(0%) hue-rotate(130deg) brightness(93%) contrast(89%);
 }
 
-/* Estilos para el textarea de notas */
 .textarea-notas {
   width: 100%;
   height: 60px;
@@ -185,86 +215,67 @@
   font-size: 13px;
   color: black;
   resize: none;
-  padding-left: 25px; /* Espacio para el ícono */
+  padding-left: 25px;
   padding-right: 25px;
   box-sizing: border-box;
-  z-index: 1; /* Asegura que el textarea esté detrás del ícono */
+  z-index: 1;
 }
 
-/* Estilos para el placeholder del textarea */
 .textarea-notas::placeholder {
   color: #747474;
   font-style: italic;
 }
 
-/* Contenedor principal para acto sexual */
-.acto-sexual-container {
-  width: 90%;
-  height: 448px;
-  margin: 16px auto; /* Centrado y margen superior */
-  border-radius: 10px;
-  background-color: #FFE3E0; /* Fondo rosado */
-  padding: 16px; /* Espaciado interno */
-  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
-}
-
-/* Estilos para el texto "Acto Sexual" */
 .texto-acto-sexual {
   color: black;
   font-family: "Open Sans";
   font-size: 16px;
   font-weight: 600;
-  margin-bottom: 12px; /* Espacio entre el texto y el contenedor interno */
-  display: block; /* Asegura que el texto ocupe su propia línea */
+  margin-bottom: 12px;
+  display: block;
 }
 
-/* Estilos para el contenedor de detalles del acto sexual */
 .detalles-acto-container {
   width: 100%;
-  height: auto; /* Ajusta la altura automáticamente */
+  height: auto;
   border-radius: 10px;
-  background-color: #FFD3D8; /* Fondo más claro */
-  padding: 16px; /* Espaciado interno */
-  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+  background-color: #FFD3D8;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
-/* Para que las opciones de orgasmo se ubiquen debajo */
 .opcion-acto {
   display: flex;
-  align-items: flex-start; /* Asegura que el contenido se alinee al inicio */
+  align-items: flex-start;
   justify-content: space-between;
   padding: 12px 0;
-  flex-direction: row; /* Mantiene el diseño horizontal por defecto */
+  flex-direction: row;
 }
 
 .opcion-acto.orgasmo {
-  flex-direction: column; /* Hace que los elementos se apilen en columna */
-  align-items: flex-start; /* Alinea el contenido a la izquierda */
-  gap: 8px; /* Espacio entre el texto y las opciones */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
 
-/* Contenedor para el ícono y el texto */
 .contenido-opcion {
   display: flex;
   align-items: center;
-  gap: 12px; /* Espacio entre el ícono y el texto */
+  gap: 12px;
 }
 
-/* Estilos para el ícono SVG */
 .icono-opcion {
-  width: 24px; /* Tamaño del ícono */
+  width: 24px;
   height: 24px;
-  object-fit: contain; /* Asegura que el SVG se escale correctamente */
+  object-fit: contain;
 }
 
-/* Estilos para el texto de la opción */
 .texto-opcion {
   display: flex;
   flex-direction: column;
-  gap: 4px; /* Espacio entre título y subtítulo */
+  gap: 4px;
 }
 
-/* Estilos para el título de la opción */
 .titulo-opcion {
   font-family: "Open Sans";
   font-size: 14px;
@@ -272,7 +283,6 @@
   color: black;
 }
 
-/* Estilos para el subtítulo de la opción */
 .subtitulo-opcion {
   font-family: "Open Sans";
   font-size: 12px;
@@ -280,33 +290,29 @@
   color: #747474;
 }
 
-/* Contenedor para las opciones de orgasmo */
 .opciones-orgasmo {
   display: flex;
-  gap: 16px; /* Espacio entre las opciones */
-  margin-top: 8px; /* Espacio superior */
+  gap: 16px;
+  margin-top: 8px;
 }
 
-/* Estilos para cada opción de orgasmo */
 .opcion-orgasmo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px; /* Espacio entre el ícono y el texto */
+  gap: 4px;
   cursor: pointer;
   padding: 8px;
   border-radius: 8px;
   transition: background-color 0.3s ease;
 }
 
-/* Estilos para el ícono de orgasmo */
 .icono-orgasmo {
-  width: 50px; /* Tamaño del ícono */
+  width: 50px;
   height: 50px;
-  object-fit: contain; /* Asegura que el SVG se escale correctamente */
+  object-fit: contain;
 }
 
-/* Estilos para el texto de orgasmo */
 .texto-orgasmo {
   font-family: "Open Sans";
   font-size: 12px;
@@ -314,19 +320,17 @@
   color: black;
 }
 
-/* Estilos para la opción seleccionada */
 .opcion-orgasmo.seleccionado {
-  background-color: #FF9CA7; /* Fondo rosado para la opción seleccionada */
+  background-color: #FF9CA7;
 }
 
-/* Estilos para el toggle */
 ion-toggle {
-  --track-background-checked: #FF9CA7; /* Fondo del toggle cuando está activado */
-  --track-background: #C4C4C4; /* Fondo del toggle cuando está desactivado */
-  --handle-background: white; /* Color del círculo interior */
-  --handle-background-checked: white; /* Color del círculo interior cuando está activado */
-  --handle-spacing: 2px; /* Espacio entre el círculo y el borde */
-  transform: scale(0.8); /* Escala el toggle al 80% de su tamaño original */
-  transform-origin: left center; /* Ajusta el punto de origen de la transformación */
-  margin-right: 8px; /* Ajusta el margen derecho si es necesario */
+  --track-background-checked: #FF9CA7;
+  --track-background: #C4C4C4;
+  --handle-background: white;
+  --handle-background-checked: white;
+  --handle-spacing: 2px;
+  transform: scale(0.8);
+  transform-origin: left center;
+  margin-right: 8px;
 }
