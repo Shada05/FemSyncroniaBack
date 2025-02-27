@@ -1,42 +1,102 @@
 <ion-content>
-  <!-- Barra superior -->
-  <div class="top-bar">
-    <ion-icon class="notificacion" name="notifications-outline"></ion-icon>
-    <ion-text class="bienvenida-text">Registro</ion-text>
-    <img class="imagen-perfil" [src]="profileImage" alt="Foto de perfil">
-  </div>
-
-  <!-- Contenedor para el período -->
-  <div class="periodo-container">
-    <ion-text class="texto-periodo">Período</ion-text>
-    <ion-button class="boton-comenzado">He comenzado</ion-button>
-  </div>
-
-  <!-- Contenedor para el sangrado -->
-  <div class="sangrado-container">
-    <ion-text class="texto-sangrado">Sangrado</ion-text>
-    <div class="gotas-container">
-      <img *ngFor="let gota of [1,2,3,4,5]"
-        [src]="gota <= sangradoGotas ? 'assets/icons/pantalla-principal/gota-llena.svg' : 'assets/icons/pantalla-principal/gota-vacia.svg'"
-        (click)="calificarSangrado(gota)" class="gota" [ngClass]="{ 'gota-activa': gota <= sangradoGotas }">
+  <div class="background">
+    <!-- Barra superior -->
+    <div class="top-bar">
+      <ion-icon class="notificacion" name="notifications-outline"></ion-icon>
+      <ion-text class="bienvenida-text">Registro</ion-text>
+      <img class="imagen-perfil" [src]="profileImage" alt="Foto de perfil">
     </div>
-  </div>
 
-  <!-- Contenedor para los síntomas -->
-  <div class="sintomas-container">
-    <ion-text class="texto-sintomas">Síntomas</ion-text>
-    <app-sintomas-container [sintomas]="sintomas" [sintomasPorTipo]="sintomasPorTipo"></app-sintomas-container>
-  </div>
+    <!-- Contenedor para el período -->
+    <div class="periodo-container">
+      <ion-text class="texto-periodo">Período</ion-text>
+      <ion-button class="boton-comenzado">He comenzado</ion-button>
+    </div>
 
-  <!-- Contenedor para las notas -->
-  <div class="notas-container">
-    <ion-text class="texto-notas">Notas</ion-text>
-    <div class="textarea-contenedor">
-      <!-- Ícono de notas -->
-      <img src="assets/icons/pantalla-principal/editar.svg" class="icono-notas" *ngIf="!notasValue" />
-      <!-- Textarea -->
-      <ion-textarea class="textarea-notas" placeholder="Escribe tus notas aquí..."
-        [(ngModel)]="notasValue"></ion-textarea>
+    <!-- Contenedor para el sangrado -->
+    <div class="sangrado-container">
+      <ion-text class="texto-sangrado">Sangrado</ion-text>
+      <div class="gotas-container">
+        <img *ngFor="let gota of [1,2,3,4,5]"
+          [src]="gota <= sangradoGotas ? 'assets/icons/pantalla-principal/gota-llena.svg' : 'assets/icons/pantalla-principal/gota-vacia.svg'"
+          (click)="calificarSangrado(gota)" class="gota" [ngClass]="{ 'gota-activa': gota <= sangradoGotas }">
+      </div>
+    </div>
+
+    <!-- Contenedor para los síntomas -->
+    <div class="sintomas-container">
+      <ion-text class="texto-sintomas">Síntomas</ion-text>
+      <app-sintomas-container [sintomas]="sintomas" [sintomasPorTipo]="sintomasPorTipo"></app-sintomas-container>
+    </div>
+
+    <!-- Contenedor para las notas -->
+    <div class="notas-container">
+      <ion-text class="texto-notas">Notas</ion-text>
+      <div class="textarea-contenedor">
+        <!-- Ícono de notas -->
+        <img src="assets/icons/pantalla-principal/editar.svg" class="icono-notas" *ngIf="!notasValue" />
+        <!-- Textarea -->
+        <ion-textarea class="textarea-notas" placeholder="Escribe tus notas aquí..."
+          [(ngModel)]="notasValue"></ion-textarea>
+      </div>
+    </div>
+
+    <!-- Contenedor principal para acto sexual -->
+    <div class="acto-sexual-container">
+      <ion-text class="texto-acto-sexual">Acto Sexual</ion-text>
+      <!-- Contenedor interno para detalles -->
+      <div class="detalles-acto-container">
+        <!-- Opción 1: Relaciones -->
+        <div class="opcion-acto">
+          <div class="contenido-opcion">
+            <img src="assets/icons/pantalla-principal/relaciones.png" class="icono-opcion" alt="Ícono Relaciones" />
+            <div class="texto-opcion">
+              <ion-text class="titulo-opcion">Relaciones</ion-text>
+              <ion-text class="subtitulo-opcion">¿Tuviste acto sexual?</ion-text>
+            </div>
+          </div>
+          <ion-toggle [(ngModel)]="tuvoActoSexual"></ion-toggle>
+        </div>
+
+        <!-- Opción 2: Protección -->
+        <div class="opcion-acto">
+          <div class="contenido-opcion">
+            <img src="assets/icons/pantalla-principal/proteccion.png" class="icono-opcion" alt="Ícono Protección" />
+            <div class="texto-opcion">
+              <ion-text class="titulo-opcion">Protección</ion-text>
+              <ion-text class="subtitulo-opcion">¿Usaste protección en el acto?</ion-text>
+            </div>
+          </div>
+          <ion-toggle [(ngModel)]="usoProteccion"></ion-toggle>
+        </div>
+
+        <div class="opcion-acto orgasmo">
+          <div class="contenido-opcion">
+            <div class="texto-opcion">
+              <ion-text class="titulo-opcion">Orgasmos</ion-text>
+              <ion-text class="subtitulo-opcion">¿Tuviste orgasmos en el acto?</ion-text>
+            </div>
+          </div>
+          <!-- Opciones de orgasmo ahora están debajo -->
+          <div class="opciones-orgasmo">
+            <div class="opcion-orgasmo" (click)="seleccionarOrgasmo('si')"
+              [ngClass]="{ 'seleccionado': orgasmoSeleccionado === 'si' }">
+              <img src="assets/icons/pantalla-principal/si.png" alt="Sí tuve" class="icono-orgasmo" />
+              <ion-text class="texto-orgasmo">Sí tuve</ion-text>
+            </div>
+            <div class="opcion-orgasmo" (click)="seleccionarOrgasmo('no')"
+              [ngClass]="{ 'seleccionado': orgasmoSeleccionado === 'no' }">
+              <img src="assets/icons/pantalla-principal/no.png" alt="No tuve" class="icono-orgasmo" />
+              <ion-text class="texto-orgasmo">No tuve</ion-text>
+            </div>
+            <div class="opcion-orgasmo" (click)="seleccionarOrgasmo('no-se')"
+              [ngClass]="{ 'seleccionado': orgasmoSeleccionado === 'no-se' }">
+              <img src="assets/icons/pantalla-principal/no-se.png" alt="No lo sé" class="icono-orgasmo" />
+              <ion-text class="texto-orgasmo">No lo sé</ion-text>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </ion-content>

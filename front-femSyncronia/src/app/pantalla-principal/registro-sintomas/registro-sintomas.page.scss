@@ -1,13 +1,16 @@
-ion-content {
-  --background: none; /* Sin fondo de color por defecto */
-  background-image: url('/assets/img/pantalla-principal/fondo-tabs.svg'); /* Imagen de fondo */
-  background-size: cover; /* La imagen cubre todo el área */
-  background-repeat: no-repeat; /* La imagen no se repite */
-  background-position: center; /* La imagen está centrada */
-  width: 100%; /* Ancho completo */
-  height: 100vh; /* Altura completa de la ventana */
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh; /* Cubre al menos el viewport */
+  height: 1470px; /* Altura igual a la altura de la imagen */
+  background-image: url('/assets/img/pantalla-principal/background-sintomas.jpeg');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: top center;
+  z-index: -1;
 }
-
 /* Contenedor de la barra superior */
 .top-bar {
   height: 100px;
@@ -192,4 +195,138 @@ ion-content {
 .textarea-notas::placeholder {
   color: #747474;
   font-style: italic;
+}
+
+/* Contenedor principal para acto sexual */
+.acto-sexual-container {
+  width: 90%;
+  height: 448px;
+  margin: 16px auto; /* Centrado y margen superior */
+  border-radius: 10px;
+  background-color: #FFE3E0; /* Fondo rosado */
+  padding: 16px; /* Espaciado interno */
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+/* Estilos para el texto "Acto Sexual" */
+.texto-acto-sexual {
+  color: black;
+  font-family: "Open Sans";
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px; /* Espacio entre el texto y el contenedor interno */
+  display: block; /* Asegura que el texto ocupe su propia línea */
+}
+
+/* Estilos para el contenedor de detalles del acto sexual */
+.detalles-acto-container {
+  width: 100%;
+  height: auto; /* Ajusta la altura automáticamente */
+  border-radius: 10px;
+  background-color: #FFD3D8; /* Fondo más claro */
+  padding: 16px; /* Espaciado interno */
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+/* Para que las opciones de orgasmo se ubiquen debajo */
+.opcion-acto {
+  display: flex;
+  align-items: flex-start; /* Asegura que el contenido se alinee al inicio */
+  justify-content: space-between;
+  padding: 12px 0;
+  flex-direction: row; /* Mantiene el diseño horizontal por defecto */
+}
+
+.opcion-acto.orgasmo {
+  flex-direction: column; /* Hace que los elementos se apilen en columna */
+  align-items: flex-start; /* Alinea el contenido a la izquierda */
+  gap: 8px; /* Espacio entre el texto y las opciones */
+}
+
+/* Contenedor para el ícono y el texto */
+.contenido-opcion {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Espacio entre el ícono y el texto */
+}
+
+/* Estilos para el ícono SVG */
+.icono-opcion {
+  width: 24px; /* Tamaño del ícono */
+  height: 24px;
+  object-fit: contain; /* Asegura que el SVG se escale correctamente */
+}
+
+/* Estilos para el texto de la opción */
+.texto-opcion {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* Espacio entre título y subtítulo */
+}
+
+/* Estilos para el título de la opción */
+.titulo-opcion {
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+}
+
+/* Estilos para el subtítulo de la opción */
+.subtitulo-opcion {
+  font-family: "Open Sans";
+  font-size: 12px;
+  font-weight: 400;
+  color: #747474;
+}
+
+/* Contenedor para las opciones de orgasmo */
+.opciones-orgasmo {
+  display: flex;
+  gap: 16px; /* Espacio entre las opciones */
+  margin-top: 8px; /* Espacio superior */
+}
+
+/* Estilos para cada opción de orgasmo */
+.opcion-orgasmo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px; /* Espacio entre el ícono y el texto */
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+/* Estilos para el ícono de orgasmo */
+.icono-orgasmo {
+  width: 50px; /* Tamaño del ícono */
+  height: 50px;
+  object-fit: contain; /* Asegura que el SVG se escale correctamente */
+}
+
+/* Estilos para el texto de orgasmo */
+.texto-orgasmo {
+  font-family: "Open Sans";
+  font-size: 12px;
+  font-weight: 400;
+  color: black;
+}
+
+/* Estilos para la opción seleccionada */
+.opcion-orgasmo.seleccionado {
+  background-color: #FF9CA7; /* Fondo rosado para la opción seleccionada */
+}
+
+/* Estilos para el toggle */
+ion-toggle {
+  --track-background-checked: #FF9CA7; /* Fondo del toggle cuando está activado */
+  --track-background: #C4C4C4; /* Fondo del toggle cuando está desactivado */
+  --handle-background: white; /* Color del círculo interior */
+  --handle-background-checked: white; /* Color del círculo interior cuando está activado */
+  --handle-spacing: 2px; /* Espacio entre el círculo y el borde */
+  transform: scale(0.8); /* Escala el toggle al 80% de su tamaño original */
+  transform-origin: left center; /* Ajusta el punto de origen de la transformación */
+  margin-right: 8px; /* Ajusta el margen derecho si es necesario */
 }

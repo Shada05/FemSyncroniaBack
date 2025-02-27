@@ -17,6 +17,9 @@ export class RegistroSintomasPage implements OnInit {
   sintomasPorTipo: { [key: number]: any[] } = {};
   sintomaSeleccionado: any = null;
   notasValue: string = ''; // Asegúrate de que esté inicializado
+  tuvoActoSexual: boolean = false; // Estado del toggle "Relaciones"
+  usoProteccion: boolean = false; // Estado del toggle "Protección"
+  orgasmoSeleccionado: string | null = null;
 
   constructor(
     private apiService: ApiService,
@@ -105,5 +108,10 @@ export class RegistroSintomasPage implements OnInit {
   // Función para manejar el evento de entrada en el textarea
   onNotasInput(event: any) {
     console.log('Valor de notasValue:', this.notasValue); // Depuración
+  }
+
+  // Función para seleccionar una opción de orgasmo
+  seleccionarOrgasmo(opcion: string) {
+    this.orgasmoSeleccionado = opcion;
   }
 }
