@@ -3,29 +3,38 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class values_users extends Model {
+  class cycle_calendar extends Model {
 
     static associate(models) {
     }
   }
-  values_users.init({
+  cycle_calendar.init({
 
-    id_user:{
-      type: DataTypes.DATE,
+    cycle_status:{
+      type: DataTypes.INTEGER,
       allowNull: false
     }, 
-    weight:{
+    Start_day:{ //INICIO DE ESE PERIODO
       type: DataTypes.DATE,
       allowNull: true
     }, 
-    temperature: {
+    Finish_day: { //FIN DEL PERIODO
       type: DataTypes.DATE,
       allowNull: true
     }, 
-    height: {
+
+    average_periodo: {
       type: DataTypes.DATE,
       allowNull: true
-    }, 
+    },
+    average_ciclo: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    Regular_cycle:{ //0=No, 1=Sí, 2=Tal vez
+      type: DataTypes.INTEGER,
+      allowNull:true
+    },
     createdAt: {
       allowNull: false, 
       type: DataTypes.DATE,
@@ -42,12 +51,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   }, {
     sequelize,
-        modelName: 'values_users',
+        modelName: 'cycle_calendar',
         defaultScope: {
             attributes: {
                 exclude: ['updatedAt','deletedAt']
             }
         }
   });
-  return values_users;
+  return cycle_calendar;
 };

@@ -3,7 +3,10 @@ const bcrypt = require('bcrypt');
 
 exports.store = async (req, res) => {
     try {
-        const { birthdate, username, name, lastname, user_status, email, password, profile_image, phone  } = req.body;
+        const { birthdate, username, name, lastname, user_status, email, password, profile_image, phone, 
+            when_your_period_came, recording_period, Have_symptoms, First_period, Affects_skin, Affects_weight,
+            Affects_dream, Affects_energy, Affects_appetite, Affects_humour
+          } = req.body;
 
         // Verificar si el email ya está registrado
         const existingUser = await users.findOne({ where: { email } });
@@ -24,8 +27,17 @@ exports.store = async (req, res) => {
             profile_image,
             birthdate,
             username,
-            user_status
-
+            user_status,
+            when_your_period_came,
+            recording_period,
+            Have_symptoms,
+            First_period,
+            Affects_skin,
+            Affects_weight,
+            Affects_dream,
+            Affects_energy,
+            Affects_appetite,
+            Affects_humour
         });
 
         return res.status(201).send(newUser);
@@ -114,7 +126,15 @@ exports.update = async (req, res) => {
     if (req.body.email != null) updatedData['email']= req.body.email;
     if (req.body.password != null) updatedData['password']= req.body.password;
     if (req.body.profile_image != null) updatedData['profile_image']= req.body.profile_image;
-
+    if (req.body.when_your_period_came != null) updatedData['when_your_period_came']= req.body.when_your_period_came;
+    if (req.body.recording_period != null) updatedData['recording_period']= req.body.recording_period;
+    if (req.body.Have_symptoms != null ) updatedData['Have_symptoms']= req.body.Have_symptoms;
+    if (req.body.Affects_skin != null ) updatedData['Affects_skin']= req.body.Affects_skin;
+    if (req.body.Affects_weight != null ) updatedData['Affects_weight']= req.body.Affects_weight;
+    if (req.body.Affects_dream != null ) updatedData['Affects_dream']= req.body.Affects_dream;
+    if (req.body.Affects_energy != null ) updatedData['Affects_energy']= req.body.Affects_energy;
+    if (req.body.Affects_appetite != null ) updatedData['Affects_appetite']= req.body.Affects_appetite;
+    if (req.body.Affects_humour != null ) updatedData['Affects_humour']= req.body.Affects_humour;
 
     return await users.update(updatedData, {
         where: {

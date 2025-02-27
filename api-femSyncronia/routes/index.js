@@ -4,7 +4,6 @@ const path = require('path'); // Necesario para manejar rutas de archivos
 
 const cyclesController = require('../controllers/cycles');
 const crons_statusController = require('../controllers/crons_status');
-const usuarioController = require('../controllers/usuario');
 const usersController = require('../controllers/users');
 const emailsController = require('../controllers/emails');
 const user_statusesController = require('../controllers/user_status');
@@ -39,12 +38,6 @@ router.post('/upload', upload.single('image'), uploadImage);
 router.use('/iconos/sintomas', express.static(path.join(__dirname, '../iconos/sintomas')));
 router.use('/uploads', express.static('uploads')); // Servir archivos estáticos
 
-// Rutas de usuario
-router.post("/api/v1/usuario/", usuarioController.store);
-router.get("/api/v1/usuario/:id", usuarioController.show);
-router.get("/api/v1/usuario/", usuarioController.index);
-router.delete("/api/v1/usuario/:id", usuarioController.destroy);
-router.put("/usuarios/:id", usuarioController.update);
 
 // Rutas de emails
 router.post('/api/v1/emails', emailsController.store);
@@ -78,10 +71,14 @@ router.delete('/api/v1/users-status/:id', user_statusesController.destroy);
 
 //cycles
 router.post('/api/v1/cycles', cyclesController.store);
+router.post('/api/v1/cycles_prediction', cyclesController.store_prediction);
+
 router.get('/api/v1/cycles', cyclesController.index);
 router.get('/api/v1/cycles/:id', cyclesController.show);
 router.put('/api/v1/cycles/:id', cyclesController.update);
 router.delete('/api/v1/cycles/:id', cyclesController.destroy);
+router.get('/api/v1/cycles_tables/:id', cyclesController.show_tables);
+
 
 //Crons_status
 router.post('/api/v1/cronsstatus', crons_statusController.store);

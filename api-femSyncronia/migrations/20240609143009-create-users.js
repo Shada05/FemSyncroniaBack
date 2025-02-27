@@ -39,6 +39,33 @@ module.exports = {
             token: {
                 type: Sequelize.STRING
             },
+            when_your_period_came: {
+                type: Sequelize.DATE
+            },
+            recording_period: {
+                type: Sequelize.INTEGER
+            },
+            Have_symptoms: {
+                type: Sequelize.INTEGER
+            },
+            Affects_skin: {//0=No, 1=Si, 2= No lo se
+                type: Sequelize.INTEGER
+            },
+            Affects_weight: {//0=No, 1=Si, 2= No lo se
+                type: Sequelize.INTEGER
+            },
+            Affects_dream: {//0=No, 1=Si, 2= No lo se
+                type: Sequelize.INTEGER
+            },
+            Affects_energy: {//0=No, 1=Si, 2= No lo se
+                type: Sequelize.INTEGER
+            },
+            Affects_appetite: {//0=No, 1=Si, 2= No lo se
+                type: Sequelize.INTEGER
+            },
+            Affects_humour: {//0=No, 1=Si, 2= No lo se
+                type: Sequelize.INTEGER
+            },
             createdAt: {
                 type: Sequelize.DATE,
                 allowNull: false,
