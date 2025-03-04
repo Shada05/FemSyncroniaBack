@@ -389,3 +389,131 @@ ion-button {
 .contenedor-item[data-tipo="otro"] .linea-divisora {
   background-color: #FFD9B3;
 }
+
+/* Estilo para el título "Análisis" */
+.titulo-analisis {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: black;
+  margin-bottom: 20px;
+}
+
+/* Estilo para el contenedor de ciclos */
+.contenedor-ciclos {
+  width: 316px;
+  height: 170px;
+  background: #E9E9E9; /* Fondo gris claro */
+  border-radius: 20px; /* Bordes redondeados */
+  margin: 16px auto; /* Centrado y margen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  color: black; /* Color del texto */
+  font-weight: 600;
+  padding: 16px; /* Añadido padding para espaciado interno */
+}
+
+/* Estilo para la línea con ícono y texto "Ciclos" */
+.linea-ciclos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px; /* Espaciado inferior */
+}
+
+.icono-ciclos {
+  font-size: 24px;
+  margin-right: 8px;
+  color: black;
+}
+
+.texto-ciclos {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  color: black;
+  margin-top: 8px; /* Espaciado superior para separar del borde */
+}
+
+/* Estilo para el texto adicional */
+.texto-ciclos-registrados {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 12px; /* Reducido el margen inferior */
+}
+
+/* Contenedor para las dos cards pequeñas */
+.contenedor-cards {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px; /* Espaciado entre las cards */
+}
+
+/* Estilo para las cards pequeñas */
+.card-pequena {
+  width: 136px;
+  height: 67px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  color: white; /* Color del texto */
+  font-weight: 600;
+  margin: 0; /* Eliminado margen adicional */
+}
+
+/* Estilo para el contenedor de temperatura */
+.contenedor-temperatura {
+  width: 316px;
+  height: 94px;
+  background: #FFFFFF; /* Fondo blanco */
+  border-radius: 20px; /* Bordes redondeados */
+  margin: 16px auto; /* Centrado y margen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  color: black; /* Color del texto */
+  font-weight: 600;
+}
+
+/* Estilo para el contenedor de peso */
+.contenedor-peso {
+  width: 316px;
+  height: 94px;
+  background: #FFFFFF; /* Fondo blanco */
+  border-radius: 20px; /* Bordes redondeados */
+  margin: 16px auto; /* Centrado y margen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  color: black; /* Color del texto */
+  font-weight: 600;
+}
+
+/* Estilo para el contenedor de historial */
+.contenedor-historial {
+  width: 316px;
+  height: 94px;
+  background: #FFFFFF; /* Fondo blanco */
+  border-radius: 20px; /* Bordes redondeados */
+  margin: 16px auto; /* Centrado y margen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  color: black; /* Color del texto */
+  font-weight: 600;
+}
