@@ -17,7 +17,7 @@ const symptoms_Controller = require('../controllers/symptoms.js');
 
 const { uploadImage } = require('../controllers/imageController');
 const upload = require('../middlewares/upload');
-const  auth_controller = require('../controllers/authcontroller');
+const  auth_controller = require('../controllers/authController');
 const { authenticateToken } = require('../middlewares/auth');
 const { enviarCodigoVerificacion, validarCodigo } = require('../controllers/emailController');
 

@@ -4,7 +4,7 @@
     "description": "API for proyect FemSyncronia",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon index.js",
+        "start": "node index.js",
         "test": "echo \"Error: no test specified\" && exit 1",
         "make:model": "sequelize model:create --name",
         "make:migration": "npx sequelize-cli migration:generate --name",
