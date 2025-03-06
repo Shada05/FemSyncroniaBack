@@ -1,9 +1,9 @@
 {
     "development": {
-        "username": "root",
-        "password": null,
-        "database": "db_femsync",
-        "host": "127.0.0.1",
+        "username": "utmzbmo1i6zjivyb",
+        "password": "XhVDjn73igLYlfGvBIhE",
+        "database": "binjropyndoqknlvwkvl",
+        "host": "binjropyndoqknlvwkvl-mysql.services.clever-cloud.com",
         "dialect": "mysql"
     },
     "test": {
