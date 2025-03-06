@@ -10,13 +10,14 @@ ion-content {
   
 /* Contenedor de la barra superior */
 .top-bar {
-    display: flex; /* Configura el contenedor como flexbox */
-    align-items: center; /* Centra verticalmente los elementos */
-    justify-content: space-between; /* Espacia los elementos uniformemente */
-    padding: 25px 16px; /* Espaciado interno: 10px arriba/abajo, 16px izquierda/derecha */
-    width: 100%; /* Ancho completo */
-    background-color: transparent; /* Fondo transparente */
-  }
+  height: 100px;  
+  display: flex; /* Configura el contenedor como flexbox */
+  align-items: center; /* Centra verticalmente los elementos */
+  justify-content: space-between; /* Espacia los elementos uniformemente */
+  padding: 25px 16px; /* Espaciado interno: 10px arriba/abajo, 16px izquierda/derecha */
+  width: 100%; /* Ancho completo */
+  background-color: transparent; /* Fondo transparente */
+}
   
 /* Ajusta el ícono de notificación */
 .notificacion {
@@ -253,13 +254,266 @@ ion-item{
 }
 
 ion-tab-bar {
-    --background: #ffffff; /* Fondo blanco para el tab-bar */
-    border-top: none;
+  --background: #ffffff; /* Fondo blanco para el tab-bar */
+  border-top: none;
 }
 
 ion-tab-button {
-    --background: #ffffff; /* Fondo blanco de los botones */
-    --color: #8e8e93; /* Color por defecto */
-    --color-selected: #ff4d7f; /* Color cuando está seleccionado */
-    font-size: 7px;
+  --background: #ffffff; /* Fondo blanco de los botones */
+  --color: #8e8e93; /* Color por defecto */
+  --color-selected: #ff4d7f; /* Color cuando está seleccionado */
+  font-size: 7px;
+}
+ion-button {
+  --color: black;
+  margin: 0; /* Elimina márgenes no deseados */
+  padding: 0; /* Elimina padding no deseado */
+}
+
+.mes-año {
+  color: black;
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+/* Contenedor principal */
+.info-dia {
+  width: 350px;
+  background: transparent;
+  border-radius: 20px;
+  margin: 24px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  position: relative;
+}
+
+/* Etiquetas superiores */
+.etiquetas-superiores {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.etiqueta-dia-actual{
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.etiqueta-indice-ciclo{
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  color: #7B7A7A;
+}
+/* Botón de editar */
+.boton-editar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 150px;
+  height: 10px;
+  --background: #FFF;
+  --border-radius: 50px;
+  --color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: none;
+  --color:#FF9CA7;
+  --background-activated: #F2F2F2;
+}
+
+/* Contenedores adicionales */
+.contenedor-adicional {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+}
+
+.contenedor-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Alinea los elementos uniformemente */
+  padding: 8px 0;
+  position: relative;
+}
+
+/* Texto izquierdo */
+.item-texto {
+  font-size: 16px;
+  color: #333;
+  flex: 1; /* Que ocupe el espacio necesario */
+  text-align: left;
+}
+
+/* Línea divisora */
+.linea-divisora {
+  width: 2px;
+  height: 24px;
+  margin: 0 10px; /* Espaciado entre texto e línea */
+  align-self: center;
+}
+
+/* Texto derecho */
+.texto-derecha {
+  font-size: 16px;
+  color: #333;
+  flex: 1;
+  text-align: left;
+}
+
+/* Colores específicos para cada línea */
+.contenedor-item[data-tipo="baja"] .linea-divisora {
+  background-color: #C5E1A5;;
+}
+
+.contenedor-item[data-tipo="peso"] .linea-divisora {
+  background-color: #FFB3C9;;
+}
+
+.contenedor-item[data-tipo="temp"] .linea-divisora {
+  background-color: #D5B3FF;
+}
+
+.contenedor-item[data-tipo="otro"] .linea-divisora {
+  background-color: #FFD9B3;
+}
+
+/* Estilo para el título "Análisis" */
+.titulo-analisis {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: black;
+  margin-bottom: 20px;
+}
+
+/* Estilo para el contenedor de ciclos */
+.contenedor-ciclos {
+  width: 316px;
+  height: 170px;
+  background: #E9E9E9; /* Fondo gris claro */
+  border-radius: 20px; /* Bordes redondeados */
+  margin: 16px auto; /* Centrado y margen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  color: black; /* Color del texto */
+  font-weight: 600;
+  padding: 16px; /* Añadido padding para espaciado interno */
+}
+
+/* Estilo para la línea con ícono y texto "Ciclos" */
+.linea-ciclos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px; /* Espaciado inferior */
+}
+
+.icono-ciclos {
+  font-size: 24px;
+  margin-right: 8px;
+  color: black;
+}
+
+.texto-ciclos {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  color: black;
+  margin-top: 8px; /* Espaciado superior para separar del borde */
+}
+
+/* Estilo para el texto adicional */
+.texto-ciclos-registrados {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 12px; /* Reducido el margen inferior */
+}
+
+/* Contenedor para las dos cards pequeñas */
+.contenedor-cards {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px; /* Espaciado entre las cards */
+}
+
+/* Estilo para las cards pequeñas */
+.card-pequena {
+  width: 136px;
+  height: 67px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  color: white; /* Color del texto */
+  font-weight: 600;
+  margin: 0; /* Eliminado margen adicional */
+}
+
+/* Estilo para el contenedor de temperatura */
+.contenedor-temperatura {
+  width: 316px;
+  height: 94px;
+  background: #FFFFFF; /* Fondo blanco */
+  border-radius: 20px; /* Bordes redondeados */
+  margin: 16px auto; /* Centrado y margen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  color: black; /* Color del texto */
+  font-weight: 600;
+}
+
+/* Estilo para el contenedor de peso */
+.contenedor-peso {
+  width: 316px;
+  height: 94px;
+  background: #FFFFFF; /* Fondo blanco */
+  border-radius: 20px; /* Bordes redondeados */
+  margin: 16px auto; /* Centrado y margen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  color: black; /* Color del texto */
+  font-weight: 600;
+}
+
+/* Estilo para el contenedor de historial */
+.contenedor-historial {
+  width: 316px;
+  height: 94px;
+  background: #FFFFFF; /* Fondo blanco */
+  border-radius: 20px; /* Bordes redondeados */
+  margin: 16px auto; /* Centrado y margen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  color: black; /* Color del texto */
+  font-weight: 600;
 }
