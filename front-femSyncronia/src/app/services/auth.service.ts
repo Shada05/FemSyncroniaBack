@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage-angular';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://femsyncronia.onrender.com';  // URL de tu API
+  private apiUrl = 'http://localhost:3000';  // URL de tu API
 
   constructor(private http: HttpClient, private storage: Storage) {
     this.storage.create();
