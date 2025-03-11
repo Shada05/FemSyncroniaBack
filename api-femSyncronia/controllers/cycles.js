@@ -217,7 +217,7 @@ exports.store_prediction = async (req, res) => {
         const createdCycle = await cycles.create(cycle);
 
         // Llamar al script de Python después de almacenar los datos
-        const pythonProcess = spawn('python3', ['/IA-Cycles/index.py', createdCycle.user_id]); // entorno python 3
+        const pythonProcess = spawn('python3', ['/IA-Cycles/prueba.py', createdCycle.user_id]); // entorno python 3
 
         pythonProcess.stdout.on('data', (data) => {
             console.log(`Salida del script Python: ${data}`);

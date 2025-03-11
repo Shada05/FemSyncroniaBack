@@ -14,7 +14,7 @@ password = ""
 # Variables para almacenar los datos
 x_data = []  # Almacenará los valores de "id"
 y_data = []  # Almacenará los valores de "DM_1"
-
+print("Hola mundo")
 try:
     # Conexión a la base de datos MySQL
     connection = mysql.connector.connect(
@@ -24,7 +24,7 @@ try:
         user=user,
         password=password
     )
-
+   
     if connection.is_connected():
         db_Info = connection.get_server_info()
         print("Conectado a MySQL Server versión", db_Info)
