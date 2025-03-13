@@ -390,20 +390,19 @@ ion-button {
   background-color: #FFD9B3;
 }
 
-/* Estilo para el título "Análisis" */
+/* Centrar el título "Análisis" */
 .titulo-analisis {
-  text-align: center;
-  font-size: 24px;
-  font-weight: 600;
-  color: black;
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  text-align: center; /* Asegura que el texto esté centrado */
+  width: 100%; /* Ocupa todo el ancho disponible */
 }
 
 /* Estilo para el contenedor de ciclos */
 .contenedor-ciclos {
   width: 316px;
   height: 170px;
-  background: #E9E9E9; /* Fondo gris claro */
+  background: #FFE3E0;; /* Fondo gris claro */
   border-radius: 20px; /* Bordes redondeados */
   margin: 16px auto; /* Centrado y margen */
   display: flex;
@@ -420,8 +419,8 @@ ion-button {
 .linea-ciclos {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 8px; /* Espaciado inferior */
+  justify-content: flex-start; /* Alinea a la izquierda */
+  margin-bottom: 8px;
 }
 
 .icono-ciclos {
@@ -444,7 +443,15 @@ ion-button {
   font-style: normal;
   font-weight: 700;
   color: black;
-  margin-bottom: 12px; /* Reducido el margen inferior */
+  margin-bottom: 12px;
+  text-align: left; /* Alinea el texto a la izquierda */
+  display: block;
+  width: 100%; /* Para asegurarse de que ocupe toda la línea */
+}
+
+/* Ajustar el padding del ion-card-content */
+ion-card-content {
+  padding: 0; /* Eliminar el padding */
 }
 
 /* Contenedor para las dos cards pequeñas */
@@ -457,17 +464,87 @@ ion-button {
 
 /* Estilo para las cards pequeñas */
 .card-pequena {
-  width: 136px;
+  width: 140px;
   height: 67px;
   border-radius: 10px;
   display: flex;
+  flex-direction: column; /* Asegura que los elementos estén en columna */
   align-items: center;
   justify-content: center;
   text-align: center;
   font-size: 14px;
-  color: white; /* Color del texto */
+  color: white;
   font-weight: 600;
-  margin: 0; /* Eliminado margen adicional */
+  margin: 0;
+  padding: 5px; /* Añadir un pequeño padding */
+}
+
+/* Contenedor para el ícono y el texto */
+.contenido-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px; /* Reducir el espacio entre el ícono y el texto */
+  width: 70%;
+}
+
+/* Estilo del icono */
+.icono-card {
+  font-size: 20px;
+  color: black;
+  flex-shrink: 0; /* Evita que el icono se reduzca */
+}
+
+/* Estilo del texto */
+.texto-dias {
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap; /* Evita que se divida en dos líneas */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1; /* Permite que el texto se expanda */
+  text-align: center;
+  margin-left: 2px; /* Ajuste adicional si es necesario */
+}
+
+.color-texto-periodo{
+  color: #9F0000;
+}
+.color-texto-ciclo{
+  color:#9F6900;
+}
+/* Línea divisora */
+.linea-divisora {
+  width: 90%; /* Ocupar todo el ancho disponible */
+  height: 1px;
+  margin: 2px 0;
+}
+
+/* Colores de la línea divisora */
+.linea-roja {
+  background-color: #9F0000;
+}
+
+.linea-amarilla {
+  background-color: #9F6900;
+}
+
+/* Estilo del texto "Promedio de período" y "Promedio de ciclo" */
+.texto-promedio {
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap; /* Evitar que se divida en dos líneas */
+  width: 100%; /* Ocupar todo el ancho */
+}
+
+/* Ajustar el padding del ion-card-content */
+.content-cards {
+  padding: 0; /* Eliminar el padding */
+  width: 100%; /* Asegurar que ocupe todo el ancho */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Estilo para el contenedor de temperatura */

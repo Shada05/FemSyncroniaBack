@@ -145,15 +145,17 @@
     </ion-tab>
 
 
-    <ion-tab tab="grafica">
+    <ion-tab tab="analisis">
       <div id="pagina-grafica">
         <ion-content>
           <div class="center">
 
-            <!-- Título "Análisis" -->
-            <ion-text class="titulo-analisis">
-              <h1>Análisis</h1>
-            </ion-text>
+            <!-- Barra superior -->
+            <div class="top-bar">
+              <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg"></ion-icon>
+              <ion-text class="bienvenida-text">Análisis</ion-text>
+              <img class="imagen-perfil" [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()">
+            </div>
 
             <!-- Contenedor para Ciclos -->
             <ion-card class="contenedor-ciclos">
@@ -169,17 +171,27 @@
 
                 <!-- Contenedor para las dos cards pequeñas -->
                 <div class="contenedor-cards">
-                  <!-- Card 1: Color #9F0000 -->
-                  <ion-card class="card-pequena" style="background-color: #9F0000;">
-                    <ion-card-content>
-                      <p>Card 1</p>
+                  <!-- Card 1: Promedio de período -->
+                  <ion-card class="card-pequena" style="background-color: rgba(255, 0, 0, 0.32);" >
+                    <ion-card-content class="content-cards">
+                      <div class="contenido-card">
+                        <ion-icon src="assets/icons/pantalla-principal/sangre-1.svg" class="icono-card"></ion-icon>
+                        <ion-text class="texto-dias color-texto-periodo">7 días</ion-text>
+                      </div>
+                      <div class="linea-divisora linea-roja"></div>
+                      <ion-text class="texto-promedio color-texto-periodo">Promedio de período</ion-text>
                     </ion-card-content>
                   </ion-card>
 
-                  <!-- Card 2: Color #9F6900 -->
-                  <ion-card class="card-pequena" style="background-color: #9F6900;">
-                    <ion-card-content>
-                      <p>Card 2</p>
+                  <!-- Card 2: Promedio de ciclo -->
+                  <ion-card class="card-pequena" style="background-color: rgba(255, 184, 0, 0.32);">
+                    <ion-card-content class="content-cards">
+                      <div class="contenido-card">
+                        <ion-icon src="assets/icons/pantalla-principal/ciclo-amarillo.svg" class="icono-card"></ion-icon>
+                        <ion-text class="texto-dias color-texto-ciclo">30 días</ion-text>
+                      </div>
+                      <div class="linea-divisora linea-amarilla"></div>
+                      <ion-text class="texto-promedio color-texto-ciclo">Promedio de ciclo</ion-text>
                     </ion-card-content>
                   </ion-card>
                 </div>
@@ -239,9 +251,9 @@
         <ion-icon src="../../../assets/icons/Tabs/Calendario.svg"></ion-icon>
         Calendario
       </ion-tab-button>
-      <ion-tab-button tab="grafica">
+      <ion-tab-button tab="analisis">
         <ion-icon src="../../../assets/icons/Tabs/Estadisticas.svg"></ion-icon>
-        Gráfica
+        Análisis
       </ion-tab-button>
       <ion-tab-button tab="buscar">
         <ion-icon src="../../../assets/icons/Tabs/Buscar.svg"></ion-icon>
