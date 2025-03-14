@@ -1,22 +1,23 @@
 import mysql.connector
-from mysql.connector import Error
 import numpy as np
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 
 # Parámetros de conexión
-host = "localhost"  # O la dirección IP del servidor MySQL
-port = 3306  # Puerto estándar para MySQL
+host = "localhost"
+port = 3306
 database = "db_femsync"
 user = "root"
 password = ""
 
+# Solicitar el user_id
+x = input("Ingrese el user_id a analizar: ")
+
 # Variables para almacenar los datos
-x_data = []  # Almacenará los valores de "id"
-y_data = []  # Almacenará los valores de "DM_1"
-print("Hola mundo")
+x_data = []  # Almacenará la cantidad de veces que aparece el user_id
+y_data = []  # Almacenará los valores de DM_1 para el user_id
+
 try:
-    # Conexión a la base de datos MySQL
     connection = mysql.connector.connect(
         host=host,
         port=port,
@@ -24,63 +25,61 @@ try:
         user=user,
         password=password
     )
-   
+
     if connection.is_connected():
-        db_Info = connection.get_server_info()
-        print("Conectado a MySQL Server versión", db_Info)
-
+        print("✅ Conexión exitosa a la base de datos")
         cursor = connection.cursor()
-        cursor.execute("SELECT DATABASE();")
-        record = cursor.fetchone()
-        print("Conectado a la base de datos:", record)
 
-        # Ejecutar la consulta para obtener los datos de la tabla "cycles"
-        cursor.execute("SELECT id, DM_1 FROM cycles;")
-        records = cursor.fetchall()
+        # Consulta para obtener los datos filtrados por user_id
+        cursor.execute("SELECT id, DM_1 FROM cycles WHERE user_id = %s;", (x,))
+        rows = cursor.fetchall()
 
-        # Almacenar los datos en las variables x_data e y_data
-        for record in records:
-            x_data.append(record[0])  # "id"
-            y_data.append(record[1])  # "DM_1"
+        # Contar la cantidad de veces que aparece el user_id
+        x_data = [len(rows)]  # La cantidad de veces que aparece en la BD
+        y_data = [row[1] for row in rows]  # Lista con los valores de DM_1
+        analizar_datos(x, x_data, y_data)
 
-        # Imprimir los registros obtenidos
-        print("Registros de la tabla 'cycles':")
-        for record in records:
-            print(record)
+except mysql.connector.Error as err:
+    print(f"❌ Error: {err}")
 
-        # Cierra el cursor y la conexión
+finally:
+    if 'connection' in locals() and connection.is_connected():
         cursor.close()
         connection.close()
-        print("Conexión cerrada")
+        print("🔌 Conexión cerrada")
 
-except Error as e:
-    print("Error al conectar a MySQL", e)
 
-# Usar los datos obtenidos en el segundo código
-x = np.array(x_data)  # Convertir a un array de numpy
-y = np.array(y_data)  # Convertir a un array de numpy
+def analizar_datos(x, x_data, y_data):
+    print(f"📊 El user_id {x} aparece {x_data[0]} veces en la base de datos")
+    print(f"📌 Valores de DM_1 asociados: {y_data}")
 
-# Reshape de x para que sea una matriz de una columna (requerido por scikit-learn)
-x = x.reshape(-1, 1)
+    # Si no hay datos suficientes para regresión, salir
+    if len(y_data) < 2:
+        print("⚠️ No hay suficientes datos para la regresión lineal")
+        return
 
-# Crear el modelo de regresión lineal
-modelo = LinearRegression()
+    # Convertir los datos en arreglos numpy para regresión
+    x_data_np = np.array(range(len(y_data))).reshape(-1, 1)  # Índices de los datos
+    y_data_np = np.array(y_data)
 
-# Entrenar el modelo
-modelo.fit(x, y)
+    # Modelo de regresión lineal
+    model = LinearRegression().fit(x_data_np, y_data_np)
+    r_sq = model.score(x_data_np, y_data_np)
 
-# Predecir valores de y para los valores de x
-y_pred = modelo.predict(x)
+    # Resultados del modelo
+    print(f'📈 Coeficiente de determinación: {r_sq}')
+    print(f'🔹 Intercepto: {model.intercept_}')
+    print(f'🔹 Pendiente: {model.coef_[0]}')
 
-# Visualizar los resultados
-plt.scatter(x, y, color='blue', label='Intensidad del sintoma')
-plt.plot(x, y_pred, color='red', label='cantidad de ciclos')
-plt.xlabel('x (id)')
-plt.ylabel('y (DM_1)')
-plt.title('Regresión Lineal (Predicción): y en función de x')
-plt.legend()
-plt.grid(True)
-plt.show()
+    # Predicción
+    y_pred = model.predict(x_data_np)
+    print(f'🔮 Predicción de valores: {y_pred}')
 
-# Mostrar la ecuación de la línea de regresión
-print(f"Ecuación de la línea de regresión: y = {modelo.coef_[0]:.4f}x + {modelo.intercept_:.4f}")
+    # Gráfica
+    plt.scatter(x_data_np, y_data_np, color='black', label="Datos reales")
+    plt.plot(x_data_np, y_pred, color='blue', linewidth=2, label="Regresión Lineal")
+    plt.title(f'Regresión Lineal para user_id {x}')
+    plt.xlabel('Índice de Datos')
+    plt.ylabel('DM_1')
+    plt.legend()
+    plt.show()
