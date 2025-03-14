@@ -17,38 +17,6 @@ x = input("Ingrese el user_id a analizar: ")
 x_data = []  # Almacenará la cantidad de veces que aparece el user_id
 y_data = []  # Almacenará los valores de DM_1 para el user_id
 
-try:
-    connection = mysql.connector.connect(
-        host=host,
-        port=port,
-        database=database,
-        user=user,
-        password=password
-    )
-
-    if connection.is_connected():
-        print("✅ Conexión exitosa a la base de datos")
-        cursor = connection.cursor()
-
-        # Consulta para obtener los datos filtrados por user_id
-        cursor.execute("SELECT id, DM_1 FROM cycles WHERE user_id = %s;", (x,))
-        rows = cursor.fetchall()
-
-        # Contar la cantidad de veces que aparece el user_id
-        x_data = [len(rows)]  # La cantidad de veces que aparece en la BD
-        y_data = [row[1] for row in rows]  # Lista con los valores de DM_1
-        analizar_datos(x, x_data, y_data)
-
-except mysql.connector.Error as err:
-    print(f"❌ Error: {err}")
-
-finally:
-    if 'connection' in locals() and connection.is_connected():
-        cursor.close()
-        connection.close()
-        print("🔌 Conexión cerrada")
-
-
 def analizar_datos(x, x_data, y_data):
     print(f"📊 El user_id {x} aparece {x_data[0]} veces en la base de datos")
     print(f"📌 Valores de DM_1 asociados: {y_data}")
@@ -83,3 +51,46 @@ def analizar_datos(x, x_data, y_data):
     plt.ylabel('DM_1')
     plt.legend()
     plt.show()
+
+try:
+    connection = mysql.connector.connect(
+        host=host,
+        port=port,
+        database=database,
+        user=user,
+        password=password
+    )
+
+    if connection.is_connected():
+        print("✅ Conexión exitosa a la base de datos")
+        cursor = connection.cursor()
+
+        # Consulta para obtener los datos filtrados por user_id
+        cursor.execute("SELECT id, DM_1 FROM cycles WHERE user_id = %s AND cycle_status = 1;", (x,))
+        rows = cursor.fetchall()
+
+        # Contar la cantidad de veces que aparece el user_id
+        x_data = [len(rows)]  # La cantidad de veces que aparece en la BD
+        y_data = [row[1] for row in rows]  # Lista con los valores de DM_1
+        
+        # Llamar a la función de análisis con los datos obtenidos
+        analizar_datos(x, x_data, y_data)
+
+        # Consulta para obtener los datos filtrados por user_id
+        cursor.execute("SELECT id, DM_2 FROM cycles WHERE user_id = %s;", (x,))
+        rows = cursor.fetchall()
+
+        # Contar la cantidad de veces que aparece el user_id
+        DM_2_x_data = [len(rows)]  # La cantidad de veces que aparece en la BD
+        DM_2_y_data = [row[1] for row in rows]  # Lista con los valores de DM_1
+        analizar_datos(x, DM_2_x_data, DM_2_y_data)
+
+
+except mysql.connector.Error as err:
+    print(f"❌ Error: {err}")
+
+finally:
+    if 'connection' in locals() and connection.is_connected():
+        cursor.close()
+        connection.close()
+        print("🔌 Conexión cerrada")
