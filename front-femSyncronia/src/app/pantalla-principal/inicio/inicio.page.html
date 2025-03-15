@@ -55,9 +55,8 @@
           <div class="top-bar">
             <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg"></ion-icon>
             <ion-text class="bienvenida-text">Bienvenida</ion-text>
-            <ion-avatar><img  [src]="profileImage" alt="Foto de perfil"
-              (click)="abrirMenuPerfil()">
-          </ion-avatar>
+            <ion-avatar><img [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()">
+            </ion-avatar>
           </div>
 
           <!-- Contenedor periodo -->
@@ -96,9 +95,8 @@
             <ion-button (click)="mesSiguiente()" fill="clear">
               <ion-icon name="chevron-forward-outline"></ion-icon>
             </ion-button>
-                          <ion-avatar><img  [src]="profileImage" alt="Foto de perfil"
-                  (click)="abrirMenuPerfil()">
-              </ion-avatar>
+            <ion-avatar><img [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()">
+            </ion-avatar>
           </div>
 
           <!-- Componente del calendario -->
@@ -157,12 +155,22 @@
             <div class="top-bar">
               <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg"></ion-icon>
               <ion-text class="bienvenida-text">Análisis</ion-text>
-              <ion-avatar><img  [src]="profileImage" alt="Foto de perfil"
-                  (click)="abrirMenuPerfil()">
+              <ion-avatar><img [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()">
               </ion-avatar>
             </div>
+            <ng-container *ngIf="componenteActivo === 'temperatura'">
+              <app-analisis-temperatura (cerrarComponente)="ocultarComponente()"></app-analisis-temperatura>
+            </ng-container>
 
+        <!--    <ng-container *ngIf="componenteActivo === 'peso'">
+              <app-analisis-peso (cerrarComponente)="ocultarComponente()"></app-analisis-peso>
+            </ng-container>
+
+            <ng-container *ngIf="componenteActivo === 'historial'">
+              <app-analisis-historial (cerrarComponente)="ocultarComponente()"></app-analisis-historial>
+            </ng-container>-->
             <!-- Contenedor para Ciclos -->
+             <ng-container *ngIf="!componenteActivo">
             <ion-card class="contenedor-ciclos">
               <ion-card-content>
                 <!-- Línea con ícono y texto "Ciclos" -->
@@ -221,7 +229,7 @@
                           <ion-text class="titulo">Temperatura</ion-text>
                         </div>
                         <!-- Flecha en la parte superior derecha -->
-                        <ion-button fill="clear" class="flecha">
+                        <ion-button fill="clear" class="flecha" (click)="mostrarComponente('temperatura')">
                           <ion-icon src="assets/icons/pantalla-principal/Adelante.svg"></ion-icon>
                         </ion-button>
                       </div>
@@ -278,6 +286,7 @@
                 </ion-col>
               </ion-row>
             </ion-grid>
+          </ng-container>
           </div>
         </ion-content>
       </div>

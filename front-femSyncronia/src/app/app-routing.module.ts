@@ -94,7 +94,8 @@ const routes: Routes = [
   {
     path: 'mi-perfil',
     loadChildren: () => import('./pantalla-principal/mi-perfil/mi-perfil.module').then( m => m.MiPerfilPageModule)
-  },  {
+  },
+  {
     path: 'sintomas',
     loadChildren: () => import('./formulario/sintomas/sintomas.module').then( m => m.SintomasPageModule)
   },

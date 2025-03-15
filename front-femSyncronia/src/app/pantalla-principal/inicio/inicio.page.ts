@@ -3,6 +3,7 @@ import { MenuController } from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular'
 
 @Component({
   selector: 'app-inicio',
@@ -14,12 +15,12 @@ export class InicioPage implements OnInit {
   userId: string | null = null;
   nombreCompleto: string = '';
   email: string = '';
-
+  componenteActivo: string = '';
   // Propiedades para manejar el mes y el año
   mesActual: number = 0;
   anoActual: number = 0;
   fechaActual: Date = new Date();
-  
+
   // Propiedades para el ciclo menstrual
   fechaInicio = new Date(2025, 1, 15); // 1 de Octubre de 2023
   fechaFin = new Date(2025, 1, 28); // 15 de Octubre de 2023
@@ -27,13 +28,24 @@ export class InicioPage implements OnInit {
   // Propiedades para las etiquetas
   diaActual: number = 0; // Número del día actual
   indice: number = 1; // Número del índice (puedes cambiarlo según sea necesario)
-  
+
   constructor(
     private menuCtrl: MenuController,
     private apiService: ApiService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private navCtrl: NavController
   ) { }
+  mostrarComponente(componente: string) {
+    this.componenteActivo = componente;
+  }
+
+  ocultarComponente() {
+    this.componenteActivo = '';
+  }
+  navegarATemperatura() {
+    this.navCtrl.navigateForward('/analisis-temperatura');
+  }
 
   ngOnInit() {
     this.cargarUsuario(); // Llama a la función para cargar los datos del usuario
