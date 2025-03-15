@@ -55,7 +55,9 @@
           <div class="top-bar">
             <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg"></ion-icon>
             <ion-text class="bienvenida-text">Bienvenida</ion-text>
-            <img class="imagen-perfil" [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()">
+            <ion-avatar><img  [src]="profileImage" alt="Foto de perfil"
+              (click)="abrirMenuPerfil()">
+          </ion-avatar>
           </div>
 
           <!-- Contenedor periodo -->
@@ -94,7 +96,9 @@
             <ion-button (click)="mesSiguiente()" fill="clear">
               <ion-icon name="chevron-forward-outline"></ion-icon>
             </ion-button>
-            <img class="imagen-perfil" [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()">
+                          <ion-avatar><img  [src]="profileImage" alt="Foto de perfil"
+                  (click)="abrirMenuPerfil()">
+              </ion-avatar>
           </div>
 
           <!-- Componente del calendario -->
@@ -153,7 +157,9 @@
             <div class="top-bar">
               <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg"></ion-icon>
               <ion-text class="bienvenida-text">Análisis</ion-text>
-              <img class="imagen-perfil" [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()">
+              <ion-avatar><img  [src]="profileImage" alt="Foto de perfil"
+                  (click)="abrirMenuPerfil()">
+              </ion-avatar>
             </div>
 
             <!-- Contenedor para Ciclos -->
