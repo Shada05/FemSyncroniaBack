@@ -11,6 +11,9 @@ import { NavController } from '@ionic/angular'
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit {
+  misLabelsY: string[] = ['35°C', '36°C', '37°C', '38°C', '39°C', '40°C', '41°C'];
+  minTemp: number = 34;
+  maxTemp: number = 42;
   profileImage: string = '/assets/img/pantalla-principal/Foto-perfil.svg'; // Ruta de la imagen de perfil por defecto
   userId: string | null = null;
   nombreCompleto: string = '';
@@ -43,9 +46,7 @@ export class InicioPage implements OnInit {
   ocultarComponente() {
     this.componenteActivo = '';
   }
-  navegarATemperatura() {
-    this.navCtrl.navigateForward('/analisis-temperatura');
-  }
+
 
   ngOnInit() {
     this.cargarUsuario(); // Llama a la función para cargar los datos del usuario

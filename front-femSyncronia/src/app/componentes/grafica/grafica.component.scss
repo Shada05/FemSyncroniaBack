@@ -1,0 +1,48 @@
+.contenido-grafica {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ocupa toda la altura disponible */
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+}
+  
+.contenedor-grafica {
+    flex: 1; /* Ocupa todo el espacio disponible */
+    min-height: 200px; /* Altura mínima para el gráfico */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Para posicionar el canvas correctamente */
+}
+  
+canvas {
+    width: 100% !important; /* Ocupa el 100% del ancho del contenedor */
+    height: 100% !important; /* Ocupa el 100% de la altura del contenedor */
+}
+  
+.contenedor-inferior {
+    height: 170px; /* Altura fija del contenedor inferior */
+    width: 100%;
+    border-radius: 20px;
+    background: #FFE3E0;
+    flex-shrink: 0; /* Evita que se encoja */
+    margin-top: 16px; /* Espaciado entre el gráfico y el contenedor inferior */
+}
+  
+.boton-cerrar-container {
+    position: absolute;
+    top: 110px;
+    right: 25px;
+    z-index: 2;
+}
+  
+.boton-cerrar {
+    font-size: 30px;
+    color: #ff4d7f;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    background: none;
+    border-radius: 50%;
+} 

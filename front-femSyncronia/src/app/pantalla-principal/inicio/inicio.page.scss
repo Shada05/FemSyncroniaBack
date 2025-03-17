@@ -639,3 +639,22 @@ ion-card-content {
   top: 0;
   right: 0;
 }
+
+/* Contenedor principal para el análisis de temperatura */
+.contenedor-analisis-grafica {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 150px); /* Ajusta la altura restando el espacio de la barra superior y el tab-bar */
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* Evita el scroll */
+}
+
+/* Ajustes para el componente de temperatura */
+app-grafica{
+  flex: 1; /* Ocupa el espacio disponible */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
