@@ -18,6 +18,14 @@ export class GraficaComponent implements OnInit, OnDestroy {
   diasMostrados: number = 16;
   ultimoDiaDelMes: number = 0;
   private intervaloActualizacion: any;
+  dia: string = ''; // Cambiado a tipo string para incluir día y mes
+  temperaturaActual: (number | null) = 0;
+
+  // Meses abreviados
+  mesesAbreviados: string[] = [
+    'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 
+    'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+  ];
 
   ngOnInit() {
     this.crearGrafica();
@@ -48,6 +56,41 @@ export class GraficaComponent implements OnInit, OnDestroy {
     return Array.from({ length: dias.length }, () => Math.floor(Math.random() * (41 - 35 + 1)) + 35);
   }
 
+  actualizarIndicador() {
+    const hoy = new Date().getDate();
+    const indiceHoy = this.diasDelMes.indexOf(hoy.toString());
+  
+    if (indiceHoy === -1) return; // Si el día actual no está en la gráfica, no hacer nada
+  
+    const temperaturaHoy = this.datosTemperatura[indiceHoy];
+    this.temperaturaActual = temperaturaHoy;
+    let posicion = 0; // Posición en porcentaje
+  
+    // Ajustamos las condiciones de temperatura
+    if (temperaturaHoy! < 36) {
+      posicion = 0;
+    } else if (temperaturaHoy! >= 36 && temperaturaHoy! < 37.5) {
+      posicion = 25;
+    } else if (temperaturaHoy! >= 38 && temperaturaHoy! < 39.5) {
+      posicion = 50;
+    } else if (temperaturaHoy! >= 39.5 && temperaturaHoy! < 41) {
+      posicion = 75;
+    } else {
+      posicion = 95; // Temperatura >= 41
+    }
+  
+    // Aseguramos que la posición no sea superior al 100%
+    if (posicion > 100) {
+      posicion = 100;
+    }
+  
+    const indicador = document.querySelector('.indicador') as HTMLElement;
+    if (indicador) {
+      // Actualizamos la posición del indicador
+      indicador.style.left = `${posicion}%`;
+    }
+  }
+
   crearGrafica() {
     const ctx = document.getElementById('graficaTemperatura') as HTMLCanvasElement;
     if (!ctx) return;
@@ -56,6 +99,8 @@ export class GraficaComponent implements OnInit, OnDestroy {
     const datosSimulados = this.simularDatosTemperatura();
     const hoy = new Date();
     const diaActual = hoy.getDate();
+    const mesActual = hoy.getMonth(); // Mes actual (de 0 a 11)
+    this.dia = `${diaActual} ${this.mesesAbreviados[mesActual]}`; // Guardamos día y mes abreviado como un string
 
     // Ajustar días mostrados según la fecha actual
     if (diaActual > this.diasMostrados) {
@@ -103,6 +148,7 @@ export class GraficaComponent implements OnInit, OnDestroy {
         }
       }
     });
+    this.actualizarIndicador();
   }
 
   cerrar() {

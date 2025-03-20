@@ -48,47 +48,96 @@ canvas {
     transition: color 0.3s ease;
     background: none;
     border-radius: 50%;
-} 
-
+}
+  
+/* Nueva estructura para el día, subtítulo y temperatura */
+.informacion-dia {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Para alinear la temperatura a la derecha */
+    flex-wrap: wrap; /* Permite que los elementos se ajusten cuando el espacio sea limitado */
+}
+  
+.informacion-dia-izquierda {
+    display: flex;
+    flex-direction: column;
+}
+  
+.dia-actual {
+    font-size: 20px;
+    font-weight: 700;
+    color: black;
+    margin-bottom: 4px; /* Espacio entre el día actual y el subtítulo */
+}
+  
+.subtitulo-dia {
+    font-size: 15px;
+    color: #00000066;
+}
+  
+.temperatura-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+  
+.temperatura {
+    font-size: 20px;
+    font-weight: 700;
+    color: black;
+}
+  
+/* Barra de intensidad */
 .barra-intensidad {
     width: 100%;
-    height: 30px;
-    background: #fff;
-    border-radius: 15px;
+    height: 19px; /* Se reduce el alto de la barra */
+    background: none;
+    border-radius: 10px; /* Agregado border-radius para bordes redondeados */
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* Permite que los elementos fuera del contenedor se vean */
+    margin-top: 16px;
 }
-
+  
 .niveles {
     display: flex;
     height: 100%;
     width: 100%;
+    margin: 0; /* Elimina el margen entre los niveles */
+    padding: 0; /* Elimina el padding entre los niveles */
 }
-
+  
 .nivel {
     flex: 1;
     height: 100%;
-    margin: 0 2px;
     background: #FFB3C9;
-    &:first-child { margin-left: 0; }
-    &:last-child { margin-right: 0; }
+    border-radius: 10px; /* Border-radius para cada nivel */
 }
-
-.indicador {
+  
+.contenedor-indicador {
     position: absolute;
-    top: -8px;
-    left: 0%;
+    bottom: -15px; /* Asegura que el contenedor esté justo fuera de la barra */
+    left: 0;
+    width: 100%;
+    height: 20px; /* Establecemos la altura para ajustarlo bien */
+    display: flex;
+    justify-content: flex-start;
+    pointer-events: none; /* Evita que el contenedor interfiera con las interacciones del usuario */
+}
+  
+.indicador {
     width: 20px;
     height: 20px;
     background: #ff4d7f;
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-    transform: translateX(-50%);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Triángulo apuntando hacia abajo */
+    position: absolute;
+    bottom: 0; /* Asegura que la punta quede alineada con la parte inferior */
     transition: left 0.3s ease;
 }
-
-/* Colores de niveles (opcional) */
-.nivel:nth-child(1) { background: #31B5FF; }  /* frio */
+  
+  /* Colores de niveles (opcional) */
+.nivel:nth-child(1) { background: #31B5FF; }  /* frío */
 .nivel:nth-child(2) { background: #73FF31; }  /* bueno */
-.nivel:nth-child(3) { background: #FFEA31; }  /* Regular */
+.nivel:nth-child(3) { background: #FFD436; }  /* Regular */
 .nivel:nth-child(4) { background: #FFA031; }  /* Malo */
 .nivel:nth-child(5) { background: #FF3D31; }  /* Peligroso */
+  
