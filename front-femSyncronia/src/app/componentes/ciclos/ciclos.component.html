@@ -1,0 +1,45 @@
+<div class="center">
+  <ion-card class="contenedor-ciclos">
+    <ion-card-content>
+      <!-- Línea con ícono y texto "Ciclos" -->
+      <div class="linea-ciclos">
+        <ion-icon src="assets/icons/pantalla-principal/ciclo.svg" class="icono-ciclos"></ion-icon>
+        <ion-text class="texto-ciclos">Ciclos</ion-text>
+      </div>
+
+      <!-- Botón de adelante en la parte superior derecha del contenedor Ciclos -->
+      <ion-button fill="clear" class="flecha">
+        <ion-icon src="assets/icons/pantalla-principal/Adelante.svg"></ion-icon>
+      </ion-button>
+
+      <!-- Texto adicional -->
+      <ion-text class="texto-ciclos-registrados">33 ciclos registrados</ion-text>
+
+      <!-- Contenedor para las dos cards pequeñas -->
+      <div class="contenedor-cards">
+        <!-- Card 1: Promedio de ciclo -->
+        <ion-card class="card-pequena" style="background-color: rgba(255, 184, 0, 0.32);">
+          <ion-card-content class="content-cards">
+            <div class="contenido-card">
+              <ion-icon src="assets/icons/pantalla-principal/ciclo-amarillo.svg" class="icono-card"></ion-icon>
+              <ion-text class="texto-dias color-texto-ciclo">30 días</ion-text>
+            </div>
+            <div class="linea-divisora-analisis linea-amarilla"></div>
+            <ion-text class="texto-promedio color-texto-ciclo">Promedio de ciclo</ion-text>
+          </ion-card-content>
+        </ion-card>
+        <!-- Card 2: Promedio de período -->
+        <ion-card class="card-pequena" style="background-color: rgba(255, 0, 0, 0.32);">
+          <ion-card-content class="content-cards">
+            <div class="contenido-card">
+              <ion-icon src="assets/icons/pantalla-principal/sangre-1.svg" class="icono-card"></ion-icon>
+              <ion-text class="texto-dias color-texto-periodo">7 días</ion-text>
+            </div>
+            <div class="linea-divisora-analisis linea-roja"></div>
+            <ion-text class="texto-promedio color-texto-periodo">Promedio de período</ion-text>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</div>

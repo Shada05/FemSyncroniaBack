@@ -1,0 +1,100 @@
+.contenedor-ciclos {
+    width: 100%;
+    background: #FFE3E0;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: none;
+    position: relative;
+}
+
+.linea-ciclos {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.icono-ciclos {
+    width: 24px;
+    height: 24px;
+}
+
+.texto-ciclos {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    color: black;
+    margin-top: 8px; /* Espaciado superior para separar del borde */
+  }
+
+.flecha {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+}
+
+/* Estilo para el texto adicional */
+.texto-ciclos-registrados {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    color: black;
+    margin-bottom: 12px;
+    text-align: left; /* Alinea el texto a la izquierda */
+    display: block;
+    width: 100%; /* Para asegurarse de que ocupe toda la línea */
+  }
+
+.contenedor-cards {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+}
+
+.card-pequena {
+    width: 48%;
+    border-radius: 12px;
+}
+
+.content-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.contenido-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.icono-card {
+    width: 28px;
+    height: 28px;
+}
+
+.texto-dias {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.linea-divisora-analisis {
+    width: 80%;
+    height: 2px;
+    margin: 8px 0;
+}
+
+.linea-amarilla {
+    background: #FFB800;
+}
+
+.linea-roja {
+    background: #FF0000;
+}
+
+.texto-promedio {
+    font-size: 14px;
+    color: #333;
+}

@@ -149,7 +149,6 @@
     <ion-tab tab="analisis">
       <div id="pagina-grafica">
         <ion-content>
-          <div class="center">
 
             <!-- Barra superior -->
             <div class="top-bar">
@@ -158,6 +157,11 @@
               <ion-avatar><ion-img [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()"></ion-img>
               </ion-avatar>
             </div>
+            <ng-container *ngIf="componenteActivo === 'ciclos'">
+              <app-ciclos>
+                
+              </app-ciclos>
+            </ng-container>
             <ng-container *ngIf="componenteActivo === 'temperatura'">
               <div class="contenedor-analisis-grafica">
                 <app-grafica [yAxisLabels]="misLabelsY" [minTemp]="minTemp" [maxTemp]="maxTemp"
@@ -186,7 +190,7 @@
                   </div>
 
                   <!-- Botón de adelante en la parte superior derecha del contenedor Ciclos -->
-                  <ion-button fill="clear" class="flecha">
+                  <ion-button fill="clear" class="flecha" (click)="mostrarComponente('ciclos')">
                     <ion-icon src="assets/icons/pantalla-principal/Adelante.svg"></ion-icon>
                   </ion-button>
 
@@ -293,7 +297,6 @@
                 </ion-row>
               </ion-grid>
             </ng-container>
-          </div>
         </ion-content>
       </div>
     </ion-tab>

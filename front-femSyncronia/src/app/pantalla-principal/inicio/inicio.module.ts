@@ -10,7 +10,7 @@ import { InicioPage } from './inicio.page';
 
 import { CalendarioCicloComponent } from 'src/app/componentes/calendario-ciclo/calendario-ciclo.component';
 import { GraficaComponent } from 'src/app/componentes/grafica/grafica.component';
-
+import { CiclosComponent } from 'src/app/componentes/ciclos/ciclos.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,6 +18,6 @@ import { GraficaComponent } from 'src/app/componentes/grafica/grafica.component'
     IonicModule,
     InicioPageRoutingModule,
   ],
-  declarations: [InicioPage, CalendarioCicloComponent, GraficaComponent]
+  declarations: [InicioPage, CalendarioCicloComponent, GraficaComponent,CiclosComponent]
 })
 export class InicioPageModule { }

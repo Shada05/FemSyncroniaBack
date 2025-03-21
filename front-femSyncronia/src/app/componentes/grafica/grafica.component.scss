@@ -3,15 +3,10 @@
     flex-direction: column;
     height: 100%; /* Ocupa toda la altura disponible */
     width: 100%;
-    padding: 16px;
-    box-sizing: border-box;
 }
   
 .contenedor-grafica {
     flex: 1; /* Ocupa todo el espacio disponible */
-    min-height: 200px; /* Altura mínima para el gráfico */
-    width: 100%;
-    display: flex;
     justify-content: center;
     align-items: center;
     position: relative; /* Para posicionar el canvas correctamente */
@@ -20,10 +15,12 @@
 canvas {
     width: 100% !important; /* Ocupa el 100% del ancho del contenedor */
     height: 100% !important; /* Ocupa el 100% de la altura del contenedor */
+    padding-left: 16px;
+    padding-right: 16px;
 }
   
 .contenedor-inferior {
-    height: 170px;
+    height: 190px;
     width: 100%;
     border-radius: 20px;
     background: #FFE3E0;
@@ -36,8 +33,8 @@ canvas {
   
 .boton-cerrar-container {
     position: absolute;
-    top: 110px;
-    right: 25px;
+    top: 100px;
+    right: 35px;
     z-index: 2;
 }
   
@@ -140,4 +137,21 @@ canvas {
 .nivel:nth-child(3) { background: #FFD436; }  /* Regular */
 .nivel:nth-child(4) { background: #FFA031; }  /* Malo */
 .nivel:nth-child(5) { background: #FF3D31; }  /* Peligroso */
-  
+
+.contenedor-boton {
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    margin-top: 25px; /* Separa más el botón de la barra de intensidad */
+    width: 100%; /* Asegura que el contenedor ocupa todo el ancho disponible */
+}
+
+.editar-button {
+    --color: #FF9CA7;
+    --background: white;
+    --border-radius: 50px;
+    min-height: 34px;
+    width: 320px;
+    font-weight: 600;
+    font-size: 18px;
+    --background-activated: #F2F2F2;
+}

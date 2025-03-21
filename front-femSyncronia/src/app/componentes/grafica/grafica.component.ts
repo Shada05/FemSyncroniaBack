@@ -129,7 +129,7 @@ export class GraficaComponent implements OnInit, OnDestroy {
           borderColor: '#FF4D7F',
           borderWidth: 1,
           fill: false,
-          pointStyle: false,
+          pointStyle: "circle",
         }]
       },
       options: {
