@@ -19,6 +19,8 @@ x_data = []  # Almacenará la cantidad de veces que aparece el user_id
 y_data = []  # Almacenará los valores de DM_1 para el user_id
 
 def analizar_datos(x, x_data, y_data,name_column):
+
+    print(f"-------------------------------------------------------------")
     print(f"📊 El user_id {x} aparece {x_data[0]} veces en la base de datos")
     print(f"📌 Valores de {name_column}asociados: {y_data}")
 
@@ -40,11 +42,17 @@ def analizar_datos(x, x_data, y_data,name_column):
     print(f'🔹 Intercepto: {model.intercept_}')
     print(f'🔹 Pendiente: {model.coef_[0]}')
 
+    # redondeo
+    y_pred= np.round(model.predict(x_data_np), 2)
+    print(f'🔮 Predicción de valores (redondeada): {y_pred}')
+
+
     # Predicción
     y_pred = model.predict(x_data_np)
     print(f'🔮 Predicción de valores: {y_pred}')
 
-    # Gráfica
+
+    #  Gráfica
     plt.scatter(x_data_np, y_data_np, color='black', label="Datos reales")
     plt.plot(x_data_np, y_pred, color='blue', linewidth=2, label="Regresión Lineal")
     plt.title(f'Regresión Lineal para user_id {x} de {name_column}')
@@ -52,6 +60,7 @@ def analizar_datos(x, x_data, y_data,name_column):
     plt.ylabel(name_column)
     plt.legend()
     plt.show()
+    return y_pred  # Retornar los valores predichos redondeados
 
 try:
     connection = mysql.connector.connect(

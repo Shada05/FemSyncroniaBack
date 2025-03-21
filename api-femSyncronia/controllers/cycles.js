@@ -100,7 +100,7 @@ exports.store = async (req, res) => {
         F_12: req.body.F_12,
         F_13: req.body.F_13,
         F_14: req.body.F_14,
-        F_15: req.body.F_15,
+        F_15: req.body.F_15, //sangrado
         AS_1: req.body.AS_1,
         AS_2: req.body.AS_2,
         AS_3: req.body.AS_3,
@@ -274,9 +274,9 @@ exports.show_tables = async (req, res) => {
     }
 
     // Seleccionar solo los campos weight y temperature
-    const { user_id, weight, temperature } = cycle;
+    const { user_id, weight, temperature, cycle_status } = cycle; //Agregar date
 
-    return res.status(200).send({user_id, weight, temperature });
+    return res.status(200).send({user_id, weight, temperature, cycle_status });
 };
 
 exports.destroy = async (req, res) => {
