@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,EventEmitter, Output, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-ciclos',
@@ -6,9 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ciclos.component.scss'],
 })
 export class CiclosComponent  implements OnInit {
-
+  @Output() cerrarComponente = new EventEmitter<void>();
   constructor() { }
 
   ngOnInit() {}
-
+  cerrar() {
+    this.cerrarComponente.emit();
+  }
 }

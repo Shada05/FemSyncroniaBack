@@ -158,19 +158,21 @@
               </ion-avatar>
             </div>
             <ng-container *ngIf="componenteActivo === 'ciclos'">
-              <app-ciclos>
+              <div class="contenedor-analisis">
+                <app-ciclos (cerrarComponente)="ocultarComponente()">
                 
-              </app-ciclos>
+                </app-ciclos>
+              </div>
             </ng-container>
             <ng-container *ngIf="componenteActivo === 'temperatura'">
-              <div class="contenedor-analisis-grafica">
+              <div class="contenedor-analisis">
                 <app-grafica [yAxisLabels]="misLabelsY" [minTemp]="minTemp" [maxTemp]="maxTemp"
                   (cerrarComponente)="ocultarComponente()"></app-grafica>
               </div>
             </ng-container>
 
                <ng-container *ngIf="componenteActivo === 'peso'">
-                <div class="contenedor-analisis-grafica">
+                <div class="contenedor-analisis">
                   <app-grafica [yAxisLabels]="misLabelsY" [minTemp]="minTemp" [maxTemp]="maxTemp"
                     (cerrarComponente)="ocultarComponente()"></app-grafica>
                 </div>

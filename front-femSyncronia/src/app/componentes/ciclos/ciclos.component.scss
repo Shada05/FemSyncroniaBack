@@ -1,10 +1,36 @@
-.contenedor-ciclos {
-    width: 100%;
+::ng-deep .contenedor-ciclos {
+    width: 90vw; /* Ancho del 90% de la ventana */
+    height: calc(100vh - 166px); /* Resta la altura del top-bar (100px) + tab-bar (56px) + margen (10px) */
     background: #FFE3E0;
     border-radius: 16px;
     padding: 16px;
     box-shadow: none;
-    position: relative;
+    position: fixed;
+    top: 100px; /* Ajusta el top para que no se superponga con el top-bar */
+    left: 50%;
+    transform: translateX(-50%); /* Centra el componente horizontalmente */
+    z-index: 1000; /* Asegura que esté sobre otros elementos */
+    margin: 0 auto; /* Asegura que no haya margen adicional */
+}
+
+.boton-cerrar-container {
+    position: absolute; /* Posiciona el botón de cierre de manera absoluta */
+    top: 16px; /* Distancia desde la parte superior */
+    right: 16px; /* Distancia desde la derecha */
+    z-index: 1001; /* Asegura que esté por encima de otros elementos */
+}
+
+.boton-cerrar {
+    font-size: 30px; /* Tamaño del ícono */
+    color: #ff4d7f; /* Color del ícono */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el ícono */
+    transition: color 0.3s ease; /* Transición suave del color */
+    background: none; /* Fondo transparente */
+    border-radius: 50%; /* Hace que el ícono sea circular */
+}
+
+.boton-cerrar:hover {
+    color: #ff1a4f; /* Cambia el color al pasar el cursor */
 }
 
 .linea-ciclos {
@@ -25,15 +51,8 @@
     font-weight: 700;
     color: black;
     margin-top: 8px; /* Espaciado superior para separar del borde */
-  }
-
-.flecha {
-    position: absolute;
-    top: 16px;
-    right: 16px;
 }
 
-/* Estilo para el texto adicional */
 .texto-ciclos-registrados {
     font-size: 20px;
     font-style: normal;
@@ -43,58 +62,101 @@
     text-align: left; /* Alinea el texto a la izquierda */
     display: block;
     width: 100%; /* Para asegurarse de que ocupe toda la línea */
-  }
-
-.contenedor-cards {
-    display: flex;
-    gap: 12px;
-    justify-content: space-between;
 }
 
 .card-pequena {
-    width: 48%;
+    width: 100%; /* Ocupa todo el ancho disponible */
+    height: 50px; /* Altura fija */
     border-radius: 12px;
+    margin-bottom: 12px; /* Espaciado entre las cards */
+    padding: 0; /* Elimina el padding interno */
+    box-shadow: none; /* Elimina la sombra si es necesario */
+    margin-left: 0; /* Asegura que no haya margen izquierdo */
 }
 
 .content-cards {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: center; /* Centra verticalmente */
+    justify-content: flex-start; /* Alinea el contenido a la izquierda */
+    height: 100%; /* Asegura que ocupe toda la altura del card */
+    padding: 0 16px; /* Espaciado interno */
 }
 
 .contenido-card {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
+    align-items: center; /* Centra verticalmente los elementos */
+    justify-content: flex-start; /* Alinea el contenido a la izquierda */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 0; /* Elimina el padding interno */
+}
+
+.grupo-izquierda {
+    display: flex;
+    align-items: center; /* Centra verticalmente el ícono y el texto */
+    gap: 8px; /* Espaciado entre el ícono y el texto */
 }
 
 .icono-card {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
 }
 
 .texto-dias {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 700;
 }
 
 .linea-divisora-analisis {
-    width: 80%;
-    height: 2px;
-    margin: 8px 0;
+    width: 2px; /* Ancho de la línea divisora */
+    height: 24px; /* Altura de la línea divisora */
+    margin: 0 16px; /* Espaciado entre el grupo y el texto "Promedio de ciclo" */
 }
 
-.linea-amarilla {
-    background: #FFB800;
-}
-
+/* Colores de la línea divisora */
 .linea-roja {
-    background: #FF0000;
+    background-color: #9F0000;
+}
+  
+.linea-amarilla {
+    background-color: #9F6900;
 }
 
 .texto-promedio {
     font-size: 14px;
-    color: #333;
+    font-weight: 700;
+}
+
+.color-texto-periodo{
+    color: #9F0000;
+}
+.color-texto-ciclo{
+    color:#9F6900;
+}
+
+/* Estilos para la tabla */
+.tabla {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columnas */
+    gap: 1px; /* Espaciado entre filas y columnas */
+    margin-bottom: 16px; /* Espaciado debajo de la tabla */
+    background: #FFE3E0; /* Fondo de la tabla para simular el color del gap */
+    border-radius: 8px; /* Bordes redondeados para la tabla */
+}
+
+.fila {
+    display: contents; /* Hace que los elementos hijos se comporten como si fueran parte de la cuadrícula */
+}
+
+.columna {
+    padding: 8px; /* Espaciado interno */
+    background: #ffffff; /* Fondo blanco para las celdas */
+    text-align: center; /* Centra el texto */
+    font-size: 14px; /* Tamaño del texto */
+    font-weight: 500; /* Grosor del texto */
+    color: black; /* Color del texto en negro */
+}
+
+/* Estilo para la primera fila (negrita) */
+.primera-fila .columna {
+    font-weight: bold; /* Texto en negrita */
 }

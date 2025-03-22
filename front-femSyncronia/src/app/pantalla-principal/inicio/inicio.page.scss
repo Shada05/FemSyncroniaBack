@@ -640,8 +640,8 @@ ion-card-content {
   right: 0;
 }
 
-/* Contenedor principal para el análisis de temperatura */
-.contenedor-analisis-grafica {
+/* Contenedor principal para el análisis */
+.contenedor-analisis {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 150px); /* Ajusta la altura restando el espacio de la barra superior y el tab-bar */
@@ -650,7 +650,8 @@ ion-card-content {
   overflow: hidden; /* Evita el scroll */
 }
 
-/* Ajustes para el componente de temperatura */
+/* Ajustes para el componente de temperatura  y peso*/
+app-ciclos,
 app-grafica{
   flex: 1; /* Ocupa el espacio disponible */
   display: flex;
