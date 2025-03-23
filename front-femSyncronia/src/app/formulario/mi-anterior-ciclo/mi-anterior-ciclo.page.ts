@@ -194,7 +194,7 @@ export class MiAnteriorCicloPage implements OnInit {
       Start_day: fechaInicio, // Fecha de inicio en formato YYYY-MM-DD
       Finish_day: fechaFin, // Fecha de fin en formato YYYY-MM-DD
       average_periodo: formData.dias1,
-      avergae_ciclo: formData.dias2,
+      average_ciclo: formData.dias2
     };
 
     // Enviar los datos a la API
