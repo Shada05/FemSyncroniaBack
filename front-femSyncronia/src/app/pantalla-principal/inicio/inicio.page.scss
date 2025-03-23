@@ -402,7 +402,7 @@ ion-button {
 .contenedor-ciclos {
   width: 316px;
   height: 170px;
-  background: #FFE3E0;; /* Fondo gris claro */
+  background: #FFE3E0; /* Fondo gris claro */
   border-radius: 20px; /* Bordes redondeados */
   margin: 16px auto; /* Centrado y margen */
   display: flex;
@@ -413,6 +413,7 @@ ion-button {
   color: black; /* Color del texto */
   font-weight: 600;
   padding: 16px; /* Añadido padding para espaciado interno */
+  box-shadow: none;
 }
 
 /* Estilo para la línea con ícono y texto "Ciclos" */
@@ -477,6 +478,7 @@ ion-card-content {
   font-weight: 600;
   margin: 0;
   padding: 5px; /* Añadir un pequeño padding */
+  box-shadow: none;
 }
 
 /* Contenedor para el ícono y el texto */
@@ -514,7 +516,7 @@ ion-card-content {
   color:#9F6900;
 }
 /* Línea divisora */
-.linea-divisora {
+.linea-divisora-analisis {
   width: 90%; /* Ocupar todo el ancho disponible */
   height: 1px;
   margin: 2px 0;
@@ -547,50 +549,113 @@ ion-card-content {
   align-items: center;
 }
 
-/* Estilo para el contenedor de temperatura */
-.contenedor-temperatura {
-  width: 316px;
-  height: 94px;
-  background: #FFFFFF; /* Fondo blanco */
-  border-radius: 20px; /* Bordes redondeados */
-  margin: 16px auto; /* Centrado y margen */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 16px;
-  color: black; /* Color del texto */
-  font-weight: 600;
-}
-
-/* Estilo para el contenedor de peso */
-.contenedor-peso {
-  width: 316px;
-  height: 94px;
-  background: #FFFFFF; /* Fondo blanco */
-  border-radius: 20px; /* Bordes redondeados */
-  margin: 16px auto; /* Centrado y margen */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 16px;
-  color: black; /* Color del texto */
-  font-weight: 600;
-}
-
-/* Estilo para el contenedor de historial */
+/* Contenedor general */
+.contenedor-peso,
+.contenedor-temperatura,
 .contenedor-historial {
   width: 316px;
-  height: 94px;
-  background: #FFFFFF; /* Fondo blanco */
-  border-radius: 20px; /* Bordes redondeados */
-  margin: 16px auto; /* Centrado y margen */
+  height: 99px; /* Manteniendo el tamaño que ya modificaste */
+  background: #FFFFFF;
+  border-radius: 20px;
+  margin: 12px auto;
+  font-size: 16px;
+  padding: 8px 12px; /* Espacio interno */
+  color: black;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column; /* Mantiene todo alineado en columna */
+  justify-content: center;
+  background: #FFE3E0;
+  box-shadow: none;
+}
+
+/* Ajuste de las líneas internas */
+.contenedor-peso ion-text,
+.contenedor-temperatura ion-text,
+.contenedor-historial ion-text {
+  margin: 0;
+  padding: 0;
+  line-height: 1.2; /* Reduce espacio entre líneas */
+}
+
+/* Contenedor de la línea y la flecha */
+.linea-con-flecha {
+  display: flex;
+  justify-content: space-between; /* Alinea la línea y la flecha en extremos opuestos */
+  align-items: center; /* Alinea la flecha y el texto en la misma línea */
+  width: 100%; /* Toma el ancho completo del contenedor */
+  margin-bottom: 4px; /* Ajusta el espacio entre la línea y los textos */
+  position: relative; /* Posiciona la flecha en relación con la línea */
+}
+
+/* Primera línea: Icono + Título */
+.linea {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  gap: 6px;
+}
+
+/* Contenedor de los textos (Dato + Última Actualización) */
+.contenedor-texto {
+  display: flex;
+  flex-direction: column; /* Mantiene los textos en columna */
+  padding-left: 6px; /* Espaciado alineado */
+  gap: 6px; /* Añade un espacio entre los elementos */
+}
+
+/* Icono */
+.icono {
+  font-size: 25px;
+  color: #4a4a4a;
+}
+
+/* Título */
+.titulo {
   font-size: 16px;
-  color: black; /* Color del texto */
-  font-weight: 600;
+  font-weight: 700;
+  color: black;
+}
+
+/* Valor (Ej. 36.6°) */
+.dato {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  padding-bottom: 6px; /* Aumenta la separación entre el dato y la última actualización */
+}
+
+/* Última actualización */
+.ultima-actualizacion {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.4);
+  padding-top: 6px; /* Aumenta la separación superior */
+}
+
+/* Flecha en la parte superior derecha */
+.flecha {
+  font-size: 18px;
+  color: #4a4a4a;
+  position: absolute; /* Hace que la flecha esté en la parte superior derecha */
+  top: 0;
+  right: 0;
+}
+
+/* Contenedor principal para el análisis */
+.contenedor-analisis {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 150px); /* Ajusta la altura restando el espacio de la barra superior y el tab-bar */
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* Evita el scroll */
+}
+
+/* Ajustes para el componente de temperatura  y peso*/
+app-ciclos,
+app-grafica{
+  flex: 1; /* Ocupa el espacio disponible */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
