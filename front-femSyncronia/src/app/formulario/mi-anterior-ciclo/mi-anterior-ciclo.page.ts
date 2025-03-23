@@ -11,7 +11,8 @@ export class MiAnteriorCicloPage implements OnInit {
   formulario: FormGroup; // Definición del formulario
 
   meses: string[] = ['Ene.', 'Feb.', 'Mar.', 'Abr.', 'May.', 'Jun.', 'Jul.', 'Ago.', 'Sep.', 'Oct.', 'Nov.', 'Dic.'];
-  dias: number[] = [];
+  diasInicio: number[] = []; // Días disponibles para el inicio del periodo
+  diasFin: number[] = []; // Días disponibles para el fin del periodo
   maxDias: number = 45; // Límite máximo para el número de días
   dias1: number | string = ''; // Valor del primer input de días
   dias2: number | string = ''; // Valor del segundo input de días
@@ -20,28 +21,37 @@ export class MiAnteriorCicloPage implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.formulario = this.fb.group({
-      dias1: ['', [Validators.required,
-        this.validarMaxNum
-      ]],
-      dias2: ['', [Validators.required,
-        this.validarMaxNum
-      ]],
-    }
-    )
+      mesInicio: ['', Validators.required], // Control para el mes de inicio
+      diaInicio: ['', Validators.required], // Control para el día de inicio
+      mesFin: ['', Validators.required], // Control para el mes de fin
+      diaFin: ['', Validators.required], // Control para el día de fin
+      dias1: ['', [Validators.required, this.validarMaxNum]],
+      dias2: ['', [Validators.required, this.validarMaxNum]],
+    });
   }
 
   ngOnInit() {}
 
   // Actualiza los días dependiendo del mes seleccionado
-  actualizarDias(event: any) {
-    const mesSeleccionado = event.detail.value;
+  actualizarDias(tipo: 'inicio' | 'fin') {
+    const mesSeleccionado = tipo === 'inicio' 
+      ? this.formulario.get('mesInicio')?.value 
+      : this.formulario.get('mesFin')?.value;
+
+    let dias: number[] = [];
 
     if (mesSeleccionado === 'Feb.') {
-      this.dias = Array.from({ length: 28 }, (_, i) => i + 1); // 28 días para febrero
+      dias = Array.from({ length: 28 }, (_, i) => i + 1); // 28 días para febrero
     } else if (['Abr.', 'Jun.', 'Sep.', 'Nov.'].includes(mesSeleccionado)) {
-      this.dias = Array.from({ length: 30 }, (_, i) => i + 1); // 30 días para meses con 30 días
+      dias = Array.from({ length: 30 }, (_, i) => i + 1); // 30 días para meses con 30 días
     } else {
-      this.dias = Array.from({ length: 31 }, (_, i) => i + 1); // 31 días para los demás meses
+      dias = Array.from({ length: 31 }, (_, i) => i + 1); // 31 días para los demás meses
+    }
+
+    if (tipo === 'inicio') {
+      this.diasInicio = dias;
+    } else {
+      this.diasFin = dias;
     }
   }
 
@@ -75,13 +85,13 @@ export class MiAnteriorCicloPage implements OnInit {
   validarMaxNum(control: AbstractControl): ValidationErrors | null {
     const numero = control.value;
     const esMenor = numero <= 45; // Compara si el número es menor o igual a 45
-  
+
     if (!esMenor) {
       return { max: true }; // Si el número es mayor que 45, retorna el error
     }
     return null; // Si el número es válido, no retorna ningún error
   }
-  
+
   soloNumeros(input: IonInput | null) {
     if (input) {
       const value = (input.value as string).replace(/[^0-9]/g, '');

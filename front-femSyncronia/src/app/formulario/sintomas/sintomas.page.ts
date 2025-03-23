@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
-import { PopoverController } from '@ionic/angular'; // Importar PopoverController
-import { SintomaPopoverComponent } from '../../componentes/sintoma-popover/sintoma-popover.component';
 
 @Component({
   selector: 'app-sintomas',
@@ -17,8 +15,7 @@ export class SintomasPage implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private router: Router,
-    private popoverCtrl: PopoverController
+    private router: Router
   ) { }
 
   async ngOnInit() {
