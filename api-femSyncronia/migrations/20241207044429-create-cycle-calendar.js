@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('cycle_calendar', {
+    await queryInterface.createTable('cycle_calendars', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -29,9 +29,13 @@ module.exports = {
       type: Sequelize.DATEONLY,
       allowNull: false
     },
+    average_mestruation: {
+      type: Sequelize.DATEONLY,
+      allowNull: false
+    },
     Regular_cycle: {
-    type: Sequelize.INTEGER,
-    allowNull: false
+      type: Sequelize.INTEGER,
+      allowNull: false
     },
     createdAt: {
         type: Sequelize.DATE,
@@ -50,6 +54,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('cycle_calendar');
+    await queryInterface.dropTable('cycle_calendars');
   }
 };

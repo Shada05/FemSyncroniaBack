@@ -12,8 +12,6 @@ password = ""
 
 # Solicitar el user_id
 x = input("Ingrese el user_id a analizar: ")
-
-
 # Variables para almacenar los datos
 x_data = []  # Almacenará la cantidad de veces que aparece el user_id
 y_data = []  # Almacenará los valores de los sintomas para el user_id
@@ -41,10 +39,7 @@ def analizar_datos(x, x_data, y_data, name_column):
     prediction = round(model.intercept_)
 
     # Guardar el resultado en la lista de predicciones
-    predictions.append({
-        name_column,
-        prediction
-    })
+    predictions.append((prediction, name_column))
 
     # Resultados del modelo
     print(f'📈 Coeficiente de determinación: {r_sq}')
@@ -87,12 +82,13 @@ try:
 
             # Llamar a la función analizar_datos para la columna actual
             analizar_datos(x, x_data, y_data, column)
-            
+
         print(f"valores de {predictions}")
 
         for prediction, columna in predictions:
-            query = f"UPDATE cycles SET {columna} = {prediction} WHERE user_id = %s AND cycle_status = 2;"
-            cursor.execute(query, (x))
+            print(f"Predicción para {columna}: {prediction} del id: {x}")
+            query = f"UPDATE cycles SET {columna} = {int(prediction)} WHERE user_id = %s AND cycle_status = 2;"
+            cursor.execute(query, (x,))  # Nota la coma después de x
 
 
 
