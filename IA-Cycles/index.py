@@ -16,13 +16,13 @@ x = input("Ingrese el user_id a analizar: ")
 
 # Variables para almacenar los datos
 x_data = []  # Almacenará la cantidad de veces que aparece el user_id
-y_data = []  # Almacenará los valores de DM_1 para el user_id
+y_data = []  # Almacenará los valores de los sintomas para el user_id
+predictions = []
 
-def analizar_datos(x, x_data, y_data,name_column):
-
+def analizar_datos(x, x_data, y_data, name_column):
     print(f"-------------------------------------------------------------")
     print(f"📊 El user_id {x} aparece {x_data[0]} veces en la base de datos")
-    print(f"📌 Valores de {name_column}asociados: {y_data}")
+    print(f"📌 Valores de {name_column} asociados: {y_data}")
 
     # Si no hay datos suficientes para regresión, salir
     if len(y_data) < 2:
@@ -37,30 +37,20 @@ def analizar_datos(x, x_data, y_data,name_column):
     model = LinearRegression().fit(x_data_np, y_data_np)
     r_sq = model.score(x_data_np, y_data_np)
 
+    # Redondear el intercepto a un número entero y almacenarlo en 'prediction'
+    prediction = round(model.intercept_)
+
+    # Guardar el resultado en la lista de predicciones
+    predictions.append({
+        name_column,
+        prediction
+    })
+
     # Resultados del modelo
     print(f'📈 Coeficiente de determinación: {r_sq}')
-    print(f'🔹 Intercepto: {model.intercept_}')
+    print(f'🔹 Intercepto: {model.intercept_} (redondeado: {prediction})')
     print(f'🔹 Pendiente: {model.coef_[0]}')
 
-    # redondeo
-    y_pred= np.round(model.predict(x_data_np), 2)
-    print(f'🔮 Predicción de valores (redondeada): {y_pred}')
-
-
-    # Predicción
-    y_pred = model.predict(x_data_np)
-    print(f'🔮 Predicción de valores: {y_pred}')
-
-
-    #  Gráfica
-    plt.scatter(x_data_np, y_data_np, color='black', label="Datos reales")
-    plt.plot(x_data_np, y_pred, color='blue', linewidth=2, label="Regresión Lineal")
-    plt.title(f'Regresión Lineal para user_id {x} de {name_column}')
-    plt.xlabel('Índice de Datos')
-    plt.ylabel(name_column)
-    plt.legend()
-    plt.show()
-    return y_pred  # Retornar los valores predichos redondeados
 
 try:
     connection = mysql.connector.connect(
@@ -97,9 +87,12 @@ try:
 
             # Llamar a la función analizar_datos para la columna actual
             analizar_datos(x, x_data, y_data, column)
+            
+        print(f"valores de {predictions}")
 
-            query = f"SELECT id, {column} FROM cycles WHERE user_id = %s AND cycle_status = 1;"
-
+        for prediction, columna in predictions:
+            query = f"UPDATE cycles SET {columna} = {prediction} WHERE user_id = %s AND cycle_status = 2;"
+            cursor.execute(query, (x))
 
 
 

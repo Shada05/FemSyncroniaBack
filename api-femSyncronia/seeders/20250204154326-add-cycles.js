@@ -63,7 +63,7 @@ module.exports = {
         user_id: 3,
         weight: 60,
         temperature: 36.5,
-        date: "2022-05-04",
+        date: "2022-05-07",
         DM_1: 1,
         DM_2: 3,
         DM_3: 4,
