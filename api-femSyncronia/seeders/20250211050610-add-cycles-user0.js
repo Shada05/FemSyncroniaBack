@@ -9,6 +9,8 @@ module.exports = {
         user_id: 1,
         weight: 60,
         temperature: 36.5,
+        date: "2022-05-07", // Fecha añadida
+
         //Problemas en la piel
         PP_1: 3, // Acne
         PP_2: 3, //picazon
@@ -80,6 +82,8 @@ module.exports = {
         user_id: 1,
         weight: 63,
         temperature: 36.5,
+        date: "2022-05-08", // Fecha añadida
+
         //Problemas en la piel
         PP_1: 3, // Acne
         PP_2: 3, //picazon
@@ -151,6 +155,8 @@ module.exports = {
         user_id: 1,
         weight: 60,
         temperature: 36.5,
+        date: "2022-05-09", // Fecha añadida
+
         //Problemas en la piel
         PP_1: 3, // Acne
         PP_2: 3, //picazon
@@ -221,7 +227,9 @@ module.exports = {
         cycle_status: 1,
         user_id: 1,
         weight: 62,
-        temperature: 37,
+        temperature: 37.0,
+        date: "2022-05-10", // Fecha añadida
+ 
         //Problemas en la piel
         PP_1: 3, // Acne
         PP_2: 3, //picazon
@@ -293,6 +301,8 @@ module.exports = {
         user_id: 1,
         weight: 60,
         temperature: 36.5,
+        date: "2022-05-11", // Fecha añadida
+
         //Problemas en la piel
         PP_1: 3, // Acne
         PP_2: 3, //picazon
@@ -364,6 +374,8 @@ module.exports = {
         user_id: 1,
         weight: 60,
         temperature: 36.5,
+        date: "2022-05-12", // Fecha añadida
+
         //Problemas en la piel
         PP_1: 3, // Acne
         PP_2: 3, //picazon

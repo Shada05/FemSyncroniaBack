@@ -6,9 +6,11 @@ module.exports = {
     await queryInterface.bulkInsert("cycles", [
       {
         cycle_status: 1,
-        user_id: 1,
+        user_id: 3,
         weight: 60,
         temperature: 36.5,
+        date: "2025-02-01", // Fecha añadida
+        
         //Problemas en la piel
         PP_1: 3, // Acne
         PP_2: 3, //picazon
@@ -77,9 +79,11 @@ module.exports = {
       },
       { // número 2
         cycle_status: 1,
-        user_id: 1,
+        user_id: 3,
         weight: 63,
         temperature: 36.5,
+        date: "2025-02-02", // Fecha añadida
+
         //Problemas en la piel
         PP_1: 3, // Acne
         PP_2: 3, //picazon
@@ -148,9 +152,11 @@ module.exports = {
       },
       {// 3 ciclo
         cycle_status: 1,
-        user_id: 1,
+        user_id: 3,
         weight: 60,
         temperature: 36.5,
+        date: "2025-02-03", // Fecha añadida
+
         //Problemas en la piel
         PP_1: 3, // Acne
         PP_2: 3, //picazon
@@ -219,9 +225,11 @@ module.exports = {
       },
       {// 4 ciclo
         cycle_status: 1,
-        user_id: 1,
+        user_id: 3,
         weight: 62,
         temperature: 37,
+ 
+        date: "2025-02-04", // Fecha añadida
         //Problemas en la piel
         PP_1: 3, // Acne
         PP_2: 3, //picazon
@@ -290,9 +298,11 @@ module.exports = {
       },
       {// 5 ciclo
         cycle_status: 1,
-        user_id: 1,
+        user_id: 3,
         weight: 60,
         temperature: 36.5,
+        date: "2025-02-05", // Fecha añadida
+
         //Problemas en la piel
         PP_1: 3, // Acne
         PP_2: 3, //picazon
@@ -361,9 +371,11 @@ module.exports = {
       },
       {// 6 ciclo
         cycle_status: 1,
-        user_id: 1,
+        user_id: 3,
         weight: 60,
         temperature: 36.5,
+        date: "2025-02-06", // Fecha añadida
+
         //Problemas en la piel
         PP_1: 3, // Acne
         PP_2: 3, //picazon

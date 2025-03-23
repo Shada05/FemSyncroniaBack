@@ -21,7 +21,7 @@ exports.store = async (req, res) => {
         cycle_status: req.body.cycle_status !== undefined ? req.body.cycle_status : 1, // Inicializa con 2 si no está definido
         weight: req.body.weight,
         temperature: req.body.temperature,
-
+        date: req.body.date,
         DM_1: req.body.DM_1,
         DM_2: req.body.DM_2,
         DM_3: req.body.DM_3,
@@ -123,7 +123,7 @@ exports.store_prediction = async (req, res) => {
         cycle_status: req.body.cycle_status !== undefined ? req.body.cycle_status : 2, // Inicializa con 2 si no está definido
         weight: req.body.weight,
         temperature: req.body.temperature,
-
+        date: req.body.date,
         DM_1: req.body.DM_1,
         DM_2: req.body.DM_2,
         DM_3: req.body.DM_3,
@@ -274,9 +274,9 @@ exports.show_tables = async (req, res) => {
     }
 
     // Seleccionar solo los campos weight y temperature
-    const { user_id, weight, temperature, cycle_status } = cycle; //Agregar date
+    const { user_id, weight, temperature, cycle_status, date } = cycle; //Agregar date
 
-    return res.status(200).send({user_id, weight, temperature, cycle_status });
+    return res.status(200).send({user_id, weight, temperature, cycle_status, date });
 };
 
 exports.destroy = async (req, res) => {
@@ -309,6 +309,7 @@ exports.update = async (req, res) => {
     if (req.body.cycle_status != null) updatedData['cycles_status']= req.body.cycle_status;
     if (req.body.weight != null) updatedData['weight']= req.body.weigth;
     if (req.body.temperature != null) updatedData['temperature']= req.body.temperature;
+    if (req.body.date != null) updatedData['date']= req.body.date;
     if (req.body.DM_1 != null) updatedData['DM_1']= req.body.DM_1;
     if (req.body.DM_2 != null) updatedData['DM_2']= req.body.DM_2;
     if (req.body.DM_3 != null) updatedData['DM_3']= req.body.DM_3;

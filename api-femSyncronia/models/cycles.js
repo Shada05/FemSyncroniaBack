@@ -34,6 +34,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.FLOAT,
         allowNull: false
     },
+    date:{
+        type: DataTypes.DATEONLY,
+        allowNull: false
+      },
     //Datos relevantes para el ciclo mestrual
     DM_1: { //Colicos
         type: DataTypes.INTEGER,
