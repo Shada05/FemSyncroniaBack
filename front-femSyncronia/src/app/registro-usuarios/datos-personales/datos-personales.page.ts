@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera'; // Importa solo lo necesario desde @capacitor/camera
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastController, ActionSheetController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -32,7 +32,8 @@ export class DatosPersonalesPage implements OnInit {
     private apiService: ApiService,
     private toastController: ToastController,
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private actionSheetController: ActionSheetController
   ) {}
 
   ngOnInit() {
@@ -57,13 +58,67 @@ export class DatosPersonalesPage implements OnInit {
     }
   }
 
+  // Función para mostrar el Action Sheet con las opciones de tomar foto o seleccionar de la galería
   async changeProfilePicture() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Selecciona una opción',
+      buttons: [
+        {
+          text: 'Tomar foto',
+          icon: 'camera',
+          handler: () => {
+            this.takePhoto(); // Llamar a la función para tomar una foto
+          },
+        },
+        {
+          text: 'Seleccionar de la galería',
+          icon: 'image',
+          handler: () => {
+            this.selectFromGallery(); // Llamar a la función para seleccionar de la galería
+          },
+        },
+        {
+          text: 'Cancelar',
+          icon: 'close',
+          role: 'cancel', // Cierra el Action Sheet sin hacer nada
+        },
+      ],
+    });
+
+    await actionSheet.present(); // Mostrar el Action Sheet
+  }
+
+  // Función para tomar una foto
+  async takePhoto() {
     try {
       const image = await Camera.getPhoto({
         quality: 90,
         allowEditing: false,
         resultType: CameraResultType.Uri,
-        source: CameraSource.Photos,
+        source: CameraSource.Camera, // Usar la cámara para tomar una foto
+      });
+
+      if (image && image.webPath) {
+        const blob = await fetch(image.webPath).then((res) => res.blob());
+        this.selectedImage = blob;
+        this.profileImage = image.webPath;
+        console.log('Foto tomada correctamente.');
+      } else {
+        console.log('No se tomó ninguna foto.');
+      }
+    } catch (error) {
+      console.log('Error al tomar la foto: ', error);
+    }
+  }
+
+  // Función para seleccionar una imagen de la galería
+  async selectFromGallery() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.Uri,
+        source: CameraSource.Photos, // Usar la galería para seleccionar una imagen
       });
 
       if (image && image.webPath) {

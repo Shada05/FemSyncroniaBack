@@ -14,6 +14,9 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/api/v1/users`, data);
   }
 
+  createCiclo(data: any): Observable<any>{
+    return this.http.post(`${this.apiUrl}`,data);
+  }
   updateUsuario(id: string, data: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/api/v1/users/${id}`, data);
   }

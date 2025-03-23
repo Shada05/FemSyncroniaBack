@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, Platform } from '@ionic/angular'; // Importa NavController y Platform
 import { AuthService } from './services/auth.service';
 import { PrimeraAperturaService } from './services/primera-apertura.service';
+import { SplashScreen } from '@capacitor/splash-screen';
 
 @Component({
   selector: 'app-root',
@@ -18,14 +19,17 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
     // Verifica si es la primera vez que se abre la aplicación
+    this.showSplash();
     //await this.verificarPrimeraApertura();
-
-    // Deshabilita el botón de retroceso físico en la pantalla de login
-    this.platform.backButton.subscribeWithPriority(10, () => {
-      // No hacer nada (deshabilitar el botón de retroceso)
-    });
   }
 
+  async showSplash() {
+    // Show the splash for an indefinite amount of time:
+    await SplashScreen.show({
+      autoHide: true,
+      showDuration:2000
+    });
+  }
   async verificarPrimeraApertura() {
     // Obtiene el estado de la primera apertura desde el servicio
     const esPrimeraVez = await this.primeraAperturaService.verificar();

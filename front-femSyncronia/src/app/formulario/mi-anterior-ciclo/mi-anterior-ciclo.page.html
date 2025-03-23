@@ -13,7 +13,7 @@
         que te bajó.
       </ion-text>
     </div>
-    <form [formGroup]="formulario">
+    <form [formGroup]="formulario" (ngSubmit)="crearCiclo()"> <!-- Agrega (ngSubmit) -->
       <div class="preguntas">
         <div>
           <ion-text class="color-texto">Inicio del último periodo:</ion-text>
@@ -78,14 +78,15 @@
           </div>
         </div>
       </div>
-    </form>
-    <div class="divisor"></div>
 
-    <div class="contenedor-boton">
-      <ion-button class="btn-continuar" [routerLink]="['/periodo']" type="submit">
-        Continuar
-      </ion-button>
-    </div>
+      <div class="divisor"></div>
+
+      <div class="contenedor-boton">
+        <ion-button class="btn-continuar" type="submit"> <!-- Cambia a type="submit" -->
+          Continuar
+        </ion-button>
+      </div>
+    </form>
 
     <span><a [routerLink]="['/registro']">¿Necesitas ayuda?</a></span>
   </div>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { IonInput } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router'; // Importa Router para navegar
 
 @Component({
   selector: 'app-mi-anterior-ciclo',
@@ -9,7 +11,7 @@ import { IonInput } from '@ionic/angular';
 })
 export class MiAnteriorCicloPage implements OnInit {
   formulario: FormGroup; // Definición del formulario
-
+  userId: string | null = null;
   meses: string[] = ['Ene.', 'Feb.', 'Mar.', 'Abr.', 'May.', 'Jun.', 'Jul.', 'Ago.', 'Sep.', 'Oct.', 'Nov.', 'Dic.'];
   diasInicio: number[] = []; // Días disponibles para el inicio del periodo
   diasFin: number[] = []; // Días disponibles para el fin del periodo
@@ -19,7 +21,11 @@ export class MiAnteriorCicloPage implements OnInit {
   errorDias1: string = ''; // Mensaje de error para el primer input de días
   errorDias2: string = ''; // Mensaje de error para el segundo input de días
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router // Inyecta Router
+  ) {
     this.formulario = this.fb.group({
       mesInicio: ['', Validators.required], // Control para el mes de inicio
       diaInicio: ['', Validators.required], // Control para el día de inicio
@@ -30,7 +36,26 @@ export class MiAnteriorCicloPage implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.obtenerUsuarioId();
+  }
+
+  async obtenerUsuarioId() {
+    const token = await this.auth.obtenerToken();
+    if (token) {
+      this.auth.verificarToken(token).subscribe(
+        (response) => {
+          this.userId = response.user.id;
+          console.log('ID obtenido del token:', this.userId);
+        },
+        (error) => {
+          console.log('Error al obtener el ID:', error);
+        }
+      );
+    } else {
+      console.log('No hay token almacenado.');
+    }
+  }
 
   // Actualiza los días dependiendo del mes seleccionado
   actualizarDias(tipo: 'inicio' | 'fin') {
@@ -97,5 +122,34 @@ export class MiAnteriorCicloPage implements OnInit {
       const value = (input.value as string).replace(/[^0-9]/g, '');
       input.value = value;
     }
+  }
+
+  // Función para enviar los datos del formulario
+  crearCiclo() {
+    if (this.formulario.invalid) {
+      console.log('Formulario inválido. Por favor, completa todos los campos requeridos.');
+      return;
+    }
+
+    // Obtén los valores del formulario
+    const formData = this.formulario.value;
+    console.log('Datos del formulario:', formData);
+
+    // Aquí puedes enviar los datos a tu API o realizar otras acciones
+    // Ejemplo:
+    const data = {
+      id: this.userId,
+      mesInicio: formData.mesInicio,
+      diaInicio: formData.diaInicio,
+      mesFin: formData.mesFin,
+      diaFin: formData.diaFin,
+      dias1: formData.dias1,
+      dias2: formData.dias2,
+    };
+
+    console.log('Datos procesados:', data);
+
+    // Navegar a la siguiente pantalla
+    this.router.navigate(['/periodo']);
   }
 }
