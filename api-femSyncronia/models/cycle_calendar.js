@@ -3,12 +3,12 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class cycle_calendar extends Model {
+  class cycle_calendars extends Model {
 
     static associate(models) {
     }
   }
-  cycle_calendar.init({
+  cycle_calendars.init({
 
     cycle_status:{
       type: DataTypes.INTEGER,
@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     },
     Regular_cycle:{ //0=regular, 1=Irregular
+      type: DataTypes.INTEGER,
       allowNull:true,
       references: {
         model: 'users', // Nombre de la tabla a la que hace referencia
@@ -57,12 +58,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   }, {
     sequelize,
-        modelName: 'cycle_calendar',
+        modelName: 'cycle_calendars',
         defaultScope: {
             attributes: {
                 exclude: ['updatedAt','deletedAt']
             }
         }
   });
-  return cycle_calendar;
+  return cycle_calendars;
 };

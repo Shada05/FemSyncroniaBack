@@ -1,4 +1,4 @@
-const cycle_calendars  = require('../models').cycle_calendar;
+const cycle_calendars  = require('../models').cycle_calendars;
 
 exports.store = async (req, res) => {
     const cycle_calendar = {
@@ -36,7 +36,7 @@ exports.index = async (req, res) =>{
 
 exports.show = async (req, res) => {
     const id = parseInt(req.params.id);
-    const cycle_calendar = await cycle_calendar.findOne({
+    const cycle_calendar = await cycle_calendars.findOne({
         where: {
             id: id
         }
