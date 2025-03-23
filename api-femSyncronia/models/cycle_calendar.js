@@ -15,25 +15,31 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }, 
     Start_day:{ //INICIO DE ESE PERIODO
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: true
     }, 
     Finish_day: { //FIN DEL PERIODO
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: true
     }, 
-
     average_periodo: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: true
     },
     average_ciclo: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: true
     },
-    Regular_cycle:{ //0=No, 1=Sí, 2=Tal vez
-      type: DataTypes.INTEGER,
-      allowNull:true
+    average_mestruation: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    },
+    Regular_cycle:{ //0=regular, 1=Irregular
+      allowNull:true,
+      references: {
+        model: 'users', // Nombre de la tabla a la que hace referencia
+        key: 'Regular_cycle'       // Columna de la tabla referenciada
+    }
     },
     createdAt: {
       allowNull: false, 

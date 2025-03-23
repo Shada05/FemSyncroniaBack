@@ -6,7 +6,7 @@ module.exports = {
     await queryInterface.bulkInsert("cycles", [
       {
         cycle_status: 1,
-        user_id: 1,
+        user_id: 2,
         weight: 60,
         temperature: 36.5,
         date: "2025-02-01", // Fecha añadida
@@ -79,7 +79,7 @@ module.exports = {
       },
       { // número 2
         cycle_status: 1,
-        user_id: 1,
+        user_id: 2,
         weight: 63,
         temperature: 36.5,
         date: "2025-02-02", // Fecha añadida
