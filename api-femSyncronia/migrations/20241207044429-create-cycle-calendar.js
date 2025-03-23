@@ -10,22 +10,28 @@ module.exports = {
         type: Sequelize.INTEGER
     },
     cycle_status: { 
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
     },
     Start_day: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY,
+        allowNull: false
     },
     Finish_day: {
-        type: Sequelize.DATE
+        type: Sequelize.DATEONLY,
+        allowNull: false
     },
     average_periodo: {
-        type: Sequelize.DATE
+      type: Sequelize.DATEONLY,
+      allowNull: false
     },
     average_ciclo: {
-      type: Sequelize.DATE
+      type: Sequelize.DATEONLY,
+      allowNull: false
     },
     Regular_cycle: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    allowNull: false
     },
     createdAt: {
         type: Sequelize.DATE,

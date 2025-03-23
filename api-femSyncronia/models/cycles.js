@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   cycles.init({
-    cycle_status: { //Activo, Inactivo, Predcición, cancelado
+    cycle_status: { //1=Activo, 0=Inactivo, 2=Predcición, 3=cancelado
         type: DataTypes.INTEGER,
         allowNull: false
     },
@@ -34,6 +34,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.FLOAT,
         allowNull: false
     },
+    date:{
+        type: DataTypes.DATEONLY, //Solo la fecha
+        allowNull: false
+      },
     //Datos relevantes para el ciclo mestrual
     DM_1: { //Colicos
         type: DataTypes.INTEGER,

@@ -14,7 +14,7 @@ const patient_data_Controller = require('../controllers/patient_data');
 const report_status_Controller = require('../controllers/report_status');
 const reports_Controller = require('../controllers/reports');
 const symptoms_Controller = require('../controllers/symptoms.js');
-
+const cycle_calendarController = require('../controllers/cycle_calendar');
 const { uploadImage } = require('../controllers/imageController');
 const upload = require('../middlewares/upload');
 const  auth_controller = require('../controllers/authcontroller');
@@ -77,7 +77,7 @@ router.get('/api/v1/cycles', cyclesController.index);
 router.get('/api/v1/cycles/:id', cyclesController.show);
 router.put('/api/v1/cycles/:id', cyclesController.update);
 router.delete('/api/v1/cycles/:id', cyclesController.destroy);
-router.get('/api/v1/cycles_tables/:id', cyclesController.show_tables);
+router.get('/api/v1/cycles_tables/:id', cyclesController.show_tables); //mostrar el ciclo con las tablas de sintomas
 
 
 //Crons_status
@@ -135,6 +135,13 @@ router.get('/api/v1/symptoms', symptoms_Controller.index);
 router.get('/api/v1/symptoms/:id', symptoms_Controller.show);
 router.put('/api/v1/symptoms/:id', symptoms_Controller.update);
 router.delete('/api/v1/symptoms/:id', symptoms_Controller.destroy);
+
+//cycle_calendar
+router.post('/api/v1/cycle_calendar', cycle_calendarController.store);
+router.get('/api/v1/cycle_calendar', cycle_calendarController.index);
+router.get('/api/v1/cycle_calendar/:id', cycle_calendarController.show);
+router.put('/api/v1/cycle_calendar/:id', cycle_calendarController.update);
+router.delete('/api/v1/cycle_calendar/:id', cycle_calendarController.destroy);
 
 
 

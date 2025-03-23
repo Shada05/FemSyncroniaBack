@@ -17,6 +17,10 @@ module.exports = {
           key: 'id'
         }
       },
+      date:{
+        type: Sequelize.DATE,
+        allowNull: false
+      },
       cycle_status: {
         type: Sequelize.INTEGER // 1 = Activo, 2 = Predicción
       },
