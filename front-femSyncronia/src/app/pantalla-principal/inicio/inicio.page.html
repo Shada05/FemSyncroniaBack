@@ -176,11 +176,10 @@
                   <app-grafica [yAxisLabels]="misLabelsY" [minTemp]="minTemp" [maxTemp]="maxTemp"
                     (cerrarComponente)="ocultarComponente()"></app-grafica>
                 </div>
-            </ng-container>
-            <!-- 
+            </ng-container> 
             <ng-container *ngIf="componenteActivo === 'historial'">
-              <app-analisis-historial (cerrarComponente)="ocultarComponente()"></app-analisis-historial>
-            </ng-container>-->
+              <app-historial (cerrarComponente)="ocultarComponente()"></app-historial>
+            </ng-container>
             <!-- Contenedor para Ciclos -->
             <ng-container *ngIf="!componenteActivo">
               <ion-card class="contenedor-ciclos">
@@ -285,7 +284,7 @@
                             <ion-text class="titulo">Historial</ion-text>
                           </div>
                           <!-- Flecha en la parte superior derecha -->
-                          <ion-button fill="clear" class="flecha">
+                          <ion-button fill="clear" class="flecha" (click)="mostrarComponente('historial')">
                             <ion-icon src="assets/icons/pantalla-principal/Adelante.svg"></ion-icon>
                           </ion-button>
                         </div>

@@ -1,0 +1,19 @@
+  <!-- Botón de cerrar -->
+  <div class="boton-cerrar-container" [class.oculto]="estaCerrando">
+    <ion-icon name="close-circle-outline" (click)="cerrar()" class="boton-cerrar"></ion-icon>
+  </div>
+
+<div class="contenedor-historial" [class.cerrando]="estaCerrando">
+  <!-- Contenido del historial -->
+  <div class="contenido-historial">
+    <!-- Lista de elementos del historial -->
+    <div class="lista-historial">
+      <!-- Iteramos sobre la lista de items -->
+      <div class="item-historial" *ngFor="let item of itemsHistorial">
+        <ion-icon src="assets/icons/pantalla-principal/Adelante.svg" class="icono-item"></ion-icon>
+        <div class="titulo">{{ item.titulo }}</div>
+        <div class="fecha">{{ item.fecha }}</div>
+      </div>
+    </div>
+  </div>
+</div>

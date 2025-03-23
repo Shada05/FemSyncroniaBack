@@ -65,6 +65,11 @@ canvas {
     border-radius: 50%;
 }
 
+/* Clase para ocultar el botón */
+.boton-cerrar-container.oculto {
+    opacity: 0; /* Oculta el botón */
+    pointer-events: none; /* Desactiva interacciones */
+}
 /* Nueva estructura para el día, subtítulo y temperatura */
 .informacion-dia {
     display: flex;
