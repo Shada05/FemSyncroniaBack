@@ -1,3 +1,4 @@
+/* Estilos base del contenedor */
 ::ng-deep .contenedor-ciclos {
     width: 90vw; /* Ancho del 90% de la ventana */
     height: calc(100vh - 166px); /* Resta la altura del top-bar (100px) + tab-bar (56px) + margen (10px) */
@@ -11,26 +12,54 @@
     transform: translateX(-50%); /* Centra el componente horizontalmente */
     z-index: 1000; /* Asegura que esté sobre otros elementos */
     margin: 0 auto; /* Asegura que no haya margen adicional */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transición suave */
+}
+
+/* Animación cuando se cierra el contenedor */
+.contenedor-ciclos.cerrando {
+    animation: cerrarVentana 0.3s ease forwards;
+}
+
+@keyframes cerrarVentana {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.9);
+    }
 }
 
 .boton-cerrar-container {
-    position: absolute; /* Posiciona el botón de cierre de manera absoluta */
-    top: 16px; /* Distancia desde la parte superior */
-    right: 16px; /* Distancia desde la derecha */
-    z-index: 1001; /* Asegura que esté por encima de otros elementos */
+    position: absolute;
+    /* Posiciona el botón de cierre de manera absoluta */
+    top: 16px;
+    /* Distancia desde la parte superior */
+    right: 16px;
+    /* Distancia desde la derecha */
+    z-index: 1001;
+    /* Asegura que esté por encima de otros elementos */
 }
 
 .boton-cerrar {
-    font-size: 30px; /* Tamaño del ícono */
-    color: #ff4d7f; /* Color del ícono */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el ícono */
-    transition: color 0.3s ease; /* Transición suave del color */
-    background: none; /* Fondo transparente */
-    border-radius: 50%; /* Hace que el ícono sea circular */
+    font-size: 30px;
+    /* Tamaño del ícono */
+    color: #ff4d7f;
+    /* Color del ícono */
+    cursor: pointer;
+    /* Cambia el cursor al pasar sobre el ícono */
+    transition: color 0.3s ease;
+    /* Transición suave del color */
+    background: none;
+    /* Fondo transparente */
+    border-radius: 50%;
+    /* Hace que el ícono sea circular */
 }
 
 .boton-cerrar:hover {
-    color: #ff1a4f; /* Cambia el color al pasar el cursor */
+    color: #ff1a4f;
+    /* Cambia el color al pasar el cursor */
 }
 
 .linea-ciclos {
@@ -50,7 +79,8 @@
     font-style: normal;
     font-weight: 700;
     color: black;
-    margin-top: 8px; /* Espaciado superior para separar del borde */
+    margin-top: 8px;
+    /* Espaciado superior para separar del borde */
 }
 
 .texto-ciclos-registrados {
@@ -59,41 +89,59 @@
     font-weight: 700;
     color: black;
     margin-bottom: 12px;
-    text-align: left; /* Alinea el texto a la izquierda */
+    text-align: left;
+    /* Alinea el texto a la izquierda */
     display: block;
-    width: 100%; /* Para asegurarse de que ocupe toda la línea */
+    width: 100%;
+    /* Para asegurarse de que ocupe toda la línea */
 }
 
 .card-pequena {
-    width: 100%; /* Ocupa todo el ancho disponible */
-    height: 50px; /* Altura fija */
+    width: 100%;
+    /* Ocupa todo el ancho disponible */
+    height: 50px;
+    /* Altura fija */
     border-radius: 12px;
-    margin-bottom: 12px; /* Espaciado entre las cards */
-    padding: 0; /* Elimina el padding interno */
-    box-shadow: none; /* Elimina la sombra si es necesario */
-    margin-left: 0; /* Asegura que no haya margen izquierdo */
+    margin-bottom: 12px;
+    /* Espaciado entre las cards */
+    padding: 0;
+    /* Elimina el padding interno */
+    box-shadow: none;
+    /* Elimina la sombra si es necesario */
+    margin-left: 0;
+    /* Asegura que no haya margen izquierdo */
 }
 
 .content-cards {
     display: flex;
-    align-items: center; /* Centra verticalmente */
-    justify-content: flex-start; /* Alinea el contenido a la izquierda */
-    height: 100%; /* Asegura que ocupe toda la altura del card */
-    padding: 0 16px; /* Espaciado interno */
+    align-items: center;
+    /* Centra verticalmente */
+    justify-content: flex-start;
+    /* Alinea el contenido a la izquierda */
+    height: 100%;
+    /* Asegura que ocupe toda la altura del card */
+    padding: 0 16px;
+    /* Espaciado interno */
 }
 
 .contenido-card {
     display: flex;
-    align-items: center; /* Centra verticalmente los elementos */
-    justify-content: flex-start; /* Alinea el contenido a la izquierda */
-    width: 100%; /* Ocupa todo el ancho disponible */
-    padding: 0; /* Elimina el padding interno */
+    align-items: center;
+    /* Centra verticalmente los elementos */
+    justify-content: flex-start;
+    /* Alinea el contenido a la izquierda */
+    width: 100%;
+    /* Ocupa todo el ancho disponible */
+    padding: 0;
+    /* Elimina el padding interno */
 }
 
 .grupo-izquierda {
     display: flex;
-    align-items: center; /* Centra verticalmente el ícono y el texto */
-    gap: 8px; /* Espaciado entre el ícono y el texto */
+    align-items: center;
+    /* Centra verticalmente el ícono y el texto */
+    gap: 8px;
+    /* Espaciado entre el ícono y el texto */
 }
 
 .icono-card {
@@ -107,16 +155,19 @@
 }
 
 .linea-divisora-analisis {
-    width: 2px; /* Ancho de la línea divisora */
-    height: 24px; /* Altura de la línea divisora */
-    margin: 0 16px; /* Espaciado entre el grupo y el texto "Promedio de ciclo" */
+    width: 2px;
+    /* Ancho de la línea divisora */
+    height: 24px;
+    /* Altura de la línea divisora */
+    margin: 0 16px;
+    /* Espaciado entre el grupo y el texto "Promedio de ciclo" */
 }
 
 /* Colores de la línea divisora */
 .linea-roja {
     background-color: #9F0000;
 }
-  
+
 .linea-amarilla {
     background-color: #9F6900;
 }
@@ -126,37 +177,51 @@
     font-weight: 700;
 }
 
-.color-texto-periodo{
+.color-texto-periodo {
     color: #9F0000;
 }
-.color-texto-ciclo{
-    color:#9F6900;
+
+.color-texto-ciclo {
+    color: #9F6900;
 }
 
 /* Estilos para la tabla */
 .tabla {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 columnas */
-    gap: 1px; /* Espaciado entre filas y columnas */
-    margin-bottom: 16px; /* Espaciado debajo de la tabla */
-    background: #FFE3E0; /* Fondo de la tabla para simular el color del gap */
-    border-radius: 8px; /* Bordes redondeados para la tabla */
+    grid-template-columns: 1fr 1fr;
+    /* 2 columnas */
+    gap: 1px;
+    /* Espaciado entre filas y columnas */
+    margin-bottom: 16px;
+    /* Espaciado debajo de la tabla */
+    background: #FFE3E0;
+    /* Fondo de la tabla para simular el color del gap */
+    border-radius: 8px;
+    /* Bordes redondeados para la tabla */
 }
 
 .fila {
-    display: contents; /* Hace que los elementos hijos se comporten como si fueran parte de la cuadrícula */
+    display: contents;
+    /* Hace que los elementos hijos se comporten como si fueran parte de la cuadrícula */
 }
 
 .columna {
-    padding: 8px; /* Espaciado interno */
-    background: #ffffff; /* Fondo blanco para las celdas */
-    text-align: center; /* Centra el texto */
-    font-size: 14px; /* Tamaño del texto */
-    font-weight: 500; /* Grosor del texto */
-    color: black; /* Color del texto en negro */
+    padding: 8px;
+    /* Espaciado interno */
+    background: #ffffff;
+    /* Fondo blanco para las celdas */
+    text-align: center;
+    /* Centra el texto */
+    font-size: 14px;
+    /* Tamaño del texto */
+    font-weight: 500;
+    /* Grosor del texto */
+    color: black;
+    /* Color del texto en negro */
 }
 
 /* Estilo para la primera fila (negrita) */
 .primera-fila .columna {
-    font-weight: bold; /* Texto en negrita */
+    font-weight: bold;
+    /* Texto en negrita */
 }

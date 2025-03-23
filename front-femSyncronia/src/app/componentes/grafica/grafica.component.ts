@@ -11,6 +11,7 @@ export class GraficaComponent implements OnInit, OnDestroy {
   @Input() yAxisLabels: string[] = [];
   @Input() minTemp!: number;
   @Input() maxTemp!: number;
+  estaCerrando = false; 
 
   chart!: Chart;
   diasDelMes: string[] = [];
@@ -151,7 +152,11 @@ export class GraficaComponent implements OnInit, OnDestroy {
     this.actualizarIndicador();
   }
 
+  // Función para cerrar
   cerrar() {
-    this.cerrarComponente.emit();
+    this.estaCerrando = true; // Activa la animación
+    setTimeout(() => {
+      this.cerrarComponente.emit(); // Emite el evento después de la animación
+    }, 300); // Espera a que termine la animación (300ms)
   }
 }
