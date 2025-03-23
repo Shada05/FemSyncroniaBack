@@ -18,6 +18,7 @@ export class CuentanosPage implements OnInit {
   regularPeriod: string | null = null; // Periodos regulares
   haveSymptoms: string | null = null; // Síntomas: "no", "si", "no se"
   userId: string | null = null; // ID del usuario
+  isToastShowing: boolean = false; // Controla si ya se está mostrando un toast
 
   constructor(
     private apiService: ApiService, // Inyecta el servicio ApiService
@@ -85,23 +86,45 @@ export class CuentanosPage implements OnInit {
 
   // Función para mostrar un toast con un mensaje de error
   async mostrarToastError() {
+    if (this.isToastShowing) {
+      return; // Si ya se está mostrando un toast, no mostrar otro
+    }
+
+    this.isToastShowing = true; // Marcar que se está mostrando un toast
+
     const toast = await this.toastController.create({
       message: 'Ha ocurrido un error, inténtelo más tarde.', // Mensaje de error
       duration: 3000, // Duración de 3 segundos
       position: 'bottom', // Posición inferior
       color: 'danger', // Color rojo para indicar error
     });
+
+    toast.onDidDismiss().then(() => {
+      this.isToastShowing = false; // Marcar que el toast ya no se está mostrando
+    });
+
     await toast.present();
   }
 
   // Función para mostrar un toast de advertencia cuando falten datos
   async mostrarToastAdvertencia() {
+    if (this.isToastShowing) {
+      return; // Si ya se está mostrando un toast, no mostrar otro
+    }
+
+    this.isToastShowing = true; // Marcar que se está mostrando un toast
+
     const toast = await this.toastController.create({
       message: 'Por favor, completa todos los campos requeridos.', // Mensaje de advertencia
       duration: 3000, // Duración de 3 segundos
       position: 'bottom', // Posición inferior
       color: 'warning', // Color amarillo para indicar advertencia
     });
+
+    toast.onDidDismiss().then(() => {
+      this.isToastShowing = false; // Marcar que el toast ya no se está mostrando
+    });
+
     await toast.present();
   }
 

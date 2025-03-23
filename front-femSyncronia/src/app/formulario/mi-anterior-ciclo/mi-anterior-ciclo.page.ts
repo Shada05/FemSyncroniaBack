@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { IonInput } from '@ionic/angular';
+import { IonInput, LoadingController, ToastController } from '@ionic/angular'; // Importa LoadingController y ToastController
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router'; // Importa Router para navegar
+import { ApiService } from 'src/app/services/api.service'; // Importa ApiService para enviar datos a la API
 
 @Component({
   selector: 'app-mi-anterior-ciclo',
@@ -20,11 +21,15 @@ export class MiAnteriorCicloPage implements OnInit {
   dias2: number | string = ''; // Valor del segundo input de días
   errorDias1: string = ''; // Mensaje de error para el primer input de días
   errorDias2: string = ''; // Mensaje de error para el segundo input de días
+  isToastShowing: boolean = false; // Controla si ya se está mostrando un toast
 
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router // Inyecta Router
+    private router: Router, // Inyecta Router
+    private apiService: ApiService, // Inyecta ApiService
+    private loadingController: LoadingController, // Inyecta LoadingController
+    private toastController: ToastController // Inyecta ToastController
   ) {
     this.formulario = this.fb.group({
       mesInicio: ['', Validators.required], // Control para el mes de inicio
@@ -124,32 +129,86 @@ export class MiAnteriorCicloPage implements OnInit {
     }
   }
 
+  // Función para convertir el nombre del mes a su representación numérica
+  convertirMesANumero(mes: string): string {
+    const meses = ['Ene.', 'Feb.', 'Mar.', 'Abr.', 'May.', 'Jun.', 'Jul.', 'Ago.', 'Sep.', 'Oct.', 'Nov.', 'Dic.'];
+    const index = meses.indexOf(mes);
+    return (index + 1).toString().padStart(2, '0'); // Devuelve el mes en formato "01", "02", etc.
+  }
+
+  // Función para formatear la fecha en formato YYYY-MM-DD
+  formatearFecha(mes: string, dia: number): string {
+    const anioActual = new Date().getFullYear(); // Obtiene el año actual
+    const mesFormateado = this.convertirMesANumero(mes); // Convierte el mes a número
+    const diaFormateado = dia.toString().padStart(2, '0'); // Asegura que el día tenga dos dígitos
+    return `${anioActual}-${mesFormateado}-${diaFormateado}`; // Formato YYYY-MM-DD
+  }
+
+  // Función para mostrar un toast con un mensaje de error
+  async mostrarToastError(mensaje: string, color: 'warning' | 'danger' = 'danger') {
+    if (this.isToastShowing) {
+      return; // Si ya se está mostrando un toast, no mostrar otro
+    }
+
+    this.isToastShowing = true; // Marcar que se está mostrando un toast
+
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 3000, // Duración de 3 segundos
+      position: 'bottom', // Posición inferior
+      color: color, // Color del toast (warning o danger)
+    });
+
+    toast.onDidDismiss().then(() => {
+      this.isToastShowing = false; // Marcar que el toast ya no se está mostrando
+    });
+
+    await toast.present();
+  }
+
   // Función para enviar los datos del formulario
-  crearCiclo() {
+  async crearCiclo() {
     if (this.formulario.invalid) {
-      console.log('Formulario inválido. Por favor, completa todos los campos requeridos.');
+      this.mostrarToastError('Por favor, completa todos los campos requeridos.', 'warning');
       return;
     }
+
+    // Mostrar el spinner de carga
+    const loading = await this.loadingController.create({
+      message: 'Enviando datos...', // Mensaje mientras se carga
+      spinner: 'crescent', // Tipo de spinner
+    });
+    await loading.present();
 
     // Obtén los valores del formulario
     const formData = this.formulario.value;
     console.log('Datos del formulario:', formData);
 
-    // Aquí puedes enviar los datos a tu API o realizar otras acciones
-    // Ejemplo:
+    // Formatear las fechas de inicio y fin
+    const fechaInicio = this.formatearFecha(formData.mesInicio, formData.diaInicio);
+    const fechaFin = this.formatearFecha(formData.mesFin, formData.diaFin);
+
+    // Crear el objeto con los datos a enviar
     const data = {
-      id: this.userId,
-      mesInicio: formData.mesInicio,
-      diaInicio: formData.diaInicio,
-      mesFin: formData.mesFin,
-      diaFin: formData.diaFin,
-      dias1: formData.dias1,
-      dias2: formData.dias2,
+      cycle_status: 1,
+      Start_day: fechaInicio, // Fecha de inicio en formato YYYY-MM-DD
+      Finish_day: fechaFin, // Fecha de fin en formato YYYY-MM-DD
+      average_periodo: formData.dias1,
+      avergae_ciclo: formData.dias2,
     };
 
-    console.log('Datos procesados:', data);
-
-    // Navegar a la siguiente pantalla
-    this.router.navigate(['/periodo']);
+    // Enviar los datos a la API
+    this.apiService.createCiclo(data).subscribe({
+      next: async (response) => {
+        console.log('Datos enviados exitosamente:', response);
+        await loading.dismiss(); // Ocultar el spinner
+        this.router.navigate(['/periodo']); // Navegar a la siguiente pantalla
+      },
+      error: async (error) => {
+        console.error('Error al enviar los datos:', error);
+        await loading.dismiss(); // Ocultar el spinner
+        this.mostrarToastError('Error al enviar los datos. Inténtalo de nuevo.', 'danger'); // Mostrar toast de error
+      },
+    });
   }
 }
