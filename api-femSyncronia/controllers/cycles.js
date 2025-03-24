@@ -307,7 +307,7 @@ exports.update = async (req, res) => {
     let updatedData = {};
 
     if (req.body.cycle_status != null) updatedData['cycles_status']= req.body.cycle_status;
-    if (req.body.weight != null) updatedData['weight']= req.body.weigth;
+    if (req.body.weight != null) updatedData['weight']= req.body.weight;
     if (req.body.temperature != null) updatedData['temperature']= req.body.temperature;
     if (req.body.date != null) updatedData['date']= req.body.date;
     if (req.body.DM_1 != null) updatedData['DM_1']= req.body.DM_1;

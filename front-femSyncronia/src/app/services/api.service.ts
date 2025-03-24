@@ -25,6 +25,10 @@ export class ApiService {
     return this.http.get(`${this.apiUrl}/api/v1/users/${id}`);
   }
 
+  updateCycles(id: string, data: any): Observable<any>{
+    return this.http.put(`${this.apiUrl}/api/v1/cycles/${id}`, data)
+  }
+  
   uploadImage(formData: FormData): Observable<{ imageUrl: string }> {
     return this.http.post<{ imageUrl: string }>(`${this.apiUrl}/upload`, formData);
   }
