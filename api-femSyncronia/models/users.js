@@ -88,10 +88,6 @@ module.exports = (sequelize, DataTypes) => {
             type:DataTypes.INTEGER,
             allowNull: true
         },
-        Regular_cycle:{ //0=No, 1=Sí, 2=Tal vez
-            type: DataTypes.INTEGER,
-            allowNull:true,
-          },
         createdAt: {
             allowNull: false, 
             type: DataTypes.DATE,

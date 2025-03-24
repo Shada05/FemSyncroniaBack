@@ -23,15 +23,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     }, 
     average_periodo: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.INTEGER,
       allowNull: true
     },
     average_ciclo: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.INTEGER,
       allowNull: true
     },
     average_mestruation: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.INTEGER,
       allowNull: true
     },
     Regular_cycle:{ //0=regular, 1=Irregular

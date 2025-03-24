@@ -172,31 +172,42 @@ export class MiAnteriorCicloPage implements OnInit {
       this.mostrarToastError('Por favor, completa todos los campos requeridos.', 'warning');
       return;
     }
-
+  
     // Mostrar el spinner de carga
     const loading = await this.loadingController.create({
       message: 'Enviando datos...', // Mensaje mientras se carga
       spinner: 'crescent', // Tipo de spinner
     });
     await loading.present();
-
+  
     // Obtén los valores del formulario
     const formData = this.formulario.value;
     console.log('Datos del formulario:', formData);
-
+  
     // Formatear las fechas de inicio y fin
     const fechaInicio = this.formatearFecha(formData.mesInicio, formData.diaInicio);
     const fechaFin = this.formatearFecha(formData.mesFin, formData.diaFin);
-
+  
+    // Convertir dias1 y dias2 a enteros
+    const dias1 = parseInt(formData.dias1, 10); // Convertir a entero
+    const dias2 = parseInt(formData.dias2, 10); // Convertir a entero
+  
+    // Validar que la conversión sea exitosa
+    if (isNaN(dias1) || isNaN(dias2)) {
+      await loading.dismiss(); // Ocultar el spinner
+      this.mostrarToastError('Los valores de días deben ser números válidos.', 'warning');
+      return;
+    }
+  
     // Crear el objeto con los datos a enviar
     const data = {
       cycle_status: 1,
       Start_day: fechaInicio, // Fecha de inicio en formato YYYY-MM-DD
       Finish_day: fechaFin, // Fecha de fin en formato YYYY-MM-DD
-      average_periodo: formData.dias1,
-      average_ciclo: formData.dias2
+      average_periodo: dias1, // Usar el valor convertido a entero
+      average_ciclo: dias2, // Usar el valor convertido a entero
     };
-
+  
     // Enviar los datos a la API
     this.apiService.createCiclo(data).subscribe({
       next: async (response) => {

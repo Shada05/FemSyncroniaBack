@@ -152,16 +152,13 @@ export class CuentanosPage implements OnInit {
 
     // Formatear el año como un string en formato YYYY-MM-DD
     const fechaFormateada = this.formatearFecha(this.whenYourPeriodCame);
-
     // Mapear el valor de haveSymptoms antes de enviarlo
     const haveSymptomsMapeado = this.mapearSintomas(this.haveSymptoms);
-
     // Crear el objeto con los datos a enviar
     const data = {
       when_your_period_came: fechaFormateada, // Usar la fecha formateada
-      have_symptoms: haveSymptomsMapeado, // Usar el valor mapeado
+      Have_symptoms: haveSymptomsMapeado, // Usar el valor mapeado
     };
-
     // Llamar al servicio para actualizar los datos del usuario
     this.apiService.updateUsuario(this.userId, data).subscribe({
       next: (response) => {
