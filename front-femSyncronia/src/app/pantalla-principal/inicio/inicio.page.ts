@@ -3,7 +3,15 @@ import { MenuController } from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular'
+import { lastValueFrom } from 'rxjs';
+
+interface Sintoma {
+  id: number; // ID del síntoma
+  name: string; // Nombre del síntoma
+  image: string; // URL del icono del síntoma
+  description?: string; // Descripción opcional
+  type?: number; // Tipo opcional
+}
 
 @Component({
   selector: 'app-inicio',
@@ -32,12 +40,14 @@ export class InicioPage implements OnInit {
   diaActual: number = 0; // Número del día actual
   indice: number = 1; // Número del índice (puedes cambiarlo según sea necesario)
 
+  // Propiedades para los síntomas
+  sintomasCalificados: any[] = [];
+
   constructor(
     private menuCtrl: MenuController,
     private apiService: ApiService,
     private authService: AuthService,
     private router: Router,
-    private navCtrl: NavController
   ) { }
   mostrarComponente(componente: string) {
     this.componenteActivo = componente;
@@ -53,7 +63,7 @@ export class InicioPage implements OnInit {
     this.actualizarMes(this.fechaActual); // Inicializa el mes y año con la fecha actual
   }
 
-  // Función para cargar los datos del usuario y la imagen de perfil
+    // Función para cargar los datos del usuario y la imagen de perfil
   async cargarUsuario() {
     const token = await this.authService.obtenerToken();
     if (token) {
@@ -77,6 +87,9 @@ export class InicioPage implements OnInit {
                 } else {
                   console.warn('No se encontró imagen de perfil en la BD.');
                 }
+
+                // Obtener los síntomas calificados
+                this.obtenerSintomasCalificados();
               },
               error: (error) => {
                 console.error('Error al cargar los datos del usuario:', error);
@@ -92,6 +105,50 @@ export class InicioPage implements OnInit {
       });
     } else {
       console.log('No hay token almacenado.');
+    }
+  }
+
+  // Función para obtener los síntomas calificados
+  async obtenerSintomasCalificados() {
+    if (!this.userId) {
+      console.error('Error: No se puede obtener el ciclo sin un ID de usuario.');
+      return;
+    }
+  
+    try {
+      // Obtener los síntomas disponibles
+      const sintomasDisponibles = await lastValueFrom(this.apiService.obtenerSintomas());
+  
+      // Obtener el ciclo actual del usuario
+      const cicloActual = await lastValueFrom(this.apiService.mostrarCiclo(this.userId));
+  
+      // Crear un contador para asignar IDs secuenciales
+      let idSecuencial = 1;
+  
+      // Filtrar los síntomas calificados
+      this.sintomasCalificados = Object.keys(cicloActual)
+        .filter(key => key.startsWith('DM_') || key.startsWith('M_') || key.startsWith('PP_') || key.startsWith('E_') || key.startsWith('F_') || key.startsWith('AS_')) // Filtrar solo las columnas de síntomas
+        .map(key => {
+          const intensidad = cicloActual[key]; // Intensidad (estrellas)
+          const sintomaInfo = sintomasDisponibles.find((s: Sintoma) => s.id === idSecuencial); // Buscar el síntoma en la lista de síntomas disponibles usando el ID secuencial
+  
+          // Crear el objeto del síntoma calificado
+          const sintomaCalificado = {
+            id: idSecuencial,
+            nombre: sintomaInfo ? sintomaInfo.name : `Síntoma ${idSecuencial}`, // Usar el nombre del síntoma si está disponible
+            intensidad: intensidad,
+            icono: sintomaInfo ? sintomaInfo.image : null, // Usar la URL del icono del síntoma si está disponible
+          };
+  
+          idSecuencial++; // Incrementar el ID secuencial para el próximo síntoma
+  
+          return sintomaCalificado;
+        })
+        .filter(sintoma => sintoma.intensidad > 0); // Filtrar solo los síntomas con intensidad mayor que 0
+  
+      console.log('Síntomas calificados:', this.sintomasCalificados); // Depuración
+    } catch (error) {
+      console.error('Error al obtener los síntomas calificados:', error);
     }
   }
 
