@@ -14,6 +14,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     }, 
+    user_id:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'users', // Nombre de la tabla a la que hace referencia
+        key: 'id'       // Columna de la tabla referenciada
+    }
+    },
     Start_day:{ //INICIO DE ESE PERIODO
       type: DataTypes.DATEONLY,
       allowNull: true

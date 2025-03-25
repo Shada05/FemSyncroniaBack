@@ -5,7 +5,7 @@ exports.store = async (req, res) => {
     try {
         const { birthdate, username, name, lastname, user_status, email, password, profile_image, phone, 
             when_your_period_came, recording_period, Have_symptoms, First_period, Affects_skin, Affects_weight,
-            Affects_dream, Affects_energy, Affects_appetite, Affects_humour
+            Affects_dream, Affects_energy, Affects_appetite, Affects_humour, regular_cycle
           } = req.body;
 
         // Verificar si el email ya está registrado
@@ -37,7 +37,8 @@ exports.store = async (req, res) => {
             Affects_dream,
             Affects_energy,
             Affects_appetite,
-            Affects_humour
+            Affects_humour,
+            regular_cycle
         });
 
         return res.status(201).send(newUser);
