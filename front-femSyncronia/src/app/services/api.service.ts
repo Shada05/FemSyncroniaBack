@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:3000'; // URL base de tu API
+  private apiUrl = 'https://femsyncronia.onrender.com'; // URL base de tu API
 
   constructor(private http: HttpClient) { }
 
@@ -14,6 +14,9 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/api/v1/users`, data);
   }
 
+  createCiclo(data: any): Observable<any>{
+    return this.http.post(`${this.apiUrl}/api/v1/cycle_calendar`,data);
+  }
   updateUsuario(id: string, data: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/api/v1/users/${id}`, data);
   }
@@ -22,6 +25,18 @@ export class ApiService {
     return this.http.get(`${this.apiUrl}/api/v1/users/${id}`);
   }
 
+  updateCycles(id: string, data: any): Observable<any>{
+    return this.http.put(`${this.apiUrl}/api/v1/cycles/${id}`, data)
+  }
+  
+  mostrarCicloCalendario(id: string): Observable<any>{
+    return this.http.get(`${this.apiUrl}/api/v1/cycle_calendar/${id}`);
+  }
+
+  mostrarCiclo(id: string): Observable<any>{
+    return this.http.get(`${this.apiUrl}/api/v1/cycles/${id}`);
+  }
+  
   uploadImage(formData: FormData): Observable<{ imageUrl: string }> {
     return this.http.post<{ imageUrl: string }>(`${this.apiUrl}/upload`, formData);
   }

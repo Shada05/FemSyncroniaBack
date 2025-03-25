@@ -119,8 +119,57 @@ ion-content {
   --background-activated: #FF8390;
 }
 
+/* Contenedor de síntomas */
+.info-sintomas {
+  width: 319px;
+  height: 132px; /* Altura fija del contenedor */
+  background: #FFFFFF; /* Fondo gris claro */
+  margin: 24px auto; /* Espaciado entre los componentes */
+  border-radius: 20px; /* Bordes redondeados */
+  display: flex;
+  flex-direction: column; /* Alinear el título y la lista en columna */
+  padding: 10px; /* Espaciado interno */
+}
+
+/* Estilo del título "Posibles síntomas" */
+.titulo-sintomas {
+  font-size: 16px; /* Tamaño de fuente del título */
+  font-weight: 600; /* Grosor de la fuente */
+  color: black; /* Color del texto */
+  margin-bottom: 8px; /* Espaciado entre el título y la lista */
+  text-align: left; /* Alinear el texto a la izquierda */
+}
+
+/* Contenedor de la lista de síntomas */
+.contenedor-lista-sintomas {
+  flex: 1; /* Ocupa el espacio restante */
+  overflow-y: auto; /* Permitir scroll vertical si los síntomas exceden el tamaño */
+}
+
+/* Estilo para cada síntoma */
+.sintoma-item {
+  display: flex;
+  align-items: center; /* Alinear imagen y texto horizontalmente */
+  margin-bottom: 8px; /* Espaciado entre síntomas */
+  width: 100%; /* Ocupar todo el ancho disponible */
+}
+
+/* Imagen del síntoma */
+.sintoma-icono {
+  width: 15px; /* Ancho de la imagen */
+  height: 15px; /* Altura de la imagen */
+  margin-right: 8px; /* Espaciado entre la imagen y el texto */
+}
+
+/* Texto del síntoma */
+.sintoma-item ion-text {
+  font-size: 15px; /* Tamaño de fuente */
+  color: black; /* Color del texto */
+  font-weight: 400; /* Grosor de la fuente */
+}
+
 /* Componentes adicionales */
-.info-sintomas, .info-consejos{
+.info-consejos{
   width: 319px;
   height: 132px;
   background: #FFFFFF; /* Fondo gris claro */

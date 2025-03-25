@@ -6,9 +6,10 @@ module.exports = {
     await queryInterface.bulkInsert("cycles", [
       {
         cycle_status: 1,
-        user_id: 5,
+        user_id: 29,
         weight: 60,
         temperature: 36.5,
+        date: "2025-02-01", // Fecha añadida
         //Problemas en la piel
         PP_1: 3, // Acne
         PP_2: 3, //picazon
