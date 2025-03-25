@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   async ngOnInit() {
     // Verifica si es la primera vez que se abre la aplicación
     this.showSplash();
-    //await this.verificarPrimeraApertura();
+    await this.verificarPrimeraApertura();
   }
 
   async showSplash() {
