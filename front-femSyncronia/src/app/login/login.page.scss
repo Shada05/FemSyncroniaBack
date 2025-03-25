@@ -164,13 +164,7 @@ ion-content {
     --box-shadow: none; /* Sin sombra */
     min-height: 44px;
     font-size: 18px; /* Tamaño de fuente */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave para color de fondo y texto */
-  }
-  
-  /* Estilo para el botón de continuar en hover */
-  .btn-continuar:hover {
-    --background: white; /* Color de fondo */
-    --color: #FFB7BF; /* Color del texto */
+    --background-activated:#FF8390
   }
   
   /* Estilo para el botón de Google */
@@ -182,10 +176,3 @@ ion-content {
     --box-shadow: none; /* Sin sombra */
   }
   
-  /* Estilo para el botón de Google en hover */
-  .btn-Google:hover {
-    --background: white; /* Color de fondo */
-    --border-color: rgba(0, 0, 0, 0.09); /* Color del borde */
-    --border-style: solid; /* Estilo del borde */
-    --border-width: 1px; /* Ancho del borde */
-  }
