@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { NavController } from '@ionic/angular';
 import { lastValueFrom } from 'rxjs';
-import { ToastController, LoadingController } from '@ionic/angular';
+import { UtilidadesService } from '../services/utilidades.service'; // Importar el servicio
 
 @Component({
   selector: 'app-login',
@@ -15,14 +15,12 @@ export class LoginPage implements OnInit {
   passwordVisible = false;
   mostrarIcono = false;
   isLoading = false;
-  isToastOpen = false;
-  
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private navCtrl: NavController,
-    private loadingController: LoadingController,
-    private toastController: ToastController
+    private utilidadesService: UtilidadesService // Inyectar el servicio
   ) {
     // Inicialización del formulario con validadores
     this.formulario = this.fb.group({
@@ -39,45 +37,19 @@ export class LoginPage implements OnInit {
   }
 
   /**
-   * Muestra un toast de advertencia
-   * @param mensaje Mensaje a mostrar
-   */
-  private async mostrarToastAdvertencia(mensaje: string) {
-    if (this.isToastOpen) return;
-
-    this.isToastOpen = true;
-    const toast = await this.toastController.create({
-      message: mensaje,
-      duration: 2000,
-      color: 'warning',
-      position: 'bottom',
-    });
-
-    toast.onDidDismiss().then(() => {
-      this.isToastOpen = false;
-    });
-
-    await toast.present();
-  }
-
-  /**
    * Maneja el proceso de login
    */
   async login() {
     if (this.formulario.invalid) {
-      this.mostrarToastAdvertencia('Por favor, completa todos los campos requeridos.');
+      this.utilidadesService.mostrarToastAdvertencia('Por favor, completa todos los campos requeridos.');
       return;
     }
-    
+
     if (this.isLoading) return;
     this.isLoading = true;
 
-    const loading = await this.loadingController.create({
-      message: 'Enviando datos...',
-      spinner: 'crescent',
-    });
-    
-    await loading.present();
+    // Usar el servicio para mostrar el loading
+    await this.utilidadesService.mostrarLoading();
 
     try {
       const { email, password } = this.formulario.value;
@@ -86,13 +58,19 @@ export class LoginPage implements OnInit {
       if (response?.token) {
         await this.authService.guardarToken(response.token);
         this.navCtrl.navigateRoot('/pantalla-principal');
+
+        // Reiniciar el formulario
+        this.formulario.reset();
+        this.mostrarIcono = false;
+        this.passwordVisible = false;
       } else {
-        this.mostrarToastAdvertencia('Error: No se recibió un token válido.');
+        this.utilidadesService.mostrarToastAdvertencia('Error: No se recibió un token válido.');
       }
     } catch (error: any) {
       this.handleLoginError(error);
     } finally {
-      await loading.dismiss();
+      // Usar el servicio para ocultar el loading
+      await this.utilidadesService.ocultarLoading();
       this.isLoading = false;
     }
   }
@@ -103,7 +81,7 @@ export class LoginPage implements OnInit {
    */
   private handleLoginError(error: any) {
     if (!error.error?.message) {
-      this.mostrarToastAdvertencia('Error desconocido al intentar iniciar sesión');
+      this.utilidadesService.mostrarToastAdvertencia('Error desconocido al intentar iniciar sesión');
       return;
     }
 
