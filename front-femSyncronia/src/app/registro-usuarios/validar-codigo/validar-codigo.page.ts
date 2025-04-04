@@ -44,20 +44,78 @@ export class ValidarCodigoPage implements OnInit {
   }
 
   moverFoco(inputActual: IonInput | null, siguienteInput: IonInput | null) {
-    setTimeout(() => {
-      if (inputActual?.value) {
-        siguienteInput?.setFocus();
-      }
-    }, 100);
+    if (inputActual?.value && siguienteInput) {
+      siguienteInput.setFocus();
+    }
   }
 
-  handleKeydown(event: KeyboardEvent, inputAnterior: IonInput | null, inputSiguiente: IonInput | null) {
+handleKeydown(event: KeyboardEvent, inputAnterior: IonInput | null, inputSiguiente: IonInput | null) {
+    const currentInput = event.target as HTMLInputElement;
+    
     if (event.key === 'Backspace') {
-      if ((event.target as HTMLInputElement).value === '') {
-        if (inputAnterior) {
-          inputAnterior.setFocus();
-        }
+      if (currentInput.value === '' && inputAnterior) {
+        event.preventDefault();
+        this.moverFocoConCursorAlFinal(inputAnterior);
       }
+    } else if (event.key === 'ArrowLeft') {
+      event.preventDefault(); // Siempre prevenir el comportamiento por defecto
+      
+      if (inputAnterior) {
+        // Mover al input anterior si existe
+        this.moverFocoConCursorAlFinal(inputAnterior);
+      } else {
+        // Estamos en el primer input - mantener cursor al inicio
+        currentInput.setSelectionRange(0, 0);
+      }
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault(); // Siempre prevenir el comportamiento por defecto
+      
+      if (inputSiguiente) {
+        // Mover al input siguiente si existe
+        this.moverFocoConCursorAlFinal(inputSiguiente);
+      } else {
+        // Estamos en el último input - mantener cursor al final
+        currentInput.setSelectionRange(currentInput.value.length, currentInput.value.length);
+      }
+    } else if (/^[0-9]$/.test(event.key)) {
+      if (currentInput.value && inputSiguiente) {
+        setTimeout(() => this.moverFocoConCursorAlFinal(inputSiguiente!), 10);
+      }
+    }
+  }
+
+  private async moverFocoConCursorAlFinal(input: IonInput) {
+    if (!input) return;
+    
+    try {
+      await input.setFocus();
+      const inputElement = await input.getInputElement();
+      if (inputElement) {
+        inputElement.setSelectionRange(inputElement.value.length, inputElement.value.length);
+      }
+    } catch (error) {
+      console.error('Error al mover el foco:', error);
+    }
+  }
+
+  handlePaste(event: ClipboardEvent) {
+    event.preventDefault();
+    const clipboardData = event.clipboardData?.getData('text/plain').trim();
+
+    if (clipboardData && /^\d{6}$/.test(clipboardData)) {
+      const digits = clipboardData.split('');
+
+      this.formulario.patchValue({
+        codigo1: digits[0],
+        codigo2: digits[1],
+        codigo3: digits[2],
+        codigo4: digits[3],
+        codigo5: digits[4],
+        codigo6: digits[5]
+      });
+
+      // Mover el foco al último input
+      setTimeout(() => this.codigo6?.setFocus(), 10);
     }
   }
 
