@@ -33,10 +33,7 @@ ion-content {
 }
 
 ion-item {
-    --highlight-height: 0; /* Quita la línea de enfoque de IonItem */
     --inner-padding-end: 0;
-    --inner-padding-start: 0;
-    --border-width: 0; /* Elimina cualquier borde preexistente */
     --background:none;
     --color:#868686;
     --border-color:#868686;
@@ -48,6 +45,7 @@ ion-input {
     width: 30px; /* Ajusta el ancho del input */
     height: 20px; /* Ajusta la altura del input */
     --highlight-color-focused:none;
+    --highlight-color-valid:#868686;
 }
 
 .invalid {
