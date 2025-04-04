@@ -31,8 +31,15 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
-            "scripts": []
+            "styles": [
+              "src/global.scss",
+              "src/theme/variables.scss"
+            ],
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "@ionic/storage",
+              "localforage"
+            ]
           },
           "configurations": {
             "production": {
@@ -44,7 +51,7 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
+                  "maximumWarning": "9kb",
                   "maximumError": "10kb"
                 }
               ],
@@ -111,7 +118,10 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
+            "styles": [
+              "src/global.scss",
+              "src/theme/variables.scss"
+            ],
             "scripts": []
           },
           "configurations": {

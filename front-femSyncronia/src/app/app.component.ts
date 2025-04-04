@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, Platform } from '@ionic/angular'; // Importa NavController y Platform
+import { NavController } from '@ionic/angular'; // Importa NavController y Platform
 import { AuthService } from './services/auth.service';
 import { PrimeraAperturaService } from './services/primera-apertura.service';
 import { SplashScreen } from '@capacitor/splash-screen';
@@ -14,20 +14,24 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private primeraAperturaService: PrimeraAperturaService,
     private navCtrl: NavController, // Inyecta NavController
-    private platform: Platform // Inyecta Platform
   ) { }
 
   async ngOnInit() {
-    // Verifica si es la primera vez que se abre la aplicación
-    this.showSplash();
-    await this.verificarPrimeraApertura();
+    await SplashScreen.show({ autoHide: false });
+  
+    // Ejecutar verificaciones y esperar al menos 2 segundos
+    await Promise.all([
+      this.verificarPrimeraApertura(),
+      new Promise(resolve => setTimeout(resolve, 2000)) // Mínimo 2 segundos
+    ]);
+  
+    await SplashScreen.hide();
   }
 
   async showSplash() {
     // Show the splash for an indefinite amount of time:
     await SplashScreen.show({
-      autoHide: true,
-      showDuration:2000
+      autoHide: false
     });
   }
   async verificarPrimeraApertura() {
@@ -70,4 +74,4 @@ export class AppComponent implements OnInit {
       this.navCtrl.navigateRoot('/login'); // Usa navigateRoot para eliminar el historial
     }
   }
-}
+} 

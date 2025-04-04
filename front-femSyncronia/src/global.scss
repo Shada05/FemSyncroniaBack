@@ -42,3 +42,11 @@
   --width: 200px;
   --box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.6);
 }
+
+.loading {
+  --background: #E4E4E4; /* Fondo oscuro */
+  --spinner-color: #000000; /* Color del spinner */
+  --content-padding: 20px; /* Espaciado dentro del loading */
+  --border-radius: 12px; /* Bordes redondeados */
+  color:#000000;
+}

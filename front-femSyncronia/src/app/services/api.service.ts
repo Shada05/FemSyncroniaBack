@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'https://femsyncronia.onrender.com'; // URL base de tu API
+  private apiUrl = 'http://localhost:3000'; // URL base de tu API
 
   constructor(private http: HttpClient) { }
 
