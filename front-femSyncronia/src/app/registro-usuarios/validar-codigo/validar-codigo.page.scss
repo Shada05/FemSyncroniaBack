@@ -98,35 +98,22 @@ ion-text {
 .btn-validar, .btn-enviar-codigo {
     --border-radius: 50px; /* Radio de borde */
     width: 302px; /* Ancho del botón */
+    min-height: 44px;
     height: 44px; /* Altura del botón */
-    text-transform: none; /* No transformar el texto */
     font-family: 'Roboto-medium'; /* Familia de fuente */
-    --padding-start: 20px; /* Espacio interior al inicio */
-    --padding-end: 20px; /* Espacio interior al final */
-    --border-style: solid; /* Estilo del borde */
-    --border-width: 1px; /* Ancho del borde */
-    --box-shadow: none; /* Sin sombra */
     font-size: 18px; /* Tamaño de fuente */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones */
 }
 
 /* Estilo específico para el botón Validar */
 .btn-validar {
+    --background-activated:#FF8390;
     --background: #FFB7BF; /* Color de fondo */
     --color: white; /* Color de texto */
-    --border-color: #FFB7BF; /* Color del borde */
 }
 
 /* Estilo específico para el botón Enviar Código */
 .btn-enviar-codigo {
     --background: #E9E9E9; /* Color de fondo */
+    --background-activated:#CCCCCC;
     --color: #9D9D9D; /* Color del texto */
-    --border-color: #E9E9E9; /* Color del borde */
-}
-
-ion-toast{
-    --background:#E4E4E4;
-    --color:black;
-    --border-radius:15px;
-    --height: 85px;
 }
