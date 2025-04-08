@@ -38,46 +38,62 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
     const primerDiaSemana = primerDiaMes.getDay();
     const ultimoDiaMesAnterior = new Date(this.anoActual, this.mesActual, 0).getDate();
   
+    // Calcular la diferencia total de días en el ciclo
     const diferenciaDias = Math.floor((this.fechaFin.getTime() - this.fechaInicio.getTime()) / (1000 * 60 * 60 * 24)) + 1;
-    let contadorIndice = (diferenciaDias - (primerDiaSemana % diferenciaDias)) % diferenciaDias;
   
     // Días del mes anterior
     for (let i = primerDiaSemana - 1; i >= 0; i--) {
+      const dia = ultimoDiaMesAnterior - i;
+      const fecha = new Date(this.anoActual, this.mesActual - 1, dia);
+      const diffDias = Math.floor((fecha.getTime() - this.fechaInicio.getTime()) / (1000 * 60 * 60 * 24));
+      const indice = (diffDias % diferenciaDias + diferenciaDias) % diferenciaDias + 1;
+      
       this.diasMes.push({
-        dia: ultimoDiaMesAnterior - i,
+        dia: dia,
         tipo: 'anterior',
-        indice: (contadorIndice % diferenciaDias) + 1,
+        indice: indice
       });
-      contadorIndice++;
     }
   
     // Días del mes actual
     for (let i = 1; i <= ultimoDiaMes.getDate(); i++) {
+      const fecha = new Date(this.anoActual, this.mesActual, i);
+      const diffDias = Math.floor((fecha.getTime() - this.fechaInicio.getTime()) / (1000 * 60 * 60 * 24));
+      const indice = (diffDias % diferenciaDias + diferenciaDias) % diferenciaDias + 1;
+      
       this.diasMes.push({
         dia: i,
         tipo: 'actual',
-        indice: (contadorIndice % diferenciaDias) + 1,
+        indice: indice
       });
-      contadorIndice++;
     }
   
     // Días del mes siguiente
     let diaSiguiente = 1;
     while (this.diasMes.length < 42) {
+      const fecha = new Date(this.anoActual, this.mesActual + 1, diaSiguiente);
+      const diffDias = Math.floor((fecha.getTime() - this.fechaInicio.getTime()) / (1000 * 60 * 60 * 24));
+      const indice = (diffDias % diferenciaDias + diferenciaDias) % diferenciaDias + 1;
+      
       this.diasMes.push({
         dia: diaSiguiente++,
         tipo: 'siguiente',
-        indice: (contadorIndice % diferenciaDias) + 1,
+        indice: indice
       });
-      contadorIndice++;
     }
   
     // Buscar el día actual e índice
-    const diaHoy = this.diasMes.find(dia => dia.dia === this.fechaActual.getDate() && dia.tipo === 'actual');
+    const diaHoy = this.diasMes.find(dia => 
+      dia.dia === this.fechaActual.getDate() && 
+      dia.tipo === 'actual' &&
+      this.mesActual === this.fechaActual.getMonth() &&
+      this.anoActual === this.fechaActual.getFullYear()
+    );
+    
     if (diaHoy) {
       this.diaSeleccionado.emit({
         diaActual: diaHoy.dia,
-        indice: diaHoy.indice ?? 1, // Asegura que el índice tenga valor
+        indice: diaHoy.indice ?? 1,
       });
     }
   }
