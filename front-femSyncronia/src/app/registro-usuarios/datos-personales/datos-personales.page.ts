@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera'; // Importa solo lo necesario desde @capacitor/camera
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { ToastController, ActionSheetController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { UtilidadesService } from 'src/app/services/utilidades.service';
 
 @Component({
   selector: 'app-datos-personales',
@@ -30,11 +31,11 @@ export class DatosPersonalesPage implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private toastController: ToastController,
     private router: Router,
     private auth: AuthService,
-    private actionSheetController: ActionSheetController
-  ) {}
+    private actionSheetController: ActionSheetController,
+    private utilidadesService: UtilidadesService
+  ) { }
 
   ngOnInit() {
     this.selectedLada = '+52';
@@ -58,7 +59,6 @@ export class DatosPersonalesPage implements OnInit {
     }
   }
 
-  // Función para mostrar el Action Sheet con las opciones de tomar foto o seleccionar de la galería
   async changeProfilePicture() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Selecciona una opción',
@@ -67,35 +67,34 @@ export class DatosPersonalesPage implements OnInit {
           text: 'Tomar foto',
           icon: 'camera',
           handler: () => {
-            this.takePhoto(); // Llamar a la función para tomar una foto
+            this.takePhoto();
           },
         },
         {
           text: 'Seleccionar de la galería',
           icon: 'image',
           handler: () => {
-            this.selectFromGallery(); // Llamar a la función para seleccionar de la galería
+            this.selectFromGallery();
           },
         },
         {
           text: 'Cancelar',
           icon: 'close',
-          role: 'cancel', // Cierra el Action Sheet sin hacer nada
+          role: 'cancel',
         },
       ],
     });
 
-    await actionSheet.present(); // Mostrar el Action Sheet
+    await actionSheet.present();
   }
 
-  // Función para tomar una foto
   async takePhoto() {
     try {
       const image = await Camera.getPhoto({
         quality: 90,
         allowEditing: false,
         resultType: CameraResultType.Uri,
-        source: CameraSource.Camera, // Usar la cámara para tomar una foto
+        source: CameraSource.Camera,
       });
 
       if (image && image.webPath) {
@@ -108,17 +107,17 @@ export class DatosPersonalesPage implements OnInit {
       }
     } catch (error) {
       console.log('Error al tomar la foto: ', error);
+      await this.utilidadesService.mostrarToastAdvertencia('Error al tomar la foto');
     }
   }
 
-  // Función para seleccionar una imagen de la galería
   async selectFromGallery() {
     try {
       const image = await Camera.getPhoto({
         quality: 90,
         allowEditing: false,
         resultType: CameraResultType.Uri,
-        source: CameraSource.Photos, // Usar la galería para seleccionar una imagen
+        source: CameraSource.Photos,
       });
 
       if (image && image.webPath) {
@@ -131,65 +130,76 @@ export class DatosPersonalesPage implements OnInit {
       }
     } catch (error) {
       console.log('Error al seleccionar la imagen: ', error);
+      await this.utilidadesService.mostrarToastAdvertencia('Error al seleccionar la imagen');
     }
   }
 
   async updateUserData() {
     if (!this.userId) {
       console.error('Error: No se puede actualizar sin un ID de usuario.');
+      await this.utilidadesService.mostrarToastAdvertencia('Error: No se puede actualizar sin un ID de usuario.');
       return;
     }
 
     if (!this.phoneNumber.trim() || !this.selectedDay || !this.selectedMonth || !this.selectedYear) {
       console.error('Por favor, completa todos los campos requeridos.');
+      await this.utilidadesService.mostrarToastAdvertencia('Por favor, completa todos los campos requeridos.');
       return;
     }
 
-    const birthdate = `${this.selectedYear}-${this.formatMonth(this.selectedMonth)}-${this.selectedDay}`;
-    const data = {
-      name: this.nombre,
-      lastname: this.apellido,
-      birthdate: birthdate,
-      phone: `${this.selectedLada} ${this.phoneNumber}`,
-      profile_image: this.profileImage,
-    };
+    try {
+      await this.utilidadesService.mostrarLoading('Actualizando datos...');
 
-    if (this.selectedImage) {
-      const formData = new FormData();
-      formData.append('image', this.selectedImage, 'profile.jpg');
+      const birthdate = `${this.selectedYear}-${this.formatMonth(this.selectedMonth)}-${this.selectedDay}`;
+      const data = {
+        name: this.nombre,
+        lastname: this.apellido,
+        birthdate: birthdate,
+        phone: `${this.selectedLada} ${this.phoneNumber}`,
+        profile_image: this.profileImage,
+      };
 
-      try {
-        const response = await this.apiService.uploadImage(formData).toPromise();
+      if (this.selectedImage) {
+        const formData = new FormData();
+        formData.append('image', this.selectedImage, 'profile.jpg');
 
-        if (response && response.imageUrl) {
-          data.profile_image = response.imageUrl;
-          console.log('Imagen subida correctamente. URL:', data.profile_image);
-        } else {
-          console.error('Error: La respuesta de la API no contiene la URL de la imagen.');
+        try {
+          const response = await this.apiService.uploadImage(formData).toPromise();
+
+          if (response && response.imageUrl) {
+            data.profile_image = response.imageUrl;
+            console.log('Imagen subida correctamente. URL:', data.profile_image);
+          } else {
+            console.error('Error: La respuesta de la API no contiene la URL de la imagen.');
+            await this.utilidadesService.ocultarLoading();
+            await this.utilidadesService.mostrarToastAdvertencia('Error al subir la imagen');
+            return;
+          }
+        } catch (error) {
+          console.error('Error al subir la imagen:', error);
+          await this.utilidadesService.ocultarLoading();
+          await this.utilidadesService.mostrarToastAdvertencia('Error al subir la imagen');
           return;
         }
-      } catch (error) {
-        console.error('Error al subir la imagen:', error);
-        return;
       }
+
+      this.apiService.updateUsuario(this.userId, data).subscribe({
+        next: async (response) => {
+          console.log('Usuario actualizado exitosamente:', response);
+          await this.utilidadesService.ocultarLoading();
+          this.router.navigate(['/datos-guardados']);
+        },
+        error: async (error) => {
+          console.error('Error al actualizar el usuario:', error);
+          await this.utilidadesService.ocultarLoading();
+          await this.utilidadesService.mostrarToastAdvertencia('Error al actualizar los datos. Intenta nuevamente.');
+        },
+      });
+    } catch (error) {
+      console.error('Error inesperado:', error);
+      await this.utilidadesService.ocultarLoading();
+      await this.utilidadesService.mostrarToastAdvertencia('Error inesperado. Intenta nuevamente.');
     }
-
-    this.apiService.updateUsuario(this.userId, data).subscribe({
-      next: async (response) => {
-        console.log('Usuario actualizado exitosamente:', response);
-        this.router.navigate(['/datos-guardados']);
-      },
-      error: async (error) => {
-        console.error('Error al actualizar el usuario:', error);
-
-        const toast = await this.toastController.create({
-          message: 'Error al registrar. Intenta nuevamente.',
-          duration: 2000,
-          color: 'danger',
-        });
-        await toast.present();
-      },
-    });
   }
 
   private formatMonth(month: string): string {
@@ -197,11 +207,10 @@ export class DatosPersonalesPage implements OnInit {
     return monthIndex >= 0 ? (monthIndex + 1).toString().padStart(2, '0') : '01';
   }
 
-  // Función para validar que solo se ingresen números en el campo de teléfono
   validatePhoneNumber(event: any) {
     const input = event.target as HTMLInputElement;
-    const value = input.value.replace(/\D/g, ''); // Elimina todos los caracteres que no sean números
-    input.value = value; // Actualiza el valor del campo
-    this.phoneNumber = value; // Actualiza la variable en el componente
+    const value = input.value.replace(/\D/g, '');
+    input.value = value;
+    this.phoneNumber = value;
   }
 }

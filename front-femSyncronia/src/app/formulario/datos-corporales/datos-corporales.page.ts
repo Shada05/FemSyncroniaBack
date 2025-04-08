@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ApiService } from 'src/app/services/api.service';
-import { ToastController, LoadingController } from '@ionic/angular'; // Importa ToastController y LoadingController
-import { Router } from '@angular/router'; // Importa Router para navegar
+import { Router } from '@angular/router'; 
+import { UtilidadesService } from 'src/app/services/utilidades.service';
 
 @Component({
   selector: 'app-datos-corporales',
@@ -12,16 +12,14 @@ import { Router } from '@angular/router'; // Importa Router para navegar
 })
 export class DatosCorporalesPage implements OnInit {
   formulario: FormGroup;
-  userId: string | null = null; // ID del usuario
-  isToastOpen = false; // Controla si ya se está mostrando un toast
+  userId: string | null = null; 
 
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
     private authService: AuthService,
-    private toastController: ToastController, // Inyecta ToastController
-    private loadingController: LoadingController, // Inyecta LoadingController
-    private router: Router // Inyecta Router
+    private router: Router,
+    private utilidadesService: UtilidadesService
   ) {
     this.formulario = this.fb.group({
       peso: ['', [Validators.required, this.validarMaxPeso]],
@@ -80,101 +78,67 @@ export class DatosCorporalesPage implements OnInit {
 
   // Función para obtener el ID del usuario desde el token
   async obtenerUsuarioId() {
-    const token = await this.authService.obtenerToken(); // Obtener el token
+    const token = await this.authService.obtenerToken();
     if (token) {
       this.authService.verificarToken(token).subscribe({
         next: (response) => {
-          this.userId = response.user.id; // Obtiene el ID del usuario desde el token
+          this.userId = response.user.id;
           console.log('ID obtenido del token:', this.userId);
         },
-        error: (error) => {
+        error: async (error) => {
           console.error('Error al verificar el token:', error);
+          await this.utilidadesService.mostrarToastAdvertencia('Error al obtener el ID de usuario');
         },
       });
     } else {
       console.log('No hay token almacenado.');
+      await this.utilidadesService.mostrarToastAdvertencia('No se encontró token de autenticación');
     }
   }
 
-  // Función para mostrar un toast de advertencia
-  async mostrarToastAdvertencia(mensaje: string) {
-    if (this.isToastOpen) {
-      return; // Si ya se está mostrando un toast, no mostrar otro
-    }
-
-    this.isToastOpen = true; // Marcar que se está mostrando un toast
-
-    const toast = await this.toastController.create({
-      message: mensaje,
-      duration: 2000,
-      color: 'warning',
-      position: 'bottom',
-    });
-
-    toast.onDidDismiss().then(() => {
-      this.isToastOpen = false; // Marcar que el toast ya no se está mostrando
-    });
-
-    await toast.present();
-  }
 
   // Función para enviar los datos del formulario
   async enviarDatos() {
     if (!this.userId) {
       console.error('Error: No se puede actualizar sin un ID de usuario.');
-      const toast = await this.toastController.create({
-        message: 'Error: No se pudo obtener el ID del usuario.',
-        duration: 2000,
-        color: 'danger',
-      });
-      await toast.present();
+      await this.utilidadesService.mostrarToastAdvertencia('Error: No se puede actualizar sin un ID de usuario');
       return;
     }
 
     // Verificar que el formulario sea válido
     if (this.formulario.invalid) {
       console.error('Por favor, completa todos los campos requeridos.');
-      this.mostrarToastAdvertencia('Por favor, completa todos los campos requeridos.'); // Mostrar toast de advertencia
+      await this.utilidadesService.mostrarToastAdvertencia('Por favor, completa todos los campos requeridos');
       return;
     }
 
-    // Mostrar el spinner de carga
-    const loading = await this.loadingController.create({
-      message: 'Enviando datos...', // Mensaje mientras se carga
-      spinner: 'crescent', // Tipo de spinner
-    });
-    await loading.present();
+    try{
+      await this.utilidadesService.mostrarLoading('Enviando datos...');
+      // Obtener los datos del formulario y convertirlos a float
+      const datosFormulario = this.formulario.value;
 
-    // Obtener los datos del formulario y convertirlos a float
-    const datosFormulario = this.formulario.value;
+      const data = {
+        weight: parseFloat(datosFormulario.peso), // Convertir a float
+        temperature: parseFloat(datosFormulario.temperatura), // Convertir a float
+      };
 
-    const data = {
-      weight: parseFloat(datosFormulario.peso), // Convertir a float
-      temperature: parseFloat(datosFormulario.temperatura), // Convertir a float
-    };
-
-    console.log('Datos a enviar:', data); // Depuración
-
-    // Llamar al servicio para actualizar los datos del usuario
-    this.apiService.updateCycles(this.userId, data).subscribe({
-      next: async (response) => {
-        console.log('Usuario actualizado exitosamente:', response);
-        await loading.dismiss(); // Ocultar el spinner
-        this.router.navigate(['/sintomas']); // Navegar a la siguiente pantalla
-      },
-      error: async (error) => {
-        console.error('Error al actualizar el usuario:', error);
-        console.log('Respuesta completa del servidor:', error); // Depuración
-
-        await loading.dismiss(); // Ocultar el spinner en caso de error
-
-        const toast = await this.toastController.create({
-          message: 'Error al registrar. Intenta nuevamente.',
-          duration: 2000,
-          color: 'danger',
-        });
-        await toast.present();
-      },
-    });
+      // Llamar al servicio para actualizar los datos del usuario
+      this.apiService.updateCycles(this.userId, data).subscribe({
+        next: async (response) => {
+          console.log('Usuario actualizado exitosamente:', response);
+          await this.utilidadesService.ocultarLoading();
+          this.router.navigate(['/sintomas']); // Navegar a la siguiente pantalla
+        },
+        error: async (error) => {
+          console.error('Error al actualizar los datos:', error);
+          await this.utilidadesService.ocultarLoading();
+          await this.utilidadesService.mostrarToastAdvertencia('Error al enviar los datos. Intenta nuevamente');
+        },
+      });
+    }catch(error){
+      console.error('Error inesperado:', error);
+      await this.utilidadesService.ocultarLoading();
+      await this.utilidadesService.mostrarToastAdvertencia('Error inesperado. Intenta nuevamente');
+    }
   }
 }

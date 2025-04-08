@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { IonInput, LoadingController, ToastController } from '@ionic/angular'; // Importa LoadingController y ToastController
+import { IonInput } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router'; // Importa Router para navegar
-import { ApiService } from 'src/app/services/api.service'; // Importa ApiService para enviar datos a la API
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
+import { UtilidadesService } from 'src/app/services/utilidades.service';
 
 @Component({
   selector: 'app-mi-anterior-ciclo',
@@ -25,11 +26,10 @@ export class MiAnteriorCicloPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private auth: AuthService,
+    private authService: AuthService,
     private router: Router, // Inyecta Router
     private apiService: ApiService, // Inyecta ApiService
-    private loadingController: LoadingController, // Inyecta LoadingController
-    private toastController: ToastController // Inyecta ToastController
+    private utilidadesService: UtilidadesService // Inyecta ToastController
   ) {
     this.formulario = this.fb.group({
       mesInicio: ['', Validators.required], // Control para el mes de inicio
@@ -46,26 +46,28 @@ export class MiAnteriorCicloPage implements OnInit {
   }
 
   async obtenerUsuarioId() {
-    const token = await this.auth.obtenerToken();
+    const token = await this.authService.obtenerToken();
     if (token) {
-      this.auth.verificarToken(token).subscribe(
-        (response) => {
+      this.authService.verificarToken(token).subscribe({
+        next: (response) => {
           this.userId = response.user.id;
           console.log('ID obtenido del token:', this.userId);
         },
-        (error) => {
-          console.log('Error al obtener el ID:', error);
-        }
-      );
+        error: async (error) => {
+          console.error('Error al verificar el token:', error);
+          await this.utilidadesService.mostrarToastAdvertencia('Error al obtener el ID de usuario');
+        },
+      });
     } else {
       console.log('No hay token almacenado.');
+      await this.utilidadesService.mostrarToastAdvertencia('No se encontró token de autenticación');
     }
   }
 
   // Actualiza los días dependiendo del mes seleccionado
   actualizarDias(tipo: 'inicio' | 'fin') {
-    const mesSeleccionado = tipo === 'inicio' 
-      ? this.formulario.get('mesInicio')?.value 
+    const mesSeleccionado = tipo === 'inicio'
+      ? this.formulario.get('mesInicio')?.value
       : this.formulario.get('mesFin')?.value;
 
     let dias: number[] = [];
@@ -144,82 +146,58 @@ export class MiAnteriorCicloPage implements OnInit {
     return `${anioActual}-${mesFormateado}-${diaFormateado}`; // Formato YYYY-MM-DD
   }
 
-  // Función para mostrar un toast con un mensaje de error
-  async mostrarToastError(mensaje: string, color: 'warning' | 'danger' = 'danger') {
-    if (this.isToastShowing) {
-      return; // Si ya se está mostrando un toast, no mostrar otro
-    }
-
-    this.isToastShowing = true; // Marcar que se está mostrando un toast
-
-    const toast = await this.toastController.create({
-      message: mensaje,
-      duration: 3000, // Duración de 3 segundos
-      position: 'bottom', // Posición inferior
-      color: color, // Color del toast (warning o danger)
-    });
-
-    toast.onDidDismiss().then(() => {
-      this.isToastShowing = false; // Marcar que el toast ya no se está mostrando
-    });
-
-    await toast.present();
-  }
 
   // Función para enviar los datos del formulario
   async crearCiclo() {
     if (this.formulario.invalid) {
-      this.mostrarToastError('Por favor, completa todos los campos requeridos.', 'warning');
+
+      await this.utilidadesService.mostrarToastAdvertencia('Por favor, completa todos los campos requeridos');
       return;
     }
-  
-    // Mostrar el spinner de carga
-    const loading = await this.loadingController.create({
-      message: 'Enviando datos...', // Mensaje mientras se carga
-      spinner: 'crescent', // Tipo de spinner
-    });
-    await loading.present();
-  
+
     // Obtén los valores del formulario
     const formData = this.formulario.value;
     console.log('Datos del formulario:', formData);
-  
+
     // Formatear las fechas de inicio y fin
     const fechaInicio = this.formatearFecha(formData.mesInicio, formData.diaInicio);
     const fechaFin = this.formatearFecha(formData.mesFin, formData.diaFin);
-  
+
     // Convertir dias1 y dias2 a enteros
     const dias1 = parseInt(formData.dias1, 10); // Convertir a entero
     const dias2 = parseInt(formData.dias2, 10); // Convertir a entero
-  
+
     // Validar que la conversión sea exitosa
     if (isNaN(dias1) || isNaN(dias2)) {
-      await loading.dismiss(); // Ocultar el spinner
-      this.mostrarToastError('Los valores de días deben ser números válidos.', 'warning');
+      await this.utilidadesService.mostrarToastAdvertencia('Los valores de días deben ser números válidos');
       return;
     }
-  
-    // Crear el objeto con los datos a enviar
-    const data = {
-      cycle_status: 1,
-      Start_day: fechaInicio, // Fecha de inicio en formato YYYY-MM-DD
-      Finish_day: fechaFin, // Fecha de fin en formato YYYY-MM-DD
-      average_periodo: dias1, // Usar el valor convertido a entero
-      average_ciclo: dias2, // Usar el valor convertido a entero
-    };
-  
-    // Enviar los datos a la API
-    this.apiService.createCiclo(data).subscribe({
-      next: async (response) => {
-        console.log('Datos enviados exitosamente:', response);
-        await loading.dismiss(); // Ocultar el spinner
-        this.router.navigate(['/periodo']); // Navegar a la siguiente pantalla
-      },
-      error: async (error) => {
-        console.error('Error al enviar los datos:', error);
-        await loading.dismiss(); // Ocultar el spinner
-        this.mostrarToastError('Error al enviar los datos. Inténtalo de nuevo.', 'danger'); // Mostrar toast de error
-      },
-    });
+    try {
+      await this.utilidadesService.mostrarLoading('Enviando datos...');
+
+      const data = {
+        cycle_status: 1,
+        Start_day: fechaInicio,
+        Finish_day: fechaFin,
+        average_periodo: dias1,
+        average_ciclo: dias2,
+      };
+
+      this.apiService.createCiclo(data).subscribe({
+        next: async (response) => {
+          console.log('Datos enviados exitosamente:', response);
+          await this.utilidadesService.ocultarLoading();
+          this.router.navigate(['/periodo']); // Navegar a la siguiente pantalla
+        },
+        error: async (error) => {
+          console.error('Error al enviar los datos:', error);
+          await this.utilidadesService.ocultarLoading();
+          await this.utilidadesService.mostrarToastAdvertencia('Error al enviar los datos. Inténtalo de nuevo'); // Mostrar toast de error
+        },
+      });
+    } catch (error) {
+
+    }
+
   }
 }
