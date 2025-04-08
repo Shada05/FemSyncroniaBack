@@ -1,141 +1,179 @@
 /* Estilos para los textos */
-.tipo-sintoma{
-    font-family: 'Open Sans';
-    font-size: 15px;
-    font-weight: 400;
-    color: black;
-
+.tipo-sintoma {
+  font-family: "Open Sans";
+  font-size: 15px;
+  font-weight: 400;
+  color: black;
 }
 
 /* Contenedor de síntomas */
 .contenedor-sintomas {
-    width: 100%;
-    max-width: 350px;
-    height: 370px;
-    background-color: transparent;
-    overflow-y: auto;
-    box-sizing: border-box;
-    display: flex;
-    flex-wrap: wrap;
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  height: 370px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 10px;
 }
-  
+
 /* Personalización del scrollbar */
 .contenedor-sintomas::-webkit-scrollbar {
-    width: 5px; /* Ancho de la barra de scroll */
+  width: 5px; /* Ancho de la barra de scroll */
 }
 
 .contenedor-sintomas::-webkit-scrollbar-track {
-    background: white; /* Fondo de la barra de scroll */
+  background: white; /* Fondo de la barra de scroll */
 }
 
 .contenedor-sintomas::-webkit-scrollbar-thumb {
-    background: #FF9CA7; /* Color del indicador */
-    border-radius: 5px; /* Bordes redondeados */
+  background: #ff9ca7; /* Color del indicador */
+  border-radius: 5px; /* Bordes redondeados */
 }
-  
+
 /* Tarjeta de síntoma */
 .sintoma-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: calc(33.33% - 2px);
-    height: 120px;
-    box-shadow: none;
-    border-radius: 10px;
-    background: none;
-    margin: 0; 
-    padding: 0; /* Elimina el padding de las tarjetas */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(33.33% - 2px);
+  height: 120px;
+  box-shadow: none;
+  border-radius: 10px;
+  background: none;
+  margin: 0;
+  padding: 0; /* Elimina el padding de las tarjetas */
 }
 
 /* Animación para las tarjetas calificadas */
 .calificado {
-    animation: resaltar 1.5s infinite; /* Aplicar animación */
-    border: 2px solid #E0E0E0; /* Borde gris claro */
-    background-color: rgba(224, 224, 224, 0.1); /* Fondo semi-transparente */
+  animation: resaltar 1.5s infinite; /* Aplicar animación */
+  border: 2px solid #e0e0e0; /* Borde gris claro */
+  background-color: rgba(224, 224, 224, 0.1); /* Fondo semi-transparente */
+}
+
+/* Definir la animación */
+@keyframes resaltar {
+  0% {
+    transform: scale(1); /* Tamaño normal */
   }
-  
-  /* Definir la animación */
-  @keyframes resaltar {
-    0% {
-      transform: scale(1); /* Tamaño normal */
-    }
-    50% {
-      transform: scale(1.02); /* Escalar ligeramente */
-      box-shadow: 0 0 10px rgba(224, 224, 224, 0.3); /* Sombra gris muy ligera */
-    }
-    100% {
-      transform: scale(1); /* Volver al tamaño normal */
-    }
+  50% {
+    transform: scale(1.02); /* Escalar ligeramente */
+    box-shadow: 0 0 10px rgba(224, 224, 224, 0.3); /* Sombra gris muy ligera */
+  }
+  100% {
+    transform: scale(1); /* Volver al tamaño normal */
+  }
 }
 
 /* Contenedor de cada grupo de síntomas */
 .lista-sintomas {
-    display: flex;
-    flex-wrap: wrap; /* Permite que los elementos se acomoden en varias filas */
-    justify-content: center; /* Centra los síntomas */
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se acomoden en varias filas */
+  justify-content: center; /* Centra los síntomas */
 }
 
 /* Imagen del síntoma */
 .sintoma-imagen {
-    width: 50px; 
-    height: 50px;
-    object-fit: cover;
-    border-radius: 10px;
-    cursor: pointer;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 /* Contenedor de la imagen */
 .imagen-contenedor {
-    position: relative; /* Permite posicionar el ícono de manera absoluta */
-    display: inline-block; /* Ajusta el tamaño al contenido */
+  position: relative; /* Permite posicionar el ícono de manera absoluta */
+  display: inline-block; /* Ajusta el tamaño al contenido */
 }
-  
+
 /* Estilos para el ícono de exclamación */
 .icono-exclamacion {
-    position: absolute; /* Posiciona el ícono de manera absoluta */
-    top: 0; /* Alinea en la parte superior */
-    right: -15px; /* Alinea en la parte derecha */
-    font-size: 13px; /* Tamaño del ícono */
-    border-radius: 50%; /* Bordes redondeados */
+  position: absolute; /* Posiciona el ícono de manera absoluta */
+  top: 0; /* Alinea en la parte superior */
+  right: -15px; /* Alinea en la parte derecha */
+  font-size: 13px; /* Tamaño del ícono */
+  border-radius: 50%; /* Bordes redondeados */
 }
 
 /* Ajuste para el texto dentro de la tarjeta */
 ion-item {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    --background: transparent;
-    width: 100%;
-    color: black;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  --background: transparent;
+  width: 100%;
+  color: black;
 }
 
 .sintoma-texto {
-    text-align: center;
-    font-size: 12px;
-    font-weight: 400;
-    color: black;
-    display: block;
-    width: 100%;
-    white-space: normal;
-    word-wrap: break-word;
-    line-height: 14px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+  color: black;
+  display: block;
+  width: 100%;
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 14px;
 }
 
 /* Contenedor de estrellas con espacio fijo */
 .estrellas-container {
-    display: flex;
-    justify-content: center;
-    gap: 3px;
-    width: 100%;
-    padding: 5px 0;
-    background: transparent;
-    border-radius: 10px;
-    min-height: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+  width: 100%;
+  padding: 5px 0;
+  background: transparent;
+  border-radius: 10px;
+  min-height: 30px;
 }
 
 /* Estilo para las estrellas */
 .estrella {
-    font-size: 15px;
-    color: #FFD700;
-    cursor: pointer;
+  font-size: 15px;
+  color: #ffd700;
+  cursor: pointer;
+}
+
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Ocupa todo el alto del contenedor padre */
+  width: 100%;
+  position: absolute; /* Para que se sobreponga al contenido */
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: transparent;
+}
+
+ion-spinner {
+  width: 100px;
+  height: 100px;
+  --color: black;
+}
+
+.contenedor-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: transparent;
+}
+
+.mensaje-error {
+  font-size: 15px;
+  color: #ff4d4d;
+  text-align: center;
 }

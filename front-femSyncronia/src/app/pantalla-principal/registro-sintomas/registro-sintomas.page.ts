@@ -20,6 +20,8 @@ export class RegistroSintomasPage implements OnInit {
   tuvoActoSexual: boolean = false; // Estado del toggle "Relaciones"
   usoProteccion: boolean = false; // Estado del toggle "Protección"
   orgasmoSeleccionado: string | null = null;
+  cargando = true;
+  errorCarga = false;
 
   constructor(
     private apiService: ApiService,
@@ -32,6 +34,7 @@ export class RegistroSintomasPage implements OnInit {
   }
 
   async obtenerSintomas() {
+    this.cargando = true;
     try {
       const data = await lastValueFrom(this.apiService.obtenerSintomas());
 
@@ -54,9 +57,12 @@ export class RegistroSintomasPage implements OnInit {
           this.sintomasPorTipo[sintoma.tipo].push(sintoma);
         }
       });
-
+      this.errorCarga = false;
     } catch (error) {
       console.error('Error al obtener los síntomas:', error);
+      this.errorCarga = true;
+    }finally{
+      this.cargando = false;
     }
   }
 

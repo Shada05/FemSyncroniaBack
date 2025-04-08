@@ -15,13 +15,15 @@ export class SintomasPage implements OnInit {
   sintomasPorTipo: { [key: number]: any[] } = {};
   sintomaSeleccionado: any = null;
   userId: string | null = null;
+  cargando = true;
+  errorCarga = false;
 
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
     private router: Router,
     private utilidadesService: UtilidadesService
-  ) { }
+  ) {}
 
   async ngOnInit() {
     await this.obtenerSintomas();
@@ -39,45 +41,53 @@ export class SintomasPage implements OnInit {
         },
         error: async (error) => {
           console.error('Error al verificar el token:', error);
-          await this.utilidadesService.mostrarToastAdvertencia('Error al obtener el ID de usuario');
+          await this.utilidadesService.mostrarToastAdvertencia(
+            'Error al obtener el ID de usuario'
+          );
         },
       });
     } else {
       console.log('No hay token almacenado.');
-      await this.utilidadesService.mostrarToastAdvertencia('No se encontró token de autenticación');
+      await this.utilidadesService.mostrarToastAdvertencia(
+        'No se encontró token de autenticación'
+      );
     }
   }
 
   async obtenerSintomas() {
+    this.cargando = true;
+
     try {
+      console.log('Cargando:', this.cargando, 'Error:', this.errorCarga);
       const data = await lastValueFrom(this.apiService.obtenerSintomas());
 
-      // Inicializar el objeto de síntomas por tipo
       this.sintomasPorTipo = { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [] };
 
-      // Mapear los síntomas y organizarlos por tipo
       this.sintomas = data.map((sintoma: any) => ({
         nombre: sintoma.name,
         imagen: sintoma.image,
         descripcion: sintoma.description,
         mostrarEstrellas: false,
         estrellas: 0,
-        tipo: sintoma.type
+        tipo: sintoma.type,
       }));
 
-      // Agrupar los síntomas por tipo
-      this.sintomas.forEach(sintoma => {
+      this.sintomas.forEach((sintoma) => {
         if (this.sintomasPorTipo[sintoma.tipo] !== undefined) {
           this.sintomasPorTipo[sintoma.tipo].push(sintoma);
         }
       });
 
-      // Renombrar los síntomas según su tipo
       this.renombrarSintomas();
-
+      this.errorCarga = false; // Todo salió bien
     } catch (error) {
       console.error('Error al obtener los síntomas:', error);
+      this.errorCarga = true; // Mostrar mensaje de error
+    } finally {
+      this.cargando = false; // Ocultar spinner
     }
+    
+
   }
 
   // Función para renombrar los síntomas según su tipo
@@ -89,7 +99,9 @@ export class SintomasPage implements OnInit {
 
         // Obtener las iniciales según el tipo
         let iniciales = '';
-        switch (parseInt(tipo)) { // Convertir el tipo a número
+        switch (
+          parseInt(tipo) // Convertir el tipo a número
+        ) {
           case 0:
             iniciales = 'DM_';
             break;
@@ -124,22 +136,26 @@ export class SintomasPage implements OnInit {
     // Verificar que el userId esté disponible
     if (!this.userId) {
       console.error('Error: No se puede actualizar sin un ID de usuario.');
-      await this.utilidadesService.mostrarToastAdvertencia('Error: No se puede actualizar sin un ID de usuario');
+      await this.utilidadesService.mostrarToastAdvertencia(
+        'Error: No se puede actualizar sin un ID de usuario'
+      );
       return;
     }
 
     // Filtrar los síntomas que tienen una calificación (estrellas > 0)
     const sintomasCalificados = this.sintomas
-      .filter(sintoma => sintoma.estrellas > 0) // Solo síntomas con calificación
-      .map(sintoma => ({
+      .filter((sintoma) => sintoma.estrellas > 0) // Solo síntomas con calificación
+      .map((sintoma) => ({
         nombre: sintoma.nombreRenombrado || sintoma.nombre, // Usar el nombre renombrado si existe
-        intensidad: sintoma.estrellas // La intensidad es la cantidad de estrellas
+        intensidad: sintoma.estrellas, // La intensidad es la cantidad de estrellas
       }));
 
     // Verificar si hay síntomas calificados
     if (sintomasCalificados.length === 0) {
-      console.log("No hay síntomas calificados para enviar.");
-      await this.utilidadesService.mostrarToastAdvertencia('Por favor, califica al menos un síntoma'); 
+      console.log('No hay síntomas calificados para enviar.');
+      await this.utilidadesService.mostrarToastAdvertencia(
+        'Por favor, califica al menos un síntoma'
+      );
       return;
     }
 
@@ -147,21 +163,25 @@ export class SintomasPage implements OnInit {
     const data: any = {};
 
     // Transformar los síntomas calificados al formato que el backend espera
-    sintomasCalificados.forEach(sintoma => {
+    sintomasCalificados.forEach((sintoma) => {
       data[sintoma.nombre] = parseInt(sintoma.intensidad); // Ejemplo: { DM_1: 3, M_1: 2, ... }
     });
 
     try {
       await this.utilidadesService.mostrarLoading('Enviando datos...');
       // Llamar al método updateCycles del ApiService
-      const response = await lastValueFrom(this.apiService.updateCycles(this.userId, data));
+      const response = await lastValueFrom(
+        this.apiService.updateCycles(this.userId, data)
+      );
       console.log('Respuesta del servidor:', response);
 
       await this.utilidadesService.ocultarLoading();
       this.router.navigate(['/loading']);
     } catch (error) {
-      console.error("Error al enviar los síntomas calificados:", error);
-      await this.utilidadesService.mostrarToastAdvertencia('Error al enviar los síntomas. Intenta nuevamente.'); // Mostrar mensaje de error
+      console.error('Error al enviar los síntomas calificados:', error);
+      await this.utilidadesService.mostrarToastAdvertencia(
+        'Error al enviar los síntomas. Intenta nuevamente.'
+      ); // Mostrar mensaje de error
     }
   }
 }
