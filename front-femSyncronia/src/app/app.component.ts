@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   
     // Ejecutar verificaciones y esperar al menos 2 segundos
     await Promise.all([
-      this.verificarPrimeraApertura(),
+      //this.verificarPrimeraApertura(),
       new Promise(resolve => setTimeout(resolve, 2000)) // Mínimo 2 segundos
     ]);
   

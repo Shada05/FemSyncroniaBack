@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { ToastController, LoadingController } from '@ionic/angular';
-import { ApiService } from '../../services/api.service'; // Importa el servicio
 import { Router } from '@angular/router';
+import { ApiService } from '../../services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { CodigoService } from 'src/app/services/codigo.service'; // Importa el servicio de código
+import { CodigoService } from 'src/app/services/codigo.service';
+import { UtilidadesService } from 'src/app/services/utilidades.service';
 
 @Component({
   selector: 'app-registro',
@@ -17,16 +17,14 @@ export class RegistroPage implements OnInit {
   confirmarPasswordVisible = false;
   mostrarIconoPassword = false;
   mostrarIconoConfirmPassword = false;
-  isLoading = false;
-  isToastOpen = false;
   
   constructor(
     private fb: FormBuilder,
-    private apiService: ApiService, // Inyecta el servicio
-    private toastController: ToastController,
-    private router: Router, // Inyecta el Router
+    private apiService: ApiService,
+    private router: Router,
     private auth: AuthService,
-    private codigoService: CodigoService // Inyecta el servicio de código
+    private codigoService: CodigoService,
+    private utilidadesService: UtilidadesService
   ) {
     this.formulario = this.fb.group({
       username: ['', Validators.required],
@@ -48,71 +46,69 @@ export class RegistroPage implements OnInit {
 
   ngOnInit() { }
 
-  registrar() {
+  async registrar() {
     if (this.formulario.valid) {
-      const datos = this.formulario.value;
-      delete datos.confirmarPassword;
-  
-      this.apiService.createUsuario(datos).subscribe({
-        next: async (response) => {
-          console.log('Registro exitoso:', response);
-  
-          // Guarda el ID del usuario en ionic storage
-          if (response && response.id) {
-            this.auth.register(response.id, response.email).subscribe(
-              async (response) => {
-                console.log('Usuario registrado con éxito', response);
-  
-                // Almacenar el token en Ionic Storage
-                const token = response.token;
-                if (token) {
-                  await this.auth.guardarToken(token);
-                  console.log('Token guardado en Storage');
-                  // Enviar el código de verificación después de guardar el token
-                  this.enviarCodigoVerificacion(datos.email);
-                }
-              },
-              (error) => {
-                console.error('Error al registrar usuario', error);
-              });
-          }
-  
-          this.formulario.reset();
-        },
-        error: async (error) => {
-          console.error('Error al registrar:', error);
-  
-          const toast = await this.toastController.create({
-            message: 'Error al registrar. Intenta nuevamente.',
-            duration: 2000,
-            color: 'danger',
-          });
-          await toast.present();
-        },
-      });
+      try {
+        await this.utilidadesService.mostrarLoading('Registrando usuario...');
+        const datos = this.formulario.value;
+        delete datos.confirmarPassword;
+        
+        this.apiService.createUsuario(datos).subscribe({
+          next: async (response) => {
+            console.log('Registro exitoso:', response);
+    
+            if (response && response.id) {
+              this.auth.register(response.id, response.email).subscribe(
+                async (authResponse) => {
+                  console.log('Usuario registrado con éxito', authResponse);
+    
+                  const token = authResponse.token;
+                  if (token) {
+                    await this.auth.guardarToken(token);
+                    console.log('Token guardado en Storage');
+                    await this.utilidadesService.ocultarLoading();
+                    await this.enviarCodigoVerificacion(datos.email);
+                  }
+                },
+                async (error) => {
+                  console.error('Error al registrar usuario', error);
+                  await this.utilidadesService.ocultarLoading();
+                  await this.utilidadesService.mostrarToastAdvertencia('Error al registrar usuario');
+                });
+            }
+    
+            this.formulario.reset();
+          },
+          error: async (error) => {
+            console.error('Error al registrar:', error);
+            await this.utilidadesService.ocultarLoading();
+            await this.utilidadesService.mostrarToastAdvertencia('Error al registrar. Intenta nuevamente.');
+          },
+        });
+      } catch (error) {
+        console.error('Error inesperado:', error);
+        await this.utilidadesService.ocultarLoading();
+        await this.utilidadesService.mostrarToastAdvertencia('Error inesperado. Intenta nuevamente.');
+      }
     } else {
-      console.error('Formulario inválido');
+      this.utilidadesService.mostrarToastAdvertencia('Por favor completa el formulario correctamente.');
     }
   }
 
-  // Función para enviar el código de verificación
   async enviarCodigoVerificacion(email: string) {
-  try {
-    const response = await this.codigoService.enviarCodigo(email).toPromise();
-    console.log('Código de verificación enviado:', response);
-    
-    this.router.navigate(['/validar-codigo-regis']);
-  } catch (error) {
-    console.error('Error al enviar el código de verificación:', error);
-    
-    const toast = await this.toastController.create({
-      message: 'Error al enviar el código de verificación. Intenta nuevamente.',
-      duration: 2000,
-      color: 'danger',
-    });
-    await toast.present();
+    try {
+      await this.utilidadesService.mostrarLoading('Enviando código de verificación...');
+      const response = await this.codigoService.enviarCodigo(email).toPromise();
+      console.log('Código de verificación enviado:', response);
+      
+      await this.utilidadesService.ocultarLoading();
+      this.router.navigate(['/validar-codigo-regis']);
+    } catch (error) {
+      console.error('Error al enviar el código de verificación:', error);
+      await this.utilidadesService.ocultarLoading();
+      await this.utilidadesService.mostrarToastAdvertencia('Error al enviar el código de verificación. Intenta nuevamente.');
+    }
   }
-}
 
   alternarVisibilidadContrasena(campo: string) {
     if (campo === 'password') {

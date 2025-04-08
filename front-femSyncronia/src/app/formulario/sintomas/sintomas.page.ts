@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { lastValueFrom } from 'rxjs';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular'; // Importa ToastController para mostrar mensajes
 import { AuthService } from 'src/app/services/auth.service';
+import { UtilidadesService } from 'src/app/services/utilidades.service';
 
 @Component({
   selector: 'app-sintomas',
@@ -20,7 +20,7 @@ export class SintomasPage implements OnInit {
     private apiService: ApiService,
     private authService: AuthService,
     private router: Router,
-    private toastController: ToastController // Inyecta ToastController
+    private utilidadesService: UtilidadesService
   ) { }
 
   async ngOnInit() {
@@ -30,19 +30,21 @@ export class SintomasPage implements OnInit {
 
   // Función para obtener el ID del usuario desde el token
   async obtenerUsuarioId() {
-    const token = await this.authService.obtenerToken(); // Obtener el token
+    const token = await this.authService.obtenerToken();
     if (token) {
       this.authService.verificarToken(token).subscribe({
         next: (response) => {
-          this.userId = response.user.id; // Obtiene el ID del usuario desde el token
+          this.userId = response.user.id;
           console.log('ID obtenido del token:', this.userId);
         },
-        error: (error) => {
+        error: async (error) => {
           console.error('Error al verificar el token:', error);
+          await this.utilidadesService.mostrarToastAdvertencia('Error al obtener el ID de usuario');
         },
       });
     } else {
       console.log('No hay token almacenado.');
+      await this.utilidadesService.mostrarToastAdvertencia('No se encontró token de autenticación');
     }
   }
 
@@ -122,7 +124,7 @@ export class SintomasPage implements OnInit {
     // Verificar que el userId esté disponible
     if (!this.userId) {
       console.error('Error: No se puede actualizar sin un ID de usuario.');
-      await this.mostrarToast('Error: No se pudo obtener el ID del usuario.');
+      await this.utilidadesService.mostrarToastAdvertencia('Error: No se puede actualizar sin un ID de usuario');
       return;
     }
 
@@ -137,7 +139,7 @@ export class SintomasPage implements OnInit {
     // Verificar si hay síntomas calificados
     if (sintomasCalificados.length === 0) {
       console.log("No hay síntomas calificados para enviar.");
-      await this.mostrarToast('Por favor, califica al menos un síntoma.'); // Mostrar mensaje de advertencia
+      await this.utilidadesService.mostrarToastAdvertencia('Por favor, califica al menos un síntoma'); 
       return;
     }
 
@@ -150,29 +152,16 @@ export class SintomasPage implements OnInit {
     });
 
     try {
-      // Enviar los síntomas calificados a través del servicio
-      console.log('Datos a enviar:', data); // Depuración
-
+      await this.utilidadesService.mostrarLoading('Enviando datos...');
       // Llamar al método updateCycles del ApiService
       const response = await lastValueFrom(this.apiService.updateCycles(this.userId, data));
       console.log('Respuesta del servidor:', response);
 
-      // Navegar a la página /loading solo después de enviar los datos
+      await this.utilidadesService.ocultarLoading();
       this.router.navigate(['/loading']);
     } catch (error) {
       console.error("Error al enviar los síntomas calificados:", error);
-      await this.mostrarToast('Error al enviar los síntomas. Intenta nuevamente.'); // Mostrar mensaje de error
+      await this.utilidadesService.mostrarToastAdvertencia('Error al enviar los síntomas. Intenta nuevamente.'); // Mostrar mensaje de error
     }
-  }
-
-  // Función para mostrar un toast
-  async mostrarToast(mensaje: string) {
-    const toast = await this.toastController.create({
-      message: mensaje,
-      duration: 2000,
-      color: 'warning',
-      position: 'bottom'
-    });
-    await toast.present();
   }
 }

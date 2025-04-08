@@ -41,7 +41,7 @@ export class LoginPage implements OnInit {
    */
   async login() {
     if (this.formulario.invalid) {
-      this.utilidadesService.mostrarToastAdvertencia('Por favor, completa todos los campos requeridos.');
+      this.utilidadesService.mostrarToastAdvertencia('Por favor, completa el formulario correctamente.');
       return;
     }
 
