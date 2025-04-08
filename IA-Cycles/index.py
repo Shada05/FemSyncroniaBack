@@ -54,15 +54,16 @@ def analizar_datos(x, x_data, y_data, name_column):
     # Predicción
     y_pred = model.predict(x_data_np)
     print(f'🔮 Predicción de valores: {y_pred}')
+    return prediction
 
     #  Gráfica
-    plt.scatter(x_data_np, y_data_np, color='black', label="Datos reales")
-    plt.plot(x_data_np, y_pred, color='blue', linewidth=2, label="Regresión Lineal")
-    plt.title(f'Regresión Lineal para user_id {x} de {name_column}')
-    plt.xlabel('Cantidad de pruebas')
-    plt.ylabel('Intensidad del sintoma')
-    plt.legend()
-    plt.show()
+    #plt.scatter(x_data_np, y_data_np, color='black', label="Datos reales")
+    #plt.plot(x_data_np, y_pred, color='blue', linewidth=2, label="Regresión Lineal")
+    #plt.title(f'Regresión Lineal para user_id {x} de {name_column}')
+    #plt.xlabel('Cantidad de pruebas')
+    #plt.ylabel('Intensidad del sintoma')
+    #plt.legend()
+    #plt.show()
 
 
 try:

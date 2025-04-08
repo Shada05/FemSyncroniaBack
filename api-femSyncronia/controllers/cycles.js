@@ -261,6 +261,35 @@ exports.show = async (req, res) => {
     return res.status(200).send(cycle);
 }
 
+exports.show_tablesid = async (req, res) => {
+    const user_id = Number(req.params.user_id);
+    console.log(user_id);
+
+    // Validar el user_id
+    if (isNaN(user_id) || user_id <= 0 || !Number.isInteger(user_id)) {
+        return res.status(400).send({ message: 'Invalid user_id' });
+    }
+
+    try {
+        // Obtener todos los ciclos con el mismo user_id
+        const cyclesList = await cycles.findAll({
+            where: { user_id: user_id },
+            attributes: ['id', 'weight', 'temperature', 'cycle_status', 'date'] // Puedes agregar más campos si lo deseas
+        });
+
+        if (cyclesList.length === 0) {
+            return res.status(404).send({ message: 'No cycles found for the given user_id' });
+        }
+
+        // Enviar la respuesta con todos los ciclos encontrados
+        return res.status(200).send(cyclesList);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ message: 'Internal server error' });
+    }
+};
+
+
 exports.show_tables = async (req, res) => {
     const id = parseInt(req.params.id);
     const cycle = await cycles.findOne({
