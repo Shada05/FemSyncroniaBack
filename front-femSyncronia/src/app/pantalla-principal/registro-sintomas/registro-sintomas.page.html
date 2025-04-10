@@ -152,5 +152,54 @@
         </div>
       </div>
     </div>
+    <!-- Contenedor para análisis -->
+    <div class="analisis-container">
+      <ion-text class="texto-analisis">Análisis</ion-text>
+      <div class="detalles-analisis-container">
+        <!-- Campo de Peso -->
+        <div class="analisis-item">
+          <ion-icon
+            src="assets/icons/pantalla-principal/escala-de-peso.svg"
+            class="analisis-icon"
+          ></ion-icon>
+          <ion-text class="analisis-label">Peso</ion-text>
+          <div class="analisis-input-container">
+            <ion-input
+              type="text"
+              inputmode="decimal"
+              class="analisis-input"
+              placeholder="00.0"
+              maxlength="6"
+              (ionInput)="validarDecimal($event, 'peso')"
+            ></ion-input>
+            <ion-text class="analisis-unidad">kg</ion-text>
+          </div>
+        </div>
+
+        <!-- Campo de Temperatura -->
+        <div class="analisis-item">
+          <ion-icon
+            src="assets/icons/pantalla-principal/temperatura.svg"
+            class="analisis-icon"
+          ></ion-icon>
+          <ion-text class="analisis-label">Temperatura</ion-text>
+          <div class="analisis-input-container">
+            <ion-input
+              type="text"
+              inputmode="decimal"
+              class="analisis-input"
+              placeholder="00.0"
+              maxlength="6"
+              (ionInput)="validarDecimal($event, 'temperatura')"
+            ></ion-input>
+            <ion-text class="analisis-unidad">°C</ion-text>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Botón guardar -->
+    <div class="boton-container">
+      <ion-button class="boton-guardar">Guardar</ion-button>
+    </div>
   </div>
 </ion-content>

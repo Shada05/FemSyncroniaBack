@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { lastValueFrom } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-registro-sintomas',
   templateUrl: './registro-sintomas.page.html',
   styleUrls: ['./registro-sintomas.page.scss'],
 })
-
 export class RegistroSintomasPage implements OnInit {
   profileImage: string = '/assets/img/pantalla-principal/Foto-perfil.svg';
   userId: string | null = null;
@@ -22,15 +22,24 @@ export class RegistroSintomasPage implements OnInit {
   orgasmoSeleccionado: string | null = null;
   cargando = true;
   errorCarga = false;
-
+  temperatura: number = 0;
+  peso: number = 0;
   constructor(
     private apiService: ApiService,
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+    private route: ActivatedRoute
+  ) {}
 
   async ngOnInit() {
     this.cargarUsuario();
     this.obtenerSintomas();
+    this.route.params.subscribe((params) => {
+      const diaSeleccionado = +params['dia'];
+      const indiceCiclo = +params['indice'];
+
+      console.log('Día recibido:', diaSeleccionado);
+      console.log('Índice recibido:', indiceCiclo);
+    });
   }
 
   async obtenerSintomas() {
@@ -48,11 +57,11 @@ export class RegistroSintomasPage implements OnInit {
         descripcion: sintoma.description,
         mostrarEstrellas: false,
         estrellas: 0,
-        tipo: sintoma.type
+        tipo: sintoma.type,
       }));
 
       // Agrupar los síntomas por tipo
-      this.sintomas.forEach(sintoma => {
+      this.sintomas.forEach((sintoma) => {
         if (this.sintomasPorTipo[sintoma.tipo] !== undefined) {
           this.sintomasPorTipo[sintoma.tipo].push(sintoma);
         }
@@ -61,7 +70,7 @@ export class RegistroSintomasPage implements OnInit {
     } catch (error) {
       console.error('Error al obtener los síntomas:', error);
       this.errorCarga = true;
-    }finally{
+    } finally {
       this.cargando = false;
     }
   }
@@ -120,4 +129,32 @@ export class RegistroSintomasPage implements OnInit {
   seleccionarOrgasmo(opcion: string) {
     this.orgasmoSeleccionado = opcion;
   }
+  validarDecimal(event: any, campo: 'peso' | 'temperatura') {
+    const input = event.target as HTMLInputElement;
+    let valor = input.value;
+  
+    // Reemplaza todo excepto números y punto
+    valor = valor.replace(/[^\d.]/g, '');
+  
+    // Elimina puntos duplicados
+    const partes = valor.split('.');
+    if (partes.length > 2) {
+      valor = partes[0] + '.' + partes[1];
+    }
+  
+    // Limita a dos decimales
+    if (partes.length === 2) {
+      partes[1] = partes[1].slice(0, 2);
+      valor = partes[0].slice(0, 2) + '.' + partes[1];
+    } else {
+      valor = partes[0].slice(0, 2);
+    }
+  
+    input.value = valor;
+  
+    // Guarda en la variable correspondiente si quieres usarlo
+    if (campo === 'peso') this.peso = parseFloat(valor);
+    if (campo === 'temperatura') this.temperatura = parseFloat(valor);
+  }
+  
 }
