@@ -9,8 +9,11 @@
       [ngClass]="{
         'dia-actual': diaObj.tipo === 'actual', 
         'dia-tenue': diaObj.tipo === 'anterior' || diaObj.tipo === 'siguiente',
-        'hoy': esHoy(diaObj)
+        'hoy': esHoy(diaObj),
+        'seleccionado': esDiaSeleccionado(diaObj)
       }" 
+      (click)="diaObj.tipo === 'actual' ? seleccionarDia(diaObj) : null"
+      [class.no-seleccionable]="diaObj.tipo !== 'actual'"
       class="dia">
       <div class="indice-dia" *ngIf="diaObj.indice !== null">{{ diaObj.indice }}</div>
       {{ diaObj.dia }}
