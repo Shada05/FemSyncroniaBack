@@ -100,7 +100,7 @@ const routes: Routes = [
     loadChildren: () => import('./formulario/sintomas/sintomas.module').then( m => m.SintomasPageModule)
   },
   {
-    path: 'registro-sintomas',
+    path: 'registro-sintomas/:dia/:indice',
     loadChildren: () => import('./pantalla-principal/registro-sintomas/registro-sintomas.module').then( m => m.RegistroSintomasPageModule)
   },
 
