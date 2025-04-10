@@ -18,7 +18,7 @@ module.exports = {
         }
       },
       date:{
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false
       },
       cycle_status: {
