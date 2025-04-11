@@ -30,7 +30,9 @@
             <ion-img
               [src]="sintoma.imagen"
               (click)="toggleEstrellas(sintoma)"
+              (ionImgWillLoad)="onImageLoad()"
               class="sintoma-imagen"
+              [class.imagen-cargada]="sintoma.imagenCargada"
             ></ion-img>
             <ion-icon
               name="alert-circle-outline"

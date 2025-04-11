@@ -11,10 +11,11 @@ export class SintomasContainerComponent implements OnInit {
   @Input() sintomas: any[] = [];
   @Input() sintomasPorTipo: { [key: number]: any[] } = {};
   sintomaSeleccionado: any = null;
+  @Input() imagenesCargadas: boolean = false;
 
   @Input() cargando: boolean = false;
   @Input() errorCarga: boolean = false;
-  
+
   // Mapeo manual de tipos de síntomas
   tiposSintomas = [
     { id: 0, nombre: 'Dolores musculares:' },
@@ -28,6 +29,10 @@ export class SintomasContainerComponent implements OnInit {
   constructor(private popoverCtrl: PopoverController) {}
 
   ngOnInit() {}
+
+  onImageLoad() {
+    this.imagenesCargadas = true;
+  }
 
   toggleEstrellas(sintoma: any) {
     // Si hay un síntoma seleccionado previamente y no tiene calificación, ocultar sus estrellas
