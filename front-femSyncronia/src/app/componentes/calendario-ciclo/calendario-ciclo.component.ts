@@ -8,6 +8,12 @@ import {
   EventEmitter,
 } from '@angular/core';
 
+interface DiaCalendario {
+  dia: number;
+  tipo: string;
+  indice?: number | null;
+  intensidad?: number | null; // Nueva propiedad
+}
 @Component({
   selector: 'app-calendario-ciclo',
   templateUrl: './calendario-ciclo.component.html',
@@ -27,7 +33,8 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
   }>();
 
   diasSemana: string[] = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-  diasMes: { dia: number; tipo: string; indice?: number | null }[] = [];
+  // Luego actualiza la declaración de diasMes:
+  diasMes: DiaCalendario[] = [];
   fechaActual: Date;
 
   constructor() {
@@ -47,6 +54,21 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
     ) {
       this.actualizarCalendario();
     }
+  }
+
+  // Método de ejemplo - reemplázalo con tu lógica real
+  private obtenerIntensidadParaDia(dia: number): number | null {
+    // Esto es un ejemplo - usa tus datos reales aquí
+    const intensidadesPorDia: Record<number, number> = {
+      1: 1,
+      2: 2,
+      3: 3,
+      4: 4,
+      5: 5,
+      
+    };
+
+    return intensidadesPorDia[dia] || null;
   }
 
   actualizarCalendario() {
@@ -84,7 +106,7 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
       });
     }
 
-    // Días del mes actual
+    // Días del mes actual - EJEMPLO (reemplaza con tus datos reales)
     for (let i = 1; i <= ultimoDiaMes.getDate(); i++) {
       const fecha = new Date(this.anoActual, this.mesActual, i);
       const diffDias = Math.floor(
@@ -93,10 +115,14 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
       const indice =
         (((diffDias % diferenciaDias) + diferenciaDias) % diferenciaDias) + 1;
 
+      // Obtener intensidad de tus datos reales (esto es un ejemplo)
+      const intensidad = this.obtenerIntensidadParaDia(i); // Implementa esta función
+
       this.diasMes.push({
         dia: i,
         tipo: 'actual',
         indice: indice,
+        intensidad: intensidad, // Asigna la intensidad
       });
     }
 

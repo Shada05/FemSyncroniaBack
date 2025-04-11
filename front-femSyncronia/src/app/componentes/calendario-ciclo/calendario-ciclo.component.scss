@@ -1,4 +1,4 @@
-/* 📌 Contenedor principal del calendario */
+/* Contenedor principal del calendario */
 .calendario-container {
   width: 352px;
   height: 245px;
@@ -115,5 +115,45 @@
   &.seleccionado {
     background-color: #ffeeef;
     border-radius: 8px;
+  }
+}
+
+/* Estilos para días con intensidad */
+.dias-mes .dia[class*="intensidad-"] {
+  .indice-dia {
+    color: white !important;
+  }
+}
+
+/* Colores específicos por intensidad */
+.dia.intensidad-1 {
+  background-color: #ffd3d8;
+}
+.dia.intensidad-2 {
+  background-color: #f8bbd0;
+}
+.dia.intensidad-3 {
+  background-color: #f48fb1;
+}
+.dia.intensidad-4 {
+  background-color: #f06283;
+}
+.dia.intensidad-5 {
+  background-color: #c63d54;
+}
+
+.dias-mes .dia.seleccionado {
+  //box-shadow: 0 0 0 1px #ff8390 inset;
+  background-color: #ffeeef !important;
+}
+
+/* Estilo para el día de ovulación (índice 14) */
+.dia.ovulacion {
+  background-color: #ffdfc0 !important;
+  color: #333 !important;
+  position: relative;
+
+  .indice-dia {
+    color: #333 !important;
   }
 }
