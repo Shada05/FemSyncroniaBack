@@ -34,7 +34,7 @@ export class InicioPage implements OnInit {
 
   // Propiedades para el ciclo menstrual
   fechaInicio = new Date(2025, 2, 28); 
-  fechaFin = new Date(2025, 3, 15);
+  fechaFin = new Date(2025, 3, 24);
 
   // Propiedades para las etiquetas
   diaActual: number = 0; // Número del día actual

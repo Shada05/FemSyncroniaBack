@@ -64,7 +64,7 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
       2: 2,
       3: 3,
       4: 4,
-      5: 5,
+      31: 5,
       
     };
 
@@ -99,14 +99,17 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
       const indice =
         (((diffDias % diferenciaDias) + diferenciaDias) % diferenciaDias) + 1;
 
+      // Obtener intensidad de tus datos reales
+      const intensidad = this.obtenerIntensidadParaDia(i);
+
       this.diasMes.push({
         dia: dia,
         tipo: 'anterior',
         indice: indice,
+        intensidad: intensidad
       });
     }
 
-    // Días del mes actual - EJEMPLO (reemplaza con tus datos reales)
     for (let i = 1; i <= ultimoDiaMes.getDate(); i++) {
       const fecha = new Date(this.anoActual, this.mesActual, i);
       const diffDias = Math.floor(
@@ -115,19 +118,35 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
       const indice =
         (((diffDias % diferenciaDias) + diferenciaDias) % diferenciaDias) + 1;
 
-      // Obtener intensidad de tus datos reales (esto es un ejemplo)
-      const intensidad = this.obtenerIntensidadParaDia(i); // Implementa esta función
+      const intensidad = this.obtenerIntensidadParaDia(i);
 
       this.diasMes.push({
         dia: i,
         tipo: 'actual',
         indice: indice,
-        intensidad: intensidad, // Asigna la intensidad
+        intensidad: intensidad
       });
     }
 
+    for (let i =1; this.diasMes.length < 42; i++) {
+      const fecha = new Date(this.anoActual, this.mesActual + 1, i);
+      const diffDias = Math.floor(
+        (fecha.getTime() - this.fechaInicio.getTime()) / (1000 * 60 * 60 * 24)
+      );
+      const indice =
+        (((diffDias % diferenciaDias) + diferenciaDias) % diferenciaDias) + 1;
+
+      const intensidad = this.obtenerIntensidadParaDia(i);
+      
+      this.diasMes.push({
+        dia: i,
+        tipo: 'siguiente',
+        indice: indice,
+        intensidad:intensidad
+      });
+    }
     // Días del mes siguiente
-    let diaSiguiente = 1;
+  /*  let diaSiguiente = 1;
     while (this.diasMes.length < 42) {
       const fecha = new Date(this.anoActual, this.mesActual + 1, diaSiguiente);
       const diffDias = Math.floor(
@@ -136,12 +155,15 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
       const indice =
         (((diffDias % diferenciaDias) + diferenciaDias) % diferenciaDias) + 1;
 
+      const intensidad = this.obtenerIntensidadParaDia(i);
+      
       this.diasMes.push({
         dia: diaSiguiente++,
         tipo: 'siguiente',
         indice: indice,
+        intensidad:intensidad
       });
-    }
+    }*/
 
     // Buscar el día actual e índice
     const diaHoy = this.diasMes.find(

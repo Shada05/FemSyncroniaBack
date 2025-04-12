@@ -152,8 +152,9 @@
   background-color: #ffdfc0 !important;
   color: #333 !important;
   position: relative;
+}
 
-  .indice-dia {
-    color: #333 !important;
-  }
+/* Estilo para días fértiles (índices 9-13 y 15) */
+.dia.fertil {
+  background-color: #FFFAC0 !important;
 }
