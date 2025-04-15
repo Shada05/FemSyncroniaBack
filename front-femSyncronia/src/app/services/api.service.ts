@@ -34,7 +34,7 @@ export class ApiService {
   }
 
   mostrarCiclo(user_id: string): Observable<any>{
-    return this.http.get(`${this.apiUrl}/api/v1/cycles_tables_id/${user_id}`);
+    return this.http.get(`${this.apiUrl}/cycles_tables_id/${user_id}`);
   }
   
   crearCiclo(data:any): Observable<any>{
