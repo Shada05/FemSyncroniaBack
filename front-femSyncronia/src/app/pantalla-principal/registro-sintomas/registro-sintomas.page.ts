@@ -41,7 +41,7 @@ export class RegistroSintomasPage implements OnInit {
 
   async ngOnInit() {
     this.cargarUsuario();
-    this.obtenerSintomas();
+    await this.obtenerSintomas();
     this.route.params.subscribe((params) => {
       this.fechaDeRegistro = params['fecha'];
       console.log('Fecha de registro:', this.fechaDeRegistro);
@@ -50,13 +50,13 @@ export class RegistroSintomasPage implements OnInit {
 
   async obtenerSintomas() {
     this.cargando = true;
+
     try {
+      console.log('Cargando:', this.cargando, 'Error:', this.errorCarga);
       const data = await lastValueFrom(this.apiService.obtenerSintomas());
 
-      // Inicializar el objeto de síntomas por tipo
       this.sintomasPorTipo = { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [] };
 
-      // Mapear los síntomas y organizarlos por tipo
       this.sintomas = data.map((sintoma: any) => ({
         nombre: sintoma.name,
         imagen: sintoma.image,
@@ -66,18 +66,63 @@ export class RegistroSintomasPage implements OnInit {
         tipo: sintoma.type,
       }));
 
-      // Agrupar los síntomas por tipo
       this.sintomas.forEach((sintoma) => {
         if (this.sintomasPorTipo[sintoma.tipo] !== undefined) {
           this.sintomasPorTipo[sintoma.tipo].push(sintoma);
         }
       });
-      this.errorCarga = false;
+
+      this.renombrarSintomas();
+      this.errorCarga = false; // Todo salió bien
     } catch (error) {
       console.error('Error al obtener los síntomas:', error);
-      this.errorCarga = true;
+      this.errorCarga = true; // Mostrar mensaje de error
     } finally {
-      this.cargando = false;
+      this.cargando = false; // Ocultar spinner
+    }
+    
+
+  }
+
+  // Función para renombrar los síntomas según su tipo
+  renombrarSintomas() {
+    // Recorrer los síntomas por tipo
+    for (const tipo in this.sintomasPorTipo) {
+      if (this.sintomasPorTipo.hasOwnProperty(tipo)) {
+        const sintomasDelTipo = this.sintomasPorTipo[tipo];
+
+        // Obtener las iniciales según el tipo
+        let iniciales = '';
+        switch (
+          parseInt(tipo) // Convertir el tipo a número
+        ) {
+          case 0:
+            iniciales = 'DM_';
+            break;
+          case 1:
+            iniciales = 'M_';
+            break;
+          case 2:
+            iniciales = 'PP_';
+            break;
+          case 3:
+            iniciales = 'E_';
+            break;
+          case 4:
+            iniciales = 'F_';
+            break;
+          case 5:
+            iniciales = 'AS_';
+            break;
+          default:
+            iniciales = 'OTRO'; // En caso de un tipo no definido
+        }
+
+        // Renombrar los síntomas del tipo actual
+        sintomasDelTipo.forEach((sintoma, index) => {
+          sintoma.nombreRenombrado = `${iniciales}${index + 1}`; // index + 1 para empezar desde 1
+        });
+      }
     }
   }
 
@@ -86,51 +131,70 @@ export class RegistroSintomasPage implements OnInit {
       this.utilidades.mostrarToastAdvertencia('No hay usuario identificado');
       return;
     }
-
+  
     await this.utilidades.mostrarLoading('Registrando datos...');
-
-    // Preparamos los datos para enviar
-    const datosCiclo = {
+  
+    // Validar al menos un síntoma calificado
+    const sintomasCalificados = this.sintomas
+      .filter((sintoma) => sintoma.estrellas > 0)
+      .map((sintoma) => ({
+        nombre: sintoma.nombreRenombrado || sintoma.nombre,
+        intensidad: sintoma.estrellas,
+      }));
+  
+    if (sintomasCalificados.length === 0) {
+      await this.utilidades.ocultarLoading();
+      this.utilidades.mostrarToastAdvertencia(
+        'Por favor, califica al menos un síntoma'
+      );
+      return;
+    }
+  
+    // Validar campos numéricos obligatorios y que no estén vacíos ni en cero
+    if (
+      this.temperatura == null || this.temperatura === 0 || isNaN(this.temperatura) || Number(this.temperatura) <= 0 ||
+      this.peso == null || this.peso === 0 || isNaN(this.peso) || Number(this.peso) <= 0 ||
+      this.sangradoGotas == null || this.sangradoGotas === 0 || isNaN(this.sangradoGotas) || Number(this.sangradoGotas) <= 0
+    ) {
+      await this.utilidades.ocultarLoading();
+      this.utilidades.mostrarToastAdvertencia(
+        'Por favor ingresa valores válidos');
+      return;
+    }
+  
+    // Preparar datos para enviar
+    const datosCiclo: any = {
       user_id: this.userId,
-      date: this.fechaDeRegistro, // Usamos el día seleccionado
+      date: this.fechaDeRegistro,
       F_15: this.sangradoGotas,
       notes: this.notasValue,
       temperature: this.temperatura,
       weight: this.peso,
-      symptoms: this.obtenerSintomasSeleccionados(),
     };
-
+  
+    // Agregar síntomas calificados
+    sintomasCalificados.forEach((sintoma) => {
+      datosCiclo[sintoma.nombre] = parseInt(sintoma.intensidad);
+    });
+  
     try {
-      // Llamamos a la API para crear el ciclo
       const respuesta = await lastValueFrom(
         this.apiService.crearCiclo(datosCiclo)
       );
       console.log('Ciclo registrado con éxito:', respuesta);
-
+  
       await this.utilidades.ocultarLoading();
-
+      this.utilidades.mostrarToastAdvertencia(
+        'Datos registrados correctamente'
+      );
+      this.apiService.notificarActualizacion();
       this.navCtrl.back();
-      // Opcional: Reiniciamos el formulario
       this.reiniciarFormulario();
     } catch (error) {
-      console.error('Error al registrar el ciclo:', error);
       await this.utilidades.ocultarLoading();
-
       console.error('Error al registrar el ciclo:', error);
-      await this.utilidades.mostrarToastAdvertencia(
-        'Error al registrar los datos'
-      );
+      this.utilidades.mostrarToastAdvertencia('Error al registrar los datos');
     }
-  }
-
-  // Obtiene los síntomas seleccionados con su intensidad
-  private obtenerSintomasSeleccionados(): any[] {
-    return this.sintomas
-      .filter((sintoma) => sintoma.estrellas > 0)
-      .map((sintoma) => ({
-        symptom_id: sintoma.id, // Asumiendo que cada síntoma tiene un id
-        intensity: sintoma.estrellas,
-      }));
   }
 
   // Reinicia el formulario después de enviar
