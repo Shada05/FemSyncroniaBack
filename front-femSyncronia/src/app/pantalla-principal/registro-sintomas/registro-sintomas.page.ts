@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { lastValueFrom } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro-sintomas',
@@ -16,29 +17,32 @@ export class RegistroSintomasPage implements OnInit {
   sintomas: any[] = [];
   sintomasPorTipo: { [key: number]: any[] } = {};
   sintomaSeleccionado: any = null;
-  notasValue: string = ''; // Asegúrate de que esté inicializado
-  tuvoActoSexual: boolean = false; // Estado del toggle "Relaciones"
-  usoProteccion: boolean = false; // Estado del toggle "Protección"
+  notasValue: string = '';
+  tuvoActoSexual: boolean = false;
+  usoProteccion: boolean = false;
   orgasmoSeleccionado: string | null = null;
   cargando = true;
   errorCarga = false;
   temperatura: number = 0;
   peso: number = 0;
+  mesActual: number = new Date().getMonth();
+  anoActual: number = new Date().getFullYear();
+  fechaDeRegistro: String | null = null;
+  indiceCiclo: number | null = null;
+
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alertController: AlertController
   ) {}
 
   async ngOnInit() {
     this.cargarUsuario();
     this.obtenerSintomas();
     this.route.params.subscribe((params) => {
-      const diaSeleccionado = +params['dia'];
-      const indiceCiclo = +params['indice'];
-
-      console.log('Día recibido:', diaSeleccionado);
-      console.log('Índice recibido:', indiceCiclo);
+      this.fechaDeRegistro = params['fecha'];
+      console.log('Fecha de registro:', this.fechaDeRegistro);
     });
   }
 
@@ -75,6 +79,84 @@ export class RegistroSintomasPage implements OnInit {
     }
   }
 
+
+  async registrarCiclo() {
+    if (!this.userId) {
+      console.error('No hay usuario identificado');
+      return;
+    }
+
+    // Preparamos los datos para enviar
+    const datosCiclo = {
+      user_id: this.userId,
+      date: this.fechaDeRegistro, // Usamos el día seleccionado
+      F_15: this.sangradoGotas,
+      notes: this.notasValue,
+      temperature: this.temperatura,
+      weight: this.peso,
+      symptoms: this.obtenerSintomasSeleccionados(),
+    };
+
+    try {
+      // Llamamos a la API para crear el ciclo
+      const respuesta = await lastValueFrom(
+        this.apiService.crearCiclo(datosCiclo)
+      );
+      console.log('Ciclo registrado con éxito:', respuesta);
+
+      // Mostramos mensaje de éxito
+      await this.mostrarAlerta(
+        'Éxito',
+        'El ciclo se ha registrado correctamente'
+      );
+
+      // Opcional: Reiniciamos el formulario
+      this.reiniciarFormulario();
+    } catch (error) {
+      console.error('Error al registrar el ciclo:', error);
+      await this.mostrarAlerta(
+        'Error',
+        'No se pudo registrar el ciclo. Inténtalo de nuevo.'
+      );
+    }
+  }
+
+  // Obtiene los síntomas seleccionados con su intensidad
+  private obtenerSintomasSeleccionados(): any[] {
+    return this.sintomas
+      .filter((sintoma) => sintoma.estrellas > 0)
+      .map((sintoma) => ({
+        symptom_id: sintoma.id, // Asumiendo que cada síntoma tiene un id
+        intensity: sintoma.estrellas,
+      }));
+  }
+
+  // Muestra alertas al usuario
+  private async mostrarAlerta(titulo: string, mensaje: string) {
+    const alerta = await this.alertController.create({
+      header: titulo,
+      message: mensaje,
+      buttons: ['OK'],
+    });
+    await alerta.present();
+  }
+
+  // Reinicia el formulario después de enviar
+  private reiniciarFormulario() {
+    this.sangradoGotas = 0;
+    this.notasValue = '';
+    this.tuvoActoSexual = false;
+    this.usoProteccion = false;
+    this.orgasmoSeleccionado = null;
+    this.temperatura = 0;
+    this.peso = 0;
+
+    // Reinicia las estrellas de los síntomas si es necesario
+    this.sintomas.forEach((s) => {
+      s.estrellas = 0;
+      s.mostrarEstrellas = false;
+    });
+  }
   async cargarUsuario() {
     const token = await this.authService.obtenerToken();
     if (token) {
@@ -132,16 +214,16 @@ export class RegistroSintomasPage implements OnInit {
   validarDecimal(event: any, campo: 'peso' | 'temperatura') {
     const input = event.target as HTMLInputElement;
     let valor = input.value;
-  
+
     // Reemplaza todo excepto números y punto
     valor = valor.replace(/[^\d.]/g, '');
-  
+
     // Elimina puntos duplicados
     const partes = valor.split('.');
     if (partes.length > 2) {
       valor = partes[0] + '.' + partes[1];
     }
-  
+
     // Limita a dos decimales
     if (partes.length === 2) {
       partes[1] = partes[1].slice(0, 2);
@@ -149,12 +231,11 @@ export class RegistroSintomasPage implements OnInit {
     } else {
       valor = partes[0].slice(0, 2);
     }
-  
+
     input.value = valor;
-  
+
     // Guarda en la variable correspondiente si quieres usarlo
     if (campo === 'peso') this.peso = parseFloat(valor);
     if (campo === 'temperatura') this.temperatura = parseFloat(valor);
   }
-  
 }
