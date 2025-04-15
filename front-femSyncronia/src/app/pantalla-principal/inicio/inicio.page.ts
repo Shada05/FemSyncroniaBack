@@ -57,6 +57,13 @@ export class InicioPage implements OnInit {
     this.componenteActivo = '';
   }
 
+  obtenerFechaFormateada(): string {
+    const fecha = new Date(this.anoActual, this.mesActual, this.diaActual);
+    const año = fecha.getFullYear();
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const dia = fecha.getDate().toString().padStart(2, '0');
+    return `${año}-${mes}-${dia}`;
+  }
 
   ngOnInit() {
     this.cargarUsuario(); // Llama a la función para cargar los datos del usuario
@@ -156,6 +163,8 @@ export class InicioPage implements OnInit {
   actualizarDiaSeleccionado(event: { diaActual: number, indice: number }) {
     this.diaActual = event.diaActual;
     this.indice = event.indice;
+
+    this.fechaActual = new Date(this.anoActual, this.mesActual, this.diaActual);
   }
 
   /**
