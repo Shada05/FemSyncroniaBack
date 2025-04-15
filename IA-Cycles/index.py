@@ -1,3 +1,4 @@
+import sys
 import mysql.connector
 import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -10,8 +11,12 @@ database = "db_femsync"
 user = "root"
 password = ""
 
-# Solicitar el user_id
-x = input("Ingrese el user_id a analizar: ")
+if len(sys.argv) < 2:
+    print("❌ Error: Se requiere un user_id como argumento.")
+    sys.exit(1)
+
+x = sys.argv[1]  # El user_id se pasa como argumento
+print(f"🔍 Analizando datos para el user_id: {x}")
 # Variables para almacenar los datos
 x_data = []  # Almacenará la cantidad de veces que aparece el user_id
 y_data = []  # Almacenará los valores de los sintomas para el user_id
