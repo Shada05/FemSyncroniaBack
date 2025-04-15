@@ -7,6 +7,8 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 
 interface DiaCalendario {
@@ -28,6 +30,8 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
   @Input() fechaFin: Date = new Date();
   @Input() userId: string = '32';
 
+  private destroy$ = new Subject<void>();
+
   diaSeleccionadoId: number | null = null;
   ciclosUsuario: any[] = [];
   @Output() diaSeleccionado = new EventEmitter<{
@@ -47,8 +51,24 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
   async ngOnInit() {
     await this.cargarCiclos();
     this.actualizarCalendario();
+
+    // Suscribirse a eventos de actualización
+    this.apiService.cicloActualizado$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.cargarYCargarCalendario();
+      });
   }
 
+  private async cargarYCargarCalendario() {
+    await this.cargarCiclos();
+    this.actualizarCalendario();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
   async ngOnChanges(changes: SimpleChanges) {
     if (changes['userId'] && changes['userId'].currentValue) {
       await this.cargarCiclos();
