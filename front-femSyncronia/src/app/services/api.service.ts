@@ -33,10 +33,13 @@ export class ApiService {
     return this.http.get(`${this.apiUrl}/api/v1/cycle_calendar/${id}`);
   }
 
-  mostrarCiclo(id: string): Observable<any>{
-    return this.http.get(`${this.apiUrl}/api/v1/cycles/${id}`);
+  mostrarCiclo(user_id: string): Observable<any>{
+    return this.http.get(`${this.apiUrl}/api/v1/cycles_tables_id/${user_id}`);
   }
   
+  crearCiclo(data:any): Observable<any>{
+    return this.http.post(`${this.apiUrl}/api/v1/cycles`,data)
+  }
   uploadImage(formData: FormData): Observable<{ imageUrl: string }> {
     return this.http.post<{ imageUrl: string }>(`${this.apiUrl}/upload`, formData);
   }
