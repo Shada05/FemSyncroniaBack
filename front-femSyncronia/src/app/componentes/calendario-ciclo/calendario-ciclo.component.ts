@@ -7,13 +7,15 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
 
 interface DiaCalendario {
   dia: number;
   tipo: string;
   indice?: number | null;
-  intensidad?: number | null; // Nueva propiedad
+  intensidad?: number | null; // Changed back to synchronous
 }
+
 @Component({
   selector: 'app-calendario-ciclo',
   templateUrl: './calendario-ciclo.component.html',
@@ -24,28 +26,33 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
   @Input() anoActual: number = 0;
   @Input() fechaInicio: Date = new Date();
   @Input() fechaFin: Date = new Date();
+  @Input() userId: string = '32';
 
   diaSeleccionadoId: number | null = null;
-
+  ciclosUsuario: any[] = [];
   @Output() diaSeleccionado = new EventEmitter<{
     diaActual: number;
     indice: number;
   }>();
 
   diasSemana: string[] = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
-  // Luego actualiza la declaración de diasMes:
   diasMes: DiaCalendario[] = [];
   fechaActual: Date;
+  private ciclosData: any[] = []; // Store cycles data
 
-  constructor() {
+  constructor(private apiService: ApiService) {
     this.fechaActual = new Date();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.cargarCiclos();
     this.actualizarCalendario();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  async ngOnChanges(changes: SimpleChanges) {
+    if (changes['userId'] && changes['userId'].currentValue) {
+      await this.cargarCiclos();
+    }
     if (
       changes['mesActual'] ||
       changes['anoActual'] ||
@@ -56,19 +63,36 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
     }
   }
 
-  // Método de ejemplo - reemplázalo con tu lógica real
-  private obtenerIntensidadParaDia(dia: number): number | null {
-    // Esto es un ejemplo - usa tus datos reales aquí
-    const intensidadesPorDia: Record<number, number> = {
-      1: 1,
-      2: 2,
-      3: 3,
-      4: 4,
-      31: 5,
-      
-    };
+  private async cargarCiclos() {
+    if (!this.userId) return;
 
-    return intensidadesPorDia[dia] || null;
+    try {
+      this.ciclosData = await this.apiService
+        .mostrarCiclo(this.userId)
+        .toPromise();
+    } catch (error) {
+      console.error('Error al obtener ciclos del usuario:', error);
+      this.ciclosData = [];
+    }
+  }
+
+  private obtenerIntensidadParaDia(dia: number): number | null {
+    if (!this.userId || !this.ciclosData) return null;
+
+    // Formatear fecha buscada como YYYY-MM-DD
+    const fechaBuscadaStr = `${this.anoActual}-${(this.mesActual + 1)
+      .toString()
+      .padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
+
+    const cicloEncontrado = this.ciclosData.find((ciclo: any) => {
+      if (!ciclo.date) return false;
+
+      // Extraer solo la parte de fecha (YYYY-MM-DD) del string ISO
+      const fechaCicloStr = ciclo.date.split('T')[0];
+      return fechaBuscadaStr === fechaCicloStr;
+    });
+
+    return cicloEncontrado?.F_15 || null;
   }
 
   actualizarCalendario() {
@@ -82,7 +106,6 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
       0
     ).getDate();
 
-    // Calcular la diferencia total de días en el ciclo
     const diferenciaDias =
       Math.floor(
         (this.fechaFin.getTime() - this.fechaInicio.getTime()) /
@@ -99,17 +122,14 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
       const indice =
         (((diffDias % diferenciaDias) + diferenciaDias) % diferenciaDias) + 1;
 
-      // Obtener intensidad de tus datos reales
-      const intensidad = this.obtenerIntensidadParaDia(i);
-
       this.diasMes.push({
         dia: dia,
         tipo: 'anterior',
         indice: indice,
-        intensidad: intensidad
       });
     }
 
+    // Días del mes actual
     for (let i = 1; i <= ultimoDiaMes.getDate(); i++) {
       const fecha = new Date(this.anoActual, this.mesActual, i);
       const diffDias = Math.floor(
@@ -118,17 +138,16 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
       const indice =
         (((diffDias % diferenciaDias) + diferenciaDias) % diferenciaDias) + 1;
 
-      const intensidad = this.obtenerIntensidadParaDia(i);
-
       this.diasMes.push({
         dia: i,
         tipo: 'actual',
         indice: indice,
-        intensidad: intensidad
+        intensidad: this.obtenerIntensidadParaDia(i),
       });
     }
 
-    for (let i =1; this.diasMes.length < 42; i++) {
+    // Días del mes siguiente
+    for (let i = 1; this.diasMes.length < 42; i++) {
       const fecha = new Date(this.anoActual, this.mesActual + 1, i);
       const diffDias = Math.floor(
         (fecha.getTime() - this.fechaInicio.getTime()) / (1000 * 60 * 60 * 24)
@@ -136,34 +155,12 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
       const indice =
         (((diffDias % diferenciaDias) + diferenciaDias) % diferenciaDias) + 1;
 
-      const intensidad = this.obtenerIntensidadParaDia(i);
-      
       this.diasMes.push({
         dia: i,
         tipo: 'siguiente',
         indice: indice,
-        intensidad:intensidad
       });
     }
-    // Días del mes siguiente
-  /*  let diaSiguiente = 1;
-    while (this.diasMes.length < 42) {
-      const fecha = new Date(this.anoActual, this.mesActual + 1, diaSiguiente);
-      const diffDias = Math.floor(
-        (fecha.getTime() - this.fechaInicio.getTime()) / (1000 * 60 * 60 * 24)
-      );
-      const indice =
-        (((diffDias % diferenciaDias) + diferenciaDias) % diferenciaDias) + 1;
-
-      const intensidad = this.obtenerIntensidadParaDia(i);
-      
-      this.diasMes.push({
-        dia: diaSiguiente++,
-        tipo: 'siguiente',
-        indice: indice,
-        intensidad:intensidad
-      });
-    }*/
 
     // Buscar el día actual e índice
     const diaHoy = this.diasMes.find(
@@ -197,16 +194,13 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
     tipo: string;
     indice?: number | null;
   }) {
-    // Solo permitir selección de días del mes actual
     if (diaObj.tipo !== 'actual') {
-      return; // No hacer nada si no es del mes actual
+      return;
     }
 
-    // Generar un ID único para el día seleccionado
     this.diaSeleccionadoId =
       diaObj.dia + this.mesActual * 100 + this.anoActual * 10000;
 
-    // Emitir el evento al componente padre
     this.diaSeleccionado.emit({
       diaActual: diaObj.dia,
       indice: diaObj.indice ?? 1,
