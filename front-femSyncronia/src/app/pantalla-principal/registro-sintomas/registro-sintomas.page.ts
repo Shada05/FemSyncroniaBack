@@ -3,7 +3,8 @@ import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { lastValueFrom } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { UtilidadesService } from 'src/app/services/utilidades.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro-sintomas',
@@ -34,7 +35,8 @@ export class RegistroSintomasPage implements OnInit {
     private apiService: ApiService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private alertController: AlertController
+    private utilidades: UtilidadesService,
+    private navCtrl: NavController
   ) {}
 
   async ngOnInit() {
@@ -79,12 +81,13 @@ export class RegistroSintomasPage implements OnInit {
     }
   }
 
-
   async registrarCiclo() {
     if (!this.userId) {
-      console.error('No hay usuario identificado');
+      this.utilidades.mostrarToastAdvertencia('No hay usuario identificado');
       return;
     }
+
+    await this.utilidades.mostrarLoading('Registrando datos...');
 
     // Preparamos los datos para enviar
     const datosCiclo = {
@@ -104,19 +107,18 @@ export class RegistroSintomasPage implements OnInit {
       );
       console.log('Ciclo registrado con éxito:', respuesta);
 
-      // Mostramos mensaje de éxito
-      await this.mostrarAlerta(
-        'Éxito',
-        'El ciclo se ha registrado correctamente'
-      );
+      await this.utilidades.ocultarLoading();
 
+      this.navCtrl.back();
       // Opcional: Reiniciamos el formulario
       this.reiniciarFormulario();
     } catch (error) {
       console.error('Error al registrar el ciclo:', error);
-      await this.mostrarAlerta(
-        'Error',
-        'No se pudo registrar el ciclo. Inténtalo de nuevo.'
+      await this.utilidades.ocultarLoading();
+
+      console.error('Error al registrar el ciclo:', error);
+      await this.utilidades.mostrarToastAdvertencia(
+        'Error al registrar los datos'
       );
     }
   }
@@ -129,16 +131,6 @@ export class RegistroSintomasPage implements OnInit {
         symptom_id: sintoma.id, // Asumiendo que cada síntoma tiene un id
         intensity: sintoma.estrellas,
       }));
-  }
-
-  // Muestra alertas al usuario
-  private async mostrarAlerta(titulo: string, mensaje: string) {
-    const alerta = await this.alertController.create({
-      header: titulo,
-      message: mensaje,
-      buttons: ['OK'],
-    });
-    await alerta.present();
   }
 
   // Reinicia el formulario después de enviar
