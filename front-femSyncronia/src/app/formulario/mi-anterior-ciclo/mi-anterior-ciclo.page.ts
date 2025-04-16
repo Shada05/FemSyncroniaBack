@@ -176,6 +176,7 @@ export class MiAnteriorCicloPage implements OnInit {
       await this.utilidadesService.mostrarLoading('Enviando datos...');
 
       const data = {
+        user_id: this.userId,
         cycle_status: 1,
         Start_day: fechaInicio,
         Finish_day: fechaFin,
