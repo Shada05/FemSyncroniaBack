@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CodigoService {
-  private apiUrl = 'https://femsyncronia.onrender.com'; // URL de tu API
+  private apiUrl = 'http://localhost:3000'; // URL de tu API
 
   constructor(private http: HttpClient) {}
 
