@@ -9,8 +9,18 @@
       [ngClass]="{
         'dia-actual': diaObj.tipo === 'actual', 
         'dia-tenue': diaObj.tipo === 'anterior' || diaObj.tipo === 'siguiente',
-        'hoy': esHoy(diaObj)
+        'hoy': esHoy(diaObj),
+        'seleccionado': esDiaSeleccionado(diaObj),
+        'intensidad-1': diaObj.intensidad === 1,
+        'intensidad-2': diaObj.intensidad === 2,
+        'intensidad-3': diaObj.intensidad === 3,
+        'intensidad-4': diaObj.intensidad === 4,
+        'intensidad-5': diaObj.intensidad === 5,
+        'ovulacion': diaObj.indice === 14,
+        'fertil': (diaObj.indice && diaObj.indice >= 9 && diaObj.indice <= 13) || diaObj.indice === 15
       }" 
+      (click)="diaObj.tipo === 'actual' ? seleccionarDia(diaObj) : null"
+      [class.no-seleccionable]="diaObj.tipo !== 'actual'"
       class="dia">
       <div class="indice-dia" *ngIf="diaObj.indice !== null">{{ diaObj.indice }}</div>
       {{ diaObj.dia }}

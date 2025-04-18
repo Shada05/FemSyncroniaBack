@@ -78,7 +78,7 @@ module.exports = {
       },
       { // número 2
         cycle_status: 1,
-        user_id: 1,
+        user_id: 12,
         weight: 63,
         temperature: 36.5,
         date: "2025-02-02", // Fecha añadida
@@ -150,7 +150,7 @@ module.exports = {
       },
       {// 3 ciclo
         cycle_status: 1,
-        user_id: 1,
+        user_id: 12,
         weight: 60,
         temperature: 36.5,
         date: "2025-02-03", // Fecha añadida
@@ -222,7 +222,7 @@ module.exports = {
       },
       {// 4 ciclo
         cycle_status: 1,
-        user_id: 1,
+        user_id: 12,
         weight: 62,
         temperature: 37,
         date: "2025-02-04", // Fecha añadida       //Problemas en la piel
@@ -293,7 +293,7 @@ module.exports = {
       },
       {// 5 ciclo
         cycle_status: 1,
-        user_id: 1,
+        user_id: 12,
         weight: 60,
         temperature: 36.5,
         date: "2025-02-05", // Fecha añadida
@@ -365,7 +365,7 @@ module.exports = {
       },
       {// 6 ciclo
         cycle_status: 1,
-        user_id: 1,
+        user_id: 12,
         weight: 60,
         temperature: 36.5,
         date: "2025-02-06", // Fecha añadida

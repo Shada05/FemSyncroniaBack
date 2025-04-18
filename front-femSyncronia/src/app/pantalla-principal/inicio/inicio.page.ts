@@ -19,7 +19,15 @@ interface Sintoma {
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit {
-  misLabelsY: string[] = ['35°C', '36°C', '37°C', '38°C', '39°C', '40°C', '41°C'];
+  misLabelsY: string[] = [
+    '35°C',
+    '36°C',
+    '37°C',
+    '38°C',
+    '39°C',
+    '40°C',
+    '41°C',
+  ];
   minTemp: number = 34;
   maxTemp: number = 42;
   profileImage: string = '/assets/img/pantalla-principal/Foto-perfil.svg'; // Ruta de la imagen de perfil por defecto
@@ -34,7 +42,7 @@ export class InicioPage implements OnInit {
 
   // Propiedades para el ciclo menstrual
   fechaInicio = new Date(2025, 2, 28); 
-  fechaFin = new Date(2025, 3, 15);
+  fechaFin = new Date(2025, 3, 24);
 
   // Propiedades para las etiquetas
   diaActual: number = 0; // Número del día actual
@@ -47,8 +55,8 @@ export class InicioPage implements OnInit {
     private menuCtrl: MenuController,
     private apiService: ApiService,
     private authService: AuthService,
-    private router: Router,
-  ) { }
+    private router: Router
+  ) {}
   mostrarComponente(componente: string) {
     this.componenteActivo = componente;
   }
@@ -57,13 +65,23 @@ export class InicioPage implements OnInit {
     this.componenteActivo = '';
   }
 
+  obtenerFechaFormateada(): string {
+    const fecha = new Date(this.anoActual, this.mesActual, this.diaActual);
+    const año = fecha.getFullYear();
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const dia = fecha.getDate().toString().padStart(2, '0');
+    return `${año}-${mes}-${dia}`;
+  }
 
   ngOnInit() {
     this.cargarUsuario(); // Llama a la función para cargar los datos del usuario
     this.actualizarMes(this.fechaActual); // Inicializa el mes y año con la fecha actual
+    setInterval(() => {
+      this.obtenerSintomasCalificados();
+    }, 86400000); // 24 horas en milisegundos
   }
 
-    // Función para cargar los datos del usuario y la imagen de perfil
+  // Función para cargar los datos del usuario y la imagen de perfil
   async cargarUsuario() {
     const token = await this.authService.obtenerToken();
     if (token) {
@@ -108,54 +126,91 @@ export class InicioPage implements OnInit {
     }
   }
 
-  // Función para obtener los síntomas calificados
+  // Función para obtener los síntomas calificados del día actual
   async obtenerSintomasCalificados() {
     if (!this.userId) {
-      console.error('Error: No se puede obtener el ciclo sin un ID de usuario.');
+      console.error(
+        'Error: No se puede obtener el ciclo sin un ID de usuario.'
+      );
       return;
     }
-  
+
     try {
       // Obtener los síntomas disponibles
-      const sintomasDisponibles = await lastValueFrom(this.apiService.obtenerSintomas());
-  
-      // Obtener el ciclo actual del usuario
-      const cicloActual = await lastValueFrom(this.apiService.mostrarCiclo(this.userId));
-  
+      const sintomasDisponibles = await lastValueFrom(
+        this.apiService.obtenerSintomas()
+      );
+
+      // Obtener todos los ciclos del usuario
+      const ciclosUsuario = await lastValueFrom(
+        this.apiService.mostrarCiclo(this.userId)
+      );
+
+      // Formatear fecha actual como YYYY-MM-DD para comparación
+      const hoy = new Date();
+      const fechaHoy = `${hoy.getFullYear()}-${(hoy.getMonth() + 1)
+        .toString()
+        .padStart(2, '0')}-${hoy.getDate().toString().padStart(2, '0')}`;
+
+      // Buscar el ciclo que coincide con la fecha actual
+      const cicloActual = ciclosUsuario.find((ciclo: any) => {
+        if (!ciclo.date) return false;
+        // Comparar solo la parte de fecha (ignorando hora)
+        return ciclo.date.split('T')[0] === fechaHoy;
+      });
+
+      if (!cicloActual) {
+        console.log('No se encontró registro para la fecha actual');
+        this.sintomasCalificados = [];
+        return;
+      }
+
       // Crear un contador para asignar IDs secuenciales
       let idSecuencial = 1;
-  
-      // Filtrar los síntomas calificados
+
+      // Filtrar los síntomas calificados del ciclo actual
       this.sintomasCalificados = Object.keys(cicloActual)
-        .filter(key => key.startsWith('DM_') || key.startsWith('M_') || key.startsWith('PP_') || key.startsWith('E_') || key.startsWith('F_') || key.startsWith('AS_')) // Filtrar solo las columnas de síntomas
-        .map(key => {
-          const intensidad = cicloActual[key]; // Intensidad (estrellas)
-          const sintomaInfo = sintomasDisponibles.find((s: Sintoma) => s.id === idSecuencial); // Buscar el síntoma en la lista de síntomas disponibles usando el ID secuencial
-  
-          // Crear el objeto del síntoma calificado
+        .filter(
+          (key) =>
+            key.startsWith('DM_') ||
+            key.startsWith('M_') ||
+            key.startsWith('PP_') ||
+            key.startsWith('E_') ||
+            key.startsWith('F_') ||
+            key.startsWith('AS_')
+        )
+        .map((key) => {
+          const intensidad = cicloActual[key];
+          const sintomaInfo = sintomasDisponibles.find(
+            (s: Sintoma) => s.id === idSecuencial
+          );
+
           const sintomaCalificado = {
             id: idSecuencial,
-            nombre: sintomaInfo ? sintomaInfo.name : `Síntoma ${idSecuencial}`, // Usar el nombre del síntoma si está disponible
+            nombre: sintomaInfo ? sintomaInfo.name : `Síntoma ${idSecuencial}`,
             intensidad: intensidad,
-            icono: sintomaInfo ? sintomaInfo.image : null, // Usar la URL del icono del síntoma si está disponible
+            icono: sintomaInfo ? sintomaInfo.image : null,
+            nombreCampo: key, // Mantener el nombre original del campo
           };
-  
-          idSecuencial++; // Incrementar el ID secuencial para el próximo síntoma
-  
+
+          idSecuencial++;
           return sintomaCalificado;
         })
-        .filter(sintoma => sintoma.intensidad > 0); // Filtrar solo los síntomas con intensidad mayor que 0
-  
-      console.log('Síntomas calificados:', this.sintomasCalificados); // Depuración
+        .filter((sintoma) => sintoma.intensidad > 0);
+
+      console.log('Síntomas calificados para hoy:', this.sintomasCalificados);
     } catch (error) {
       console.error('Error al obtener los síntomas calificados:', error);
+      this.sintomasCalificados = [];
     }
   }
 
   // Actualizar el día y el índice cuando se selecciona un día del calendario
-  actualizarDiaSeleccionado(event: { diaActual: number, indice: number }) {
+  actualizarDiaSeleccionado(event: { diaActual: number; indice: number }) {
     this.diaActual = event.diaActual;
     this.indice = event.indice;
+
+    this.fechaActual = new Date(this.anoActual, this.mesActual, this.diaActual);
   }
 
   /**
@@ -183,8 +238,46 @@ export class InicioPage implements OnInit {
    * Cierra la sesión del usuario
    */
   async logout() {
-    await this.authService.cerrarSesion(); // Cierra la sesión
-    this.router.navigate(['/login']); // Redirige al usuario a la página de login
+    try {
+      // 1. Cerrar el menú si está abierto
+      await this.menuCtrl.close('menu-perfil');
+
+      // 2. Cerrar sesión en el servicio de autenticación
+      await this.authService.cerrarSesion();
+
+      // 3. Limpiar todas las variables de estado
+      this.limpiarEstado();
+
+      // 4. Redirigir al login con navegación completa
+      this.router
+        .navigate(['/login'], {
+          replaceUrl: true, // Reemplaza la URL actual en el historial
+          queryParamsHandling: 'preserve', // Opcional: mantener parámetros si es necesario
+        })
+        .then(() => {
+          // 5. Forzar recarga completa de la aplicación
+          window.location.reload();
+        });
+    } catch (error) {
+      console.error('Error durante el logout:', error);
+    }
+  }
+
+  private limpiarEstado() {
+    // Resetear todas las propiedades relevantes
+    this.userId = null;
+    this.nombreCompleto = '';
+    this.email = '';
+    this.profileImage = '/assets/img/pantalla-principal/Foto-perfil.svg';
+    this.sintomasCalificados = [];
+    this.componenteActivo = '';
+    this.mesActual = new Date().getMonth();
+    this.anoActual = new Date().getFullYear();
+    this.diaActual = 0;
+    this.indice = 1;
+
+    // Cerrar todos los menús
+    this.menuCtrl.close();
   }
 
   /**
@@ -210,8 +303,18 @@ export class InicioPage implements OnInit {
   //Obtiene el nombre del mes
   obtenerNombreMes(mes: number): string {
     const nombresMeses = [
-      'Ene.', 'Feb.', 'Mar.', 'Abr.', 'May.', 'Jun.',
-      'Jul.', 'Ago.', 'Sep.', 'Oct.', 'Nov.', 'Dic.'
+      'Ene.',
+      'Feb.',
+      'Mar.',
+      'Abr.',
+      'May.',
+      'Jun.',
+      'Jul.',
+      'Ago.',
+      'Sep.',
+      'Oct.',
+      'Nov.',
+      'Dic.',
     ];
     return nombresMeses[mes];
   }

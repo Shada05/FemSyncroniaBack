@@ -1,27 +1,63 @@
 <div class="contenedor-sintomas">
-  <!-- Iterar sobre los tipos de síntomas -->
-  <div *ngFor="let tipo of tiposSintomas">
-    <ion-text class="tipo-sintoma">{{ obtenerNombreTipo(tipo.id) }}</ion-text>
-
-    <div class="lista-sintomas">
-      <ion-card class="sintoma-card" *ngFor="let sintoma of sintomasPorTipo[tipo.id]"
-        [ngClass]="{ 'calificado': sintoma.mostrarEstrellas || sintoma.estrellas > 0 }">
-        <ion-item lines="none">
-          <ion-text class="sintoma-texto">{{ sintoma.nombre }}</ion-text>
-        </ion-item>
-        <div class="imagen-contenedor">
-          <ion-img [src]="sintoma.imagen" (click)="toggleEstrellas(sintoma)" class="sintoma-imagen"></ion-img>
-          <ion-icon name="alert-circle-outline" class="icono-exclamacion" (click)="mostrarPopover($event, sintoma)">
-          </ion-icon>
-        </div>
-        <div class="estrellas-container">
-          <ion-icon *ngFor="let estrella of [1, 2, 3, 4, 5]" [name]="estrella <= sintoma.estrellas ? 'star' : 'star'"
-            (click)="calificar(sintoma, estrella)" class="estrella"
-            [style.color]="estrella <= sintoma.estrellas ? '#FFD700' : '#c4c4c4'"
-            [style.visibility]="sintoma.mostrarEstrellas ? 'visible' : 'hidden'">
-          </ion-icon>
-        </div>
-      </ion-card>
-    </div>
+  <!-- Spinner de carga -->
+  <div *ngIf="cargando" class="spinner-wrapper">
+    <ion-spinner name="crescent"></ion-spinner>
   </div>
+
+  <!-- Mensaje de error -->
+  <div *ngIf="errorCarga && !cargando" class="contenedor-error">
+    <ion-text class="mensaje-error"
+      >No se pudieron cargar los síntomas.</ion-text
+    >
+  </div>
+
+  <!-- Contenido principal -->
+  <ng-container *ngIf="!cargando && !errorCarga">
+    <div *ngFor="let tipo of tiposSintomas">
+      <ion-text class="tipo-sintoma">{{ obtenerNombreTipo(tipo.id) }}</ion-text>
+      <div class="lista-sintomas">
+        <ion-card
+          class="sintoma-card"
+          *ngFor="let sintoma of sintomasPorTipo[tipo.id]"
+          [ngClass]="{
+            calificado: sintoma.mostrarEstrellas || sintoma.estrellas > 0
+          }"
+        >
+          <ion-item lines="none">
+            <ion-text class="sintoma-texto">{{ sintoma.nombre }}</ion-text>
+          </ion-item>
+          <div class="imagen-contenedor">
+            <ion-img
+              [src]="sintoma.imagen"
+              (click)="toggleEstrellas(sintoma)"
+              (ionImgWillLoad)="onImageLoad()"
+              class="sintoma-imagen"
+              [class.imagen-cargada]="sintoma.imagenCargada"
+            ></ion-img>
+            <ion-icon
+              name="alert-circle-outline"
+              class="icono-exclamacion"
+              (click)="mostrarPopover($event, sintoma)"
+            >
+            </ion-icon>
+          </div>
+          <div class="estrellas-container">
+            <ion-icon
+              *ngFor="let estrella of [1, 2, 3, 4, 5]"
+              [name]="estrella <= sintoma.estrellas ? 'star' : 'star'"
+              (click)="calificar(sintoma, estrella)"
+              class="estrella"
+              [style.color]="
+                estrella <= sintoma.estrellas ? '#FFD700' : '#c4c4c4'
+              "
+              [style.visibility]="
+                sintoma.mostrarEstrellas ? 'visible' : 'hidden'
+              "
+            >
+            </ion-icon>
+          </div>
+        </ion-card>
+      </div>
+    </div>
+  </ng-container>
 </div>

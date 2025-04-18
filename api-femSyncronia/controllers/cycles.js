@@ -261,22 +261,100 @@ exports.show = async (req, res) => {
     return res.status(200).send(cycle);
 }
 
-exports.show_tables = async (req, res) => {
-    const id = parseInt(req.params.id);
-    const cycle = await cycles.findOne({
-        where: {
-            id: id
-        }
-    });
+exports.show_tablesid = async (req, res) => {
+    const user_id = Number(req.params.user_id);
+    console.log(user_id);
 
-    if (!cycle) {
-        return res.status(404).send({ message: 'Cycle not found' });
+    // Validar el user_id
+    if (isNaN(user_id) || user_id <= 0 || !Number.isInteger(user_id)) {
+        return res.status(400).send({ message: 'Invalid user_id' });
     }
 
-    // Seleccionar solo los campos weight y temperature
-    const { user_id, weight, temperature, cycle_status, date } = cycle; //Agregar date
+    try {
+        // Obtener todos los ciclos con el mismo user_id
+        const cyclesList = await cycles.findAll({
+            where: { user_id: user_id },
+            attributes: ['id', 'weight', 'temperature', 'cycle_status', 'date', 'DM_1', 'DM_2', 'DM_3', 'DM_4', 'DM_5', 'DM_6', 'DM_7', 'DM_8', 'DM_9',
+                'DM_10', 'DM_11', 'DM_12', 'DM_13', 'DM_14', 'DM_15', 'DM_16', 'DM_17', 'DM_18',
+                'M_1', 'M_2', 'M_3', 'M_4', 'M_5', 'M_6', 'M_7', 'M_8', 'M_9',
+                'M_10', 'M_11', 'M_12', 'M_13', 'M_14', 'M_15', 'M_16', 'M_17', 'M_18', 'M_19',
+                'M_20', 'PP_1', 'PP_2', 'PP_3', 'PP_4', 'PP_5',
+                'E_1', 'E_2', 'E_3', 'E_4', 'E_5', 'E_6', 'E_7', 'E_8', 'E_9',
+                'E_10', 'E_11', 'E_12', 'E_13', 'E_14', 'E_15', 'E_16', 'E_17', 'E_18',
+                'E_19', 'E_20', 'E_21',
+                'F_1', 'F_2', 'F_3', 'F_4', 'F_5', 'F_6', 'F_7', 'F_8', 'F_9',
+                'F_10', 'F_11', 'F_12', 'F_13', 'F_14', 'F_15',
+                'AS_1', 'AS_2', 'AS_3', 'AS_4', 'AS_5',
+                'notes'
+            ] // Puedes agregar más campos si lo deseas
+        });
 
-    return res.status(200).send({user_id, weight, temperature, cycle_status, date });
+        if (cyclesList.length === 0) {
+            return res.status(404).send({ message: 'No cycles found for the given user_id' });
+        }
+
+        // Llamar al script de Python y pasar el user_id como argumento
+        const pythonProcess = spawn('python', ['../IA-Cycles/index.py', user_id]);
+
+        pythonProcess.stdout.on('data', (data) => {
+            console.log(`Salida del script Python: ${data}`);
+        });
+
+        pythonProcess.stderr.on('data', (data) => {
+            console.error(`Error en el script Python: ${data}`);
+        });
+
+        pythonProcess.on('close', (code) => {
+            console.log(`El script Python terminó con código ${code}`);
+            // Enviar la respuesta con todos los ciclos encontrados
+            return res.status(200).send(cyclesList);
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ message: 'Internal server error' });
+    }
+};
+
+
+exports.show_tables = async (req, res) => {
+    const user_id = parseInt(req.params.user_id); // Cambiar a user_id
+    console.log(user_id);
+
+    // Validar el user_id
+    if (isNaN(user_id) || user_id <= 0 || !Number.isInteger(user_id)) {
+        return res.status(400).send({ message: 'Invalid user_id' });
+    }
+
+    try {
+        // Buscar ciclos por user_id
+        const cyclesList = await cycles.findAll({
+            where: {
+                user_id: user_id
+            },
+            attributes: ['user_id', 'weight', 'temperature', 'cycle_status', 'date', 'DM_1', 'DM_2', 'DM_3', 'DM_4', 'DM_5', 'DM_6', 'DM_7', 'DM_8', 'DM_9',
+                'DM_10', 'DM_11', 'DM_12', 'DM_13', 'DM_14', 'DM_15', 'DM_16', 'DM_17', 'DM_18',
+                'M_1', 'M_2', 'M_3', 'M_4', 'M_5', 'M_6', 'M_7', 'M_8', 'M_9',
+                'M_10', 'M_11', 'M_12', 'M_13', 'M_14', 'M_15', 'M_16', 'M_17', 'M_18', 'M_19',
+                'M_20', 'PP_1', 'PP_2', 'PP_3', 'PP_4', 'PP_5',
+                'E_1', 'E_2', 'E_3', 'E_4', 'E_5', 'E_6', 'E_7', 'E_8', 'E_9',
+                'E_10', 'E_11', 'E_12', 'E_13', 'E_14', 'E_15', 'E_16', 'E_17', 'E_18',
+                'E_19', 'E_20', 'E_21',
+                'F_1', 'F_2', 'F_3', 'F_4', 'F_5', 'F_6', 'F_7', 'F_8', 'F_9',
+                'F_10', 'F_11', 'F_12', 'F_13', 'F_14', 'F_15',
+                'AS_1', 'AS_2', 'AS_3', 'AS_4', 'AS_5',
+                'notes'] // Seleccionar campos específicos
+        });
+
+        if (!cyclesList || cyclesList.length === 0) {
+            return res.status(404).send({ message: 'No cycles found for the given user_id' });
+        }
+
+        // Enviar la respuesta con los ciclos encontrados
+        return res.status(200).send(cyclesList);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ message: 'Internal server error' });
+    }
 };
 
 exports.destroy = async (req, res) => {

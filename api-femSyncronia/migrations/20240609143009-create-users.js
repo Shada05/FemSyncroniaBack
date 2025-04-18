@@ -66,6 +66,9 @@ module.exports = {
             Affects_humour: {//0=No, 1=Si, 2= No lo se
                 type: Sequelize.INTEGER
             },
+            Regular_cycle: { //0=No regular, 1=Regular
+                type: Sequelize.INTEGER
+            },
             createdAt: {
                 type: Sequelize.DATE,
                 allowNull: false,

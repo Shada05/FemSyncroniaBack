@@ -1,3 +1,4 @@
+import sys
 import mysql.connector
 import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -10,8 +11,12 @@ database = "db_femsync"
 user = "root"
 password = ""
 
-# Solicitar el user_id
-x = input("Ingrese el user_id a analizar: ")
+if len(sys.argv) < 2:
+    print("❌ Error: Se requiere un user_id como argumento.")
+    sys.exit(1)
+
+x = sys.argv[1]  # El user_id se pasa como argumento
+print(f"🔍 Analizando datos para el user_id: {x}")
 # Variables para almacenar los datos
 x_data = []  # Almacenará la cantidad de veces que aparece el user_id
 y_data = []  # Almacenará los valores de los sintomas para el user_id
@@ -45,6 +50,25 @@ def analizar_datos(x, x_data, y_data, name_column):
     print(f'📈 Coeficiente de determinación: {r_sq}')
     print(f'🔹 Intercepto: {model.intercept_} (redondeado: {prediction})')
     print(f'🔹 Pendiente: {model.coef_[0]}')
+
+    # redondeo
+    y_pred= np.round(model.predict(x_data_np), 2)
+    print(f'🔮 Predicción de valores (redondeada): {y_pred}')
+
+
+    # Predicción
+    y_pred = model.predict(x_data_np)
+    print(f'🔮 Predicción de valores: {y_pred}')
+    return prediction
+
+    #  Gráfica
+    #plt.scatter(x_data_np, y_data_np, color='black', label="Datos reales")
+    #plt.plot(x_data_np, y_pred, color='blue', linewidth=2, label="Regresión Lineal")
+    #plt.title(f'Regresión Lineal para user_id {x} de {name_column}')
+    #plt.xlabel('Cantidad de pruebas')
+    #plt.ylabel('Intensidad del sintoma')
+    #plt.legend()
+    #plt.show()
 
 
 try:
