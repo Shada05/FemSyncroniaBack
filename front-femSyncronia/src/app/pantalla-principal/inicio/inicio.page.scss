@@ -1,16 +1,16 @@
 ion-content {
-    --background: none; /* Sin fondo de color por defecto */
-    background-image: url('/assets/img/pantalla-principal/fondo-tabs.svg'); /* Imagen de fondo */
-    background-size: cover; /* La imagen cubre todo el área */
-    background-repeat: no-repeat; /* La imagen no se repite */
-    background-position: center; /* La imagen está centrada */
-    width: 100%; /* Ancho completo */
-    height: 100vh; /* Altura completa de la ventana */
-  }
-  
+  --background: none; /* Sin fondo de color por defecto */
+  background-image: url("/assets/img/pantalla-principal/fondo-tabs.svg"); /* Imagen de fondo */
+  background-size: cover; /* La imagen cubre todo el área */
+  background-repeat: no-repeat; /* La imagen no se repite */
+  background-position: center; /* La imagen está centrada */
+  width: 100%; /* Ancho completo */
+  height: 100vh; /* Altura completa de la ventana */
+}
+
 /* Contenedor de la barra superior */
 .top-bar {
-  height: 100px;  
+  height: 100px;
   display: flex; /* Configura el contenedor como flexbox */
   align-items: center; /* Centra verticalmente los elementos */
   justify-content: space-between; /* Espacia los elementos uniformemente */
@@ -18,39 +18,39 @@ ion-content {
   width: 100%; /* Ancho completo */
   background-color: transparent; /* Fondo transparente */
 }
-  
+
 /* Ajusta el ícono de notificación */
 .notificacion {
-    color: black;
-    height: 24px;
-    width: 24px;
+  color: black;
+  height: 24px;
+  width: 24px;
 }
-  
+
 /* Ajusta el texto de bienvenida */
 .bienvenida-text {
-    color: black;
-    text-align: center;
-    font-family: "Open Sans";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  color: black;
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
-  
+
 /* Ajusta la imagen de perfil */
 .imagen-perfil {
-    width: 50px;
-    height: 50px;
-    object-fit: cover; /* Mantiene las proporciones de la imagen */
-    border-radius: 50%; /* Hace la imagen circular */
-    border: 1px solid white;
-}  
+  width: 50px;
+  height: 50px;
+  object-fit: cover; /* Mantiene las proporciones de la imagen */
+  border-radius: 50%; /* Hace la imagen circular */
+  border: 1px solid white;
+}
 
 /* Contenedor de información debajo de la barra superior */
 .info-periodo {
   width: 324px;
   height: 287px;
-  background: #E9E9E9;
+  background: #e9e9e9;
   margin: 17px auto; /* Centra horizontalmente */
   border-radius: 20px; /* Bordes redondeados */
   display: flex;
@@ -91,7 +91,7 @@ ion-content {
 .info-periodo .linea-horizontal {
   width: 90%; /* Ancho de la línea */
   height: 1px; /* Grosor de la línea */
-  background-color: #9D9D9D;
+  background-color: #9d9d9d;
   margin: 1px 0; /* Espaciado vertical */
 }
 
@@ -108,22 +108,23 @@ ion-content {
 /* Botón dentro del contenedor */
 .boton-informacion {
   width: 223px; /* Ancho del botón */
+  min-height: 37px;
   height: 37px; /* Altura del botón */
   margin-bottom: 8px; /* Asegura que el botón quede en la parte inferior */
   --background: #ffff; /* Color de fondo del botón */
-  --color: #FF9CA7; /* Color del texto del botón */
+  --color: #ff9ca7; /* Color del texto del botón */
   --box-shadow: none; /* Sin sombra */
   --border-radius: 50px; /* Radio de borde */
   text-transform: none; /* Transformación de texto */
-  font-family: 'Roboto-medium'; /* Familia de fuente */
-  --background-activated: #FF8390;
+  font-family: "Roboto-medium"; /* Familia de fuente */
+  --background-activated: #f2f2f2;
 }
 
 /* Contenedor de síntomas */
 .info-sintomas {
   width: 319px;
   height: 132px; /* Altura fija del contenedor */
-  background: #FFFFFF; /* Fondo gris claro */
+  background: #ffffff; /* Fondo gris claro */
   margin: 24px auto; /* Espaciado entre los componentes */
   border-radius: 20px; /* Bordes redondeados */
   display: flex;
@@ -169,10 +170,10 @@ ion-content {
 }
 
 /* Componentes adicionales */
-.info-consejos{
+.info-consejos {
   width: 319px;
   height: 132px;
-  background: #FFFFFF; /* Fondo gris claro */
+  background: #ffffff; /* Fondo gris claro */
   margin: 24px auto; /* Espaciado entre los componentes */
   border-radius: 20px; /* Bordes redondeados */
   display: flex;
@@ -194,7 +195,7 @@ ion-menu {
 
 .datos-perfil {
   height: 158px; /* Altura del contenedor */
-  background: #FCBCC3; /* Fondo del contenedor */
+  background: #fcbcc3; /* Fondo del contenedor */
   display: flex; /* Usar flexbox para disposición */
   flex-direction: column; /* Coloca elementos en columna */
   justify-content: center; /* Centra verticalmente */
@@ -231,7 +232,7 @@ ion-menu {
 .linea-separadora {
   width: 210px; /* Ancho fijo de la línea */
   height: 1px; /* Altura de la línea */
-  background-color: #FFFFFF; /* Color de la línea */
+  background-color: #ffffff; /* Color de la línea */
   margin: 4px 0; /* Espaciado superior e inferior */
 }
 
@@ -239,7 +240,7 @@ ion-menu {
 .correo-usuario {
   font-size: 13px;
   font-weight: 400;
-  color: #333333CF; /* Color del texto */
+  color: #333333cf; /* Color del texto */
 }
 
 .menu-content {
@@ -250,16 +251,16 @@ ion-menu {
   padding: 16px;
 }
 
-ion-item{
-  --background:#ffff;
+ion-item {
+  --background: #ffff;
   font-size: 20px;
   font-weight: 600;
   --color: black;
 }
 
-.icono{
+.icono {
   font-size: 25px;
-  color:black;
+  color: black;
 }
 
 /* Contenedor para el logo y los textos */
@@ -299,7 +300,7 @@ ion-item{
 .fem-syncronia {
   font-size: 17px;
   font-weight: 600;
-  color: #FF4D7F; /* Color de destaque */
+  color: #ff4d7f; /* Color de destaque */
 }
 
 ion-tab-bar {
@@ -351,7 +352,7 @@ ion-button {
   flex-direction: column;
 }
 
-.etiqueta-dia-actual{
+.etiqueta-dia-actual {
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -359,11 +360,11 @@ ion-button {
   margin-bottom: 4px;
 }
 
-.etiqueta-indice-ciclo{
+.etiqueta-indice-ciclo {
   font-size: 12px;
   font-style: normal;
   font-weight: 600;
-  color: #7B7A7A;
+  color: #7b7a7a;
 }
 /* Botón de editar */
 .boton-editar {
@@ -372,14 +373,14 @@ ion-button {
   right: 16px;
   width: 150px;
   height: 10px;
-  --background: #FFF;
+  --background: #fff;
   --border-radius: 50px;
   --color: #000;
   font-size: 14px;
   font-weight: 600;
   text-transform: none;
-  --color:#FF9CA7;
-  --background-activated: #F2F2F2;
+  --color: #ff9ca7;
+  --background-activated: #f2f2f2;
 }
 
 /* Contenedores adicionales */
@@ -424,19 +425,19 @@ ion-button {
 
 /* Colores específicos para cada línea */
 .contenedor-item[data-tipo="baja"] .linea-divisora {
-  background-color: #C5E1A5;;
+  background-color: #c5e1a5;
 }
 
 .contenedor-item[data-tipo="peso"] .linea-divisora {
-  background-color: #FFB3C9;;
+  background-color: #ffb3c9;
 }
 
 .contenedor-item[data-tipo="temp"] .linea-divisora {
-  background-color: #D5B3FF;
+  background-color: #d5b3ff;
 }
 
 .contenedor-item[data-tipo="otro"] .linea-divisora {
-  background-color: #FFD9B3;
+  background-color: #ffd9b3;
 }
 
 /* Centrar el título "Análisis" */
@@ -451,7 +452,7 @@ ion-button {
 .contenedor-ciclos {
   width: 316px;
   height: 170px;
-  background: #FFE3E0; /* Fondo gris claro */
+  background: #ffe3e0; /* Fondo gris claro */
   border-radius: 20px; /* Bordes redondeados */
   margin: 16px auto; /* Centrado y margen */
   display: flex;
@@ -558,11 +559,11 @@ ion-card-content {
   margin-left: 2px; /* Ajuste adicional si es necesario */
 }
 
-.color-texto-periodo{
-  color: #9F0000;
+.color-texto-periodo {
+  color: #9f0000;
 }
-.color-texto-ciclo{
-  color:#9F6900;
+.color-texto-ciclo {
+  color: #9f6900;
 }
 /* Línea divisora */
 .linea-divisora-analisis {
@@ -573,11 +574,11 @@ ion-card-content {
 
 /* Colores de la línea divisora */
 .linea-roja {
-  background-color: #9F0000;
+  background-color: #9f0000;
 }
 
 .linea-amarilla {
-  background-color: #9F6900;
+  background-color: #9f6900;
 }
 
 /* Estilo del texto "Promedio de período" y "Promedio de ciclo" */
@@ -604,7 +605,7 @@ ion-card-content {
 .contenedor-historial {
   width: 316px;
   height: 99px; /* Manteniendo el tamaño que ya modificaste */
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 20px;
   margin: 12px auto;
   font-size: 16px;
@@ -614,7 +615,7 @@ ion-card-content {
   display: flex;
   flex-direction: column; /* Mantiene todo alineado en columna */
   justify-content: center;
-  background: #FFE3E0;
+  background: #ffe3e0;
   box-shadow: none;
 }
 
@@ -693,7 +694,9 @@ ion-card-content {
 .contenedor-analisis {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 150px); /* Ajusta la altura restando el espacio de la barra superior y el tab-bar */
+  height: calc(
+    100vh - 150px
+  ); /* Ajusta la altura restando el espacio de la barra superior y el tab-bar */
   width: 100%;
   box-sizing: border-box;
   overflow: hidden; /* Evita el scroll */
@@ -701,7 +704,7 @@ ion-card-content {
 
 /* Ajustes para el componente de temperatura  y peso*/
 app-ciclos,
-app-grafica{
+app-grafica {
   flex: 1; /* Ocupa el espacio disponible */
   display: flex;
   flex-direction: column;
