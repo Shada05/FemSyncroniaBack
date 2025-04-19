@@ -321,38 +321,57 @@
           </div>
 
           <ion-text class="titulo-informacion">Novedades</ion-text>
-           <!-- 1ro carrusel -->
-          <div class="carrusel">
-            <div 
-              class="carrusel-inner" 
-              [class.sin-transicion]="sinTransicion"
-              [style.transform]="'translateX(-' + slideVisual * 100 + '%)'">
-          
-              <!-- Clon último al inicio -->
-              <img [src]="imagenesCarrusel[imagenesCarrusel.length - 1]" />
-          
-              <!-- Slides reales -->
-              <img *ngFor="let img of imagenesCarrusel" [src]="img" />
-          
-              <!-- Clon primero al final -->
-              <img [src]="imagenesCarrusel[0]" />
+          <div class="contenedor-carruseles">
+             <!-- 1ro carrusel - horizontal -->
+            <div class="carrusel">
+              <div 
+                class="carrusel-inner" 
+                [class.sin-transicion]="sinTransicion"
+                [style.transform]="'translateX(-' + slideVisual * 100 + '%)'">
+                <img [src]="imagenesCarrusel[imagenesCarrusel.length - 1]" />
+                <img *ngFor="let img of imagenesCarrusel" [src]="img" />
+                <img [src]="imagenesCarrusel[0]" />
+              </div>
+            
+              <button class="carrusel-btn izquierda" (click)="irAnteriorSlide()">‹</button>
+              <button class="carrusel-btn derecha" (click)="irASiguienteSlide()">›</button>
+            
+              <!-- <div class="carrusel-puntos">
+                <span 
+                  *ngFor="let img of imagenesCarrusel; let i = index"
+                  [class.activo]="slideVisual === i + 1 || 
+                                  (slideVisual === 0 && i === imagenesCarrusel.length - 1) || 
+                                  (slideVisual === imagenesCarrusel.length + 1 && i === 0)"
+                  (click)="irASlide(i)">
+                </span>
+              </div> -->
             </div>
-          
-            <button class="carrusel-btn izquierda" (click)="irAnteriorSlide()">‹</button>
-            <button class="carrusel-btn derecha" (click)="irASiguienteSlide()">›</button>
-          
-            <div class="carrusel-puntos">
-              <span 
-                *ngFor="let img of imagenesCarrusel; let i = index"
-                [class.activo]="slideVisual === i + 1 || 
-                                (slideVisual === 0 && i === imagenesCarrusel.length - 1) || 
-                                (slideVisual === imagenesCarrusel.length + 1 && i === 0)"
-                (click)="irASlide(i)">
-              </span>
-            </div>
-          </div>
+  
+            <!-- 2do Carrusel - vertical  -->
+            <div class="grupo-horizontal">
+              <div class="grupo-vertical">
+                <div class="carrusel vertical">
+                  <div 
+                    class="carrusel-inner-vertical" 
+                    [class.sin-transicion]="sinTransicion2"
+                    [style.transform]="'translateY(-' + slideVisual2 * 100 + '%)'">
+                    <img [src]="imagenesCarrusel2[imagenesCarrusel2.length - 1]" />
+                    <img *ngFor="let img of imagenesCarrusel2" [src]="img" />
+                    <img [src]="imagenesCarrusel2[0]" />
+                  </div>
 
-           <!-- 2do carrusel -->
+                  <button class="carrusel-btn arriba" (click)="irAnteriorSlide2()">˄</button>
+                  <button class="carrusel-btn abajo" (click)="irASiguienteSlide2()">˅</button>
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+          
+          
+
           
           
           

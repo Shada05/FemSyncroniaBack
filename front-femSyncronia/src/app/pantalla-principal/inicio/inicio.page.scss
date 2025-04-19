@@ -786,6 +786,103 @@ app-grafica{
   }
   .sin-transicion {
     transition: none !important;
+  }  
+}
+
+
+
+.grupo-horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.carrusel.vertical {
+  width: 150px;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  margin: 0;
+
+  .carrusel-inner-vertical {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 1.2s ease-in-out;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+  }
+
+  .carrusel-btn.arriba {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 50%;
+    color: #f47191;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
   }
   
+  .carrusel-btn.abajo {
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translate(-50%, 100%);
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 50%;
+    color: #f47191;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+  
+
+  .carrusel-puntos.vertical {
+    display: flex;
+    flex-direction: row; // para que estén alineados horizontalmente
+    justify-content: center;
+    margin-top: 8px; // espacio abajo de la imagen
+    position: static; // esto hace que ya no estén encima
+    transform: none;
+
+    span {
+      width: 8px;
+      height: 8px;
+      margin: 0 4px;
+      background-color: #ccc;
+      border-radius: 50%;
+      display: inline-block;
+      cursor: pointer;
+
+      &.activo {
+        background-color: #f47191;
+      }
+    }
+  }
 }
+
+
+
+
