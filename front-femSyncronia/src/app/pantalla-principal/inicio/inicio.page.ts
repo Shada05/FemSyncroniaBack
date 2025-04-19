@@ -76,19 +76,33 @@ export class InicioPage implements OnInit, AfterViewInit {
     return `${año}-${mes}-${dia}`;
   }
 
+  imagenesCarrusel: string[] = [
+    'assets/img/1ro-carrusel/flujo.svg',
+    'assets/img/1ro-carrusel/periodo.svg',
+    'assets/img/1ro-carrusel/versus.svg'
+  ];
+  
+  slideActual: number = 0; // antes: currentSlide
+
   ngAfterViewInit(): void {
-    new Swiper('.mySwiper', {
-      loop: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true
-      },
-      autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-      },
-    });
+    setInterval(() => {
+      this.slideActual = (this.slideActual + 1) % this.imagenesCarrusel.length;
+    }, 5000); // cada 5 segundos
   }
+  
+  irASlide(index: number) {
+    this.slideActual = index;
+  }
+
+  siguienteSlide() {
+    this.slideActual = (this.slideActual + 1) % this.imagenesCarrusel.length;
+  }
+  
+  anteriorSlide() {
+    this.slideActual = (this.slideActual - 1 + this.imagenesCarrusel.length) % this.imagenesCarrusel.length;
+  }
+  
+  
   
   
   ngOnInit() {

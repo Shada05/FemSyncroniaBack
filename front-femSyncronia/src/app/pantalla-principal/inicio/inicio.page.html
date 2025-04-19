@@ -322,20 +322,27 @@
 
           <!-- Contenido y carrusel -->
           <ion-text class="titulo-informacion">Novedades</ion-text>
-          <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <img src="assets/img/1ro-carrusel/flujo.svg" />
-              </div>
-              <div class="swiper-slide">
-                <img src="assets/img/1ro-carrusel/periodo.svg" />
-              </div>
-              <div class="swiper-slide">
-                <img src="assets/img/1ro-carrusel/versus.svg" />
-              </div>
+          <div class="carrusel">
+            <div class="carrusel-inner" [style.transform]="'translateX(-' + slideActual * 100 + '%)'">
+              <img *ngFor="let img of imagenesCarrusel" [src]="img" alt="slide">
             </div>
-            <div class="swiper-pagination"></div>
+          
+            <!-- Botones izquierda y derecha -->
+            <button class="carrusel-btn izquierda" (click)="anteriorSlide()">‹</button>
+            <button class="carrusel-btn derecha" (click)="siguienteSlide()">›</button>
+          
+            <!-- Puntos indicadores -->
+            <div class="carrusel-puntos">
+              <span 
+                *ngFor="let img of imagenesCarrusel; let i = index"
+                [class.activo]="slideActual === i"
+                (click)="irASlide(i)">
+              </span>
+            </div>
           </div>
+          
+          
+          
           
           
         </ion-content>
