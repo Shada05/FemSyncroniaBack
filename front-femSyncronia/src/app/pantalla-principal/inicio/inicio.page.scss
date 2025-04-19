@@ -716,6 +716,7 @@ app-grafica{
   margin-left: 20px;
   margin-top: 16px;
 }
+
 .carrusel {
   width: 90%;
   margin: 16px auto;
@@ -743,7 +744,7 @@ app-grafica{
     border-radius: 50%;
     width: 32px;
     height: 32px;
-    font-size: 20px;
+    font-size: 26px;
     color: #ffffff;
     cursor: pointer;
     z-index: 10;
@@ -756,11 +757,11 @@ app-grafica{
     }
 
     &.izquierda {
-      left: 10px;
+      left: 3px;
     }
 
     &.derecha {
-      right: 10px;
+      right: 3px;
     }
   }
 
@@ -779,7 +780,7 @@ app-grafica{
       cursor: pointer;
 
       &.activo {
-        background-color: #f47191; // rosita 🔥
+        background-color: #f47191; 
       }
     }
   }

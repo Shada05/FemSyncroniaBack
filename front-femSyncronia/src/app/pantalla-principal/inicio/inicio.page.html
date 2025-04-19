@@ -320,8 +320,8 @@
             </ion-avatar>
           </div>
 
-          <!-- Contenido y carrusel -->
           <ion-text class="titulo-informacion">Novedades</ion-text>
+           <!-- 1ro carrusel -->
           <div class="carrusel">
             <div 
               class="carrusel-inner" 
@@ -344,11 +344,15 @@
             <div class="carrusel-puntos">
               <span 
                 *ngFor="let img of imagenesCarrusel; let i = index"
-                [class.activo]="slideVisual === i + 1"
+                [class.activo]="slideVisual === i + 1 || 
+                                (slideVisual === 0 && i === imagenesCarrusel.length - 1) || 
+                                (slideVisual === imagenesCarrusel.length + 1 && i === 0)"
                 (click)="irASlide(i)">
               </span>
             </div>
           </div>
+
+           <!-- 2do carrusel -->
           
           
           

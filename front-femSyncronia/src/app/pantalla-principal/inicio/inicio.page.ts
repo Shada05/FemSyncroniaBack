@@ -105,22 +105,23 @@ export class InicioPage implements OnInit, AfterViewInit {
         this.sinTransicion = true;
         this.slideVisual = 1;
         setTimeout(() => this.sinTransicion = false, 50);
-      }, 1200);
+      }, 5000);
     }
   }
   
   irAnteriorSlide() {
-    if (this.slideVisual > 0) {
+    if (this.slideVisual > 1) {
       this.slideVisual--;
     } else {
-      this.slideVisual = -1;
+      this.slideVisual = 0; // ir al clon del último
       setTimeout(() => {
         this.sinTransicion = true;
-        this.slideVisual = this.imagenesCarrusel.length;
+        this.slideVisual = this.imagenesCarrusel.length; // última real
         setTimeout(() => this.sinTransicion = false, 50);
-      }, 1200);
+      }, 5000); 
     }
   }
+  
   
   irASlide(index: number) {
     this.slideVisual = index + 1;
