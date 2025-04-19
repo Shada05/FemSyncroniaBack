@@ -59,20 +59,20 @@
           </div>
 
           <!-- Contenedor periodo -->
-          <div class="info-periodo">
-            <ion-text class="info-text titulo">Retraso</ion-text>
-            <ion-text class="numero">15</ion-text>
-            <ion-text class="info-text subtitulo">días de tu periodo</ion-text>
+          <div class="info-periodo" [ngStyle]="{ 'background': getColorPeriodo() }">
+            <ion-text class="info-text titulo">{{ getTituloPeriodo() }}</ion-text>
+            <ion-text class="numero">{{ getNumeroPeriodo() }}</ion-text>
+            <ion-text class="info-text subtitulo">{{ getSubtituloPeriodo() }}</ion-text>
             <div class="linea-horizontal"></div>
             <ion-text class="info-text observacion">Baja probabilidad de quedar embarazada</ion-text>
             <ion-button class="boton-informacion">Registrar</ion-button>
-          </div>
+          </div>          
 
           <!-- Contenedor síntomas -->
           <div class="info-sintomas">
             <ion-text class="titulo-sintomas">Posibles síntomas</ion-text>
             <div class="contenedor-lista-sintomas">
-              <ion-text *ngIf="sintomasCalificados.length === 0">No hay síntomas calificados.</ion-text>
+              <ion-text style="color: black;" *ngIf="sintomasCalificados.length === 0">No hay síntomas calificados.</ion-text>
               <div *ngFor="let sintoma of sintomasCalificados" class="sintoma-item">
                 <img [src]="sintoma.icono" alt="{{ sintoma.nombre }}" class="sintoma-icono" *ngIf="sintoma.icono">
                 <ion-text>{{ sintoma.nombre }}</ion-text>

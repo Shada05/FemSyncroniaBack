@@ -74,6 +74,7 @@ export class InicioPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.sintomasCalificados.length)
     this.cargarUsuario(); // Llama a la función para cargar los datos del usuario
     this.actualizarMes(this.fechaActual); // Inicializa el mes y año con la fecha actual
     setInterval(() => {
@@ -318,4 +319,43 @@ export class InicioPage implements OnInit {
     ];
     return nombresMeses[mes];
   }
+
+  duracionCiclo: number = 28;
+
+  getColorPeriodo(): string {
+    if (this.indice >= 1 && this.indice <= 6) {
+      return '#FFB7BF'; // En periodo
+    } else if (this.indice > 5 && this.indice <= this.duracionCiclo) {
+      return '#FFCBD1'; // Días previos al próximo periodo
+    }
+    return 'transparent'; // Fuera de rango o sin datos
+  }
+  
+  getTituloPeriodo(): string {
+    return this.estaEnPeriodo() ? 'Día' : 'Faltan';
+  }
+  
+  getSubtituloPeriodo(): string {
+    return this.estaEnPeriodo() ? 'día de tu periodo' : 'días para tu periodo';
+  }
+  
+  getNumeroPeriodo(): number {
+    return this.estaEnPeriodo() ? this.indice : this.diasParaInicioPeriodo;
+  }
+  
+  estaEnPeriodo(): boolean {
+    return this.indice >= 1 && this.indice <= 6;
+  }
+  
+  get diasParaInicioPeriodo(): number {
+    const diasRestantes = this.duracionCiclo - this.indice;
+  
+    // Si estás fuera del periodo, sumamos 1 porque mañana sería el día 1 del próximo ciclo
+    if (!this.estaEnPeriodo()) {
+      return diasRestantes + 1;
+    }
+  
+    return 0;
+  }
+  
 }
