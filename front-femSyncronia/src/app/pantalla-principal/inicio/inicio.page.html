@@ -323,23 +323,34 @@
           <!-- Contenido y carrusel -->
           <ion-text class="titulo-informacion">Novedades</ion-text>
           <div class="carrusel">
-            <div class="carrusel-inner" [style.transform]="'translateX(-' + slideActual * 100 + '%)'">
-              <img *ngFor="let img of imagenesCarrusel" [src]="img" alt="slide">
+            <div 
+              class="carrusel-inner" 
+              [class.sin-transicion]="sinTransicion"
+              [style.transform]="'translateX(-' + slideVisual * 100 + '%)'">
+          
+              <!-- Clon último al inicio -->
+              <img [src]="imagenesCarrusel[imagenesCarrusel.length - 1]" />
+          
+              <!-- Slides reales -->
+              <img *ngFor="let img of imagenesCarrusel" [src]="img" />
+          
+              <!-- Clon primero al final -->
+              <img [src]="imagenesCarrusel[0]" />
             </div>
           
-            <!-- Botones izquierda y derecha -->
-            <button class="carrusel-btn izquierda" (click)="anteriorSlide()">‹</button>
-            <button class="carrusel-btn derecha" (click)="siguienteSlide()">›</button>
+            <button class="carrusel-btn izquierda" (click)="irAnteriorSlide()">‹</button>
+            <button class="carrusel-btn derecha" (click)="irASiguienteSlide()">›</button>
           
-            <!-- Puntos indicadores -->
             <div class="carrusel-puntos">
               <span 
                 *ngFor="let img of imagenesCarrusel; let i = index"
-                [class.activo]="slideActual === i"
+                [class.activo]="slideVisual === i + 1"
                 (click)="irASlide(i)">
               </span>
             </div>
           </div>
+          
+          
           
           
           

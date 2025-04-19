@@ -82,25 +82,51 @@ export class InicioPage implements OnInit, AfterViewInit {
     'assets/img/1ro-carrusel/versus.svg'
   ];
   
-  slideActual: number = 0; // antes: currentSlide
-
+  slideVisual = 1;
+  sinTransicion = false;
+  intervalo: any;
+  
   ngAfterViewInit(): void {
-    setInterval(() => {
-      this.slideActual = (this.slideActual + 1) % this.imagenesCarrusel.length;
-    }, 5000); // cada 5 segundos
+    this.iniciarCarrusel();
+  }
+  
+  iniciarCarrusel() {
+    this.intervalo = setInterval(() => {
+      this.irASiguienteSlide();
+    }, 5000);
+  }
+  
+  irASiguienteSlide() {
+    if (this.slideVisual < this.imagenesCarrusel.length) {
+      this.slideVisual++;
+    } else {
+      this.slideVisual++;
+      setTimeout(() => {
+        this.sinTransicion = true;
+        this.slideVisual = 1;
+        setTimeout(() => this.sinTransicion = false, 50);
+      }, 1200);
+    }
+  }
+  
+  irAnteriorSlide() {
+    if (this.slideVisual > 0) {
+      this.slideVisual--;
+    } else {
+      this.slideVisual = -1;
+      setTimeout(() => {
+        this.sinTransicion = true;
+        this.slideVisual = this.imagenesCarrusel.length;
+        setTimeout(() => this.sinTransicion = false, 50);
+      }, 1200);
+    }
   }
   
   irASlide(index: number) {
-    this.slideActual = index;
-  }
-
-  siguienteSlide() {
-    this.slideActual = (this.slideActual + 1) % this.imagenesCarrusel.length;
+    this.slideVisual = index + 1;
   }
   
-  anteriorSlide() {
-    this.slideActual = (this.slideActual - 1 + this.imagenesCarrusel.length) % this.imagenesCarrusel.length;
-  }
+  
   
   
   

@@ -738,13 +738,13 @@ app-grafica{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0);
     border: none;
     border-radius: 50%;
     width: 32px;
     height: 32px;
     font-size: 20px;
-    color: #f47191;
+    color: #ffffff;
     cursor: pointer;
     z-index: 10;
     display: flex;
@@ -752,7 +752,7 @@ app-grafica{
     align-items: center;
 
     &:hover {
-      background-color: #fce4ec;
+      background-color: #fce4ec00;
     }
 
     &.izquierda {
@@ -783,4 +783,8 @@ app-grafica{
       }
     }
   }
+  .sin-transicion {
+    transition: none !important;
+  }
+  
 }
