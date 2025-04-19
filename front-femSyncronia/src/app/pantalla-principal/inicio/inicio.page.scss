@@ -716,3 +716,19 @@ app-grafica{
   margin-left: 20px;
   margin-top: 16px;
 }
+.mySwiper {
+  width: 100%;
+  height: auto;
+  margin-top: 16px;
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 90%;
+      border-radius: 12px;
+    }
+  }
+}

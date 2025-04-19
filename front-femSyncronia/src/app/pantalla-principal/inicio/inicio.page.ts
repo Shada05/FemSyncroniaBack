@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
+import Swiper from 'swiper';
+
+
 
 interface Sintoma {
   id: number; // ID del síntoma
@@ -18,7 +21,7 @@ interface Sintoma {
   templateUrl: './inicio.page.html',
   styleUrls: ['./inicio.page.scss'],
 })
-export class InicioPage implements OnInit {
+export class InicioPage implements OnInit, AfterViewInit {
   misLabelsY: string[] = [
     '35°C',
     '36°C',
@@ -73,6 +76,21 @@ export class InicioPage implements OnInit {
     return `${año}-${mes}-${dia}`;
   }
 
+  ngAfterViewInit(): void {
+    new Swiper('.mySwiper', {
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      },
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+    });
+  }
+  
+  
   ngOnInit() {
     this.cargarUsuario(); // Llama a la función para cargar los datos del usuario
     this.actualizarMes(this.fechaActual); // Inicializa el mes y año con la fecha actual
