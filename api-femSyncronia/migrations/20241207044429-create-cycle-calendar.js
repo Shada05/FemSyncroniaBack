@@ -9,6 +9,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
     },
+    user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'users', // Nombre de la tabla a la que hace referencia
+            key: 'id'       // Columna de la tabla referenciada
+        }
+    },
     cycle_status: { 
         type: Sequelize.INTEGER,
         allowNull: false

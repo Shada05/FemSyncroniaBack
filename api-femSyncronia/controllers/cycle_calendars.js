@@ -68,6 +68,48 @@ exports.destroy = async (req, res) => {
     );
 };
 
+exports.show_userid = async (req, res) => {
+    const user_id = Number(req.params.user_id);
+    console.log(user_id);
+
+    // Validar el user_id
+    if (isNaN(user_id) || user_id <= 0 || !Number.isInteger(user_id)) {
+        return res.status(400).send({ message: 'Invalid user_id' });
+    }
+
+    try {
+        // Obtener todos los ciclos con el mismo user_id
+        const cyclesList = await cycle_calendars.findAll({
+            where: { user_id: user_id },
+            attributes: ['user_id', 'cycle_status', 'Start_day', 'Finish_day', 'average_periodo', 'average_ciclo', 'average_mestruation', 'Regular_cycle'
+            ] // Puedes agregar más campos si lo deseas
+        });
+
+        if (cyclesList.length === 0) {
+            return res.status(404).send({ message: 'No cycles found for the given user_id' });
+        }
+
+        // Llamar al script de Python y pasar el user_id como argumento
+        const pythonProcess = spawn('python', ['../IA-Cycles/index.py', user_id]);
+
+        pythonProcess.stdout.on('data', (data) => {
+            console.log(`Salida del script Python: ${data}`);
+        });
+
+        pythonProcess.stderr.on('data', (data) => {
+            console.error(`Error en el script Python: ${data}`);
+        });
+
+        pythonProcess.on('close', (code) => {
+            console.log(`El script Python terminó con código ${code}`);
+            // Enviar la respuesta con todos los ciclos encontrados
+            return res.status(200).send(cyclesList);
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ message: 'Internal server error' });
+    }
+};
 exports.update = async (req, res) => {
     const id = parseInt(req.params.id);
     let updatedData = {};
