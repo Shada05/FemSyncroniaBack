@@ -718,7 +718,8 @@ app-grafica{
   margin-top: 16px;
 }
 
-.carrusel {
+
+.carrusel.horizontal {
   width: 90%;
   margin: 16px auto;
   overflow: hidden;
@@ -791,7 +792,6 @@ app-grafica{
 }
 
 
-
 .grupo-horizontal {
   display: flex;
   flex-direction: row;
@@ -800,13 +800,14 @@ app-grafica{
   padding: 0 16px;
 }
 
+
 .carrusel.vertical {
   width: 150px;
   height: 250px;
   position: relative;
   overflow: hidden;
   border-radius: 12px;
-  margin: 0;
+  margin: 5px;
 
   .carrusel-inner-vertical {
     display: flex;
@@ -830,11 +831,11 @@ app-grafica{
     transform: translateX(-50%);
     width: 30px;
     height: 30px;
-    font-size: 20px;
-    background-color: rgba(255, 255, 255, 0.7);
+    font-size: 15px;
+    background-color: rgba(255, 255, 255, 0);
     border: none;
-    border-radius: 50%;
-    color: #f47191;
+    border-radius: 70%;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -843,16 +844,16 @@ app-grafica{
   
   .carrusel-btn.abajo {
     position: absolute;
-    bottom: -14px;
+    bottom: 8px;
     left: 50%;
-    transform: translate(-50%, 100%);
+    transform: translateX(-50%);
     width: 30px;
     height: 30px;
     font-size: 20px;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0);
     border: none;
     border-radius: 50%;
-    color: #f47191;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -970,7 +971,3 @@ transition: transform 0.3s ease; // animación al cerrar
     font-weight: 700; // más negrita
   }
 } 
-
-
-
-
