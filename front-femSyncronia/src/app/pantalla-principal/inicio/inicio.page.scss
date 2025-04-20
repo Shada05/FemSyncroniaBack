@@ -299,7 +299,7 @@ ion-item{
 .fem-syncronia {
   font-size: 17px;
   font-weight: 600;
-  color: #FF4D7F; /* Color de destaque */
+  color: #ff4d7f; /* Color de destaque */
 }
 
 ion-tab-bar {
@@ -711,6 +711,7 @@ app-grafica{
 
 .titulo-informacion {
   color: black;
+  font-family: "Open Sans";
   font-weight: 600;
   font-size: 20px;
   margin-left: 20px;
@@ -882,6 +883,93 @@ app-grafica{
     }
   }
 }
+
+// Contenedor de la información
+.info-panel {
+position: absolute; // superpuesto sobre el contenido
+top:80px; // deja espacio para la top-bar
+left: 20px;
+right: 20px;
+width: auto; // ancho automático limitado por los márgenes
+background-color: #ffd3d800; // transparente con tinte rosado
+z-index: 9999; // encima de todo
+padding: 16px 20px; // espacio interno
+overflow-y: auto; // scroll vertical si el contenido es largo
+transition: transform 0.3s ease; // animación al cerrar
+
+.btn-cerrar {
+  position: absolute;
+  top:-4px;
+  right: -4px;
+  z-index: 10000; // más arriba del panel
+  font-size: 24px;
+  color: #f47191;
+} 
+
+.contenedor-titulo {
+  text-align: center;
+  width: 100%;
+}
+
+.titulo-panel {
+  color: #000;
+  display: inline-block; // permite aplicar ancho automático y margen
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600; // semi-negrita
+  line-height: normal;
+}
+
+.img-ilustrativa {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; // centrada horizontalmente
+}
+
+.contenido-panel-centrado {
+  color: #000;
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 20px;
+  padding: 0 8px; // margen lateral interno para evitar que toque los bordes
+}
+
+.contenido-panel-lado {
+  color: #000;
+  text-align: left;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 16px;
+  margin-bottom: 20px;
+  padding: 0 8px; 
+}
+  .contenido-panel-final {
+    color: #000;
+    text-align: center;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 20px;
+    padding: 0 8px; 
+  }
+
+  p {
+    margin-bottom: 8px;
+  }
+
+  strong {
+    display: inline-block;
+    margin-bottom: 4px;
+    font-weight: 700; // más negrita
+  }
+} 
 
 
 

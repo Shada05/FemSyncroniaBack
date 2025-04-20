@@ -54,6 +54,9 @@ export class InicioPage implements OnInit, AfterViewInit {
   // Propiedades para los síntomas
   sintomasCalificados: any[] = [];
 
+  // Propiedades para el carrusel
+  mostrarInfoFlujo = false;
+
   constructor(
     private menuCtrl: MenuController,
     private apiService: ApiService,

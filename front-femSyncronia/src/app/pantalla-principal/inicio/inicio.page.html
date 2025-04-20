@@ -320,16 +320,20 @@
             </ion-avatar>
           </div>
 
-          <ion-text class="titulo-informacion">Novedades</ion-text>
-          <div class="contenedor-carruseles">
+          <ion-text class="titulo-informacion" *ngIf="!mostrarInfoFlujo" >Novedades</ion-text>
+          <div class="contenedor-carruseles" >
+            
              <!-- 1ro carrusel - horizontal -->
-            <div class="carrusel">
+            <div class="carrusel" *ngIf="!mostrarInfoFlujo" >
               <div 
                 class="carrusel-inner" 
                 [class.sin-transicion]="sinTransicion"
                 [style.transform]="'translateX(-' + slideVisual * 100 + '%)'">
                 <img [src]="imagenesCarrusel[imagenesCarrusel.length - 1]" />
-                <img *ngFor="let img of imagenesCarrusel" [src]="img" />
+                <img 
+                  *ngFor="let img of imagenesCarrusel; let i = index" 
+                  [src]="img" 
+                  (click)="i === 0 ? mostrarInfoFlujo = true : null" />
                 <img [src]="imagenesCarrusel[0]" />
               </div>
             
@@ -346,10 +350,70 @@
                 </span>
               </div> -->
             </div>
+
+            <!-- Información 1: flujo vaginal-->
+            <ng-container *ngIf="mostrarInfoFlujo">
+              <div class="info-panel">
+                <!-- Botón de cerrar -->
+                <ion-button fill="clear" class="btn-cerrar" (click)="mostrarInfoFlujo = false">
+                  <ion-icon name="close-circle-outline"></ion-icon>
+                </ion-button>
+
+                <!-- título -->
+                <div class="contenedor-titulo">
+                  <ion-text class="titulo-panel">
+                    Flujo Vaginal: <br>Lo que debes de saber
+                  </ion-text>
+                </div>
+
+                <!-- Imagen -->
+                <img src="assets/img/Informacion/I-1.svg" alt="Ilustración flujo vaginal" class="img-ilustrativa" />
+
+                <!-- Intro centrado -->
+                <p class="contenido-panel-centrado">
+                  El flujo vaginal es algo completamente normal en el cuerpo de una mujer 
+                  y tiene un papel importante en la limpieza y protección de la zona íntima. 
+                  Aquí te dejamos algunos puntos clave para entenderlo mejor:
+                </p>
+
+                <!-- Lista informativa -->
+                <div class="contenido-panel-lado">
+                  <p><strong>🔹¿Por qué es importante?</strong><br>
+                    El flujo ayuda a mantener la vagina limpia, hidratada y protegida de infecciones. 
+                    Su cantidad y textura pueden cambiar dependiendo de la etapa del ciclo menstrual.</p>
+                
+                  <p><strong>🔹Tipos de flujo y qué significan</strong><br>
+                  ✅ Transparente o blanco y sin olor: Normal, indica que la vagina está sana. 
+                  Puede volverse más espeso antes de la menstruación..<br>
+                  ✅ Blanco espeso y con picazón: Puede ser una infección por hongos (candidiasis).<br>
+                  ✅ Amarillo o verdoso con mal olor: Puede ser una infección bacteriana o de transmisión sexual.<br>
+                  ✅ Gris con olor fuerte (como a pescado): Puede ser vaginosis bacteriana y requiere tratamiento.<br>
+                  ✅ Rosado o marrón: Puede ser sangre vieja antes o después de la menstruación.</p>
+                
+                  <p><strong>🔹¿Cuándo preocuparse?</strong><br>
+                    Si notas cambios en el color, olor o textura del flujo, especialmente si hay picazón, 
+                    ardor o mal olor, es importante consultar a un médico.</p>
+                
+                  <p><strong>🔹Consejos para mantener un flujo saludable</strong><br>
+                  ✔️ Usa ropa interior de algodón y evita telas sintéticas..<br>
+                  ✔️ No uses duchas vaginales, pueden alterar el pH natural.<br>
+                  ✔️ Mantén una higiene adecuada con agua y jabón suave.<br>
+                  ✔️ Evita usar productos perfumados en la zona íntima.<br>
+                  </p>
+                </div>
+
+                <!-- parte final -->
+                <p class="contenido-panel-final">
+                El flujo vaginal es parte del cuerpo y cambia con el ciclo menstrual. 
+                Conócelo y presta atención a cualquier señal inusual. ✨ <br><br><br>
+                </p>
+              </div>
+            </ng-container>
+            
   
             <!-- 2do Carrusel - vertical  -->
             <div class="grupo-horizontal">
-              <div class="grupo-vertical">
+              <div class="grupo-vertical" *ngIf="!mostrarInfoFlujo">
                 <div class="carrusel vertical">
                   <div 
                     class="carrusel-inner-vertical" 
