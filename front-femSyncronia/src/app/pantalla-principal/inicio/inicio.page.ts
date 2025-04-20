@@ -56,6 +56,7 @@ export class InicioPage implements OnInit, AfterViewInit {
 
   // Propiedades para el carrusel
   mostrarInfoFlujo = false;
+  mostrarInfoEleccion = false; 
 
   constructor(
     private menuCtrl: MenuController,

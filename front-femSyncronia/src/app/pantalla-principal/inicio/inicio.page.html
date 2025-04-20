@@ -320,20 +320,22 @@
             </ion-avatar>
           </div>
 
-          <ion-text class="titulo-informacion" *ngIf="!mostrarInfoFlujo" >Novedades</ion-text>
+          <ion-text class="titulo-informacion" *ngIf="!mostrarInfoFlujo && !mostrarInfoEleccion" >Novedades</ion-text>
           <div class="contenedor-carruseles" >
-            
+
              <!-- 1ro carrusel - horizontal -->
-            <div class="carrusel" *ngIf="!mostrarInfoFlujo" >
+            <div class="carrusel" *ngIf="!mostrarInfoFlujo && !mostrarInfoEleccion" >
               <div 
                 class="carrusel-inner" 
                 [class.sin-transicion]="sinTransicion"
                 [style.transform]="'translateX(-' + slideVisual * 100 + '%)'">
                 <img [src]="imagenesCarrusel[imagenesCarrusel.length - 1]" />
                 <img 
-                  *ngFor="let img of imagenesCarrusel; let i = index" 
-                  [src]="img" 
-                  (click)="i === 0 ? mostrarInfoFlujo = true : null" />
+                *ngFor="let img of imagenesCarrusel; let i = index" 
+                [src]="img" 
+                (click)="
+                  i === 0 ? mostrarInfoFlujo = true : 
+                  i === 1 ? mostrarInfoEleccion = true : null" />
                 <img [src]="imagenesCarrusel[0]" />
               </div>
             
@@ -369,14 +371,14 @@
                 <!-- Imagen -->
                 <img src="assets/img/Informacion/I-1.svg" alt="Ilustración flujo vaginal" class="img-ilustrativa" />
 
-                <!-- Intro centrado -->
+                <!-- texto centrado -->
                 <p class="contenido-panel-centrado">
                   El flujo vaginal es algo completamente normal en el cuerpo de una mujer 
                   y tiene un papel importante en la limpieza y protección de la zona íntima. 
                   Aquí te dejamos algunos puntos clave para entenderlo mejor:
                 </p>
 
-                <!-- Lista informativa -->
+                <!-- texto de lado -->
                 <div class="contenido-panel-lado">
                   <p><strong>🔹¿Por qué es importante?</strong><br>
                     El flujo ayuda a mantener la vagina limpia, hidratada y protegida de infecciones. 
@@ -410,10 +412,70 @@
               </div>
             </ng-container>
             
+            <!-- Información 2: ¿Ya te bajo?-->
+            <ng-container *ngIf="mostrarInfoEleccion">
+              <div class="info-panel">
+                <!-- Botón de cerrar -->
+                <ion-button fill="clear" class="btn-cerrar" (click)="mostrarInfoEleccion = false">
+                  <ion-icon name="close-circle-outline"></ion-icon>
+                </ion-button>
+
+                <!-- título -->
+                <div class="contenedor-titulo">
+                  <ion-text class="titulo-panel">
+                    ¿Ya te bajó?<br>¡Bienvenida al club!
+                  </ion-text>
+                </div>
+
+                <!-- Imagen -->
+                <img src="assets/img/Informacion/I-2.svg" alt="Ilustración bienvenida" class="img-ilustrativa" />
+
+                <!-- texto centrado -->
+                <div class="contenido-panel-centrado">
+                  <p>La menstruación será tu nuevo compañero de vida por mucho tiempo, así que ve 
+                    tomando nota de lo que puedes hacer para sentirte más cómoda y cuidarte mejor:</p>
+
+                  <p><strong>✅ Usa la protección adecuada</strong><br>
+                  Hay toallas sanitarias, tampones y copas menstruales. 
+                  Prueba diferentes opciones hasta encontrar la que mejor se adapte a ti.</p>
+
+                  <p><strong>✅ Cambia tu protección a tiempo</strong><br>
+                  No importa qué uses, cámbiala cada 4 a 6 horas para evitar malos olores o infecciones.</p>
+
+                  <p><strong>✅ Lleva un kit menstrual contigo</strong><br>
+                    Siempre ten en tu bolso una toalla, tampones o lo que uses, 
+                    junto con toallitas húmedas y un cambio de ropa por si acaso.</p>
+
+                  <p><strong>✅ No ignores el dolor</strong><br>
+                    Si los cólicos son muy fuertes, prueba con una bolsa de agua caliente, 
+                    estiramientos suaves o un té relajante. Si el dolor es demasiado intenso, consulta con un médico.</p>
+
+                  <p><strong>✅ Hidrátate y come bien</strong><br>
+                  Beber suficiente agua y comer alimentos ricos en hierro 
+                  te ayudará a evitar el cansancio y sentirte mejor.</p>
+
+                  <p><strong>✅ No tengas vergüenza</strong><br>
+                    La menstruación es natural. No hay razón para sentirte incómoda al hablar de ella 
+                    o pedir ayuda si lo necesitas.</p>
+
+                  <p><strong>✅ Lleva un registro de tu ciclo</strong><br>
+                  Anota cuándo empieza y termina tu periodo cada mes. 
+                  Esto te ayudará a saber cuándo llegará el siguiente y si hay cambios en tu cuerpo.</p>
+                </div>
+
+                <!-- Cierre -->
+                <p class="contenido-panel-final">
+                  🌸 Tu periodo es parte de ti, <br> a conocerlo y llevarlo de la mejor manera. <br><br><br>
+                </p>
+              </div>
+            </ng-container>
+
+
+
   
             <!-- 2do Carrusel - vertical  -->
             <div class="grupo-horizontal">
-              <div class="grupo-vertical" *ngIf="!mostrarInfoFlujo">
+              <div class="grupo-vertical" *ngIf="!mostrarInfoFlujo && !mostrarInfoEleccion">
                 <div class="carrusel vertical">
                   <div 
                     class="carrusel-inner-vertical" 
