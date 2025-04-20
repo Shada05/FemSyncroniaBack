@@ -320,11 +320,13 @@
             </ion-avatar>
           </div>
 
-          <ion-text class="titulo-informacion" *ngIf="!mostrarInfoFlujo && !mostrarInfoEleccion" >Novedades</ion-text>
+          <ion-text class="titulo-informacion" 
+          *ngIf="!mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones" >Novedades</ion-text>
           <div class="contenedor-carruseles" >
 
              <!-- 1ro carrusel - horizontal -->
-            <div class="carrusel" *ngIf="!mostrarInfoFlujo && !mostrarInfoEleccion" >
+            <div class="carrusel" 
+            *ngIf="!mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones" >
               <div 
                 class="carrusel-inner" 
                 [class.sin-transicion]="sinTransicion"
@@ -335,7 +337,9 @@
                 [src]="img" 
                 (click)="
                   i === 0 ? mostrarInfoFlujo = true : 
-                  i === 1 ? mostrarInfoEleccion = true : null" />
+                  i === 1 ? mostrarInfoEleccion = true : 
+                  i === 2 ? mostrarInfoOpciones = true : null"
+                />
                 <img [src]="imagenesCarrusel[0]" />
               </div>
             
@@ -470,12 +474,70 @@
               </div>
             </ng-container>
 
+            <!-- Información 3: Opciones menstruales -->
+            <ng-container *ngIf="mostrarInfoOpciones">
+              <div class="info-panel">
+                <!-- Botón de cerrar -->
+                <ion-button fill="clear" class="btn-cerrar" (click)="mostrarInfoOpciones = false">
+                  <ion-icon name="close-circle-outline"></ion-icon>
+                </ion-button>
+
+                <!-- título -->
+                <div class="contenedor-titulo">
+                  <ion-text class="titulo-panel">
+                    ¿Sostenibilidad, <br>Comodidad o Practicidad?
+                  </ion-text>
+                </div>
+
+                <!-- Imagen -->
+                <img src="assets/img/Informacion/I-3.svg" alt="Ilustración opciones menstruales" class="img-ilustrativa" />
+
+                <!-- texto de lado -->
+                <div class="contenido-panel-lado">
+                  <p>Cada mujer tiene necesidades diferentes, y elegir el método adecuado para tu periodo 
+                    depende de tu comodidad, estilo de vida y preferencias. Aquí te damos una guía para ayudarte:</p>
+
+                  <p><strong>🔹 Toallas sanitarias</strong><br>
+                  ✔️ Son fáciles de usar y perfectas para quienes empiezan.<br>
+                  ✔️ No requieren inserción, solo se colocan en la ropa interior..<br>
+                  ✔️ Hay de distintos tamaños y niveles de absorción.<br>
+                  ❌ Pueden sentirse incómodas si usas ropa ajustada.<br>
+                  ❌ Si no se cambian a tiempo, pueden generar malos olores.</p>
+
+                  <p><strong>🔹 Tampones</strong><br>
+                  ✔️ Ideales si practicas deporte o nadas, ya que no se notan.<br>
+                  ✔️ Absorben el flujo desde dentro, evitando manchas.<br>
+                  ✔️ Hay de diferentes tamaños según tu flujo.<br>
+                  ❌ Requieren inserción y pueden ser incómodos al inicio.<br>
+                  ❌ Deben cambiarse cada 4-6 horas para evitar infecciones.</p>
+
+                  <p><strong>🔹 Copa menstrual</strong><br>
+                  ✔️ Es reutilizable y ecológica, te dura años.<br>
+                  ✔️ Se puede usar hasta por 12 horas sin cambiarla.<br>
+                  ✔️ No genera residuos ni malos olores.<br>
+                  ❌ Puede ser difícil de colocar y sacar al principio..<br>
+                  ❌ No a todas les resulta cómoda de inmediato.</p>
+
+                  <p><strong>💡 ¿Cuál elegir?</strong><br>
+                  👉 Si buscas algo fácil y sin complicaciones, prueba las toallas.<br>
+                  👉 Si quieres más libertad de movimiento, los tampones pueden ser una buena opción.<br>
+                  👉 Si te interesa algo duradero y ecológico, la copa menstrual es ideal.</p>
+                </div>
+
+                <!-- Cierre -->
+                <p class="contenido-panel-final">
+                  ✨ No hay una opción perfecta, solo la que mejor se adapte a ti.<br>
+                  ¡Prueba y descubre cuál te funciona mejor!<br><br><br>
+                </p>
+              </div>
+            </ng-container>
 
 
   
             <!-- 2do Carrusel - vertical  -->
             <div class="grupo-horizontal">
-              <div class="grupo-vertical" *ngIf="!mostrarInfoFlujo && !mostrarInfoEleccion">
+              <div class="grupo-vertical" 
+              *ngIf="!mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones">
                 <div class="carrusel vertical">
                   <div 
                     class="carrusel-inner-vertical" 
