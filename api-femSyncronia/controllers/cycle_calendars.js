@@ -2,7 +2,7 @@ const cycle_calendars  = require('../models').cycle_calendars;
 
 exports.store = async (req, res) => {
     const cycle_calendar = {
-        
+        user_id:req.body.user_id,
         cycle_status: req.body.cycle_status,
         Start_day: req.body.Start_day,
         Finish_day: req.body.Finish_day,
