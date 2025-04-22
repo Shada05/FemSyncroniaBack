@@ -211,6 +211,17 @@ export class InicioPage implements OnInit {
     this.diaActual = event.diaActual;
     this.indice = event.indice;
 
+      // Solo actualizar indiceCiclo si el día seleccionado es HOY
+    const hoy = new Date();
+    const esHoy =
+    event.diaActual === hoy.getDate() &&
+    this.mesActual === hoy.getMonth() &&
+    this.anoActual === hoy.getFullYear();
+    
+    if (esHoy) {
+      this.indiceCiclo = event.indice;
+    }
+
     this.fechaActual = new Date(this.anoActual, this.mesActual, this.diaActual);
   }
 
@@ -321,41 +332,64 @@ export class InicioPage implements OnInit {
   }
 
   duracionCiclo: number = 28;
-
-  getColorPeriodo(): string {
-    if (this.indice >= 1 && this.indice <= 6) {
-      return '#FFB7BF'; // En periodo
-    } else if (this.indice > 5 && this.indice <= this.duracionCiclo) {
-      return '#FFCBD1'; // Días previos al próximo periodo
-    }
-    return 'transparent'; // Fuera de rango o sin datos
-  }
-  
-  getTituloPeriodo(): string {
-    return this.estaEnPeriodo() ? 'Día' : 'Faltan';
-  }
-  
-  getSubtituloPeriodo(): string {
-    return this.estaEnPeriodo() ? 'día de tu periodo' : 'días para tu periodo';
-  }
-  
-  getNumeroPeriodo(): number {
-    return this.estaEnPeriodo() ? this.indice : this.diasParaInicioPeriodo;
-  }
+  indiceCiclo: number = 0; // Nuevo nombre
   
   estaEnPeriodo(): boolean {
-    return this.indice >= 1 && this.indice <= 6;
+    return this.indiceCiclo >= 1 && this.indiceCiclo <= 5;
+  }
+  
+  estaEnDiaFertil(): boolean {
+    return (this.indiceCiclo >= 9 && this.indiceCiclo <= 15) && this.indiceCiclo !== 14;
+  }
+  
+  esDiaMasFertil(): boolean {
+    return this.indiceCiclo === 14;
   }
   
   get diasParaInicioPeriodo(): number {
-    const diasRestantes = this.duracionCiclo - this.indice;
+    if (this.estaEnPeriodo()) return 0;
+    return this.duracionCiclo - this.indiceCiclo + 1;
+  }
   
-    // Si estás fuera del periodo, sumamos 1 porque mañana sería el día 1 del próximo ciclo
-    if (!this.estaEnPeriodo()) {
-      return diasRestantes + 1;
+  get diasParaDiaFertil(): number {
+    if (this.indiceCiclo < 14) {
+      return 14 - this.indiceCiclo;
     }
-  
     return 0;
   }
   
+  getColorPeriodo(): string {
+    if (this.estaEnPeriodo()) return '#FFB7BF';
+    if (this.esDiaMasFertil()) return '#FDD5AF';
+    if (this.estaEnDiaFertil()) return '#DFFDAF';
+    if (this.indiceCiclo < this.duracionCiclo) return '#FFCBD1';
+    return 'transparent';
+  }
+  
+  getTituloPeriodo(): string {
+    if (this.estaEnPeriodo() || this.esDiaMasFertil() || this.estaEnDiaFertil()) return 'Día';
+    return 'Faltan';
+  }
+  
+  getSubtituloPeriodo(): string {
+    if (this.estaEnPeriodo()) return 'día de tu periodo';
+    if (this.esDiaMasFertil()) return 'hoy es tu día más fértil';
+    if (this.estaEnDiaFertil()) {
+      const plural = this.diasParaDiaFertil === 1 ? 'día' : 'días';
+      return `${this.diasParaDiaFertil} ${plural} para tu día más fértil`;
+    }
+    return 'días para tu periodo';
+  }
+  
+  getNumeroPeriodo(): number {
+    if (this.estaEnPeriodo() || this.esDiaMasFertil()) return this.indiceCiclo;
+    if (this.estaEnDiaFertil()) return this.diasParaDiaFertil;
+    return this.diasParaInicioPeriodo;
+  }
+  
+  getProbabilidadEmbarazo(): string {
+    if (this.esDiaMasFertil()) return 'Alta probabilidad de quedar embarazada';
+    if (this.estaEnDiaFertil()) return 'Media probabilidad de quedar embarazada';
+    return 'Baja probabilidad de quedar embarazada';
+  } 
 }
