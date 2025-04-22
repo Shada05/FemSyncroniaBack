@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
+import { ChangeDetectorRef } from '@angular/core';
 
 interface Sintoma {
   id: number; // ID del síntoma
@@ -41,7 +42,7 @@ export class InicioPage implements OnInit {
   fechaActual: Date = new Date();
 
   // Propiedades para el ciclo menstrual
-  fechaInicio = new Date(2025, 2, 28); 
+  fechaInicio= new Date(2025, 2, 28); 
   fechaFin = new Date(2025, 3, 24);
 
   // Propiedades para las etiquetas
@@ -51,11 +52,14 @@ export class InicioPage implements OnInit {
   // Propiedades para los síntomas
   sintomasCalificados: any[] = [];
 
+  fechasCargadas: boolean = false;
+
   constructor(
     private menuCtrl: MenuController,
     private apiService: ApiService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
   mostrarComponente(componente: string) {
     this.componenteActivo = componente;
@@ -74,9 +78,11 @@ export class InicioPage implements OnInit {
   }
 
   ngOnInit() {
+
     console.log(this.sintomasCalificados.length)
     this.cargarUsuario(); // Llama a la función para cargar los datos del usuario
     this.actualizarMes(this.fechaActual); // Inicializa el mes y año con la fecha actual
+    this.cargarFechasDelCicloActual();
     setInterval(() => {
       this.obtenerSintomasCalificados();
     }, 86400000); // 24 horas en milisegundos
@@ -91,6 +97,7 @@ export class InicioPage implements OnInit {
           this.userId = response.user.id; // Obtiene el ID del usuario desde el token
           console.log('ID obtenido del token:', this.userId);
 
+          this.cargarFechasDelCicloActual();
           // Llama a la API para obtener los datos del usuario
           if (this.userId) {
             this.apiService.mostrarUsuario(this.userId).subscribe({
@@ -261,15 +268,8 @@ export class InicioPage implements OnInit {
       this.limpiarEstado();
 
       // 4. Redirigir al login con navegación completa
-      this.router
-        .navigate(['/login'], {
-          replaceUrl: true, // Reemplaza la URL actual en el historial
-          queryParamsHandling: 'preserve', // Opcional: mantener parámetros si es necesario
-        })
-        .then(() => {
-          // 5. Forzar recarga completa de la aplicación
-          window.location.reload();
-        });
+      this.router.navigateByUrl('/login', { replaceUrl: true });
+
     } catch (error) {
       console.error('Error durante el logout:', error);
     }
@@ -330,6 +330,39 @@ export class InicioPage implements OnInit {
     ];
     return nombresMeses[mes];
   }
+
+  async cargarFechasDelCicloActual() {
+  if (!this.userId) return;
+
+  try {
+    const ciclos = await lastValueFrom(this.apiService.mostrarCicloCalendario(this.userId));
+
+    const hoy = new Date();
+
+    for (const ciclo of ciclos) {
+      const inicio = new Date(ciclo.Start_day);
+      const fin = new Date(ciclo.Finish_day);
+
+      if (hoy >= inicio && hoy <= fin) {
+        this.fechaInicio = inicio;
+        this.fechaFin = fin;
+
+        console.log('Fecha de inicio del ciclo:', this.fechaInicio);
+        console.log('Fecha de fin del ciclo:', this.fechaFin);
+        
+        this.cdr.detectChanges();
+        return;
+      }
+    }
+
+    
+    console.warn('No se encontró un ciclo activo para la fecha actual.');
+  } catch (error) {
+    console.error('Error al obtener fechas del ciclo:', error);
+  }finally{
+    this.fechasCargadas = true;
+  }
+}
 
   duracionCiclo: number = 28;
   indiceCiclo: number = 0; // Nuevo nombre

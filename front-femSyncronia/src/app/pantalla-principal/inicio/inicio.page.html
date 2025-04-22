@@ -59,15 +59,24 @@
           </div>
 
           <!-- Contenedor periodo -->
-          <div class="info-periodo" [ngStyle]="{ 'background': getColorPeriodo() }">
-            <ion-text class="info-text titulo">{{ getTituloPeriodo() }}</ion-text>
-            <ion-text class="numero">{{ getNumeroPeriodo() }}</ion-text>
-            <ion-text class="info-text subtitulo">{{ getSubtituloPeriodo() }}</ion-text>
-            <div class="linea-horizontal"></div>
-            <ion-text class="info-text observacion">{{ getProbabilidadEmbarazo() }}</ion-text>
-            <ion-button class="boton-informacion">Registrar</ion-button>
-          </div>                 
+          <ng-container *ngIf="fechasCargadas; else spinnerPeriodo">
+            <div class="info-periodo" [ngStyle]="{ 'background': getColorPeriodo() }">
+              <ion-text class="info-text titulo">{{ getTituloPeriodo() }}</ion-text>
+              <ion-text class="numero">{{ getNumeroPeriodo() }}</ion-text>
+              <ion-text class="info-text subtitulo">{{ getSubtituloPeriodo() }}</ion-text>
+              <div class="linea-horizontal"></div>
+              <ion-text class="info-text observacion">{{ getProbabilidadEmbarazo() }}</ion-text>
+              <ion-button class="boton-informacion">Registrar</ion-button>
+            </div>
+          </ng-container>
 
+          <!-- Spinner mientras se cargan fechas -->
+          <ng-template #spinnerPeriodo>
+            <div class="info-periodo spinner-periodo">
+              <ion-spinner name="crescent" color="medium"></ion-spinner>
+            </div>
+          </ng-template>
+              
           <!-- Contenedor síntomas -->
           <div class="info-sintomas">
             <ion-text class="titulo-sintomas">Posibles síntomas</ion-text>
@@ -107,7 +116,7 @@
 
           <!-- Componente del calendario -->
           <app-calendario-ciclo [mesActual]="mesActual" [anoActual]="anoActual" [fechaInicio]="fechaInicio"
-            [fechaFin]="fechaFin" (diaSeleccionado)="actualizarDiaSeleccionado($event)">
+            [fechaFin]="fechaFin" [userId]="userId" (diaSeleccionado)="actualizarDiaSeleccionado($event)">
           </app-calendario-ciclo>
 
           <!-- Contenedor de información del día -->

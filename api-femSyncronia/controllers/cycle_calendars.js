@@ -1,4 +1,5 @@
 const cycle_calendars  = require('../models').cycle_calendars;
+const { spawn } = require('child_process'); // Importar el módulo child_process
 
 exports.store = async (req, res) => {
     const cycle_calendar = {
@@ -107,7 +108,7 @@ exports.show_userid = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        return res.status(500).send({ message: 'Internal server error' });
+        return res.status(500).send({ message: 'Internal server error', error: error.message  });
     }
 };
 exports.update = async (req, res) => {

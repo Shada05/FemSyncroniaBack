@@ -711,3 +711,10 @@ app-grafica {
   width: 100%;
   height: 100%;
 }
+
+.spinner-periodo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
