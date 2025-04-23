@@ -140,20 +140,29 @@
                 <div class="linea-divisora"></div>
                 <span class="texto-derecha">Información</span>
               </div>
+              <div class="contenedor-item" data-tipo="sintomas">
+                <span class="item-texto">Síntomas</span>
+                <div class="linea-divisora"></div>
+                <div class="contenedor-sintomas">
+                  <div class="lista-sintomas" *ngIf="sintomasCalificados.length > 0">
+                    <div class="sintoma-item" *ngFor="let sintoma of sintomasCalificados">
+                      <span>{{ sintoma.nombre }}</span>
+                    </div>
+                  </div>
+                  <div class="sin-sintomas" *ngIf="sintomasCalificados.length === 0">
+                    No hay síntomas hoy
+                  </div>
+                </div>
+              </div>
               <div class="contenedor-item" data-tipo="peso">
                 <span class="item-texto">Peso</span>
                 <div class="linea-divisora"></div>
-                <span class="texto-derecha">70kg</span>
+                <span class="texto-derecha">74.00 kg</span>
               </div>
               <div class="contenedor-item" data-tipo="temp">
                 <span class="item-texto">Temp</span>
                 <div class="linea-divisora"></div>
                 <span class="texto-derecha">36.5°C</span>
-              </div>
-              <div class="contenedor-item" data-tipo="otro">
-                <span class="item-texto">Otro</span>
-                <div class="linea-divisora"></div>
-                <span class="texto-derecha">Ejemplo</span>
               </div>
             </div>
           </div>

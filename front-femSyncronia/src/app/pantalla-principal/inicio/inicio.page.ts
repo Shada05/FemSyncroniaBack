@@ -214,22 +214,100 @@ export class InicioPage implements OnInit {
   }
 
   // Actualizar el día y el índice cuando se selecciona un día del calendario
-  actualizarDiaSeleccionado(event: { diaActual: number; indice: number }) {
+  async actualizarDiaSeleccionado(event: { diaActual: number; indice: number }) {
     this.diaActual = event.diaActual;
     this.indice = event.indice;
-
-      // Solo actualizar indiceCiclo si el día seleccionado es HOY
+    this.fechaActual = new Date(this.anoActual, this.mesActual, this.diaActual);
+  
+    // Actualizar síntomas para el día seleccionado
+    await this.obtenerSintomasParaDiaSeleccionado();
+  
+    // Solo actualizar indiceCiclo si el día seleccionado es HOY
     const hoy = new Date();
     const esHoy =
-    event.diaActual === hoy.getDate() &&
-    this.mesActual === hoy.getMonth() &&
-    this.anoActual === hoy.getFullYear();
+      event.diaActual === hoy.getDate() &&
+      this.mesActual === hoy.getMonth() &&
+      this.anoActual === hoy.getFullYear();
     
     if (esHoy) {
       this.indiceCiclo = event.indice;
     }
-
-    this.fechaActual = new Date(this.anoActual, this.mesActual, this.diaActual);
+  }
+  
+  // Nueva función para obtener síntomas del día seleccionado
+  async obtenerSintomasParaDiaSeleccionado() {
+    if (!this.userId) {
+      console.error('Error: No se puede obtener síntomas sin un ID de usuario.');
+      return;
+    }
+  
+    try {
+      // Obtener los síntomas disponibles
+      const sintomasDisponibles = await lastValueFrom(
+        this.apiService.obtenerSintomas()
+      );
+  
+      // Obtener todos los ciclos del usuario
+      const ciclosUsuario = await lastValueFrom(
+        this.apiService.mostrarCiclo(this.userId)
+      );
+  
+      // Formatear fecha seleccionada como YYYY-MM-DD para comparación
+      const fechaSeleccionada = new Date(this.anoActual, this.mesActual, this.diaActual);
+      const fechaFormateada = `${fechaSeleccionada.getFullYear()}-${(fechaSeleccionada.getMonth() + 1)
+        .toString()
+        .padStart(2, '0')}-${fechaSeleccionada.getDate().toString().padStart(2, '0')}`;
+  
+      // Buscar el ciclo que coincide con la fecha seleccionada
+      const cicloDelDia = ciclosUsuario.find((ciclo: any) => {
+        if (!ciclo.date) return false;
+        return ciclo.date.split('T')[0] === fechaFormateada;
+      });
+  
+      if (!cicloDelDia) {
+        console.log('No se encontró registro para la fecha seleccionada');
+        this.sintomasCalificados = [];
+        return;
+      }
+  
+      // Crear un contador para asignar IDs secuenciales
+      let idSecuencial = 1;
+  
+      // Filtrar los síntomas calificados del ciclo del día seleccionado
+      this.sintomasCalificados = Object.keys(cicloDelDia)
+        .filter(
+          (key) =>
+            key.startsWith('DM_') ||
+            key.startsWith('M_') ||
+            key.startsWith('PP_') ||
+            key.startsWith('E_') ||
+            key.startsWith('F_') ||
+            key.startsWith('AS_')
+        )
+        .map((key) => {
+          const intensidad = cicloDelDia[key];
+          const sintomaInfo = sintomasDisponibles.find(
+            (s: Sintoma) => s.id === idSecuencial
+          );
+  
+          const sintomaCalificado = {
+            id: idSecuencial,
+            nombre: sintomaInfo ? sintomaInfo.name : `Síntoma ${idSecuencial}`,
+            intensidad: intensidad,
+            icono: sintomaInfo ? sintomaInfo.image : null,
+            nombreCampo: key,
+          };
+  
+          idSecuencial++;
+          return sintomaCalificado;
+        })
+        .filter((sintoma) => sintoma.intensidad > 0);
+  
+      console.log('Síntomas calificados para el día seleccionado:', this.sintomasCalificados);
+    } catch (error) {
+      console.error('Error al obtener los síntomas para el día seleccionado:', error);
+      this.sintomasCalificados = [];
+    }
   }
 
   /**

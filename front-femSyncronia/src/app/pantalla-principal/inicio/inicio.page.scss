@@ -393,25 +393,27 @@ ion-button {
 
 .contenedor-item {
   display: flex;
-  align-items: center;
-  justify-content: space-between; /* Alinea los elementos uniformemente */
+  align-items: flex-start; /* Cambiado a flex-start para mejor alineación */
+  justify-content: space-between;
   padding: 8px 0;
   position: relative;
+  min-height: 24px; /* Altura mínima para items normales */
 }
 
-/* Texto izquierdo */
+/* Ajusta el texto izquierdo */
 .item-texto {
   font-size: 16px;
   color: #333;
-  flex: 1; /* Que ocupe el espacio necesario */
+  flex: 0 0 80px;
   text-align: left;
+  padding-right: 4px; /* Reduce el padding derecho */
 }
 
 /* Línea divisora */
 .linea-divisora {
-  width: 2px;
+  width: 3px;
   height: 24px;
-  margin: 0 10px; /* Espaciado entre texto e línea */
+  margin: 0 4px; /* Reduce el margen horizontal de 10px a 4px */
   align-self: center;
 }
 
@@ -428,15 +430,64 @@ ion-button {
   background-color: #c5e1a5;
 }
 
-.contenedor-item[data-tipo="peso"] .linea-divisora {
+.contenedor-item[data-tipo="sintomas"] .linea-divisora {
   background-color: #ffb3c9;
 }
 
-.contenedor-item[data-tipo="temp"] .linea-divisora {
+/* Específicamente para el contenedor de síntomas */
+.contenedor-item[data-tipo="sintomas"] {
+  min-height: 75px; /* Igual que el max-height de lista-sintomas */
+  align-items: stretch; /* Hace que todos los hijos se estiren verticalmente */
+
+  .linea-divisora {
+    height: auto; /* Altura automática basada en el contenedor padre */
+    align-self: stretch; /* Ocupa toda la altura disponible */
+    margin: 0 4px;
+  }
+
+  .contenedor-sintomas {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 75px; /* Asegura altura mínima */
+  }
+
+  .lista-sintomas {
+    flex: 1;
+    max-height: 75px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+/* Ajustar el ancho del texto derecho para los síntomas */
+.contenedor-item[data-tipo="sintomas"] .texto-derecha {
+  display: none; /* Ocultamos el span vacío ya que usamos nuestro propio contenedor */
+}
+
+/* Estilos para síntomas */
+.sintoma-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #333;
+}
+
+.sin-sintomas {
+  font-size: 14px;
+  color: #999;
+  text-align: left;
+  padding-left: 6px;
+}
+
+.contenedor-item[data-tipo="peso"] .linea-divisora {
   background-color: #d5b3ff;
 }
 
-.contenedor-item[data-tipo="otro"] .linea-divisora {
+.contenedor-item[data-tipo="temp"] .linea-divisora {
   background-color: #ffd9b3;
 }
 
