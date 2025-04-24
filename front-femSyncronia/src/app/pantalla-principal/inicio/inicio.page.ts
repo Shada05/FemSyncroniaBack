@@ -21,7 +21,7 @@ interface Sintoma {
   templateUrl: './inicio.page.html',
   styleUrls: ['./inicio.page.scss'],
 })
-export class InicioPage implements OnInit, AfterViewInit {
+export class InicioPage implements OnInit {
   misLabelsY: string[] = [
     '35°C',
     '36°C',
@@ -54,10 +54,6 @@ export class InicioPage implements OnInit, AfterViewInit {
   // Propiedades para los síntomas
   sintomasCalificados: any[] = [];
 
-  // Propiedades para el carrusel
-  mostrarInfoFlujo = false;
-  mostrarInfoEleccion = false; 
-  mostrarInfoOpciones = false;
 
 
   constructor(
@@ -82,107 +78,6 @@ export class InicioPage implements OnInit, AfterViewInit {
     return `${año}-${mes}-${dia}`;
   }
 
-  imagenesCarrusel: string[] = [
-    'assets/img/1ro-carrusel/flujo.svg',
-    'assets/img/1ro-carrusel/periodo.svg',
-    'assets/img/1ro-carrusel/versus.svg'
-  ];
-  
-  slideVisual = 1;
-  sinTransicion = false;
-  intervalo: any;
-
-  imagenesCarrusel2: string[] = [
-    'assets/img/2do-carrusel/anticonceptivos.svg',
-    'assets/img/2do-carrusel/chequeo.svg',
-    'assets/img/2do-carrusel/maternidad.svg'
-  ];
-  
-  slideVisual2 = 1;
-  sinTransicion2 = false;
-  intervalo2: any;
-
-  
-  ngAfterViewInit(): void {
-    this.iniciarCarrusel();
-    this.iniciarCarrusel2();
-  }
-  
-  iniciarCarrusel() {
-    this.intervalo = setInterval(() => {
-      this.irASiguienteSlide();
-    }, 5000);
-  }
-  
-  irASiguienteSlide() {
-    if (this.slideVisual < this.imagenesCarrusel.length) {
-      this.slideVisual++;
-    } else {
-      this.slideVisual++;
-      setTimeout(() => {
-        this.sinTransicion = true;
-        this.slideVisual = 1;
-        setTimeout(() => this.sinTransicion = false, 50);
-      }, 5000);
-    }
-  }
-  
-  irAnteriorSlide() {
-    if (this.slideVisual > 1) {
-      this.slideVisual--;
-    } else {
-      this.slideVisual = 0; // ir al clon del último
-      setTimeout(() => {
-        this.sinTransicion = true;
-        this.slideVisual = this.imagenesCarrusel.length; // última real
-        setTimeout(() => this.sinTransicion = false, 50);
-      }, 5000); 
-    }
-  }
-  
-  
-  irASlide(index: number) {
-    this.slideVisual = index + 1;
-  }
-  
-  iniciarCarrusel2() {
-    this.intervalo2 = setInterval(() => {
-      this.irASiguienteSlide2();
-    }, 5000);
-  }
-  
-  irASiguienteSlide2() {
-    if (this.slideVisual2 < this.imagenesCarrusel2.length) {
-      this.slideVisual2++;
-    } else {
-      this.slideVisual2++;
-      setTimeout(() => {
-        this.sinTransicion2 = true;
-        this.slideVisual2 = 1;
-        setTimeout(() => this.sinTransicion2 = false, 50);
-      }, 5000);
-    }
-  }
-  
-  irAnteriorSlide2() {
-    if (this.slideVisual2 > 1) {
-      this.slideVisual2--;
-    } else {
-      this.slideVisual2 = 0;
-      setTimeout(() => {
-        this.sinTransicion2 = true;
-        this.slideVisual2 = this.imagenesCarrusel2.length;
-        setTimeout(() => this.sinTransicion2 = false, 50);
-      }, 5000);
-    }
-  }
-  
-  irASlide2(index: number) {
-    this.slideVisual2 = index + 1;
-  }
-  
-  
-  
   
   ngOnInit() {
     this.cargarUsuario(); // Llama a la función para cargar los datos del usuario
