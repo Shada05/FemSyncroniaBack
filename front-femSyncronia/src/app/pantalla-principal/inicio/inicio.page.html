@@ -79,10 +79,10 @@
               
           <!-- Contenedor síntomas -->
           <div class="info-sintomas">
-            <ion-text class="titulo-sintomas">Posibles síntomas</ion-text>
+            <ion-text class="titulo-sintomas">Síntomas de hoy</ion-text>
             <div class="contenedor-lista-sintomas">
-              <ion-text style="color: black;" *ngIf="sintomasCalificados.length === 0">No hay síntomas calificados.</ion-text>
-              <div *ngFor="let sintoma of sintomasCalificados" class="sintoma-item">
+              <ion-text style="color: black;" *ngIf="sintomasHoy.length === 0">No hay síntomas calificados hoy.</ion-text>
+              <div *ngFor="let sintoma of sintomasHoy" class="sintoma-item">
                 <img [src]="sintoma.icono" alt="{{ sintoma.nombre }}" class="sintoma-icono" *ngIf="sintoma.icono">
                 <ion-text>{{ sintoma.nombre }}</ion-text>
               </div>
@@ -144,12 +144,12 @@
                 <span class="item-texto">Síntomas</span>
                 <div class="linea-divisora"></div>
                 <div class="contenedor-sintomas">
-                  <div class="lista-sintomas" *ngIf="sintomasCalificados.length > 0">
-                    <div class="sintoma-item" *ngFor="let sintoma of sintomasCalificados">
+                  <div class="lista-sintomas" *ngIf="sintomasDiaSeleccionado.length > 0">
+                    <div class="sintoma-item" *ngFor="let sintoma of sintomasDiaSeleccionado">
                       <span>{{ sintoma.nombre }}</span>
                     </div>
                   </div>
-                  <div class="sin-sintomas" *ngIf="sintomasCalificados.length === 0">
+                  <div class="sin-sintomas" *ngIf="sintomasDiaSeleccionado.length === 0">
                     No hay síntomas hoy
                   </div>
                 </div>
