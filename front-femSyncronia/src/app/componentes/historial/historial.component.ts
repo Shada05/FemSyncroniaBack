@@ -17,16 +17,6 @@ export class HistorialComponent {
     { titulo: 'Registro peso', fecha: '18 abr' },
     { titulo: 'Registro de temperatura', fecha: '5 abr' },
     { titulo: 'Configuraciones', fecha: '25 dic 2024' },
-    { titulo: 'Configuraciones', fecha: '25 dic 2024' },
-    { titulo: 'Configuraciones', fecha: '25 dic 2024' },
-    { titulo: 'Configuraciones', fecha: '25 dic 2024' },
-    { titulo: 'Configuraciones', fecha: '25 dic 2024' },
-    { titulo: 'Configuraciones', fecha: '25 dic 2024' },
-    { titulo: 'Configuraciones', fecha: '25 dic 2024' },
-    { titulo: 'Configuraciones', fecha: '25 dic 2024' },
-    { titulo: 'Configuraciones', fecha: '25 dic 2024' },
-    { titulo: 'Configuraciones', fecha: '25 dic 2024' },
-    { titulo: 'Configuraciones', fecha: '25 dic 2024' },
   ];
 
   // Función para cerrar
