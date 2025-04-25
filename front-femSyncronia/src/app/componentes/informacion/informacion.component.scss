@@ -1,3 +1,8 @@
+.contenedor-principal {
+  width: 90%;
+  margin: 0 auto; // centrado horizontal
+}
+
 .titulo-informacion {
   display: block;
   color: black;
@@ -251,6 +256,32 @@
       font-size: 1rem;
       font-weight: 500;
       line-height: 1.2; 
+    }
+  }
+  
+
+  .galeria-horizontal {
+    width: 90%;
+    margin: 16px auto;
+  
+    .contenedor-galeria {
+      display: flex;
+      overflow-x: auto;
+      gap: 12px;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 8px;
+  
+      &::-webkit-scrollbar {
+        display: none; // quita la barra fea
+      }
+  
+      .img-galeria {
+        flex: 0 0 auto;
+        width: 150px;
+        height: auto;
+        scroll-snap-align: start;
+        border-radius: 12px;
+      }
     }
   }
   

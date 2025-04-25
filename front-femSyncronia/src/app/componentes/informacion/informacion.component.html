@@ -1,46 +1,58 @@
-<!-- info.component.html -->
-<div class="carrusel horizontal" *ngIf="!selectedCuidado && !mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones" >
-  <ion-text class="titulo-informacion">Novedades</ion-text>
-  <div 
-    class="carrusel-inner" 
-    [class.sin-transicion]="sinTransicion"
-    [style.transform]="'translateX(-' + slideVisual * 100 + '%)'">
-    <img [src]="imagenesCarrusel[imagenesCarrusel.length - 1]" />
-    <img 
-    *ngFor="let img of imagenesCarrusel; let i = index" 
-    [src]="img" 
-    (click)="
-      i === 0 ? mostrarInfoFlujo = true : 
-      i === 1 ? mostrarInfoEleccion = true : 
-      i === 2 ? mostrarInfoOpciones = true : null"
-    />
-    <img [src]="imagenesCarrusel[0]" />
-  </div>
+<div class = "contenedor-principal">
 
-  <button class="carrusel-btn izquierda" (click)="irAnteriorSlide()">‹</button>
-  <button class="carrusel-btn derecha" (click)="irASiguienteSlide()">›</button>
-
-  <div class="carrusel-puntos">
-    <span 
-      *ngFor="let img of imagenesCarrusel; let i = index"
-      [class.activo]="slideVisual === i + 1 || 
-                      (slideVisual === 0 && i === imagenesCarrusel.length - 1) || 
-                      (slideVisual === imagenesCarrusel.length + 1 && i === 0)"
-      (click)="irASlide(i)">
-    </span>
-  </div>
-</div>
-
-
-<div class="bloque-cuidados" *ngIf="!selectedCuidado && !mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones">
-  <ion-text class="titulo-informacion">Cuidados del día a día</ion-text>
-    <div class="cuidados-grid">
-      <div class="cuadro" *ngFor="let item of cuidados" (click)="mostrarCuidado(item.titulo)">
-        <img [src]="item.img" [alt]="item.titulo" />
-        <p>{{ item.titulo }}</p>
-      </div>
-      <br><br><br>
+  <!-- 1ro parte: Carrusel -->
+  <div class="carrusel horizontal" *ngIf="!selectedCuidado && !mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones" >
+    <ion-text class="titulo-informacion">Novedades</ion-text>
+    <div 
+      class="carrusel-inner" 
+      [class.sin-transicion]="sinTransicion"
+      [style.transform]="'translateX(-' + slideVisual * 100 + '%)'">
+      <img [src]="imagenesCarrusel[imagenesCarrusel.length - 1]" />
+      <img 
+      *ngFor="let img of imagenesCarrusel; let i = index" 
+      [src]="img" 
+      (click)="
+        i === 0 ? mostrarInfoFlujo = true : 
+        i === 1 ? mostrarInfoEleccion = true : 
+        i === 2 ? mostrarInfoOpciones = true : null"
+      />
+      <img [src]="imagenesCarrusel[0]" />
     </div>
+
+    <button class="carrusel-btn izquierda" (click)="irAnteriorSlide()">‹</button>
+    <button class="carrusel-btn derecha" (click)="irASiguienteSlide()">›</button>
+
+    <div class="carrusel-puntos">
+      <span 
+        *ngFor="let img of imagenesCarrusel; let i = index"
+        [class.activo]="slideVisual === i + 1 || 
+                        (slideVisual === 0 && i === imagenesCarrusel.length - 1) || 
+                        (slideVisual === imagenesCarrusel.length + 1 && i === 0)"
+        (click)="irASlide(i)">
+      </span>
+    </div>
+  </div>
+
+  <!-- 2do parte: Seleccion -->
+  <div class="galeria-horizontal" *ngIf="!selectedCuidado && !mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones">
+    <ion-text class="titulo-informacion">Recomendaciones para ti</ion-text>
+    <div class="contenedor-galeria">
+      <img *ngFor="let img of imagenesGaleria" [src]="img.src" [alt]="img.alt" class="img-galeria" />
+    </div>
+  </div>
+
+
+  <!-- 3ro parte: Tabla -->
+  <div class="bloque-cuidados" *ngIf="!selectedCuidado && !mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones">
+    <ion-text class="titulo-informacion">Cuidados del día a día</ion-text>
+      <div class="cuidados-grid">
+        <div class="cuadro" *ngFor="let item of cuidados" (click)="mostrarCuidado(item.titulo)">
+          <img [src]="item.img" [alt]="item.titulo" />
+          <p>{{ item.titulo }}</p>
+        </div>
+        <br><br><br>
+      </div>
+  </div>
 </div>
 
 

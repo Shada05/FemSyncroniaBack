@@ -89,6 +89,15 @@ cuidados = [
   ocultarPantalla() {
     this.selectedCuidado = null;
   }
+
+  imagenesGaleria = [
+    { src: 'assets/img/recomendaciones/anticonceptivos.svg', alt: 'Anticonceptivos' },
+    { src: 'assets/img/recomendaciones/chequeo.svg', alt: 'Chequeo' },
+    { src: 'assets/img/recomendaciones/maternidad.svg', alt: 'Maternidad' },
+    { src: 'assets/img/recomendaciones/spotify.svg', alt: 'Spotify' },
+    { src: 'assets/img/recomendaciones/calificanos.svg', alt: 'Califícanos' },
+  ];
+  
   
 
   constructor() { }
