@@ -1,0 +1,219 @@
+ion-text.titulo-informacion {
+  display: block;
+  color: black;
+  font-family: "Open Sans";
+  text-align: left;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 auto 8px auto; // margen inferior opcional
+  width: 100%; // para que se centre aunque esté dentro del carrusel
+}
+
+.carrusel.horizontal {
+    text-align: center;
+    width: 90%;
+    margin: 16px auto;
+    overflow: hidden;
+    position: relative;
+  
+    .carrusel-inner {
+      display: flex;
+      transition: transform 1.2s ease-in-out;
+  
+      img {
+        width: 100%;
+        border-radius: 12px;
+        flex-shrink: 0;
+      }
+    }
+  
+    // Botones flotantes (izquierda y derecha)
+    .carrusel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 255, 255, 0);
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 26px;
+      color: #ffffff;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      &:hover {
+        background-color: #fce4ec00;
+      }
+  
+      &.izquierda {
+        left: 3px;
+      }
+  
+      &.derecha {
+        right: 3px;
+      }
+    }
+  
+    .carrusel-puntos {
+      display: flex;
+      justify-content: center;
+      margin-top: 8px;
+  
+      span {
+        width: 10px;
+        height: 10px;
+        margin: 0 4px;
+        background-color: #ccc;
+        border-radius: 50%;
+        display: inline-block;
+        cursor: pointer;
+  
+        &.activo {
+          background-color: #f47191; 
+        }
+      }
+    }
+    .sin-transicion {
+      transition: none !important;
+    }  
+  }
+  
+  
+  .grupo-horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 0 16px;
+  }
+
+  // Contenedor de la información
+.info-panel {
+  position: absolute; // superpuesto sobre el contenido
+  top:80px; // deja espacio para la top-bar
+  left: 20px;
+  right: 20px;
+  width: auto; // ancho automático limitado por los márgenes
+  background-color: #ffd3d800; // transparente con tinte rosado
+  z-index: 9999; // encima de todo
+  padding: 16px 20px; // espacio interno
+  overflow-y: auto; // scroll vertical si el contenido es largo
+  transition: transform 0.3s ease; // animación al cerrar
+  
+  .btn-cerrar {
+    position: absolute;
+    top:-4px;
+    right: -4px;
+    z-index: 10000; // más arriba del panel
+    font-size: 24px;
+    color: #f47191;
+  } 
+  
+  .contenedor-titulo {
+    text-align: center;
+    width: 100%;
+  }
+  
+  .titulo-panel {
+    color: #000;
+    display: inline-block; // permite aplicar ancho automático y margen
+    text-align: center;
+    font-family: "Open Sans";
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600; // semi-negrita
+    line-height: normal;
+  }
+  
+  .img-ilustrativa {
+    display: block;
+    margin-left: auto;
+    margin-right: auto; // centrada horizontalmente
+  }
+  
+  .contenido-panel-centrado {
+    color: #000;
+    text-align: center;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 20px;
+    padding: 0 8px; // margen lateral interno para evitar que toque los bordes
+  }
+  
+  .contenido-panel-lado {
+    color: #000;
+    text-align: left;
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 20px;
+    padding: 0 8px; 
+  }
+    .contenido-panel-final {
+      color: #000;
+      text-align: center;
+      font-family: "Open Sans";
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 16px;
+      margin-bottom: 20px;
+      padding: 0 8px; 
+    }
+  
+    p {
+      margin-bottom: 8px;
+    }
+  
+    strong {
+      display: inline-block;
+      margin-bottom: 4px;
+      font-weight: 700; // más negrita
+    }
+  } 
+
+  .cuidados-container {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .cuidados-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .cuadro {
+    text-align: center;
+    background-color: #ffe6f0;
+    border-radius: 8px;
+    padding: 0.5rem;
+
+    transition: transform 0.2s ease;
+  
+    &:hover {
+      transform: scale(1.05);
+    }
+  
+    img {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+    }
+  
+    p {
+      color: black;
+      font-family: "Open Sans";
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.2; 
+    }
+  }
+  

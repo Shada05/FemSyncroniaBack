@@ -1,5 +1,6 @@
 <!-- info.component.html -->
 <div class="carrusel horizontal" *ngIf="!mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones" >
+  <ion-text class="titulo-informacion">Novedades</ion-text>
   <div 
     class="carrusel-inner" 
     [class.sin-transicion]="sinTransicion"
@@ -19,7 +20,7 @@
   <button class="carrusel-btn izquierda" (click)="irAnteriorSlide()">‹</button>
   <button class="carrusel-btn derecha" (click)="irASiguienteSlide()">›</button>
 
-  <!-- <div class="carrusel-puntos">
+  <div class="carrusel-puntos">
     <span 
       *ngFor="let img of imagenesCarrusel; let i = index"
       [class.activo]="slideVisual === i + 1 || 
@@ -27,7 +28,7 @@
                       (slideVisual === imagenesCarrusel.length + 1 && i === 0)"
       (click)="irASlide(i)">
     </span>
-  </div> -->
+  </div>
 </div>
 
 <!-- Información 1: flujo vaginal-->
@@ -204,3 +205,15 @@
     </p>
   </div>
 </ng-container>
+
+
+<div class="cuidados-container">
+  <div class="cuidados-grid">
+    <div class="cuadro" *ngFor="let item of cuidados">
+      <img [src]="item.img" [alt]="item.titulo" />
+      <p>{{ item.titulo }}</p>
+    </div>
+    <br><br><br>
+  </div>
+
+</div>

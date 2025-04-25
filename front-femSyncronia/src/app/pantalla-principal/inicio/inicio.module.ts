@@ -12,7 +12,8 @@ import { CalendarioCicloComponent } from 'src/app/componentes/calendario-ciclo/c
 import { GraficaComponent } from 'src/app/componentes/grafica/grafica.component';
 import { CiclosComponent } from 'src/app/componentes/ciclos/ciclos.component';
 import { HistorialComponent } from 'src/app/componentes/historial/historial.component';
-import { InfoComponent } from 'src/app/componentes/info/info.component';
+import { InformacionComponent } from 'src/app/componentes/informacion/informacion.component';
+
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { InfoComponent } from 'src/app/componentes/info/info.component';
     IonicModule,
     InicioPageRoutingModule,
   ],
-  declarations: [InicioPage, CalendarioCicloComponent, GraficaComponent,CiclosComponent,HistorialComponent, InfoComponent,],
+  declarations: [InicioPage, CalendarioCicloComponent, GraficaComponent,CiclosComponent,HistorialComponent, 
+                InformacionComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class InicioPageModule { }
