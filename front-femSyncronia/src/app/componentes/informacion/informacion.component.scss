@@ -1,4 +1,4 @@
-ion-text.titulo-informacion {
+.titulo-informacion {
   display: block;
   color: black;
   font-family: "Open Sans";
@@ -177,11 +177,13 @@ ion-text.titulo-informacion {
       font-weight: 700; // más negrita
     }
   } 
+ 
 
-  .cuidados-container {
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
+
+  
+  .bloque-cuidados {
+    width: 90%;
+    margin: 16px auto;
   }
   
   .cuidados-grid {

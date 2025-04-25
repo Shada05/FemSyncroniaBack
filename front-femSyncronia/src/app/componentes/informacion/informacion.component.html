@@ -31,6 +31,22 @@
   </div>
 </div>
 
+
+<div class="bloque-cuidados">
+  <ion-text class="titulo-informacion">Cuidados del día a día</ion-text>
+    <div class="cuidados-grid">
+      <div class="cuadro" *ngFor="let item of cuidados">
+        <img [src]="item.img" [alt]="item.titulo" />
+        <p>{{ item.titulo }}</p>
+      </div>
+      <br><br><br>
+    </div>
+</div>
+
+
+
+
+
 <!-- Información 1: flujo vaginal-->
 <ng-container *ngIf="mostrarInfoFlujo">
   <div class="info-panel">
@@ -207,13 +223,4 @@
 </ng-container>
 
 
-<div class="cuidados-container">
-  <div class="cuidados-grid">
-    <div class="cuadro" *ngFor="let item of cuidados">
-      <img [src]="item.img" [alt]="item.titulo" />
-      <p>{{ item.titulo }}</p>
-    </div>
-    <br><br><br>
-  </div>
 
-</div>
