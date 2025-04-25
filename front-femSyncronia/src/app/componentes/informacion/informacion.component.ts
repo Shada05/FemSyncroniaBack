@@ -69,28 +69,28 @@ export class InformacionComponent  implements OnInit, OnDestroy {
       }
     }
     
-  selectedCuidado: any = null;
-  pantallaVisible: boolean = false;
+
+cuidados = [
+  { img: 'assets/img/cuidados/C-1.svg', titulo: 'Tómate un descanso' },
+  { img: 'assets/img/cuidados/C-2.svg', titulo: 'Equilibrio y Salud' },
+  { img: 'assets/img/cuidados/C-3.svg', titulo: 'Duerme y recupérate' },
+  { img: 'assets/img/cuidados/C-4.svg', titulo: 'Mima tu piel' },
+  { img: 'assets/img/cuidados/C-5.svg', titulo: 'Conecta y medita' },
+  { img: 'assets/img/cuidados/C-6.svg', titulo: 'Hidrátate siempre' }
+];
+
   
-  mostrarCuidado(cuidado: any) {
-    this.selectedCuidado = cuidado;
-    this.pantallaVisible = true;
+  selectedCuidado: string | null = null;
+
+  mostrarCuidado(nombre: string) {
+    this.selectedCuidado = nombre;
   }
   
   ocultarPantalla() {
-    this.pantallaVisible = false;
     this.selectedCuidado = null;
   }
   
-  cuidados = [
-    { img: 'assets/img/cuidados/C-1.svg', titulo: 'Tómate un descanso' },
-    { img: 'assets/img/cuidados/C-2.svg', titulo: 'Equilibrio y Salud' },
-    { img: 'assets/img/cuidados/C-3.svg', titulo: 'Duerme y recupérate' },
-    { img: 'assets/img/cuidados/C-4.svg', titulo: 'Mima tu piel' },
-    { img: 'assets/img/cuidados/C-5.svg', titulo: 'Conecta y medita' },
-    { img: 'assets/img/cuidados/C-6.svg', titulo: 'Hidrátate siempre' }
-  ];
-  
+
   constructor() { }
 
 }

@@ -97,12 +97,17 @@
   top:80px; // deja espacio para la top-bar
   left: 20px;
   right: 20px;
-  width: auto; // ancho automático limitado por los márgenes
+  width: 90%; 
+  margin: 0 auto;
   background-color: #ffd3d800; // transparente con tinte rosado
   z-index: 9999; // encima de todo
   padding: 16px 20px; // espacio interno
   overflow-y: auto; // scroll vertical si el contenido es largo
   transition: transform 0.3s ease; // animación al cerrar
+  max-height: calc(100vh - 80px); // Altura máxima visible
+  box-shadow: none; // Por si viene con algún borde
+  border-bottom: none; // Evita líneas si alguna se coló
+  
   
   .btn-cerrar {
     position: absolute;
@@ -134,6 +139,13 @@
     margin-left: auto;
     margin-right: auto; // centrada horizontalmente
   }
+  .img-ilustrativa2 {
+    display: block;
+    margin: 0 auto 12px auto; // centrada con espacio abajo
+    width: 400px;
+    max-width: 85%;
+    height: auto;
+  }
   
   .contenido-panel-centrado {
     color: #000;
@@ -156,21 +168,44 @@
     margin-bottom: 20px;
     padding: 0 8px; 
   }
-    .contenido-panel-final {
-      color: #000;
-      text-align: center;
-      font-family: "Open Sans";
-      font-size: 16px;
-      font-weight: 600;
-      margin-top: 16px;
-      margin-bottom: 20px;
-      padding: 0 8px; 
-    }
+  .contenido-panel-final {
+    color: #000;
+    text-align: center;
+    font-family: "Open Sans";
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 20px;
+    padding: 0 8px; 
+  }
+
+  .texto-informativo {
+    color: #000;
+    text-align: center;
+    font-family: "Open Sans";
+    font-size: 17px; 
+    font-weight: 400; 
+    line-height: 1.5;
+    margin: 16px 0;
+    padding: 0 8px;
+  }
+  
+  .texto-final-destacado {
+    display: block;
+    color: #000;
+    text-align: center;
+    font-family: "Open Sans";
+    font-size: 22px;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
   
     p {
       margin-bottom: 8px;
     }
-  
+
     strong {
       display: inline-block;
       margin-bottom: 4px;
