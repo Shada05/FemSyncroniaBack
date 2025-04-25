@@ -135,11 +135,11 @@
 
             <!-- Contenedores adicionales con data-attributes -->
             <div class="contenedor-adicional">
-              <div class="contenedor-item" data-tipo="baja">
-                <span class="item-texto">Baja</span>
+              <div class="contenedor-item" data-tipo="probabilidad">
+                <span class="item-texto">{{ getProbabilidadTexto() }}</span>
                 <div class="linea-divisora"></div>
-                <span class="texto-derecha">Información</span>
-              </div>
+                <span class="texto-derecha">Probabilidad de quedar embarazada</span>
+            </div>
               <div class="contenedor-item" data-tipo="sintomas">
                 <span class="item-texto">Síntomas</span>
                 <div class="linea-divisora"></div>
@@ -157,12 +157,12 @@
               <div class="contenedor-item" data-tipo="peso">
                 <span class="item-texto">Peso</span>
                 <div class="linea-divisora"></div>
-                <span class="texto-derecha">74.00 kg</span>
+                <span class="texto-derecha">{{ peso ? (peso + ' kg') : '--' }}</span>
               </div>
               <div class="contenedor-item" data-tipo="temp">
                 <span class="item-texto">Temp</span>
                 <div class="linea-divisora"></div>
-                <span class="texto-derecha">36.5°C</span>
+                <span class="texto-derecha">{{ temperatura ? (temperatura + '°C') : '--' }}</span>
               </div>
             </div>
           </div>

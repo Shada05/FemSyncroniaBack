@@ -60,6 +60,9 @@ export class InicioPage implements OnInit {
   sintomasHoy: any[] = [];  
   sintomasDiaSeleccionado: any[] = [];  
   
+  peso: number | null = null;
+  temperatura: number | null = null;
+
   constructor(
     private menuCtrl: MenuController,
     private apiService: ApiService,
@@ -209,9 +212,14 @@ export class InicioPage implements OnInit {
       const cicloDelDia = ciclosUsuario.find((ciclo: any) => ciclo.date?.split('T')[0] === fechaFormateada);
   
       this.sintomasDiaSeleccionado = cicloDelDia ? this.procesarSintomas(cicloDelDia, sintomasDisponibles) : [];
+      this.peso = cicloDelDia?.weight || null;
+      this.temperatura = cicloDelDia?.temperature || null;
+      
     } catch (error) {
       console.error('Error al obtener síntomas:', error);
       this.sintomasDiaSeleccionado = [];
+      this.peso = null;
+      this.temperatura = null;
     }
   }
 
@@ -331,7 +339,7 @@ export class InicioPage implements OnInit {
           
           // Calcular el índice del ciclo basado en la fecha actual
           const diffDias = Math.floor((hoy.getTime() - inicio.getTime()) / (1000 * 60 * 60 * 24));
-          this.indiceCiclo = diffDias + 1; // +1 porque el primer día es 1
+          this.indiceCiclo = diffDias;
           
           console.log('Fecha de inicio del ciclo:', this.fechaInicio);
           console.log('Fecha de fin del ciclo:', this.fechaFin);
@@ -379,39 +387,35 @@ export class InicioPage implements OnInit {
   getColorPeriodo(): string {
     if (this.estaEnPeriodo()) return '#FFB7BF';
     if (this.esDiaMasFertil()) return '#FDD5AF';
-    if (this.estaEnDiaFertil()) return '#DFFDAF';
+    if (this.estaEnDiaFertil() || this.esUltimoDiaFertil()) return '#DFFDAF';
   
-    if (this.indiceCiclo < 14) return '#E9E9E9';
+    //if (this.indiceCiclo < 14) return '#E9E9E9';
   
-    if (this.indiceCiclo < this.duracionCiclo) return '#FFCBD1';
+    if (this.indiceCiclo <= this.duracionCiclo) return '#FFCBD1';
   
     return 'transparent';
-  }  
+  }
+   
 
   getTituloPeriodo(): string {
-    if (this.estaEnPeriodo() || this.esDiaMasFertil()) return 'Día';
-    if (this.indiceCiclo < 14) return 'Faltan';
+    if (this.estaEnPeriodo() || this.esDiaMasFertil() || this.esUltimoDiaFertil()) return 'Día';
     return 'Faltan';
-  }  
-
-  getSubtituloPeriodo(): string {
-    if (this.estaEnPeriodo()) {
-      return 'de tu periodo';
-    }
-  
-    if (this.esDiaMasFertil()) {
-      return 'hoy es tu día más fértil';
-    }
-  
-    if (this.indiceCiclo < 14) {
-      return 'para tu dia mas fértil';
-    }
-  
-    return 'días para tu periodo';
   }
 
+  getSubtituloPeriodo(): string {
+    if (this.estaEnPeriodo()) return 'de tu periodo';
+    if (this.esDiaMasFertil()) return 'hoy es tu día más fértil';
+    if (this.esUltimoDiaFertil()) return 'es tu último día fértil';
+    if (this.indiceCiclo < 14) return 'para tu dia mas fértil';
+    return 'días para tu periodo';
+  }  
+
+  esUltimoDiaFertil(): boolean {
+    return this.indiceCiclo === 15;
+  }
+  
   getNumeroPeriodo(): number {
-    if (this.estaEnPeriodo() || this.esDiaMasFertil()) {
+    if (this.estaEnPeriodo() || this.esDiaMasFertil() || this.esUltimoDiaFertil()) {
       return this.indiceCiclo;
     }
   
@@ -427,4 +431,11 @@ export class InicioPage implements OnInit {
     if (this.estaEnDiaFertil()) return 'Media probabilidad de quedar embarazada';
     return 'Baja probabilidad de quedar embarazada';
   }
+
+  getProbabilidadTexto(): string {
+    if (this.indice === 14) return 'Alta';
+    if (this.indice >= 9 && this.indice <= 15 && this.indice !== 14) return 'Media';
+    return 'Baja';
+  }
+  
 }

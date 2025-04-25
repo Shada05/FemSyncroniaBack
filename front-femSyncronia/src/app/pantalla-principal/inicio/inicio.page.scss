@@ -403,10 +403,12 @@ ion-button {
 /* Ajusta el texto izquierdo */
 .item-texto {
   font-size: 16px;
-  color: #333;
+  color: black;
   flex: 0 0 80px;
   text-align: left;
   padding-right: 4px; /* Reduce el padding derecho */
+  font-family: "Open Sans";
+  font-weight: 600;
 }
 
 /* Línea divisora */
@@ -419,14 +421,16 @@ ion-button {
 
 /* Texto derecho */
 .texto-derecha {
-  font-size: 16px;
-  color: #333;
+  font-size: 14px;
+  color: black;
   flex: 1;
   text-align: left;
+  font-weight: 600;
+  font-family: "Open Sans";
 }
 
 /* Colores específicos para cada línea */
-.contenedor-item[data-tipo="baja"] .linea-divisora {
+.contenedor-item[data-tipo="probabilidad"] .linea-divisora {
   background-color: #c5e1a5;
 }
 
@@ -436,7 +440,7 @@ ion-button {
 
 /* Específicamente para el contenedor de síntomas */
 .contenedor-item[data-tipo="sintomas"] {
-  min-height: 75px; /* Igual que el max-height de lista-sintomas */
+  min-height: 90px; /* Igual que el max-height de lista-sintomas */
   align-items: stretch; /* Hace que todos los hijos se estiren verticalmente */
 
   .linea-divisora {
@@ -449,12 +453,12 @@ ion-button {
     flex: 1;
     display: flex;
     flex-direction: column;
-    min-height: 75px; /* Asegura altura mínima */
+    min-height: 90px; /* Asegura altura mínima */
   }
 
   .lista-sintomas {
     flex: 1;
-    max-height: 75px;
+    max-height: 90px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -473,12 +477,15 @@ ion-button {
   align-items: center;
   gap: 6px;
   font-size: 14px;
-  color: #333;
+  font-weight: 600;
+  color: black;
+  font-family: "Open Sans";
 }
 
 .sin-sintomas {
   font-size: 14px;
   color: #999;
+  font-weight: 600;
   text-align: left;
   padding-left: 6px;
 }
