@@ -100,8 +100,18 @@ const routes: Routes = [
     loadChildren: () => import('./formulario/sintomas/sintomas.module').then( m => m.SintomasPageModule)
   },
   {
-    path: 'registro-sintomas/:fecha',
-    loadChildren: () => import('./pantalla-principal/registro-sintomas/registro-sintomas.module').then( m => m.RegistroSintomasPageModule)
+    path: 'registro-sintomas',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./pantalla-principal/registro-sintomas/registro-sintomas.module').then(m => m.RegistroSintomasPageModule),
+        data: { fecha: 'hoy' } // Valor por defecto
+      },
+      {
+        path: ':fecha',
+        loadChildren: () => import('./pantalla-principal/registro-sintomas/registro-sintomas.module').then(m => m.RegistroSintomasPageModule)
+      }
+    ]
   },
 
 
