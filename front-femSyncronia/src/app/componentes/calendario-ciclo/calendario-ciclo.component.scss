@@ -127,19 +127,19 @@
 
 /* Colores específicos por intensidad */
 .dia.intensidad-1 {
-  background-color: #ffd3d8;
+  background-color: #ffd3d8 !important;
 }
 .dia.intensidad-2 {
-  background-color: #f8bbd0;
+  background-color: #f8bbd0 !important;
 }
 .dia.intensidad-3 {
-  background-color: #f48fb1;
+  background-color: #f48fb1 !important;
 }
 .dia.intensidad-4 {
-  background-color: #f06283;
+  background-color: #f06283 !important;
 }
 .dia.intensidad-5 {
-  background-color: #c63d54;
+  background-color: #c63d54 !important;
 }
 
 .dias-mes .dia.seleccionado {
@@ -149,12 +149,14 @@
 
 /* Estilo para el día de ovulación (índice 14) */
 .dia.ovulacion {
-  background-color: #ffdfc0 !important;
-  color: #333 !important;
+  background-color: #ffdfc0;
   position: relative;
 }
 
 /* Estilo para días fértiles (índices 9-13 y 15) */
 .dia.fertil {
-  background-color: #FFFAC0 !important;
+  background-color: #FFFAC0;
+}
+.dia.prediccion {
+  background-color: #FEEDEF;
 }
