@@ -328,24 +328,37 @@ export class InicioPage implements OnInit {
     try {
       const ciclos = await lastValueFrom(this.apiService.mostrarCicloCalendario(this.userId));
       const hoy = new Date();
+      hoy.setHours(0, 0, 0, 0); // Normalizar la fecha actual
   
       for (const ciclo of ciclos) {
-        const inicio = new Date(ciclo.Start_day);
-        const fin = new Date(ciclo.Finish_day);
+        // Parsear fechas asegurando hora local a medianoche
+        const parseDate = (dateStr: string) => {
+          const [year, month, day] = dateStr.split('-').map(Number);
+          const date = new Date(year, month - 1, day);
+          date.setHours(0, 0, 0, 0); // Forzar a medianoche
+          return date;
+        };
+  
+        const inicio = parseDate(ciclo.Start_day);
+        const fin = parseDate(ciclo.Finish_day);
   
         if (hoy >= inicio && hoy <= fin) {
           this.fechaInicio = inicio;
           this.fechaFin = fin;
           
-          // Calcular el índice del ciclo basado en la fecha actual
-          const diffDias = Math.floor((hoy.getTime() - inicio.getTime()) / (1000 * 60 * 60 * 24));
-          this.indiceCiclo = diffDias;
+          // Cálculo preciso del índice (día 1 = primer día)
+          const diffMs = hoy.getTime() - inicio.getTime();
+          const diffDias = Math.round(diffMs / (1000 * 60 * 60 * 24));
+          this.indiceCiclo = diffDias + 1; // Sumar 1 si quieres que el primer día sea 1
           
-          console.log('Fecha de inicio del ciclo:', this.fechaInicio);
-          console.log('Fecha de fin del ciclo:', this.fechaFin);
-          console.log('Índice del ciclo calculado:', this.indiceCiclo);
+          // Debugging
+          console.log('Fecha inicio:', inicio);
+          console.log('Hoy:', hoy);
+          console.log('Diferencia días cruda:', diffMs / (1000 * 60 * 60 * 24));
+          console.log('Diferencia días redondeada:', diffDias);
+          console.log('Índice calculado:', this.indiceCiclo);
           
-          this.cdr.detectChanges(); // Forzar detección de cambios
+          this.cdr.detectChanges();
           return;
         }
       }
@@ -355,7 +368,7 @@ export class InicioPage implements OnInit {
       console.error('Error al obtener fechas del ciclo:', error);
     } finally {
       this.fechasCargadas = true;
-      this.cdr.detectChanges(); // Forzar detección de cambios
+      this.cdr.detectChanges();
     }
   }
 
