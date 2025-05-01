@@ -333,6 +333,10 @@ export class InicioPage implements OnInit {
       const hoy = new Date();
       hoy.setHours(0, 0, 0, 0); // Normalizar la fecha actual
   
+      let cicloEncontrado = false;
+      let cicloAnterior: any = null;
+      let diferenciaMesesAnterior = Infinity;
+  
       for (const ciclo of ciclos) {
         // Parsear fechas asegurando hora local a medianoche
         const parseDate = (dateStr: string) => {
@@ -347,9 +351,26 @@ export class InicioPage implements OnInit {
         if (hoy.getFullYear() === inicio.getFullYear() && hoy.getMonth() === inicio.getMonth()) {
           this.fechaInicio = inicio;
           this.fechaFin = fin;
-          this.cdr.detectChanges();
+          cicloEncontrado = true;
           break;
         }
+  
+        // Guardar el ciclo más reciente del mes anterior
+        const diferenciaMeses = (hoy.getFullYear() - inicio.getFullYear()) * 12 + (hoy.getMonth() - inicio.getMonth());
+        if (diferenciaMeses > 0 && diferenciaMeses < diferenciaMesesAnterior) {
+          cicloAnterior = ciclo;
+          diferenciaMesesAnterior = diferenciaMeses;
+        }
+      }
+  
+      // Si no se encontró ciclo actual, usar el del mes anterior más cercano
+      if (!cicloEncontrado && cicloAnterior) {
+        const parseDate = (dateStr: string) => {
+          const [year, month, day] = dateStr.split('-').map(Number);
+          return new Date(year, month - 1, day);
+        };
+        this.fechaInicio = parseDate(cicloAnterior.Start_day);
+        this.fechaFin = parseDate(cicloAnterior.Finish_day);
       }
   
       console.log('Fechas del ciclo cargadas:', {
@@ -393,7 +414,26 @@ export class InicioPage implements OnInit {
     return 0;
   }
 
+  getDiasDeRetraso(): number {
+    if (!this.fechaFin) return 0;
+    
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+    
+    const ultimoDiaCiclo = new Date(this.fechaFin);
+    ultimoDiaCiclo.setHours(0, 0, 0, 0);
+    
+    // Si ya pasó la fecha de fin del ciclo
+    if (hoy > ultimoDiaCiclo) {
+      const diffTime = Math.abs(hoy.getTime() - ultimoDiaCiclo.getTime());
+      return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    }
+    
+    return 0;
+  }
+
   getColorPeriodo(): string {
+    if (this.getDiasDeRetraso() > 0) return '#E9E9E9';
     if (this.estaEnPeriodo()) return '#FFB7BF';
     if (this.esDiaMasFertil()) return '#FDD5AF';
     if (this.estaEnDiaFertil() || this.esUltimoDiaFertil()) return '#DFFDAF';
@@ -407,33 +447,52 @@ export class InicioPage implements OnInit {
    
 
   getTituloPeriodo(): string {
-    if (this.estaEnPeriodo() || this.esDiaMasFertil() || this.esUltimoDiaFertil()) return 'Día';
+    if (this.getDiasDeRetraso() > 0) {
+      return 'Retraso';
+    }
+    if (this.estaEnPeriodo() || this.esDiaMasFertil() || this.esUltimoDiaFertil()) {
+      return 'Día';
+    }
     return 'Faltan';
   }
-
+  
   getSubtituloPeriodo(): string {
-    if (this.estaEnPeriodo()) return 'de tu periodo';
-    if (this.esDiaMasFertil()) return 'hoy es tu día más fértil';
-    if (this.esUltimoDiaFertil()) return 'es tu último día fértil';
-    if (this.indiceCiclo < 14) return 'para tu dia mas fértil';
+    if (this.getDiasDeRetraso() > 0) {
+      return 'de tu periodo';
+    }
+    if (this.estaEnPeriodo()) {
+      return 'de tu periodo';
+    }
+    if (this.esDiaMasFertil()) {
+      return 'hoy es tu día más fértil';
+    }
+    if (this.esUltimoDiaFertil()) {
+      return 'es tu último día fértil';
+    }
+    if (this.indiceCiclo < 14) {
+      return 'para tu día más fértil';
+    }
     return 'días para tu periodo';
-  }  
+  }
 
   esUltimoDiaFertil(): boolean {
     return this.indiceCiclo === 15;
   }
   
   getNumeroPeriodo(): number {
+    const diasRetraso = this.getDiasDeRetraso();
+    
+    if (diasRetraso > 0) {
+      return diasRetraso;
+    }
     if (this.estaEnPeriodo() || this.esDiaMasFertil() || this.esUltimoDiaFertil()) {
       return this.indiceCiclo;
     }
-  
     if (this.indiceCiclo < 14) {
       return this.diasParaDiaFertil;
     }
-  
     return this.diasParaInicioPeriodo;
-  }  
+  } 
 
   getProbabilidadEmbarazo(): string {
     if (this.esDiaMasFertil()) return 'Alta probabilidad de quedar embarazada';
