@@ -28,7 +28,7 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
   @Input() anoActual: number = 0;
   @Input() fechaInicio: Date = new Date();
   @Input() fechaFin: Date = new Date();
-  @Input() userId: string = '32';
+  @Input() userId: string | null = null;;
 
   private destroy$ = new Subject<void>();
 
@@ -69,9 +69,11 @@ export class CalendarioCicloComponent implements OnInit, OnChanges {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
   async ngOnChanges(changes: SimpleChanges) {
     if (changes['userId'] && changes['userId'].currentValue) {
       await this.cargarCiclos();
+      this.actualizarCalendario();
     }
     if (
       changes['mesActual'] ||

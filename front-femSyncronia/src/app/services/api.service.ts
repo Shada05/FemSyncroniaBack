@@ -33,7 +33,7 @@ export class ApiService {
   }
 
   mostrarCicloCalendario(id: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/api/v1/cycle_calendar/${id}`);
+    return this.http.get(`${this.apiUrl}/api/v1/cycle_calendar_id/${id}`);
   }
 
   mostrarCiclo(user_id: string): Observable<any> {

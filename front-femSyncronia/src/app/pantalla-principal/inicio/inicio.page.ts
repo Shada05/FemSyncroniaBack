@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
+import { ChangeDetectorRef } from '@angular/core';
 
 interface Sintoma {
   id: number; // ID del síntoma
@@ -41,21 +42,33 @@ export class InicioPage implements OnInit {
   fechaActual: Date = new Date();
 
   // Propiedades para el ciclo menstrual
-  fechaInicio = new Date(2025, 2, 28); 
+  fechaInicio= new Date(2025, 2, 28); 
   fechaFin = new Date(2025, 3, 24);
 
   // Propiedades para las etiquetas
   diaActual: number = 0; // Número del día actual
   indice: number = 1; // Número del índice (puedes cambiarlo según sea necesario)
 
+  duracionCiclo: number = 28;
+  indiceCiclo: number = 0;
+  
   // Propiedades para los síntomas
   sintomasCalificados: any[] = [];
+
+  fechasCargadas: boolean = false;
+
+  sintomasHoy: any[] = [];  
+  sintomasDiaSeleccionado: any[] = [];  
+  
+  peso: number | null = null;
+  temperatura: number | null = null;
 
   constructor(
     private menuCtrl: MenuController,
     private apiService: ApiService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
   mostrarComponente(componente: string) {
     this.componenteActivo = componente;
@@ -73,144 +86,142 @@ export class InicioPage implements OnInit {
     return `${año}-${mes}-${dia}`;
   }
 
-  ngOnInit() {
-    this.cargarUsuario(); // Llama a la función para cargar los datos del usuario
-    this.actualizarMes(this.fechaActual); // Inicializa el mes y año con la fecha actual
+  async ngOnInit() {
+    await this.cargarUsuario(); // Esperar a que cargue el usuario primero
+    
+    this.actualizarMes(this.fechaActual);
+    
+    // Cargar síntomas después de que todo esté listo
+    await this.obtenerSintomasCalificados();
+    
+    // Configurar intervalo después de la carga inicial
     setInterval(() => {
       this.obtenerSintomasCalificados();
-    }, 86400000); // 24 horas en milisegundos
+    }, 86400000);
   }
 
   // Función para cargar los datos del usuario y la imagen de perfil
   async cargarUsuario() {
     const token = await this.authService.obtenerToken();
-    if (token) {
-      this.authService.verificarToken(token).subscribe({
-        next: (response) => {
-          this.userId = response.user.id; // Obtiene el ID del usuario desde el token
-          console.log('ID obtenido del token:', this.userId);
-
-          // Llama a la API para obtener los datos del usuario
-          if (this.userId) {
-            this.apiService.mostrarUsuario(this.userId).subscribe({
-              next: (userData) => {
-                // Guarda los datos del usuario
-                this.nombreCompleto = `${userData.name} ${userData.lastname}`;
-                this.email = userData.email;
-
-                // Carga la imagen de perfil si existe
-                if (userData.profile_image) {
-                  this.profileImage = userData.profile_image;
-                  console.log('Imagen de perfil cargada:', this.profileImage);
-                } else {
-                  console.warn('No se encontró imagen de perfil en la BD.');
-                }
-
-                // Obtener los síntomas calificados
-                this.obtenerSintomasCalificados();
-              },
-              error: (error) => {
-                console.error('Error al cargar los datos del usuario:', error);
-              },
-            });
-          } else {
-            console.error('No se encontró el ID del usuario.');
-          }
-        },
-        error: (error) => {
-          console.error('Error al verificar el token:', error);
-        },
-      });
-    } else {
+    if (!token) {
       console.log('No hay token almacenado.');
+      return;
+    }
+  
+    try {
+      const response = await lastValueFrom(this.authService.verificarToken(token));
+      this.userId = response.user.id;
+      console.log('ID obtenido del token:', this.userId);
+  
+      // Esperar a que se carguen las fechas del ciclo
+      await this.cargarFechasDelCicloActual();
+  
+      if (this.userId) {
+        const userData = await lastValueFrom(this.apiService.mostrarUsuario(this.userId));
+        this.nombreCompleto = `${userData.name} ${userData.lastname}`;
+        this.email = userData.email;
+  
+        if (userData.profile_image) {
+          this.profileImage = userData.profile_image;
+        }
+  
+        this.cdr.detectChanges(); // Forzar actualización de la UI
+      }
+    } catch (error) {
+      console.error('Error al cargar usuario:', error);
     }
   }
 
   // Función para obtener los síntomas calificados del día actual
   async obtenerSintomasCalificados() {
-    if (!this.userId) {
-      console.error(
-        'Error: No se puede obtener el ciclo sin un ID de usuario.'
-      );
-      return;
-    }
-
+    if (!this.userId) return;
+  
     try {
-      // Obtener los síntomas disponibles
-      const sintomasDisponibles = await lastValueFrom(
-        this.apiService.obtenerSintomas()
-      );
-
-      // Obtener todos los ciclos del usuario
-      const ciclosUsuario = await lastValueFrom(
-        this.apiService.mostrarCiclo(this.userId)
-      );
-
-      // Formatear fecha actual como YYYY-MM-DD para comparación
+      const sintomasDisponibles = await lastValueFrom(this.apiService.obtenerSintomas());
+      const ciclosUsuario = await lastValueFrom(this.apiService.mostrarCiclo(this.userId));
+  
       const hoy = new Date();
-      const fechaHoy = `${hoy.getFullYear()}-${(hoy.getMonth() + 1)
-        .toString()
-        .padStart(2, '0')}-${hoy.getDate().toString().padStart(2, '0')}`;
-
-      // Buscar el ciclo que coincide con la fecha actual
-      const cicloActual = ciclosUsuario.find((ciclo: any) => {
-        if (!ciclo.date) return false;
-        // Comparar solo la parte de fecha (ignorando hora)
-        return ciclo.date.split('T')[0] === fechaHoy;
-      });
-
-      if (!cicloActual) {
-        console.log('No se encontró registro para la fecha actual');
-        this.sintomasCalificados = [];
-        return;
+      const fechaHoy = `${hoy.getFullYear()}-${(hoy.getMonth() + 1).toString().padStart(2, '0')}-${hoy.getDate().toString().padStart(2, '0')}`;
+  
+      const cicloActual = ciclosUsuario.find((ciclo: any) => ciclo.date?.split('T')[0] === fechaHoy);
+  
+      if (cicloActual) {
+        this.sintomasHoy = this.procesarSintomas(cicloActual, sintomasDisponibles);
+      } else {
+        this.sintomasHoy = [];
       }
-
-      // Crear un contador para asignar IDs secuenciales
-      let idSecuencial = 1;
-
-      // Filtrar los síntomas calificados del ciclo actual
-      this.sintomasCalificados = Object.keys(cicloActual)
-        .filter(
-          (key) =>
-            key.startsWith('DM_') ||
-            key.startsWith('M_') ||
-            key.startsWith('PP_') ||
-            key.startsWith('E_') ||
-            key.startsWith('F_') ||
-            key.startsWith('AS_')
-        )
-        .map((key) => {
-          const intensidad = cicloActual[key];
-          const sintomaInfo = sintomasDisponibles.find(
-            (s: Sintoma) => s.id === idSecuencial
-          );
-
-          const sintomaCalificado = {
-            id: idSecuencial,
-            nombre: sintomaInfo ? sintomaInfo.name : `Síntoma ${idSecuencial}`,
-            intensidad: intensidad,
-            icono: sintomaInfo ? sintomaInfo.image : null,
-            nombreCampo: key, // Mantener el nombre original del campo
-          };
-
-          idSecuencial++;
-          return sintomaCalificado;
-        })
-        .filter((sintoma) => sintoma.intensidad > 0);
-
-      console.log('Síntomas calificados para hoy:', this.sintomasCalificados);
     } catch (error) {
-      console.error('Error al obtener los síntomas calificados:', error);
-      this.sintomasCalificados = [];
+      console.error('Error al obtener síntomas:', error);
+      this.sintomasHoy = [];
     }
+  }
+  
+  private procesarSintomas(ciclo: any, sintomasDisponibles: Sintoma[]): any[] {
+    let idSecuencial = 1;
+    return Object.keys(ciclo)
+      .filter(key => key.startsWith('DM_') || key.startsWith('M_') || key.startsWith('PP_') || 
+                    key.startsWith('E_') || key.startsWith('F_') || key.startsWith('AS_'))
+      .map(key => {
+        const intensidad = ciclo[key];
+        const sintomaInfo = sintomasDisponibles.find(s => s.id === idSecuencial);
+        idSecuencial++;
+  
+        return {
+          id: idSecuencial - 1,
+          nombre: sintomaInfo?.name || `Síntoma ${idSecuencial - 1}`,
+          intensidad: intensidad,
+          icono: sintomaInfo?.image || null,
+          nombreCampo: key
+        };
+      })
+      .filter(sintoma => sintoma.intensidad > 0);
   }
 
   // Actualizar el día y el índice cuando se selecciona un día del calendario
-  actualizarDiaSeleccionado(event: { diaActual: number; indice: number }) {
+  async actualizarDiaSeleccionado(event: { diaActual: number; indice: number }) {
     this.diaActual = event.diaActual;
     this.indice = event.indice;
-
     this.fechaActual = new Date(this.anoActual, this.mesActual, this.diaActual);
+  
+    // Actualizar síntomas para el día seleccionado
+    await this.obtenerSintomasParaDiaSeleccionado();
+  
+    // Solo actualizar indiceCiclo si el día seleccionado es HOY
+    const hoy = new Date();
+    const esHoy =
+      event.diaActual === hoy.getDate() &&
+      this.mesActual === hoy.getMonth() &&
+      this.anoActual === hoy.getFullYear();
+    
+    if (esHoy) {
+      this.indiceCiclo = event.indice;
+    }
+  }
+  
+  // Nueva función para obtener síntomas del día seleccionado
+  async obtenerSintomasParaDiaSeleccionado() {
+    if (!this.userId) return;
+  
+    try {
+      const sintomasDisponibles = await lastValueFrom(this.apiService.obtenerSintomas());
+      const ciclosUsuario = await lastValueFrom(this.apiService.mostrarCiclo(this.userId));
+  
+      const fechaSeleccionada = new Date(this.anoActual, this.mesActual, this.diaActual);
+      const fechaFormateada = `${fechaSeleccionada.getFullYear()}-${(fechaSeleccionada.getMonth() + 1)
+        .toString().padStart(2, '0')}-${fechaSeleccionada.getDate().toString().padStart(2, '0')}`;
+  
+      const cicloDelDia = ciclosUsuario.find((ciclo: any) => ciclo.date?.split('T')[0] === fechaFormateada);
+  
+      this.sintomasDiaSeleccionado = cicloDelDia ? this.procesarSintomas(cicloDelDia, sintomasDisponibles) : [];
+      this.peso = cicloDelDia?.weight || null;
+      this.temperatura = cicloDelDia?.temperature || null;
+      
+    } catch (error) {
+      console.error('Error al obtener síntomas:', error);
+      this.sintomasDiaSeleccionado = [];
+      this.peso = null;
+      this.temperatura = null;
+    }
   }
 
   /**
@@ -249,15 +260,8 @@ export class InicioPage implements OnInit {
       this.limpiarEstado();
 
       // 4. Redirigir al login con navegación completa
-      this.router
-        .navigate(['/login'], {
-          replaceUrl: true, // Reemplaza la URL actual en el historial
-          queryParamsHandling: 'preserve', // Opcional: mantener parámetros si es necesario
-        })
-        .then(() => {
-          // 5. Forzar recarga completa de la aplicación
-          window.location.reload();
-        });
+      this.router.navigateByUrl('/login', { replaceUrl: true });
+
     } catch (error) {
       console.error('Error durante el logout:', error);
     }
@@ -318,4 +322,135 @@ export class InicioPage implements OnInit {
     ];
     return nombresMeses[mes];
   }
+
+  async cargarFechasDelCicloActual() {
+    if (!this.userId) return;
+  
+    try {
+      const ciclos = await lastValueFrom(this.apiService.mostrarCicloCalendario(this.userId));
+      const hoy = new Date();
+      hoy.setHours(0, 0, 0, 0); // Normalizar la fecha actual
+
+      for (const ciclo of ciclos) {
+        // Parsear fechas asegurando hora local a medianoche
+        const parseDate = (dateStr: string) => {
+          const [year, month, day] = dateStr.split('-').map(Number);
+          const date = new Date(year, month - 1, day);
+          date.setHours(0, 0, 0, 0); // Forzar a medianoche
+          console.log(date);
+          return date;
+        };
+        
+        const inicio = parseDate(ciclo.Start_day);
+        const fin = parseDate(ciclo.Finish_day);
+  
+        if (hoy >= inicio && hoy <= fin) {
+          this.fechaInicio = inicio;
+          this.fechaFin = fin;
+          
+          // Cálculo preciso del índice (día 1 = primer día)
+          const diffMs = hoy.getTime() - inicio.getTime();
+          const diffDias = Math.round(diffMs / (1000 * 60 * 60 * 24));
+          this.indiceCiclo = diffDias + 1; // Sumar 1 si quieres que el primer día sea 1
+          
+          // Debugging
+          console.log('Fecha inicio:', inicio);
+          console.log('Hoy:', hoy);
+          console.log('Diferencia días cruda:', diffMs / (1000 * 60 * 60 * 24));
+          console.log('Diferencia días redondeada:', diffDias);
+          console.log('Índice calculado:', this.indiceCiclo);
+          
+          this.cdr.detectChanges();
+          return;
+        }
+      }
+  
+      console.warn('No se encontró un ciclo activo para la fecha actual.');
+    } catch (error) {
+      console.error('Error al obtener fechas del ciclo:', error);
+    } finally {
+      this.fechasCargadas = true;
+      this.cdr.detectChanges();
+    }
+  }
+
+
+  estaEnPeriodo(): boolean {
+    return this.indiceCiclo >= 1 && this.indiceCiclo <= 5;
+  }
+
+  estaEnDiaFertil(): boolean {
+    return (this.indiceCiclo >= 9 && this.indiceCiclo <= 15) && this.indiceCiclo !== 14;
+  }
+
+  esDiaMasFertil(): boolean {
+    return this.indiceCiclo === 14;
+  }
+
+  get diasParaInicioPeriodo(): number {
+    if (this.estaEnPeriodo()) return 0;
+    return this.duracionCiclo - this.indiceCiclo + 1;
+  }
+
+  get diasParaDiaFertil(): number {
+    if (this.indiceCiclo < 14) {
+      return 14 - this.indiceCiclo;
+    }
+    return 0;
+  }
+
+  getColorPeriodo(): string {
+    if (this.estaEnPeriodo()) return '#FFB7BF';
+    if (this.esDiaMasFertil()) return '#FDD5AF';
+    if (this.estaEnDiaFertil() || this.esUltimoDiaFertil()) return '#DFFDAF';
+  
+    //if (this.indiceCiclo < 14) return '#E9E9E9';
+  
+    if (this.indiceCiclo <= this.duracionCiclo) return '#FFCBD1';
+  
+    return 'transparent';
+  }
+   
+
+  getTituloPeriodo(): string {
+    if (this.estaEnPeriodo() || this.esDiaMasFertil() || this.esUltimoDiaFertil()) return 'Día';
+    return 'Faltan';
+  }
+
+  getSubtituloPeriodo(): string {
+    if (this.estaEnPeriodo()) return 'de tu periodo';
+    if (this.esDiaMasFertil()) return 'hoy es tu día más fértil';
+    if (this.esUltimoDiaFertil()) return 'es tu último día fértil';
+    if (this.indiceCiclo < 14) return 'para tu dia mas fértil';
+    return 'días para tu periodo';
+  }  
+
+  esUltimoDiaFertil(): boolean {
+    return this.indiceCiclo === 15;
+  }
+  
+  getNumeroPeriodo(): number {
+    if (this.estaEnPeriodo() || this.esDiaMasFertil() || this.esUltimoDiaFertil()) {
+      return this.indiceCiclo;
+    }
+  
+    if (this.indiceCiclo < 14) {
+      return this.diasParaDiaFertil;
+    }
+  
+    return this.diasParaInicioPeriodo;
+  }  
+
+  getProbabilidadEmbarazo(): string {
+    if (this.esDiaMasFertil()) return 'Alta probabilidad de quedar embarazada';
+    if (this.estaEnDiaFertil()) return 'Media probabilidad de quedar embarazada';
+    return 'Baja probabilidad de quedar embarazada';
+  }
+
+  getProbabilidadTexto(): string {
+    if (this.indice === 14) return 'Alta';
+    if (this.indice >= 9 && this.indice <= 15 && this.indice !== 14) return 'Media';
+    return 'Baja';
+  }
+  
 }

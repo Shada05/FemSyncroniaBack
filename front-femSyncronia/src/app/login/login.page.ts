@@ -89,6 +89,8 @@ export class LoginPage implements OnInit {
       this.formulario.get('email')?.setErrors({ usuarioNoEncontrado: true });
     } else if (error.error.message === 'Contraseña incorrecta.') {
       this.formulario.get('password')?.setErrors({ contrasenaIncorrecta: true });
+    }else{
+      this.utilidadesService.mostrarToastAdvertencia(error.error.message || 'Error al iniciar sesión');
     }
   }
 

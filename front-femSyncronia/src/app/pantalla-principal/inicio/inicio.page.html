@@ -59,21 +59,30 @@
           </div>
 
           <!-- Contenedor periodo -->
-          <div class="info-periodo">
-            <ion-text class="info-text titulo">Retraso</ion-text>
-            <ion-text class="numero">15</ion-text>
-            <ion-text class="info-text subtitulo">días de tu periodo</ion-text>
-            <div class="linea-horizontal"></div>
-            <ion-text class="info-text observacion">Baja probabilidad de quedar embarazada</ion-text>
-            <ion-button class="boton-informacion">Registrar</ion-button>
-          </div>
+          <ng-container *ngIf="fechasCargadas; else spinnerPeriodo">
+            <div class="info-periodo" [ngStyle]="{ 'background': getColorPeriodo() }">
+              <ion-text class="info-text titulo">{{ getTituloPeriodo() }}</ion-text>
+              <ion-text class="numero">{{ getNumeroPeriodo() }}</ion-text>
+              <ion-text class="info-text subtitulo">{{ getSubtituloPeriodo() }}</ion-text>
+              <div class="linea-horizontal"></div>
+              <ion-text class="info-text observacion">{{ getProbabilidadEmbarazo() }}</ion-text>
+              <ion-button class="boton-informacion">Registrar</ion-button>
+            </div>
+          </ng-container>
 
+          <!-- Spinner mientras se cargan fechas -->
+          <ng-template #spinnerPeriodo>
+            <div class="info-periodo spinner-periodo">
+              <ion-spinner name="crescent" color="medium"></ion-spinner>
+            </div>
+          </ng-template>
+              
           <!-- Contenedor síntomas -->
           <div class="info-sintomas">
-            <ion-text class="titulo-sintomas">Posibles síntomas</ion-text>
+            <ion-text class="titulo-sintomas">Síntomas de hoy</ion-text>
             <div class="contenedor-lista-sintomas">
-              <ion-text *ngIf="sintomasCalificados.length === 0">No hay síntomas calificados.</ion-text>
-              <div *ngFor="let sintoma of sintomasCalificados" class="sintoma-item">
+              <ion-text style="color: black;" *ngIf="sintomasHoy.length === 0">No hay síntomas calificados hoy.</ion-text>
+              <div *ngFor="let sintoma of sintomasHoy" class="sintoma-item">
                 <img [src]="sintoma.icono" alt="{{ sintoma.nombre }}" class="sintoma-icono" *ngIf="sintoma.icono">
                 <ion-text>{{ sintoma.nombre }}</ion-text>
               </div>
@@ -107,7 +116,7 @@
 
           <!-- Componente del calendario -->
           <app-calendario-ciclo [mesActual]="mesActual" [anoActual]="anoActual" [fechaInicio]="fechaInicio"
-            [fechaFin]="fechaFin" (diaSeleccionado)="actualizarDiaSeleccionado($event)">
+            [fechaFin]="fechaFin" [userId]="userId" (diaSeleccionado)="actualizarDiaSeleccionado($event)">
           </app-calendario-ciclo>
 
           <!-- Contenedor de información del día -->
@@ -126,25 +135,34 @@
 
             <!-- Contenedores adicionales con data-attributes -->
             <div class="contenedor-adicional">
-              <div class="contenedor-item" data-tipo="baja">
-                <span class="item-texto">Baja</span>
+              <div class="contenedor-item" data-tipo="probabilidad">
+                <span class="item-texto">{{ getProbabilidadTexto() }}</span>
                 <div class="linea-divisora"></div>
-                <span class="texto-derecha">Información</span>
+                <span class="texto-derecha">Probabilidad de quedar embarazada</span>
+            </div>
+              <div class="contenedor-item" data-tipo="sintomas">
+                <span class="item-texto">Síntomas</span>
+                <div class="linea-divisora"></div>
+                <div class="contenedor-sintomas">
+                  <div class="lista-sintomas" *ngIf="sintomasDiaSeleccionado.length > 0">
+                    <div class="sintoma-item" *ngFor="let sintoma of sintomasDiaSeleccionado">
+                      <span>{{ sintoma.nombre }}</span>
+                    </div>
+                  </div>
+                  <div class="sin-sintomas" *ngIf="sintomasDiaSeleccionado.length === 0">
+                    No hay síntomas hoy
+                  </div>
+                </div>
               </div>
               <div class="contenedor-item" data-tipo="peso">
                 <span class="item-texto">Peso</span>
                 <div class="linea-divisora"></div>
-                <span class="texto-derecha">70kg</span>
+                <span class="texto-derecha">{{ peso ? (peso + ' kg') : '--' }}</span>
               </div>
               <div class="contenedor-item" data-tipo="temp">
                 <span class="item-texto">Temp</span>
                 <div class="linea-divisora"></div>
-                <span class="texto-derecha">36.5°C</span>
-              </div>
-              <div class="contenedor-item" data-tipo="otro">
-                <span class="item-texto">Otro</span>
-                <div class="linea-divisora"></div>
-                <span class="texto-derecha">Ejemplo</span>
+                <span class="texto-derecha">{{ temperatura ? (temperatura + '°C') : '--' }}</span>
               </div>
             </div>
           </div>
