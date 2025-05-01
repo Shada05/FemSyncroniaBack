@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { ChangeDetectorRef } from '@angular/core';
+
+
 
 interface Sintoma {
   id: number; // ID del síntoma

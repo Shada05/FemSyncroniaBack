@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { InicioPageRoutingModule } from './inicio-routing.module';
 
 import { InicioPage } from './inicio.page';
@@ -12,6 +12,8 @@ import { CalendarioCicloComponent } from 'src/app/componentes/calendario-ciclo/c
 import { GraficaComponent } from 'src/app/componentes/grafica/grafica.component';
 import { CiclosComponent } from 'src/app/componentes/ciclos/ciclos.component';
 import { HistorialComponent } from 'src/app/componentes/historial/historial.component';
+import { InformacionComponent } from 'src/app/componentes/informacion/informacion.component';
+
 
 @NgModule({
   imports: [
@@ -20,6 +22,8 @@ import { HistorialComponent } from 'src/app/componentes/historial/historial.comp
     IonicModule,
     InicioPageRoutingModule,
   ],
-  declarations: [InicioPage, CalendarioCicloComponent, GraficaComponent,CiclosComponent,HistorialComponent]
+  declarations: [InicioPage, CalendarioCicloComponent, GraficaComponent,CiclosComponent,HistorialComponent, 
+                InformacionComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class InicioPageModule { }
