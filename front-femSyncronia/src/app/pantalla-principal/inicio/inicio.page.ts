@@ -332,47 +332,39 @@ export class InicioPage implements OnInit {
       const ciclos = await lastValueFrom(this.apiService.mostrarCicloCalendario(this.userId));
       const hoy = new Date();
       hoy.setHours(0, 0, 0, 0); // Normalizar la fecha actual
-
+  
       for (const ciclo of ciclos) {
         // Parsear fechas asegurando hora local a medianoche
         const parseDate = (dateStr: string) => {
           const [year, month, day] = dateStr.split('-').map(Number);
-          const date = new Date(year, month - 1, day);
-          date.setHours(0, 0, 0, 0); // Forzar a medianoche
-          console.log(date);
-          return date;
+          return new Date(year, month - 1, day);
         };
         
         const inicio = parseDate(ciclo.Start_day);
         const fin = parseDate(ciclo.Finish_day);
   
-        if (hoy >= inicio && hoy <= fin) {
+        // Validar si el mes y año coinciden (ignorando el día)
+        if (hoy.getFullYear() === inicio.getFullYear() && hoy.getMonth() === inicio.getMonth()) {
           this.fechaInicio = inicio;
           this.fechaFin = fin;
-          
-          // Cálculo preciso del índice (día 1 = primer día)
-          const diffMs = hoy.getTime() - inicio.getTime();
-          const diffDias = Math.round(diffMs / (1000 * 60 * 60 * 24));
-          this.indiceCiclo = diffDias + 1; // Sumar 1 si quieres que el primer día sea 1
-          
-          // Debugging
-          console.log('Fecha inicio:', inicio);
-          console.log('Hoy:', hoy);
-          console.log('Diferencia días cruda:', diffMs / (1000 * 60 * 60 * 24));
-          console.log('Diferencia días redondeada:', diffDias);
-          console.log('Índice calculado:', this.indiceCiclo);
-          
           this.cdr.detectChanges();
-          return;
+          break;
         }
       }
   
-      console.warn('No se encontró un ciclo activo para la fecha actual.');
+      console.log('Fechas del ciclo cargadas:', {
+        inicio: this.fechaInicio,
+        fin: this.fechaFin
+      });
+  
     } catch (error) {
       console.error('Error al obtener fechas del ciclo:', error);
     } finally {
-      this.fechasCargadas = true;
-      this.cdr.detectChanges();
+      // Establecer fechasCargadas después de 3-4 segundos
+      setTimeout(() => {
+        this.fechasCargadas = true;
+        this.cdr.detectChanges();
+      }, 4500); // 3.5 segundos de espera
     }
   }
 
