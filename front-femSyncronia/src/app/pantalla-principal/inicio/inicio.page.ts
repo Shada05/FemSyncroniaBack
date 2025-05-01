@@ -88,6 +88,7 @@ export class InicioPage implements OnInit {
 
   async ngOnInit() {
     await this.cargarUsuario(); // Esperar a que cargue el usuario primero
+    
     this.actualizarMes(this.fechaActual);
     
     // Cargar síntomas después de que todo esté listo
@@ -329,16 +330,17 @@ export class InicioPage implements OnInit {
       const ciclos = await lastValueFrom(this.apiService.mostrarCicloCalendario(this.userId));
       const hoy = new Date();
       hoy.setHours(0, 0, 0, 0); // Normalizar la fecha actual
-  
+
       for (const ciclo of ciclos) {
         // Parsear fechas asegurando hora local a medianoche
         const parseDate = (dateStr: string) => {
           const [year, month, day] = dateStr.split('-').map(Number);
           const date = new Date(year, month - 1, day);
           date.setHours(0, 0, 0, 0); // Forzar a medianoche
+          console.log(date);
           return date;
         };
-  
+        
         const inicio = parseDate(ciclo.Start_day);
         const fin = parseDate(ciclo.Finish_day);
   
