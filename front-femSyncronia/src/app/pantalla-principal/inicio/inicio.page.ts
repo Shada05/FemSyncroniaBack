@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
+import Swiper from 'swiper';
+
+
 
 interface Sintoma {
   id: number; // ID del síntoma
@@ -51,6 +54,8 @@ export class InicioPage implements OnInit {
   // Propiedades para los síntomas
   sintomasCalificados: any[] = [];
 
+
+
   constructor(
     private menuCtrl: MenuController,
     private apiService: ApiService,
@@ -73,6 +78,7 @@ export class InicioPage implements OnInit {
     return `${año}-${mes}-${dia}`;
   }
 
+  
   ngOnInit() {
     this.cargarUsuario(); // Llama a la función para cargar los datos del usuario
     this.actualizarMes(this.fechaActual); // Inicializa el mes y año con la fecha actual

@@ -311,10 +311,22 @@
     <ion-tab tab="buscar">
       <div id="pagina-buscar">
         <ion-content>
-          <div class="center">Contenido buscar</div>
+          <!-- Barra superior -->
+          <div class="top-bar">
+            <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg"></ion-icon>
+            <ion-text class="bienvenida-text">Información</ion-text>
+            <ion-avatar>
+              <ion-img [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()"></ion-img>
+            </ion-avatar>
+          </div>
+          <div class="contenedor-info">
+            <app-informacion />
+          </div>
         </ion-content>
       </div>
     </ion-tab>
+    
+
 
     <ion-tab-bar slot="bottom">
       <ion-tab-button tab="principal">
@@ -331,7 +343,7 @@
       </ion-tab-button>
       <ion-tab-button tab="buscar">
         <ion-icon src="../../../assets/icons/Tabs/Buscar.svg"></ion-icon>
-        Buscar
+        Información
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
