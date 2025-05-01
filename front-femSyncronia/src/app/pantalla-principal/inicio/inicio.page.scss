@@ -776,3 +776,57 @@ app-grafica {
   align-items: center;
   min-height: 200px;
 }
+
+
+.info-consejos {
+  width: 319px;
+  height: 180px; /* Altura fija del contenedor */
+  background: #ffffff; /* Fondo gris claro */
+  margin: 24px auto; /* Espaciado entre los componentes */
+  border-radius: 20px; /* Bordes redondeados */
+  display: flex;
+  flex-direction: column; /* Alinear el título y la lista en columna */
+  padding: 10px; /* Espaciado interno */
+  text-align: left;
+
+
+  .titulo-consejos {
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+    margin-bottom: 8px;
+    width: 100%;
+    text-align: left;
+    padding-left: 4px; // opcional para empujar un poquito
+  }
+
+
+  .consejos-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    .consejo {
+      flex: 1 1 calc(33.33% - 10px);
+      max-width: calc(33.33% - 10px);
+      border-radius: 12px;
+      text-align: center;
+      padding: 6px; 
+
+      img {
+        width: 100%;
+        max-width: 130px;
+        height: auto;
+
+      }
+
+      p {
+        font-family: "Open Sans";
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0;
+      }
+    }
+  }
+}
