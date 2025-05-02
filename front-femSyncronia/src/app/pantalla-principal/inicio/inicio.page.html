@@ -54,7 +54,8 @@
         <ion-content>
           <!-- Barra superior -->
           <div class="top-bar">
-            <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg"></ion-icon>
+            <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg" 
+            (click)="irANotificaciones()"></ion-icon>
             <ion-text class="bienvenida-text">Bienvenida</ion-text>
             <ion-avatar><img [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()"></ion-avatar>
           </div>

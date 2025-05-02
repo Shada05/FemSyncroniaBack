@@ -72,6 +72,11 @@ export class InicioPage implements OnInit {
     private router: Router,
     private cdr: ChangeDetectorRef
   ) {}
+
+  irANotificaciones() {
+    this.router.navigate(['/notificaciones']);
+  }
+  
   mostrarComponente(componente: string) {
     this.componenteActivo = componente;
   }
