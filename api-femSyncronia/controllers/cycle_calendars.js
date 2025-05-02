@@ -1,5 +1,6 @@
 const cycle_calendars  = require('../models').cycle_calendars;
 const { spawn } = require('child_process'); // Importar el módulo child_process
+const { Op, fn, col, where } = require('sequelize');
 
 exports.store = async (req, res) => {
     const cycle_calendar = {
@@ -47,26 +48,32 @@ exports.show = async (req, res) => {
 }
 
 exports.destroy = async (req, res) => {
-    const id = parseInt(req.params.id);
+    const userId = parseInt(req.params.user_id);
 
-    return await cycle_calendars.destroy({
-        where: {
-            id: id
-        }
-    }).then(
-        deleted => {
-            if (deleted) {
-                res.status(200).send({ message: 'data eliminado con éxito' });
-            } else {
-                res.status(404).send({ message: 'data no encontrado' });
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1; // Enero es 0
+    const currentYear = currentDate.getFullYear();
+
+    try {
+        const deleted = await cycle_calendars.destroy({
+            where: {
+                user_id: userId,
+                [Op.and]: [
+                    where(fn('MONTH', col('Start_day')), currentMonth),
+                    where(fn('YEAR', col('Start_day')), currentYear)
+                ]
             }
+        });
+
+        if (deleted) {
+            res.status(200).send({ message: 'Registro eliminado con éxito' });
+        } else {
+            res.status(404).send({ message: 'No se encontró ningún registro para eliminar' });
         }
-    ).catch(
-        error => {
-            console.log(error);
-            res.status(400).send(error);
-        }
-    );
+    } catch (error) {
+        console.error(error);
+        res.status(400).send(error);
+    }
 };
 
 exports.show_userid = async (req, res) => {
