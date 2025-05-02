@@ -116,7 +116,13 @@ const routes: Routes = [
         loadChildren: () => import('./pantalla-principal/registro-sintomas/registro-sintomas.module').then(m => m.RegistroSintomasPageModule)
       }
     ]
-  }  
+  },  
+  {
+    path: 'construccion',
+    loadChildren: () => import('./pantalla-principal/construccion/construccion.module').then( m => m.ConstruccionPageModule)
+  }
+  
+ 
 
 
 ];
