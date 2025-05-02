@@ -110,9 +110,13 @@ const routes: Routes = [
       {
         path: ':fecha',
         loadChildren: () => import('./pantalla-principal/registro-sintomas/registro-sintomas.module').then(m => m.RegistroSintomasPageModule)
+      },
+      {
+        path: ':fecha/:retraso',
+        loadChildren: () => import('./pantalla-principal/registro-sintomas/registro-sintomas.module').then(m => m.RegistroSintomasPageModule)
       }
     ]
-  },
+  }  
 
 
 ];

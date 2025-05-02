@@ -30,6 +30,8 @@ export class RegistroSintomasPage implements OnInit {
   anoActual: number = new Date().getFullYear();
   fechaDeRegistro: String | null = null;
   indiceCiclo: number | null = null;
+  periodoIniciado: boolean = false;
+  diasRetraso: number = 0;
 
   constructor(
     private apiService: ApiService,
@@ -41,11 +43,16 @@ export class RegistroSintomasPage implements OnInit {
 
   async ngOnInit() {
     this.cargarUsuario();
+
+    const params = this.route.snapshot.params;
+    this.fechaDeRegistro = params['fecha'] || 'hoy';
+    this.diasRetraso = params['retraso'] || null;
+
     await this.obtenerSintomas();
-    this.route.params.subscribe((params) => {
-      this.fechaDeRegistro = params['fecha'];
-      console.log('Fecha de registro:', this.fechaDeRegistro);
-    });
+  }
+
+  alternarPeriodo() {
+    this.periodoIniciado = !this.periodoIniciado;
   }
 
   async obtenerSintomas() {
@@ -80,8 +87,6 @@ export class RegistroSintomasPage implements OnInit {
     } finally {
       this.cargando = false; // Ocultar spinner
     }
-    
-
   }
 
   // Función para renombrar los síntomas según su tipo
@@ -133,8 +138,33 @@ export class RegistroSintomasPage implements OnInit {
     }
   
     await this.utilidades.mostrarLoading('Registrando datos...');
+    console.log('ha iniciado el periodo? ',this.periodoIniciado)
+    console.log('hay dias de retraso? ',this.diasRetraso)
+    // Si periodoIniciado es true y hay días de retraso, registrar esos datos primero
+    if (this.periodoIniciado && this.diasRetraso) {
+      const averageCiclo = 25;
+      const fechaRegistroValida = (this.fechaDeRegistro ?? new Date().toISOString().split('T')[0]).toString();
+      const startDate = new Date(fechaRegistroValida);      
+      const finishDate = new Date(startDate);
+      finishDate.setDate(startDate.getDate() + averageCiclo - 1);
   
-    // Validar al menos un síntoma calificado
+      const datosRetraso = {
+        user_id: this.userId,
+        cycle_status: 1,
+        Start_day: startDate.toISOString().split('T')[0],
+        average_periodo: 5,
+        average_ciclo: averageCiclo,
+        Finish_day: finishDate.toISOString().split('T')[0],
+      };
+  
+      try {
+        await lastValueFrom(this.apiService.createCiclo(datosRetraso));
+        console.log('Datos de retraso registrados exitosamente.');
+      } catch (error) {
+        console.error('Error al registrar los datos de retraso:', error);
+      }
+    }
+  
     const sintomasCalificados = this.sintomas
       .filter((sintoma) => sintoma.estrellas > 0)
       .map((sintoma) => ({
@@ -142,57 +172,40 @@ export class RegistroSintomasPage implements OnInit {
         intensidad: sintoma.estrellas,
       }));
   
-    if (sintomasCalificados.length === 0) {
-      await this.utilidades.ocultarLoading();
-      this.utilidades.mostrarToastAdvertencia(
-        'Por favor, califica al menos un síntoma'
-      );
-      return;
-    }
+    const temperaturaValida = (!this.temperatura || isNaN(this.temperatura) || Number(this.temperatura) <= 0)
+      ? 36.5 : Number(this.temperatura);
   
-    // Validar campos numéricos obligatorios y que no estén vacíos ni en cero
-    if (
-      this.temperatura == null || this.temperatura === 0 || isNaN(this.temperatura) || Number(this.temperatura) <= 0 ||
-      this.peso == null || this.peso === 0 || isNaN(this.peso) || Number(this.peso) <= 0 ||
-      this.sangradoGotas == null || this.sangradoGotas === 0 || isNaN(this.sangradoGotas) || Number(this.sangradoGotas) <= 0
-    ) {
-      await this.utilidades.ocultarLoading();
-      this.utilidades.mostrarToastAdvertencia(
-        'Por favor ingresa valores válidos');
-      return;
-    }
+    const pesoValido = (!this.peso || isNaN(this.peso) || Number(this.peso) <= 0)
+      ? 60 : Number(this.peso);
   
-    // Preparar datos para enviar
+    const sangradoValido = (!this.sangradoGotas || isNaN(this.sangradoGotas) || Number(this.sangradoGotas) <= 0)
+      ? 0 : Number(this.sangradoGotas);
+  
     const datosCiclo: any = {
       user_id: this.userId,
       date: this.fechaDeRegistro,
-      F_15: this.sangradoGotas,
-      notes: this.notasValue,
-      temperature: this.temperatura,
-      weight: this.peso,
+      F_15: sangradoValido,
+      notes: this.notasValue || '',
+      temperature: temperaturaValida,
+      weight: pesoValido,
     };
   
-    // Agregar síntomas calificados
     sintomasCalificados.forEach((sintoma) => {
       datosCiclo[sintoma.nombre] = parseInt(sintoma.intensidad);
     });
   
     try {
-      const respuesta = await lastValueFrom(
-        this.apiService.crearCiclo(datosCiclo)
-      );
-      console.log('Ciclo registrado con éxito:', respuesta);
+      const respuesta = await lastValueFrom(this.apiService.crearCiclo(datosCiclo));
+      console.log('Síntomas del ciclo registrados:', respuesta);
   
       await this.utilidades.ocultarLoading();
-      this.utilidades.mostrarToastAdvertencia(
-        'Datos registrados correctamente'
-      );
+      this.utilidades.mostrarToastAdvertencia('Datos registrados correctamente');
       this.apiService.notificarActualizacion();
       this.navCtrl.back();
       this.reiniciarFormulario();
     } catch (error) {
       await this.utilidades.ocultarLoading();
-      console.error('Error al registrar el ciclo:', error);
+      console.error('Error al registrar los síntomas del ciclo:', error);
       this.utilidades.mostrarToastAdvertencia('Error al registrar los datos');
     }
   }

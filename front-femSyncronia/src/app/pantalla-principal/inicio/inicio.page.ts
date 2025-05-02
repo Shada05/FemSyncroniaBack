@@ -5,8 +5,8 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { ChangeDetectorRef } from '@angular/core';
-
-
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 interface Sintoma {
   id: number; // ID del síntoma
@@ -46,7 +46,7 @@ export class InicioPage implements OnInit {
   // Propiedades para el ciclo menstrual
   fechaInicio= new Date(2025, 2, 28); 
   fechaFin = new Date(2025, 3, 24);
-
+  private destroy$ = new Subject<void>();
   // Propiedades para las etiquetas
   diaActual: number = 0; // Número del día actual
   indice: number = 1; // Número del índice (puedes cambiarlo según sea necesario)
@@ -90,18 +90,29 @@ export class InicioPage implements OnInit {
 
   async ngOnInit() {
     await this.cargarUsuario(); // Esperar a que cargue el usuario primero
-    
+  
+    await this.cargarFechasDelCicloActual();
+  
     this.actualizarMes(this.fechaActual);
-    
-    // Cargar síntomas después de que todo esté listo
+  
     await this.obtenerSintomasCalificados();
-    
-    // Configurar intervalo después de la carga inicial
+  
     setInterval(() => {
       this.obtenerSintomasCalificados();
     }, 86400000);
+  
+    // Suscribirse a eventos de actualización del ciclo
+    this.apiService.cicloActualizado$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.cargarFechasDelCicloActual();
+      });
   }
 
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
   // Función para cargar los datos del usuario y la imagen de perfil
   async cargarUsuario() {
     const token = await this.authService.obtenerToken();
@@ -346,11 +357,12 @@ export class InicioPage implements OnInit {
         
         const inicio = parseDate(ciclo.Start_day);
         const fin = parseDate(ciclo.Finish_day);
-  
+        const duracion = ciclo.average_ciclo;
         // Validar si el mes y año coinciden (ignorando el día)
         if (hoy.getFullYear() === inicio.getFullYear() && hoy.getMonth() === inicio.getMonth()) {
           this.fechaInicio = inicio;
           this.fechaFin = fin;
+          this.duracionCiclo = duracion;
           cicloEncontrado = true;
           break;
         }

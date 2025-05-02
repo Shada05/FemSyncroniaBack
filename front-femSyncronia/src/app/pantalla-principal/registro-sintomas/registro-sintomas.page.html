@@ -13,7 +13,16 @@
     <!-- Contenedor para el período -->
     <div class="periodo-container">
       <ion-text class="texto-periodo">Período</ion-text>
-      <ion-button class="boton-comenzado">He terminado</ion-button>
+      <ion-button
+        class="boton-comenzado"
+        [ngStyle]="{
+          '--color': periodoIniciado ? '#8DB0FF' : '#FF9CA7',
+          '--background': 'white'
+        }"
+        (click)="alternarPeriodo()"
+      >
+        {{ periodoIniciado ? 'He terminado' : 'He comenzado'}}
+      </ion-button>
     </div>
 
     <!-- Contenedor para el sangrado -->
