@@ -132,10 +132,15 @@ export class RegistroSintomasPage implements OnInit {
   }
 
   async registrarCiclo() {
+
     if (!this.userId) {
       this.utilidades.mostrarToastAdvertencia('No hay usuario identificado');
       return;
     }
+    /*this.apiService.eliminarCicloDelMes('32').subscribe({
+      next: (res) => console.log('Eliminado:', res),
+      error: (err) => console.error('Error al eliminar:', err)
+    });  */  
   
     await this.utilidades.mostrarLoading('Registrando datos...');
     console.log('ha iniciado el periodo? ',this.periodoIniciado)

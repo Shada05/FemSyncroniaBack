@@ -43,6 +43,11 @@ export class ApiService {
   crearCiclo(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/api/v1/cycles`, data);
   }
+
+  eliminarCicloDelMes(user_id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/api/v1/cycle_calendar/user/${user_id}`);
+  }  
+  
   uploadImage(formData: FormData): Observable<{ imageUrl: string }> {
     return this.http.post<{ imageUrl: string }>(
       `${this.apiUrl}/upload`,
