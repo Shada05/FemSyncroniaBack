@@ -1,4 +1,4 @@
-<ion-menu side="end" menuId="menu-perfil" contentId="contenido" width="280px">
+<ion-menu side="end" menuId="menu-perfil" contentId="contenido" width="223px">
   <ion-content>
     <!-- Espacio para la imagen de perfil -->
     <div class="datos-perfil">
@@ -11,39 +11,38 @@
     </div>
 
     <!-- Secciones del menú -->
-    <ion-item button detail="true" lines="none" [routerLink]="['/mi-perfil']">
+    <ion-item button lines="none" [routerLink]="['/mi-perfil']">
       <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/circulo-de-usuario.svg"></ion-icon>
       <ion-label>Mi perfil</ion-label>
     </ion-item>
-    <ion-item button detail="true" lines="none" [routerLink]="['/construccion']">
-      <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/foro.svg"></ion-icon>
+    <ion-item button lines="none">
+      <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/comentarios.svg"></ion-icon>
       <ion-label>Foro</ion-label>
     </ion-item>
-    <ion-item button detail="true" lines="none" [routerLink]="['/construccion']">
-      <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/compartir.svg"></ion-icon>
-      <ion-label>Compartir</ion-label>
+    <ion-item button lines="none">
+      <ion-icon class="icono" slot="start"
+        src="/assets/icons/pantalla-principal/cinta-de-punto-de-espalda.svg"></ion-icon>
+      <ion-label>Recordatorios</ion-label>
     </ion-item>
-    <ion-item button detail="true" lines="none">
+    <ion-item button lines="none">
       <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/interrogatorio.svg"></ion-icon>
       <ion-label>Ayuda</ion-label>
     </ion-item>
-    <ion-item button detail="true" lines="none">
+    <ion-item button lines="none">
       <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/ajustes.svg"></ion-icon>
       <ion-label>Configuración</ion-label>
     </ion-item>
-    <ion-item button detail="true" lines="none" (click)="logout()">
-      <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/cerrarSesion.svg"></ion-icon>
+    <ion-item button lines="none" (click)="logout()">
+      <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/salida.svg"></ion-icon>
       <ion-label>Cerrar sesión</ion-label>
     </ion-item>
-    <ion-item style="margin-top: 350px;" button detail="true" lines="none" [routerLink]="['/acerca']">
-      <ion-icon slot="start" src="/assets/img/logo/Logo_N.svg" class="logo"></ion-icon>
-      <ion-label class="logo-label">
-        <ion-text class="acerca-de">Acerca de</ion-text><br>
+    <div class="logo-container">
+      <img class="logo" src="/assets/img/logo.svg" alt="Logo">
+      <div class="logo-textos">
+        <ion-text class="acerca-de">Acerca de</ion-text>
         <ion-text class="fem-syncronia">FemSyncronia</ion-text>
-      </ion-label>
-    </ion-item>
-    
-    
+      </div>
+    </div>
   </ion-content>
 </ion-menu>
 

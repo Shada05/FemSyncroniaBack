@@ -186,7 +186,7 @@ ion-content {
 }
 
 ion-menu {
-  --width: 280px;
+  --width: 243px;
   ion-content {
     --background: #ffffff; /* Establece un fondo blanco para el contenido del menú */
     background-image: none; /* Asegúrate de que no haya imagen de fondo */
@@ -253,7 +253,6 @@ ion-menu {
 
 ion-item {
   --background: #ffff;
-  font-family: 'Open Sans';
   font-size: 20px;
   font-weight: 600;
   --color: black;
@@ -268,20 +267,18 @@ ion-item {
 .logo-container {
   display: flex;
   align-items: center; /* Centra verticalmente los elementos */
+  justify-content: center; /* Centra horizontalmente los elementos */
   position: absolute; /* Fija el contenedor en una posición específica */
   bottom: 20px; /* Lo coloca en la parte inferior */
   width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
-  padding-left: 16px; /* Agrega este margen izquierdo */
-  padding-right: 16px; /* opcional, por simetría */
-  margin-top: 30px; /* Separación respecto al ítem anterior */
-  margin-bottom: 30px; /* Evita que quede pegado al borde */
+  padding: 10px 0; /* Espaciado opcional si lo necesitas */
 }
 
 /* Estilo de la imagen del logo */
 .logo {
-  width: 35px; /* Ajusta el tamaño del logo */
-  height: 35px; /* Ajusta el tamaño del logo */
-  object-fit: contain;
+  width: 40px; /* Ajusta el tamaño del logo */
+  height: 40px; /* Ajusta el tamaño del logo */
+  object-fit: cover;
   margin-right: 8px; /* Espaciado entre el logo y los textos */
 }
 
@@ -290,27 +287,20 @@ ion-item {
   display: flex;
   flex-direction: column; /* Coloca los textos uno debajo del otro */
   align-items: flex-start; /* Alinea los textos a la izquierda */
-  margin-left: 12px;
 }
 
 /* Estilo del texto 'Acerca de' */
 .acerca-de {
-  font-family: 'Open Sans';
-  font-size: 18px;
-  font-weight: 600;
-  color: #000000;
+  font-size: 17px;
+  font-weight: 400;
+  color: #333333;
 }
 
 /* Estilo del texto 'femSyncronia' */
 .fem-syncronia {
-  font-family: 'Open Sans';
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
-  color: #000000; /* Color de destaque */
-}
-
-ion-item::part(detail-icon) {
-  margin-right: 5px; /* margen de flecha */
+  color: #ff4d7f; /* Color de destaque */
 }
 
 ion-tab-bar {
@@ -724,7 +714,7 @@ ion-card-content {
 /* Icono */
 .icono {
   font-size: 25px;
-  color: #000000;
+  color: #4a4a4a;
 }
 
 /* Título */
