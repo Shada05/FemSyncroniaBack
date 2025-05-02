@@ -1,7 +1,7 @@
 <div class = "contenedor-principal">
 
   <!-- 1ro parte: Carrusel -->
-  <div class="carrusel horizontal" *ngIf="!selectedCuidado && !mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones" >
+  <div class="carrusel horizontal" *ngIf="!selectedCuidado && !mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones && !selectedRecomendacion">
     <ion-text class="titulo-informacion">Novedades</ion-text>
     <div 
       class="carrusel-inner" 
@@ -34,16 +34,18 @@
   </div>
 
   <!-- 2do parte: Seleccion -->
-  <div class="galeria-horizontal" *ngIf="!selectedCuidado && !mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones">
+<div class="galeria-horizontal" *ngIf="!selectedCuidado && !mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones && !selectedRecomendacion">
+
     <ion-text class="titulo-informacion">Recomendaciones para ti</ion-text>
     <div class="contenedor-galeria">
-      <img *ngFor="let img of imagenesGaleria" [src]="img.src" [alt]="img.alt" class="img-galeria" />
+      <img *ngFor="let img of imagenesGaleria" [src]="img.src" [alt]="img.alt" class="img-galeria" 
+      (click)="verRecomendacion(img.alt)" />
     </div>
   </div>
 
 
   <!-- 3ro parte: Tabla -->
-  <div class="bloque-cuidados" *ngIf="!selectedCuidado && !mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones">
+  <div class="bloque-cuidados" *ngIf="!selectedCuidado && !mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones && !selectedRecomendacion">
     <ion-text class="titulo-informacion">Cuidados del día a día</ion-text>
       <div class="cuidados-grid">
         <div class="cuadro" *ngFor="let item of cuidados" (click)="mostrarCuidado(item.titulo)">
@@ -315,21 +317,63 @@
       <p class="texto-final-destacado">Respira, relájate y déjate llevar</p><br>
     </ng-container>
     
-        <!-- CUADRO: Hidrátate siempre -->
-        <ng-container *ngIf="selectedCuidado === 'Hidrátate siempre'">
-          <img src="assets/img/cuidados/C-6.svg" alt="Hidrátate siempre" class="img-ilustrativa2" />
-          <div class="contenedor-titulo">
-            <ion-text class="titulo-panel">Hidrátate siempre</ion-text>
-          </div>
-          <div class="texto-informativo">
-            <p>Mantenerte bien hidratada es clave para reducir la hinchazón, los dolores de cabeza y mejorar la digestión.</p>
-            <p>El agua ayuda a equilibrar las hormonas, mantiene la piel radiante y favorece la circulación.</p>
-            <p>Beber suficiente agua también contribuye a aliviar los cólicos y mejora tu energía, ayudándote a sentirte 
-              más equilibrada y en control 
-              durante esos días.</p>
-          </div>
-          <p class="texto-final-destacado">Un sorbo de agua, un respiro para tu cuerpo</p><br>
-        </ng-container>
+    <!-- CUADRO: Hidrátate siempre -->
+    <ng-container *ngIf="selectedCuidado === 'Hidrátate siempre'">
+      <img src="assets/img/cuidados/C-6.svg" alt="Hidrátate siempre" class="img-ilustrativa2" />
+      <div class="contenedor-titulo">
+        <ion-text class="titulo-panel">Hidrátate siempre</ion-text>
+      </div>
+      <div class="texto-informativo">
+        <p>Mantenerte bien hidratada es clave para reducir la hinchazón, los dolores de cabeza y mejorar la digestión.</p>
+        <p>El agua ayuda a equilibrar las hormonas, mantiene la piel radiante y favorece la circulación.</p>
+        <p>Beber suficiente agua también contribuye a aliviar los cólicos y mejora tu energía, ayudándote a sentirte 
+          más equilibrada y en control 
+          durante esos días.</p>
+      </div>
+      <p class="texto-final-destacado">Un sorbo de agua, un respiro para tu cuerpo</p><br>
+    </ng-container>
+
+  </div>
+</ng-container>
+
+
+<ng-container *ngIf="selectedRecomendacion">
+  <div class="info-panel">
+    <ion-button fill="clear" class="btn-cerrar" (click)="cerrarRecomendacion()">
+      <ion-icon name="close-circle-outline"></ion-icon>
+    </ion-button>
+
+    <!-- Recomendación 1: ¿Cuál debería elegir? -->
+    <ng-container *ngIf="selectedRecomendacion === 'Anticonceptivos'">
+      <div class="contenedor-titulo">
+        <ion-text class="titulo-panel">¿Cuál debería elegir?</ion-text>
+      </div>
+      <div class="contenido-panel-centrado">
+        <img src="assets/img/Informacion/I-5.svg" alt="¿Cuál debería elegir?" class="img-ilustrativa4" />
+        <p>Cada persona tiene necesidades distintas, y elegir el método correcto depende de tu estilo de vida, 
+          salud y comodidad. Aquí algunos puntos clave:<br>
+
+          <br><strong>🔹 Si buscas un método altamente efectivo y de larga duración</strong>
+          👉 DIU o implantes: No necesitas recordarlo a diario y pueden durar entre 3 y 10 años <br>
+
+          <br><strong>🔹 Si prefieres algo fácil de usar y con control mensual</strong>
+          👉 Píldoras, parches o anillos: Son métodos hormonales que debes usar con constancia 
+          para que sean efectivos.<br>
+
+          <br><strong>🔹 Si quieres protección contra infecciones de transmisión sexual (ITS)</strong>
+          👉 Condón masculino o femenino: Es el único método que protege tanto de embarazos como de ITS.<br>
+
+          <br><strong>🔹  Si prefieres algo natural o sin hormonas</strong>
+          👉 Método del ritmo o diafragma: Requieren más control y conocimiento del ciclo menstrual,
+           pero pueden ser opciones válidas.<br>
+
+          <br><strong>🔹  Si buscas una opción definitiva</strong>
+          👉 Esterilización femenina o masculina: Métodos permanentes para quienes ya no desean tener hijos.<br>
+        </p>
+      </div>
+      <img src="assets/img/Informacion/I-7.svg" alt="tabla comparativa" class="img-ilustrativa7" />
+      <p class="contenido-panel-final">💡 Consulta con un especialista para elegir la mejor opción según tu cuerpo y necesidades.</p><br><br>
+    </ng-container>
 
   </div>
 </ng-container>

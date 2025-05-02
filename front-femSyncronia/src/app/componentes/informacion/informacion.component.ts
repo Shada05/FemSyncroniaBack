@@ -13,9 +13,9 @@ export class InformacionComponent  implements OnInit, OnDestroy {
     mostrarInfoOpciones = false;
   
     imagenesCarrusel: string[] = [
-      'assets/img/1ro-carrusel/flujo.svg',
-      'assets/img/1ro-carrusel/periodo.svg',
-      'assets/img/1ro-carrusel/versus.svg'
+      'assets/img/carrusel/flujo.svg',
+      'assets/img/carrusel/periodo.svg',
+      'assets/img/carrusel/versus.svg'
     ];
     
     slideVisual = 1;
@@ -97,9 +97,18 @@ cuidados = [
     { src: 'assets/img/recomendaciones/spotify.svg', alt: 'Spotify' },
     { src: 'assets/img/recomendaciones/calificanos.svg', alt: 'Califícanos' },
   ];
-  
-  
 
+  selectedRecomendacion: string | null = null;
+
+  verRecomendacion(titulo: string) {
+    this.selectedRecomendacion = titulo;
+  }
+
+  cerrarRecomendacion() {
+    this.selectedRecomendacion = null;
+  }
+
+  
   constructor() { }
 
 }
