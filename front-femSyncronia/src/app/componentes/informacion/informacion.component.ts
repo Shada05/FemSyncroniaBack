@@ -106,9 +106,23 @@ cuidados = [
 
   cerrarRecomendacion() {
     this.selectedRecomendacion = null;
+    this.rating = 0;
+    this.enviado = false;
   }
 
-  
+  rating = 0;
+
+  setRating(value: number) {
+    this.rating = value;
+  }
+
+  enviado = false;
+
+  enviarCalificacion() {
+    this.enviado = true;
+    // aquí puedes meter lógica para enviar datos si gustas
+  }
+
   constructor() { }
 
 }
