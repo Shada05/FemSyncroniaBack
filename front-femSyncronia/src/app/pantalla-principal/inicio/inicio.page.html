@@ -35,13 +35,15 @@
       <ion-icon class="icono" slot="start" src="/assets/icons/pantalla-principal/cerrarSesion.svg"></ion-icon>
       <ion-label>Cerrar sesión</ion-label>
     </ion-item>
-    <div class="logo-container">
-      <img class="logo" src="/assets/img/logo/Logo_N.svg" alt="Logo">
-      <div class="logo-textos">
-        <ion-text class="acerca-de">Acerca de</ion-text>
+    <ion-item style="margin-top: 350px;" button detail="true" lines="none" [routerLink]="['/acerca']">
+      <ion-icon slot="start" src="/assets/img/logo/Logo_N.svg" class="logo"></ion-icon>
+      <ion-label class="logo-label">
+        <ion-text class="acerca-de">Acerca de</ion-text><br>
         <ion-text class="fem-syncronia">FemSyncronia</ion-text>
-      </div>
-    </div>
+      </ion-label>
+    </ion-item>
+    
+    
   </ion-content>
 </ion-menu>
 

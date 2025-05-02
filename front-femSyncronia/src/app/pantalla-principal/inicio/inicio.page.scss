@@ -309,6 +309,10 @@ ion-item {
   color: #000000; /* Color de destaque */
 }
 
+ion-item::part(detail-icon) {
+  margin-right: 5px; /* margen de flecha */
+}
+
 ion-tab-bar {
   --background: #ffffff; /* Fondo blanco para el tab-bar */
   border-top: none;

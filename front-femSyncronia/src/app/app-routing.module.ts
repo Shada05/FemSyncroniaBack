@@ -120,7 +120,12 @@ const routes: Routes = [
   {
     path: 'construccion',
     loadChildren: () => import('./pantalla-principal/construccion/construccion.module').then( m => m.ConstruccionPageModule)
+  },
+  {
+    path: 'acerca',
+    loadChildren: () => import('./pantalla-principal/acerca/acerca.module').then( m => m.AcercaPageModule)
   }
+
   
  
 
