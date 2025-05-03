@@ -1,13 +1,18 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>notificaciones</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="fondo-construccion">
+  <br>
+  <div class="encabezado-centrado">
+    <p class="titulo">Notificaciones</p>
+    <ion-button class="boton-cerrar" fill="clear" (click)="cerrarPantalla()">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-button>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">notificaciones</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="contenido">
+    <br><br><br><br><br><br><br><br><br>
+    <img src="/assets/img/recursos/no_notificacion.svg" alt="notificacion" class="imagen-central" />
+    <p class="novedades"><br>Aun no hay notificaciones<br>por mostrar.</p>
+  </div>
 </ion-content>
+
+
+
