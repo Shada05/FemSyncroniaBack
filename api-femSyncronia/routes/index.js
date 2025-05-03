@@ -76,7 +76,7 @@ router.post('/api/v1/cycles_prediction', cyclesController.store_prediction);
 router.get('/api/v1/cycles', cyclesController.index);
 router.get('/api/v1/cycles/:id', cyclesController.show);
 router.put('/api/v1/cycles/:id', cyclesController.update);
-router.delete('/api/v1/cycles/:id', cyclesController.destroy);
+router.delete('/api/v1/cycles/user_cycles/:user_id/:year/:month', cyclesController.destroy);
 router.get('/cycles_tables_id/:user_id', cyclesController.show_tablesid);
 router.get('/api/v1/cycles_tables/:user_id', cyclesController.show_tables); //mostrar el ciclo con las tablas de sintomas
 
@@ -142,7 +142,7 @@ router.get('/api/v1/cycle_calendar', cycle_calendarController.index);
 router.get('/api/v1/cycle_calendar/:id', cycle_calendarController.show);
 router.get('/api/v1/cycle_calendar_id/:user_id', cycle_calendarController.show_userid);
 router.put('/api/v1/cycle_calendar/:id', cycle_calendarController.update);
-router.delete('/api/v1/cycle_calendar/user/:user_id', cycle_calendarController.destroy);
+router.delete('/api/v1/cycle_calendar/user/:user_id/:year/:month', cycle_calendarController.destroy);
 
 
 

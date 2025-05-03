@@ -57,3 +57,32 @@
   --border-radius: 12px; /* Bordes redondeados */
   color:#000000;
 }
+
+.custom-alert .alert-wrapper {
+  background: #f8d7da; /* fondo rosa palo */
+  color: #721c24; /* texto más oscuro y elegante que contraste sin romper el estilo */
+  border-radius: 12px;
+}
+
+.custom-alert .alert-title,
+.custom-alert .alert-sub-title,
+.custom-alert .alert-message {
+  color: #721c24; /* texto oscuro suave para combinar */
+}
+
+.custom-alert .alert-button {
+  color: #721c24; /* mismo tono que el texto para coherencia */
+  font-weight: bold;
+}
+
+.custom-alert .alert-button.alert-button-cancel {
+  background-color: #f1b0b7; /* tono más claro del rosa para botón cancelar */
+  color: #721c24;
+  border-radius: 6px;
+}
+
+.custom-alert .alert-button.alert-button-confirm {
+  background-color: #f5c6cb; /* otro tono suave complementario */
+  color: #721c24;
+  border-radius: 6px;
+}

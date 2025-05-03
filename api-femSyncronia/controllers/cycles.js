@@ -1,5 +1,6 @@
 const cycles  = require('../models').cycles;
 const { spawn } = require('child_process'); // Importar el módulo child_process
+const { Op, fn, col, where } = require('sequelize');
 /*Nota importante:
     Los sintomas tienen una valoración del 0 al 5 en la base de datos
     Por cada sintoma se van a hacer 1 modelo con regresion lineal para predecir el valor de los sintomas
@@ -358,11 +359,16 @@ exports.show_tables = async (req, res) => {
 };
 
 exports.destroy = async (req, res) => {
-    const id = parseInt(req.params.id);
-
+    const userId = parseInt(req.params.user_id);
+    const year = parseInt(req.params.year);
+    const month = parseInt(req.params.month);
     return await cycles.destroy({
         where: {
-            id: id
+            user_id: userId,
+            [Op.and]: [
+                where(fn('MONTH', col('date')), month),
+                where(fn('YEAR', col('date')), year)
+            ]
         }
     }).then(
         deleted => {

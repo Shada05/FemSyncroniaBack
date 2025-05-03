@@ -49,18 +49,20 @@ exports.show = async (req, res) => {
 
 exports.destroy = async (req, res) => {
     const userId = parseInt(req.params.user_id);
+    const year = parseInt(req.params.year);
+    const month = parseInt(req.params.month);
 
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth() + 1; // Enero es 0
-    const currentYear = currentDate.getFullYear();
+    if (isNaN(userId) || isNaN(year) || isNaN(month)) {
+        return res.status(400).send({ message: 'Parámetros inválidos' });
+    }
 
     try {
         const deleted = await cycle_calendars.destroy({
             where: {
                 user_id: userId,
                 [Op.and]: [
-                    where(fn('MONTH', col('Start_day')), currentMonth),
-                    where(fn('YEAR', col('Start_day')), currentYear)
+                    where(fn('MONTH', col('Start_day')), month),
+                    where(fn('YEAR', col('Start_day')), year)
                 ]
             }
         });

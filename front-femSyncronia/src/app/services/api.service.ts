@@ -44,10 +44,14 @@ export class ApiService {
     return this.http.post(`${this.apiUrl}/api/v1/cycles`, data);
   }
 
-  eliminarCicloDelMes(user_id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/api/v1/cycle_calendar/user/${user_id}`);
+  eliminarCicloPorMesYAnio(user_id: string, year: number, month: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/api/v1/cycle_calendar/user/${user_id}/${year}/${month}`);
   }  
   
+  eliminarRegistroEnciclo(user_id: string, year: number, month: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/api/v1/cycles/user_cycles/${user_id}/${year}/${month}`);
+  }
+
   uploadImage(formData: FormData): Observable<{ imageUrl: string }> {
     return this.http.post<{ imageUrl: string }>(
       `${this.apiUrl}/upload`,

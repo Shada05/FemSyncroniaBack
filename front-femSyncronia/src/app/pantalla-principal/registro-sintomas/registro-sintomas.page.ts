@@ -5,7 +5,7 @@ import { lastValueFrom } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { UtilidadesService } from 'src/app/services/utilidades.service';
 import { NavController } from '@ionic/angular';
-
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-registro-sintomas',
   templateUrl: './registro-sintomas.page.html',
@@ -38,7 +38,8 @@ export class RegistroSintomasPage implements OnInit {
     private authService: AuthService,
     private route: ActivatedRoute,
     private utilidades: UtilidadesService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private alertController: AlertController,
   ) {}
 
   async ngOnInit() {
@@ -53,6 +54,29 @@ export class RegistroSintomasPage implements OnInit {
 
   alternarPeriodo() {
     this.periodoIniciado = !this.periodoIniciado;
+  }
+
+  async mostrarConfirmacionIonic(mensaje: string): Promise<boolean> {
+    return new Promise(async (resolve) => {
+      const alert = await this.alertController.create({
+        header: 'Confirmación',
+        message: mensaje,
+        cssClass: 'custom-alert',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: () => resolve(false),
+          },
+          {
+            text: 'Aceptar',
+            handler: () => resolve(true),
+          },
+        ],
+      });
+  
+      await alert.present();
+    });
   }
 
   async obtenerSintomas() {
@@ -132,24 +156,67 @@ export class RegistroSintomasPage implements OnInit {
   }
 
   async registrarCiclo() {
-
     if (!this.userId) {
       this.utilidades.mostrarToastAdvertencia('No hay usuario identificado');
       return;
     }
-    /*this.apiService.eliminarCicloDelMes('32').subscribe({
-      next: (res) => console.log('Eliminado:', res),
-      error: (err) => console.error('Error al eliminar:', err)
-    });  */  
-  
     await this.utilidades.mostrarLoading('Registrando datos...');
-    console.log('ha iniciado el periodo? ',this.periodoIniciado)
-    console.log('hay dias de retraso? ',this.diasRetraso)
-    // Si periodoIniciado es true y hay días de retraso, registrar esos datos primero
-    if (this.periodoIniciado && this.diasRetraso) {
+    
+    const fechaRegistroValida = this.fechaDeRegistro ?? new Date().toISOString().split('T')[0];
+    const fechaActual = new Date(fechaRegistroValida.toString());
+    const mesActual = fechaActual.getMonth() + 1;
+    const anioActual = fechaActual.getFullYear();
+  
+    if (this.periodoIniciado) {
+      let ciclos: any[] = [];
+      let errorObtenerCiclos = false;
+  
+      try {
+        ciclos = await lastValueFrom(this.apiService.mostrarCicloCalendario(this.userId));
+      } catch (error) {
+        console.error('Error obteniendo ciclos existentes, continuando como si no hubiera ciclos', error);
+        errorObtenerCiclos = true;
+      }
+  
+      if (!errorObtenerCiclos) {
+        const inicioNuevo = new Date(anioActual, mesActual - 1, 1).toISOString().split('T')[0];
+  
+        const yaExisteCiclo = ciclos.some((ciclo: any) => {
+          try {
+            const fechaInicio = new Date(ciclo.Start_day);
+            const inicioExistente = new Date(fechaInicio.getFullYear(), fechaInicio.getMonth(), 1).toISOString().split('T')[0];
+            return inicioExistente === inicioNuevo;
+          } catch (error) {
+            console.error('Error procesando fecha del ciclo:', ciclo.Start_day, error);
+            return false;
+          }
+        });
+  
+        if (yaExisteCiclo) {
+          await this.utilidades.ocultarLoading();
+          const deseaEliminar = await this.mostrarConfirmacionIonic(
+            'Ya existe un registro para este mes. ¿Deseas reemplazarlo?'
+          );
+  
+          if (!deseaEliminar) {
+            this.utilidades.mostrarToastAdvertencia('Registro cancelado');
+            return;
+          }
+  
+          try {
+            await lastValueFrom(this.apiService.eliminarCicloPorMesYAnio(this.userId, anioActual, mesActual));
+            await lastValueFrom(this.apiService.eliminarRegistroEnciclo(this.userId, anioActual, mesActual));
+          } catch (error) {
+            console.error('Error eliminando ciclo existente', error);
+            this.utilidades.mostrarToastAdvertencia('Error eliminando ciclo anterior, pero continuaremos con el registro');
+          }
+        }
+      }
+  
+      await this.utilidades.ocultarLoading();
+      await this.utilidades.mostrarLoading('Registrando datos...');
       const averageCiclo = 25;
-      const fechaRegistroValida = (this.fechaDeRegistro ?? new Date().toISOString().split('T')[0]).toString();
-      const startDate = new Date(fechaRegistroValida);      
+      const startDate = new Date(fechaRegistroValida.toString());
       const finishDate = new Date(startDate);
       finishDate.setDate(startDate.getDate() + averageCiclo - 1);
   
@@ -166,7 +233,8 @@ export class RegistroSintomasPage implements OnInit {
         await lastValueFrom(this.apiService.createCiclo(datosRetraso));
         console.log('Datos de retraso registrados exitosamente.');
       } catch (error) {
-        console.error('Error al registrar los datos de retraso:', error);
+        console.error('Error registrando ciclo:', error);
+        this.utilidades.mostrarToastAdvertencia('Error registrando ciclo, pero continuaremos con síntomas');
       }
     }
   
@@ -213,7 +281,7 @@ export class RegistroSintomasPage implements OnInit {
       console.error('Error al registrar los síntomas del ciclo:', error);
       this.utilidades.mostrarToastAdvertencia('Error al registrar los datos');
     }
-  }
+  }  
 
   // Reinicia el formulario después de enviar
   private reiniciarFormulario() {
@@ -231,6 +299,7 @@ export class RegistroSintomasPage implements OnInit {
       s.mostrarEstrellas = false;
     });
   }
+
   async cargarUsuario() {
     const token = await this.authService.obtenerToken();
     if (token) {
