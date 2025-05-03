@@ -11,7 +11,7 @@ export class ConstruccionPage implements OnInit {
   constructor(private navCtrl: NavController) {}
 
   cerrarPantalla() {
-    this.navCtrl.back(); // Regresa a la pantalla anterior
+    this.navCtrl.back(); 
   }
 
   ngOnInit() {}

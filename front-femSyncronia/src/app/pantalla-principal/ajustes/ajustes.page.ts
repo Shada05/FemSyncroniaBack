@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-ajustes',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AjustesPage implements OnInit {
 
-  constructor() { }
+  constructor(private navCtrl: NavController) {}
+  
+    cerrarPantalla() {
+      this.navCtrl.back(); 
+    }
 
   ngOnInit() {
   }
