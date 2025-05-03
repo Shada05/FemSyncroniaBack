@@ -55,7 +55,7 @@
         font-weight: 600;
         line-height: normal;
         text-align: left;
-        margin: 24px auto 4px auto;
+        margin: 24px auto 0px auto; 
         width: 85%; 
     }
     
@@ -65,10 +65,11 @@
     border-radius: 10px;
     background: #FFE3E0;
     width: 320px;
-    height: 115px;
+    height: 130px;
     flex-shrink: 0;
     padding: 16px;
-    margin: 8px 16px;
+    margin: 12px 16px;
+    margin: 4px auto 0 auto;
     width: 85%; 
   
     .item-ajuste, .item-simple {
@@ -117,3 +118,71 @@
     justify-content: space-between;
   }
   
+  ion-item.item-simple {
+    --background: transparent;
+    --color: black;
+    --detail-icon-color: black;
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    margin: 0;
+    height: auto; //
+    font-family: "Open Sans";
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+    border-radius: 8px;
+  
+    img {
+      width: 28px;
+      margin-left: 4px;
+    }
+  
+    .texto-opcion {
+      color: #000;
+      font-weight: 600;
+    }
+
+  }
+  
+  .card-ajuste-p {
+    border-radius: 10px;
+    background: #FFE3E0;
+    width: 320px;
+    height: 115px;
+    flex-shrink: 0;
+    padding: 16px;
+
+    margin: 4px auto 0 auto;
+    width: 85%; 
+  
+    .item-ajuste, .item-simple {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 12px;
+      
+      img {
+        width: 35px;
+        margin-right: 12px;
+        margin-left: 4px;
+        display: block;
+      }
+  
+      span {
+        font-size: 16px;
+        font-weight: 600;
+        color: #000;
+        margin-right: auto;
+      }
+  
+      ion-select {
+        margin-left: auto;
+        max-width: 120px;
+      }
+    }
+
+  }

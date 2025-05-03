@@ -10,7 +10,7 @@
   <div class="contenido">
 
     <p class="titulo-gris">Preferencias</p>
-    <div class="card-ajuste">
+    <div class="card-ajuste-p">
       <div class="item-ajuste">
         <img src="/assets/img/ajustes/A-1.svg" alt="Idioma" />
         <span>Idioma</span>
@@ -31,39 +31,43 @@
 
     <p class="titulo-gris">Funciones</p>
     <div class="card-ajuste">
-      <div class="item-simple">
-        <img src="/assets/img/ajustes/A-3.svg" alt="Exportar"  />
-        <span>Exportar documento</span>
-      </div>
-      <div class="item-simple">
+      <ion-item button lines="none" class="item-simple" [routerLink]="['/construccion']">
+        <img src="/assets/img/ajustes/A-3.svg" alt="Exportar documento" />
+        <div class="texto-opcion">Exportar documento</div>
+      </ion-item>
+
+      <ion-item button lines="none" class="item-simple" [routerLink]="['/construccion']">
         <img src="/assets/img/ajustes/A-4.svg" alt="Mostrar/Ocultar" />
-        <span>Mostrar/ocultar opciones</span>
-      </div>
+        <div class="texto-opcion">Mostrar/ocultar opciones</div>
+      </ion-item>
     </div>
+
 
     <p class="titulo-gris">Ayuda</p>
     <div class="card-ajuste">
-      <div class="item-simple">
+      <ion-item button lines="none" class="item-simple" [routerLink]="['/construccion']">
         <img src="/assets/img/ajustes/A-5.svg" alt="Términos" />
-        <span>Términos y condiciones</span>
-      </div>
-      <div class="item-simple">
+        <div class="texto-opcion">Términos y condiciones</div>
+      </ion-item>
+
+      <ion-item button lines="none" class="item-simple" [routerLink]="['/construccion']">
         <img src="/assets/img/ajustes/A-6.svg" alt="FAQ" />
-        <span>FAQ</span>
-      </div>
+        <div class="texto-opcion">FAQ</div>
+      </ion-item>
     </div>
 
     <p class="titulo-gris">Cuenta</p>
-    <div class="card-ajuste">
-      <div class="item-simple">
-        <img src="/assets/img/ajustes/A-7.svg" alt="Contraseña" />
-        <span>Cambiar contraseña</span>
-      </div>
-      <div class="item-simple borrar">
-        <img src="/assets/img/ajustes/A-8.svg" alt="Borrar cuenta" />
-        <span>Borrar cuenta</span>
-      </div>
-    </div>
+  <div class="card-ajuste">
+    <ion-item button lines="none" class="item-simple" [routerLink]="['/construccion']">
+      <img src="/assets/img/ajustes/A-7.svg" alt="Contraseña" />
+      <div class="texto-opcion">Cambiar contraseña</div>
+    </ion-item>
+
+    <ion-item button lines="none" class="item-simple borrar" [routerLink]="['/construccion']">
+      <img src="/assets/img/ajustes/A-8.svg" alt="Borrar cuenta" />
+      <div class="texto-opcion">Borrar cuenta</div>
+    </ion-item>
+  </div>
 
   </div>
 </ion-content>
