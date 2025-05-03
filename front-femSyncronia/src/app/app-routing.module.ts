@@ -127,6 +127,10 @@ const routes: Routes = [
   },  {
     path: 'notificaciones',
     loadChildren: () => import('./pantalla-principal/notificaciones/notificaciones.module').then( m => m.NotificacionesPageModule)
+  },
+  {
+    path: 'ajustes',
+    loadChildren: () => import('./pantalla-principal/ajustes/ajustes.module').then( m => m.AjustesPageModule)
   }
 
 
