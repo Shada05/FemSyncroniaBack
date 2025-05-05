@@ -377,6 +377,30 @@ module.exports = {
           "phone": "3345896259",
           "token": "token31"
         },
+        {
+          "birthdate": "2005-01-01",
+          "username": "Encuestas",
+          "user_status": 1,
+          "name": "Encuestas",
+          "lastname": "1",
+          "email": "Encuestas@example.com",
+          "profile_image": "profile.jpg",
+          "password": "hashedpassword31",
+          "phone": "3345896259",
+          "token": "token31"
+        },
+        {
+          "birthdate": "2005-01-01",
+          "username": "Encuestas",
+          "user_status": 1,
+          "name": "Encuestas",
+          "lastname": "2",
+          "email": "user31@example.com",
+          "profile_image": "profile.jpg",
+          "password": "hashedpassword31",
+          "phone": "3345896259",
+          "token": "token31"
+        }
     ]);
   },
 
