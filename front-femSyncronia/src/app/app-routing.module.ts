@@ -131,6 +131,10 @@ const routes: Routes = [
   {
     path: 'ajustes',
     loadChildren: () => import('./pantalla-principal/ajustes/ajustes.module').then( m => m.AjustesPageModule)
+  },
+  {
+    path: 'faq',
+    loadChildren: () => import('./pantalla-principal/faq/faq.module').then( m => m.FaqPageModule)
   }
 
 
