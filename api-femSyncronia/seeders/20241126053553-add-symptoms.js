@@ -469,7 +469,7 @@ module.exports = {
         "frequency": "0",
         "type" : "4",
         "description" : "Apertura o dilatación del cuello uterino.",
-        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/65.png"
+        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/S_65.png"
 
       },
       {
@@ -477,98 +477,98 @@ module.exports = {
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción vaginal producida por el cuello uterino.",
-        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/66.png"
+        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/S_66.png"
       },
       {
         "name": "Firmeza cervical",
         "frequency": "0",
         "type" : "4",
         "description" : "Consistencia del cuello uterino, de suave a dura.",
-        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/67.png"
+        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/S_67.png"
       },
       {
         "name": "Fluido seco",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción cervical escasa o ausente.",
-        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/68.png"
+        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/S_68.png"
       },
       {
         "name": "Fluido pegajoso",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción viscosa y espesa.",
-        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/69.png"
+        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/S_69.png"
       },
       {
         "name": "Fluido cremoso",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción espesa y de textura similar a la crema.",
-        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/70.png"
+        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/S_70.png"
       },
       {
         "name": "Fluido acuoso",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción líquida y transparente.",
-        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/71.png"
+        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/S_71.png"
       },
       {
         "name": "Fluido clara de huevo",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción elástica y resbaladiza similar a la clara de huevo.",
-        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/72.png"
+        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/S_72.png"
       },
       {
         "name": "Fluido requesón",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción espesa, grumosa, similar al queso.",
-        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/73.png"
+        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/S_73.png"
       },
       {
         "name": "Fluido verde",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción de color verde, generalmente por infección.",
-        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/74.png"
+        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/S_74.png"
       },
       {
         "name": "Fluido con sangre",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción que contiene sangre, de aspecto rojizo.",
-        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/75.png"
+        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/S_75.png"
       },
       {
         "name": "Fluido con mal olor",
         "frequency": "0",
         "type" : "4",
         "description" : "Secreción vaginal con un olor desagradable.",
-        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/76.png"
+        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/S_76.png"
       },
       {
         "name": "Retención de líquidos",
         "frequency": "0",
         "type" : "4",
         "description" : "Acumulación anormal de líquidos en el cuerpo.",
-        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/77.png"
+        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/S_77.png"
       },
       {
         "name": "Manchado",
         "frequency": "0",
         "type" : "4",
         "description" : "Sangrado leve o irregular fuera del período.",
-        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/78.png"
+        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/S_78.png"
       },
       {
         "name": "Sangrado",
         "frequency": "0",
         "type" : "4",
         "description" : "Pérdida de sangre, generalmente más abundante.",
-        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/79.png"
+        "image": "http://localhost:3000/iconos/sintomas/05_fluidos/S_79.png"
       },
       //Aqui empiezan preguntas sobre actos sexuales
       {
@@ -576,35 +576,35 @@ module.exports = {
         "frequency": "0",
         "type" : "5",
         "description" : "Si tiene acto sexual o no",
-        "image": "http://localhost:3000/iconos/sintomas/06_acto/80.png"
+        "image": "http://localhost:3000/iconos/sintomas/06_acto/S_80.png"
       },
       {
         "name": "Relacion sexual con protección",
         "frequency": "0",
         "type" : "5",
         "description" : "si uso proteccion o no en el acto",
-        "image": "http://localhost:3000/iconos/sintomas/06_acto/81.png"
+        "image": "http://localhost:3000/iconos/sintomas/06_acto/S_81.png"
       },
       {
         "name": "Orgasmo",
         "frequency": "0",
         "type" : "5",
         "description" : "orgasmo ",
-        "image": "http://localhost:3000/iconos/sintomas/06_acto/82.png"
+        "image": "http://localhost:3000/iconos/sintomas/06_acto/S_82.png"
       },
       {
         "name": "Ocasiones que lo hizo",
         "frequency": "0",
         "type" : "5",
         "description" : "cantidad de heces que lo hizo",
-        "image": "http://localhost:3000/iconos/sintomas/06_acto/83.png"
+        "image": "http://localhost:3000/iconos/sintomas/06_acto/S_83.png"
       },
       {
         "name": "Personas con las que lo hizo",
         "frequency": "0",
         "type" : "5",
         "description": "cantidad de personas con las que lo hizo",
-        "image": "http://localhost:3000/iconos/sintomas/06_acto/84.png"
+        "image": "http://localhost:3000/iconos/sintomas/06_acto/S_84.png"
         }
 
     ]);
