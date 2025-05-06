@@ -412,6 +412,7 @@ export class InicioPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Cerrar sesión',
       message: '¿Estás seguro que deseas cerrar sesión?',
+      cssClass: 'custom-alert',
       buttons: [
         {
           text: 'Cancelar',
