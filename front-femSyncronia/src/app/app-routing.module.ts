@@ -135,6 +135,10 @@ const routes: Routes = [
   {
     path: 'faq',
     loadChildren: () => import('./pantalla-principal/faq/faq.module').then( m => m.FaqPageModule)
+  },
+  {
+    path: 'ty-c',
+    loadChildren: () => import('./pantalla-principal/ty-c/ty-c.module').then( m => m.TyCPageModule)
   }
 
 
