@@ -7,6 +7,7 @@ import { lastValueFrom } from 'rxjs';
 import { ChangeDetectorRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { AlertController } from '@ionic/angular';
 
 interface Sintoma {
   id: number; // ID del síntoma
@@ -70,8 +71,14 @@ export class InicioPage implements OnInit {
     private apiService: ApiService,
     private authService: AuthService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private alertController: AlertController,
   ) {}
+
+  irANotificaciones() {
+    this.router.navigate(['/notificaciones']);
+  }
+  
   mostrarComponente(componente: string) {
     this.componenteActivo = componente;
   }
@@ -399,6 +406,25 @@ export class InicioPage implements OnInit {
         this.cdr.detectChanges();
       }, 4500); // 3.5 segundos de espera
     }
+  }
+
+  async mostrarAlertaCerrarSesion() {
+    const alert = await this.alertController.create({
+      header: 'Cerrar sesión',
+      message: '¿Estás seguro que deseas cerrar sesión?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Aceptar',
+          role: 'confirm',
+          handler: () => this.logout() 
+        }
+      ]
+    });
+    await alert.present();    
   }
 
 

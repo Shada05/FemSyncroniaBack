@@ -124,7 +124,26 @@ const routes: Routes = [
   {
     path: 'acerca',
     loadChildren: () => import('./pantalla-principal/acerca/acerca.module').then( m => m.AcercaPageModule)
+  },  {
+    path: 'notificaciones',
+    loadChildren: () => import('./pantalla-principal/notificaciones/notificaciones.module').then( m => m.NotificacionesPageModule)
+  },
+  {
+    path: 'ajustes',
+    loadChildren: () => import('./pantalla-principal/ajustes/ajustes.module').then( m => m.AjustesPageModule)
+  },
+  {
+    path: 'faq',
+    loadChildren: () => import('./pantalla-principal/faq/faq.module').then( m => m.FaqPageModule)
+  },
+  {
+    path: 'ty-c',
+    loadChildren: () => import('./pantalla-principal/ty-c/ty-c.module').then( m => m.TyCPageModule)
   }
+
+
+  
+ 
 
   
  

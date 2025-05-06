@@ -1,0 +1,73 @@
+<ion-content [fullscreen]="true" class="fondo-construccion">
+  <br>
+  <div class="encabezado-centrado">
+    <p class="titulo">Configuración</p>
+    <ion-button class="boton-cerrar" fill="clear" (click)="cerrarPantalla()">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <div class="contenido">
+
+    <p class="titulo-gris">Preferencias</p>
+    <div class="card-ajuste-p">
+      <div class="item-ajuste">
+        <img src="/assets/img/ajustes/A-1.svg" alt="Idioma" />
+        <span>Idioma</span>
+        <div class="dropdown-f">
+          Español
+          <ion-icon name="chevron-down-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="item-ajuste">
+        <img src="/assets/img/ajustes/A-2.svg" alt="Tema" />
+        <span>Tema</span>
+        <div class="dropdown-f">
+          Modo dia
+          <ion-icon name="chevron-down-outline"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+    <p class="titulo-gris">Funciones</p>
+    <div class="card-ajuste">
+      <ion-item button lines="none" class="item-simple" [routerLink]="['/construccion']">
+        <img src="/assets/img/ajustes/A-3.svg" alt="Exportar documento" />
+        <div class="texto-opcion">Exportar documento</div>
+      </ion-item>
+
+      <ion-item button lines="none" class="item-simple" [routerLink]="['/construccion']">
+        <img src="/assets/img/ajustes/A-4.svg" alt="Mostrar/Ocultar" />
+        <div class="texto-opcion">Mostrar/ocultar opciones</div>
+      </ion-item>
+    </div>
+
+
+    <p class="titulo-gris">Ayuda</p>
+    <div class="card-ajuste">
+      <ion-item button lines="none" class="item-simple" [routerLink]="['/ty-c']">
+        <img src="/assets/img/ajustes/A-5.svg" alt="Términos" />
+        <div class="texto-opcion">Términos y condiciones</div>
+      </ion-item>
+
+      <ion-item button lines="none" class="item-simple" [routerLink]="['/faq']">
+        <img src="/assets/img/ajustes/A-6.svg" alt="FAQ" />
+        <div class="texto-opcion">FAQ</div>
+      </ion-item>
+    </div>
+
+    <p class="titulo-gris">Cuenta</p>
+  <div class="card-ajuste">
+    <ion-item button lines="none" class="item-simple" [routerLink]="['/construccion']">
+      <img src="/assets/img/ajustes/A-7.svg" alt="Contraseña" />
+      <div class="texto-opcion">Cambiar contraseña</div>
+    </ion-item>
+
+    <ion-item button lines="none" class="item-simple borrar" [routerLink]="['/construccion']">
+      <img src="/assets/img/ajustes/A-8.svg" alt="Borrar cuenta" />
+      <div class="texto-opcion">Borrar cuenta</div>
+    </ion-item>
+  </div>
+
+  </div>
+</ion-content>

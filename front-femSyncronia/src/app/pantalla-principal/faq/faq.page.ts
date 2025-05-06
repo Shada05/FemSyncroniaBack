@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-construccion',
-  templateUrl: './construccion.page.html',
-  styleUrls: ['./construccion.page.scss'],
+  selector: 'app-faq',
+  templateUrl: './faq.page.html',
+  styleUrls: ['./faq.page.scss'],
 })
-export class ConstruccionPage implements OnInit {
-  
+export class FaqPage implements OnInit {
+
   constructor(private navCtrl: NavController) {}
 
   cerrarPantalla() {
