@@ -150,55 +150,57 @@ export class MiAnteriorCicloPage implements OnInit {
   // Función para enviar los datos del formulario
   async crearCiclo() {
     if (this.formulario.invalid) {
-
       await this.utilidadesService.mostrarToastAdvertencia('Por favor, completa todos los campos requeridos');
       return;
     }
-
-    // Obtén los valores del formulario
+  
     const formData = this.formulario.value;
     console.log('Datos del formulario:', formData);
-
-    // Formatear las fechas de inicio y fin
-    const fechaInicio = this.formatearFecha(formData.mesInicio, formData.diaInicio);
-    const fechaFin = this.formatearFecha(formData.mesFin, formData.diaFin);
-
+  
+    // Formatear fecha de inicio como objeto Date
+    const fechaInicioStr = this.formatearFecha(formData.mesInicio, formData.diaInicio);
+    const fechaInicio = new Date(fechaInicioStr);
+  
     // Convertir dias1 y dias2 a enteros
-    const dias1 = parseInt(formData.dias1, 10); // Convertir a entero
-    const dias2 = parseInt(formData.dias2, 10); // Convertir a entero
-
-    // Validar que la conversión sea exitosa
+    const dias1 = parseInt(formData.dias1, 10);
+    const dias2 = parseInt(formData.dias2, 10);
+  
     if (isNaN(dias1) || isNaN(dias2)) {
       await this.utilidadesService.mostrarToastAdvertencia('Los valores de días deben ser números válidos');
       return;
     }
+  
+    // Calcular fecha de fin sumando dias2 - 1 días a la fecha de inicio
+    const fechaFin = new Date(fechaInicio);
+    fechaFin.setDate(fechaInicio.getDate() + dias2 - 1);
+  
     try {
       await this.utilidadesService.mostrarLoading('Enviando datos...');
-
+  
       const data = {
         user_id: this.userId,
         cycle_status: 1,
-        Start_day: fechaInicio,
-        Finish_day: fechaFin,
+        Start_day: fechaInicio.toISOString().split('T')[0],
+        Finish_day: fechaFin.toISOString().split('T')[0],
         average_periodo: dias1,
         average_ciclo: dias2,
       };
-
+  
       this.apiService.createCiclo(data).subscribe({
         next: async (response) => {
           console.log('Datos enviados exitosamente:', response);
           await this.utilidadesService.ocultarLoading();
-          this.router.navigate(['/periodo']); // Navegar a la siguiente pantalla
+          this.router.navigate(['/periodo']);
         },
         error: async (error) => {
           console.error('Error al enviar los datos:', error);
           await this.utilidadesService.ocultarLoading();
-          await this.utilidadesService.mostrarToastAdvertencia('Error al enviar los datos. Inténtalo de nuevo'); // Mostrar toast de error
+          await this.utilidadesService.mostrarToastAdvertencia('Error al enviar los datos. Inténtalo de nuevo');
         },
       });
     } catch (error) {
-
+      console.error('Error inesperado:', error);
     }
-
   }
+  
 }
