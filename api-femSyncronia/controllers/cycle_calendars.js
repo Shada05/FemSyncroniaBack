@@ -110,6 +110,8 @@ exports.show_userid = async (req, res) => {
         return res.status(500).send({ message: 'Internal server error' });
     }
 };
+
+
 exports.update = async (req, res) => {
     const id = parseInt(req.params.id);
     let updatedData = {};

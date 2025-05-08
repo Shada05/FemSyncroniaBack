@@ -77,7 +77,7 @@ router.get('/api/v1/cycles', cyclesController.index);
 router.get('/api/v1/cycles/:id', cyclesController.show);
 router.put('/api/v1/cycles/:id', cyclesController.update);
 router.delete('/api/v1/cycles/:id', cyclesController.destroy);
-router.get('/cycles_tables_id/:user_id', cyclesController.show_tablesid);
+router.put('/cycles_tables_id/:user_id', cyclesController.show_tablesid);
 router.get('/api/v1/cycles_tables/:user_id', cyclesController.show_tables); //mostrar el ciclo con las tablas de sintomas
 
 //Crons_status
