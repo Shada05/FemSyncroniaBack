@@ -139,6 +139,18 @@ const routes: Routes = [
   {
     path: 'ty-c',
     loadChildren: () => import('./pantalla-principal/ty-c/ty-c.module').then( m => m.TyCPageModule)
+  },
+  {
+    path: 'piel',
+    loadChildren: () => import('./pantalla-principal/piel/piel.module').then( m => m.PielPageModule)
+  },
+  {
+    path: 'hidratate',
+    loadChildren: () => import('./pantalla-principal/hidratate/hidratate.module').then( m => m.HidratatePageModule)
+  },
+  {
+    path: 'medita',
+    loadChildren: () => import('./pantalla-principal/medita/medita.module').then( m => m.MeditaPageModule)
   }
 
 

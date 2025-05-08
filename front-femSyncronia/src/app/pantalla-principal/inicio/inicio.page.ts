@@ -72,6 +72,19 @@ export class InicioPage implements OnInit {
   irAPestanaInformacion() {
     this.router.navigate(['/construccion']);
   }
+
+  irAPestanaPiel() {
+    this.router.navigate(['/piel']);
+  }
+
+  irAPestanaAgua() {
+    this.router.navigate(['/hidratate']);
+  }
+
+  irAPestanaMedita() {
+    this.router.navigate(['/medita']);
+  }
+  
   
 
   constructor(
