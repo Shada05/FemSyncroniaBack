@@ -28,6 +28,7 @@ export class RegistroSintomasPage implements OnInit {
   peso: number = 0;
   mesActual: number = new Date().getMonth();
   anoActual: number = new Date().getFullYear();
+  diaActual: number = new Date().getDay();
   fechaDeRegistro: String | null = null;
   indiceCiclo: number | null = null;
   periodoIniciado: boolean = false;
@@ -166,7 +167,8 @@ export class RegistroSintomasPage implements OnInit {
     const fechaActual = new Date(fechaRegistroValida.toString());
     const mesActual = fechaActual.getMonth() + 1;
     const anioActual = fechaActual.getFullYear();
-  
+    const diaActual = fechaActual.getDate()+1;
+
     if (this.periodoIniciado) {
       let ciclos: any[] = [];
       let errorObtenerCiclos = false;
@@ -239,7 +241,7 @@ export class RegistroSintomasPage implements OnInit {
     }
   
     try {
-      await lastValueFrom(this.apiService.eliminarRegistroEnciclo(this.userId, anioActual, mesActual));
+      await lastValueFrom(this.apiService.eliminarRegistroEnciclo(this.userId, anioActual, mesActual, diaActual,));
     } catch (error) {
       console.warn('No se pudo eliminar registro existente o no existía:', error);
     }
@@ -276,7 +278,7 @@ export class RegistroSintomasPage implements OnInit {
     try {
       const respuesta = await lastValueFrom(this.apiService.crearCiclo(datosCiclo));
       console.log('Síntomas del ciclo registrados:', respuesta);
-  
+      
       await this.utilidades.ocultarLoading();
       this.utilidades.mostrarToastAdvertencia('Datos registrados correctamente');
       this.apiService.notificarActualizacion();
@@ -287,6 +289,22 @@ export class RegistroSintomasPage implements OnInit {
       console.error('Error al registrar los síntomas del ciclo:', error);
       this.utilidades.mostrarToastAdvertencia('Error al registrar los datos');
     }
+
+  try {
+    // Clonar datosCiclo
+    const datosCicloPrediccion = { ...datosCiclo };
+
+    // Sumar un día a la fecha
+    const fechaOriginal = new Date((this.fechaDeRegistro ?? new Date().toISOString().split('T')[0]).toString());
+    fechaOriginal.setDate(fechaOriginal.getDate() + 1);
+
+    // Asignar la nueva fecha en formato YYYY-MM-DD
+    datosCicloPrediccion.date = fechaOriginal.toISOString().split('T')[0];
+
+    const respuesta = await lastValueFrom(this.apiService.crearCicloPrediccion(datosCicloPrediccion));
+  } catch (error) {
+    console.error('Error al registrar los datos para predicción:', error);
+  }
   }  
 
   // Reinicia el formulario después de enviar

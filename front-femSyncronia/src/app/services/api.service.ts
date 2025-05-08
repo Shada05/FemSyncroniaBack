@@ -37,20 +37,27 @@ export class ApiService {
   }
 
   mostrarCiclo(user_id: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/cycles_tables_id/${user_id}`);
+    return this.http.get(`${this.apiUrl}/api/v1/cycles_tables/${user_id}`);
   }
 
   crearCiclo(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/api/v1/cycles`, data);
   }
 
+  crearCicloPrediccion(data:any):Observable<any>{
+    return this.http.post(`${this.apiUrl}/api/v1/cycles_prediction`,data);
+  }
   eliminarCicloPorMesYAnio(user_id: string, year: number, month: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/api/v1/cycle_calendar/user/${user_id}/${year}/${month}`);
   }  
   
-  eliminarRegistroEnciclo(user_id: string, year: number, month: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/api/v1/cycles/user_cycles/${user_id}/${year}/${month}`);
-  }
+  eliminarRegistroEnciclo(user_id: string, year: number, month: number, day?: number): Observable<any> {
+    let url = `${this.apiUrl}/api/v1/cycles/user_cycles/${user_id}/${year}/${month}`;
+    if (day !== undefined && day !== null) {
+      url += `/${day}`;
+    }
+    return this.http.delete(url);
+  }  
 
   uploadImage(formData: FormData): Observable<{ imageUrl: string }> {
     return this.http.post<{ imageUrl: string }>(
