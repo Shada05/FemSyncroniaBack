@@ -10,7 +10,7 @@ exports.login = async (req, res) => {
     // Buscar el usuario en la base de datos por email, incluyendo el password
     const user = await users.unscoped().findOne({
       where: { email },
-      attributes: ['id', 'email', 'name', 'password', 'updateAt'] // Asegura que incluya la contraseña
+      attributes: ['id', 'email', 'name', 'password', 'updatedAt'] // Asegura que incluya la contraseña
     });
 
     if (!user) {
