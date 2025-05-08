@@ -1,13 +1,21 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>hidratate</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="fondo-construccion">
+  <!-- Botón cerrar -->
+  <ion-button class="boton-cerrar" fill="clear" (click)="cerrarPantalla()">
+    <ion-icon name="close-outline"></ion-icon>
+  </ion-button>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">hidratate</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="info-panel">
+    <img src="assets/img/cuidados/C-6.svg" alt="Mima tu piel" class="img-ilustrativa2" />
+    <div class="contenedor-titulo">
+      <ion-text class="titulo-panel">Hidrátate siempre</ion-text>
+    </div>
+    <div class="texto-informativo">
+      <p>Mantenerte bien hidratada es clave para reducir la hinchazón, los dolores de cabeza y mejorar la digestión.</p>
+      <p>El agua ayuda a equilibrar las hormonas, mantiene la piel radiante y favorece la circulación.</p>
+      <p>Beber suficiente agua también contribuye a aliviar los cólicos y mejora tu energía, ayudándote a sentirte 
+        más equilibrada y en control 
+        durante esos días.</p>
+    </div>
+    <p class="texto-final-destacado">Un sorbo de agua, un respiro para tu cuerpo</p><br>
+  </div>
 </ion-content>
