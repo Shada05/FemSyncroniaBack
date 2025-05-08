@@ -13,61 +13,61 @@
 
     <div class="pregunta-radio">
       <ion-text class="color-texto">En tu piel:</ion-text>
-      <ion-radio-group class="opciones-radio">
-          <ion-radio class="custom-radio" labelPlacement="end" value="si">Si</ion-radio>
-          <ion-radio class="custom-radio" labelPlacement="end" value="no">No</ion-radio>
-          <ion-radio class="custom-radio" labelPlacement="end" value="no lo se">No lo sé</ion-radio>
+      <ion-radio-group #pielGroup class="opciones-radio">
+          <ion-radio class="custom-radio" labelPlacement="end" value="1">Si</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="0">No</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="2">No lo sé</ion-radio>
       </ion-radio-group>
     </div>
 
     <div class="pregunta-radio">
       <ion-text class="color-texto">En tu peso:</ion-text>
-      <ion-radio-group class="opciones-radio">
-          <ion-radio class="custom-radio" labelPlacement="end" value="si">Si</ion-radio>
-          <ion-radio class="custom-radio" labelPlacement="end" value="no">No</ion-radio>
-          <ion-radio class="custom-radio" labelPlacement="end" value="No lo se">No lo sé</ion-radio>
+      <ion-radio-group #pesoGroup class="opciones-radio">
+          <ion-radio class="custom-radio" labelPlacement="end" value="1">Si</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="0">No</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="2">No lo sé</ion-radio>
       </ion-radio-group>
     </div>
 
     <div class="pregunta-radio">
       <ion-text class="color-texto">En tu sueño:</ion-text>
-      <ion-radio-group class="opciones-radio">
-          <ion-radio class="custom-radio" labelPlacement="end" value="si">Si</ion-radio>
-          <ion-radio class="custom-radio" labelPlacement="end" value="no">No</ion-radio>
-          <ion-radio class="custom-radio" labelPlacement="end" value="No lo se">No lo sé</ion-radio>
+      <ion-radio-group #suenoGroup class="opciones-radio">
+          <ion-radio class="custom-radio" labelPlacement="end" value="1">Si</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="0">No</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="2">No lo sé</ion-radio>
       </ion-radio-group>
     </div>
 
     <div class="pregunta-radio">
       <ion-text class="color-texto">En tu energia:</ion-text>
-      <ion-radio-group class="opciones-radio">
-          <ion-radio class="custom-radio" labelPlacement="end" value="si">Si</ion-radio>
-          <ion-radio class="custom-radio" labelPlacement="end" value="no">No</ion-radio>
-          <ion-radio class="custom-radio" labelPlacement="end" value="No lo se">No lo sé</ion-radio>
+      <ion-radio-group #energiaGroup class="opciones-radio">
+          <ion-radio class="custom-radio" labelPlacement="end" value="1">Si</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="0">No</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="2">No lo sé</ion-radio>
       </ion-radio-group>
     </div>
 
     <div class="pregunta-radio">
       <ion-text class="color-texto">En tu apetito:</ion-text>
-      <ion-radio-group class="opciones-radio">
-          <ion-radio class="custom-radio" labelPlacement="end" value="si">Si</ion-radio>
-          <ion-radio class="custom-radio" labelPlacement="end" value="no">No</ion-radio>
-          <ion-radio class="custom-radio" labelPlacement="end" value="No lo se">No lo sé</ion-radio>
+      <ion-radio-group #apetitoGroup class="opciones-radio">
+          <ion-radio class="custom-radio" labelPlacement="end" value="1">Si</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="0">No</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="2">No lo sé</ion-radio>
       </ion-radio-group>
     </div>
 
     <div class="pregunta-radio">
       <ion-text class="color-texto">En tu humor:</ion-text>
-      <ion-radio-group class="opciones-radio">
-          <ion-radio class="custom-radio" labelPlacement="end" value="si">Si</ion-radio>
-          <ion-radio class="custom-radio" labelPlacement="end" value="no">No</ion-radio>
-          <ion-radio class="custom-radio" labelPlacement="end" value="No lo se">No lo sé</ion-radio>
+      <ion-radio-group #humorGroup class="opciones-radio">
+          <ion-radio class="custom-radio" labelPlacement="end" value="1">Si</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="0">No</ion-radio>
+          <ion-radio class="custom-radio" labelPlacement="end" value="2">No lo sé</ion-radio>
       </ion-radio-group>
     </div>
     <div class="divisor"></div>
 
     <div class="contenedor-boton">
-      <ion-button class="btn-continuar" [routerLink]="['/datos-corporales']" type="submit">
+      <ion-button class="btn-continuar" (click)="enviarDatos()" type="submit">
         Continuar
       </ion-button>
     </div>

@@ -54,6 +54,7 @@ ion-content {
 .foto-perfil {
     width: 150px;
     height: 150px;
+    border-radius: 50%;
     object-fit: cover;
     margin-right: 8px; /* Espaciado entre el logo y los textos */
 }

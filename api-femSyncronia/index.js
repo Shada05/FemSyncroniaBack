@@ -21,11 +21,29 @@ dotenv.config();
 const app = express();
 let { router } = require('./routes');
 
+// Lista de orígenes permitidos
+const allowedOrigins = [
+    'http://localhost:8100', // Desarrollo con Ionic serve
+    'capacitor://localhost', // Origen en Android
+    'http://localhost',      // Origen en iOS
+    'https://localhost',     // Origen en Android Studio
+];
+
 // Configurar CORS
 app.use(cors({
-    origin: 'http://localhost:8100', // Permitir solicitudes desde tu aplicación Ionic
-    methods: 'GET,POST,PUT,DELETE', // Métodos permitidos
-    allowedHeaders: 'Content-Type,Authorization', // Cabeceras permitidas
+    origin: function (origin, callback) {
+        console.log('Origen de la solicitud:', origin); // Depuración
+        if (!origin) return callback(null, true);
+
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        } else {
+            return callback(new Error('Origen no permitido por CORS'));
+        }
+    },
+    methods: 'GET,POST,PUT,DELETE,OPTIONS', // Asegúrate de incluir OPTIONS
+    allowedHeaders: 'Content-Type,Authorization',
+    credentials: true,
 }));
 
 // Configurar Body Parser

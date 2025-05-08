@@ -1,0 +1,162 @@
+/* Contenedor principal del calendario */
+.calendario-container {
+  width: 352px;
+  height: 245px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 0 auto; /* Centrado horizontal */
+  padding: 10px;
+  position: relative; /* Si es necesario, para que se pueda controlar el z-index */
+  z-index: 1; /* Asegura que el calendario esté por debajo de otros elementos si se necesita */
+}
+
+/* Contenedor de los días de la semana (encabezado) */
+.dias-semana {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  padding: 8px 0;
+}
+
+/* Estilo de cada día de la semana */
+.dias-semana .dia {
+  color: #7b827e;
+  font-weight: bold;
+}
+
+/* Contenedor de los días del mes */
+.dias-mes {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  text-align: center;
+  padding: 8px 0;
+  flex-grow: 1;
+}
+
+/* Estilo base para cada día del mes */
+.dias-mes .dia {
+  position: relative;
+  color: black;
+  padding: 4px 0;
+  padding-bottom: 8px; /* Espacio adicional para compensar el borde */
+}
+
+/* Estilo del índice de cada día */
+.indice-dia {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: 9px;
+  color: #868686;
+}
+
+/* Estilo para los días del mes anterior y siguiente (tenue) */
+.dias-mes .dia.dia-tenue {
+  color: #6c7470 !important; /* Se usa !important para garantizar que el color no sea sobrescrito */
+  opacity: 0.7; /* Hace que se vea un poco más apagado */
+}
+
+/* Estilo para los días del mes actual */
+.dias-mes .dia.dia-actual {
+  color: #0a1811;
+}
+
+/* Estilo para el día actual (hoy) */
+.dias-mes .dia.hoy {
+  color: #ff8390 !important; /* Se usa !important para que el día actual tenga prioridad sobre otros estilos */
+  border-bottom: 2px solid #ff8390;
+  padding-bottom: 6px;
+}
+
+/* Contenedor de información del día (evitar superposición) */
+.info-dia {
+  position: relative;
+  z-index: 2; /* Asegura que esté encima del calendario */
+}
+
+/* 📌 Estilo para días no seleccionables */
+.dias-mes .dia.no-seleccionable {
+  cursor: default; /* Cambia el cursor a normal */
+  pointer-events: none; /* Opcional: deshabilita completamente los eventos del mouse */
+
+  &:hover {
+    background-color: transparent !important; /* Elimina el efecto hover */
+  }
+}
+
+/* 📌 Estilo para el día seleccionado (cuadrado completo) */
+.dias-mes .dia.seleccionado {
+  background-color: #ffeeef;
+  color: #ff8390 !important;
+  font-weight: bold;
+  border-radius: 8px;
+
+  .indice-dia {
+    color: #ff8390 !important;
+    font-weight: bold;
+  }
+}
+
+/* Mantén los estilos existentes para días tenues y actuales */
+.dias-mes .dia.dia-tenue {
+  color: #6c7470 !important;
+  opacity: 0.7;
+}
+
+.dias-mes .dia.hoy {
+  color: #ff8390 !important;
+  border-bottom: 2px solid #ff8390;
+  padding-bottom: 6px;
+
+  &.seleccionado {
+    background-color: #ffeeef;
+    border-radius: 8px;
+  }
+}
+
+/* Estilos para días con intensidad */
+.dias-mes .dia[class*="intensidad-"] {
+  .indice-dia {
+    color: white !important;
+  }
+}
+
+/* Colores específicos por intensidad */
+.dia.intensidad-1 {
+  background-color: #ffd3d8 !important;
+}
+.dia.intensidad-2 {
+  background-color: #f8bbd0 !important;
+}
+.dia.intensidad-3 {
+  background-color: #f48fb1 !important;
+}
+.dia.intensidad-4 {
+  background-color: #f06283 !important;
+}
+.dia.intensidad-5 {
+  background-color: #c63d54 !important;
+}
+
+.dias-mes .dia.seleccionado {
+  //box-shadow: 0 0 0 1px #ff8390 inset;
+  background-color: #ffeeef !important;
+}
+
+/* Estilo para el día de ovulación (índice 14) */
+.dia.ovulacion {
+  background-color: #ffdfc0;
+  position: relative;
+}
+
+/* Estilo para días fértiles (índices 9-13 y 15) */
+.dia.fertil {
+  background-color: #FFFAC0;
+}
+.dia.prediccion {
+  background-color: #FEEDEF;
+}

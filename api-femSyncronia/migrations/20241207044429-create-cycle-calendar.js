@@ -30,20 +30,20 @@ module.exports = {
         allowNull: false
     },
     average_periodo: {
-      type: Sequelize.DATEONLY,
-      allowNull: false
+      type: Sequelize.INTEGER,
+      allowNull: true
     },
     average_ciclo: {
-      type: Sequelize.DATEONLY,
-      allowNull: false
+      type: Sequelize.INTEGER,
+      allowNull: true
     },
     average_mestruation: {
-      type: Sequelize.DATEONLY,
-      allowNull: false
+      type: Sequelize.INTEGER,
+      allowNull: true
     },
     Regular_cycle: {
       type: Sequelize.INTEGER,
-      allowNull: false
+      allowNull: true
     },
     createdAt: {
         type: Sequelize.DATE,

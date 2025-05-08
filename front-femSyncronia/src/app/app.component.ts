@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular'; // Importa NavController y Platform
 import { AuthService } from './services/auth.service';
 import { PrimeraAperturaService } from './services/primera-apertura.service';
+import { SplashScreen } from '@capacitor/splash-screen';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +13,27 @@ export class AppComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private primeraAperturaService: PrimeraAperturaService,
-    private router: Router
+    private navCtrl: NavController, // Inyecta NavController
   ) { }
 
   async ngOnInit() {
-    // Verifica si es la primera vez que se abre la aplicación
-    await this.verificarPrimeraApertura();
+    await SplashScreen.show({ autoHide: false });
+  
+    // Ejecutar verificaciones y esperar al menos 2 segundos
+    await Promise.all([
+      //this.verificarPrimeraApertura(),
+      new Promise(resolve => setTimeout(resolve, 2000)) // Mínimo 2 segundos
+    ]);
+  
+    await SplashScreen.hide();
   }
 
+  async showSplash() {
+    // Show the splash for an indefinite amount of time:
+    await SplashScreen.show({
+      autoHide: false
+    });
+  }
   async verificarPrimeraApertura() {
     // Obtiene el estado de la primera apertura desde el servicio
     const esPrimeraVez = await this.primeraAperturaService.verificar();
@@ -27,7 +41,7 @@ export class AppComponent implements OnInit {
 
     if (esPrimeraVez) {
       // Si es la primera vez, redirige a la pantalla de inicio
-      this.router.navigate(['/inicio']);
+      this.navCtrl.navigateRoot('/inicio'); // Usa navigateRoot para eliminar el historial
 
       // Marca que ya no es la primera vez
       await this.primeraAperturaService.asignar(false);
@@ -47,17 +61,17 @@ export class AppComponent implements OnInit {
       this.authService.verificarToken(token).subscribe(
         () => {
           // Si el token es válido, redirige a la pantalla principal
-          this.router.navigate(['/pantalla-principal']);
+          this.navCtrl.navigateRoot('/pantalla-principal'); // Usa navigateRoot para eliminar el historial
         },
         () => {
           // Si el token es inválido o expirado, redirige al login
           console.log('Token inválido o expirado, redirigiendo al login');
-          this.router.navigate(['/login']);
+          this.navCtrl.navigateRoot('/login'); // Usa navigateRoot para eliminar el historial
         }
       );
     } else {
       // Si no hay token almacenado, redirige al login
-      this.router.navigate(['/login']);
+      this.navCtrl.navigateRoot('/login'); // Usa navigateRoot para eliminar el historial
     }
   }
-}
+} 

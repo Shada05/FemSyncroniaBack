@@ -1,8 +1,9 @@
 const cycle_calendars  = require('../models').cycle_calendars;
+const { spawn } = require('child_process'); // Importar el módulo child_process
 
 exports.store = async (req, res) => {
     const cycle_calendar = {
-        
+        user_id:req.body.user_id,
         cycle_status: req.body.cycle_status,
         Start_day: req.body.Start_day,
         Finish_day: req.body.Finish_day,
@@ -46,18 +47,19 @@ exports.show = async (req, res) => {
 }
 
 exports.destroy = async (req, res) => {
-    const id = parseInt(req.params.id);
+    const { user_id, start_day } = req.body;
 
     return await cycle_calendars.destroy({
         where: {
-            id: id
+            user_id: user_id,
+            start_day: start_day
         }
     }).then(
         deleted => {
             if (deleted) {
-                res.status(200).send({ message: 'data eliminado con éxito' });
+                res.status(200).send({ message: 'Registro eliminado con éxito' });
             } else {
-                res.status(404).send({ message: 'data no encontrado' });
+                res.status(404).send({ message: 'Registro no encontrado' });
             }
         }
     ).catch(
@@ -107,7 +109,7 @@ exports.show_userid = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        return res.status(500).send({ message: 'Internal server error' });
+        return res.status(500).send({ message: 'Internal server error', error: error.message  });
     }
 };
 
@@ -142,4 +144,42 @@ exports.update = async (req, res) => {
             res.status(400).send(error);
         }
     );
+};
+exports.update_Start_day = async (req, res) => {
+    const id = parseInt(req.params.id);
+    let updatedData = {};
+
+    if (req.body.cycle_status != null) updatedData['cycle_status'] = req.body.cycle_status;
+
+    // Si se proporciona Start_day, calcular Finish_day
+    if (req.body.Start_day != null) {
+        const startDate = new Date(req.body.Start_day);
+        updatedData['Start_day'] = startDate;
+
+        // Sumar 24 días al Start_day
+        const finishDate = new Date(startDate);
+        finishDate.setDate(finishDate.getDate() + 24);
+        updatedData['Finish_day'] = finishDate;
+    }
+
+    // Si Finish_day también viene explícitamente, sobrescribirá lo anterior
+    if (req.body.Finish_day != null) {
+        updatedData['Finish_day'] = new Date(req.body.Finish_day);
+    }
+    try {
+        const [updated] = await cycle_calendars.update(updatedData, {
+            where: { id: id }
+        });
+
+        const userUpd = await cycle_calendars.findOne({ where: { id } });
+
+        if (updated) {
+            res.status(200).send({ data: userUpd });
+        } else {
+            res.status(404).send({ message: 'data no encontrado' });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(400).send(error);
+    }
 };

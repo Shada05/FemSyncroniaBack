@@ -1,0 +1,45 @@
+<div class="contenido-grafica" [class.cerrando]="estaCerrando">
+  <div class="boton-cerrar-container" [class.oculto]="estaCerrando">
+    <ion-icon name="close-circle-outline" (click)="cerrar()" class="boton-cerrar"></ion-icon>
+  </div>
+  <div class="contenedor-grafica">
+    <canvas id="graficaTemperatura"></canvas>
+  </div>
+  <div class="contenedor-inferior">
+    <!-- Nueva sección con día actual y temperatura usando Ionic -->
+    <div class="informacion-dia">
+      <div class="informacion-dia-izquierda">
+        <div class="dia-actual">
+          {{dia}}
+        </div>
+        <div class="subtitulo-dia">
+          Día del ciclo
+        </div>
+      </div>
+      <div class="temperatura-container">
+        <div class="temperatura">
+          {{ temperaturaActual }}°C
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra de intensidad -->
+    <div class="barra-intensidad">
+      <div class="niveles">
+        <div class="nivel"></div>
+        <div class="nivel"></div>
+        <div class="nivel"></div>
+        <div class="nivel"></div>
+        <div class="nivel"></div>
+      </div>
+      <div class="contenedor-indicador">
+        <div class="indicador"></div>
+      </div>
+    </div>
+
+  <!--  <div class="contenedor-boton">
+      <ion-button class="editar-button">Editar</ion-button>
+    </div>    
+    -->
+  </div>
+</div>

@@ -1,55 +1,56 @@
 ion-content {
-    --background: none; /* Sin fondo de color por defecto */
-    background-image: url('/assets/img/pantalla-principal/fondo-tabs.svg'); /* Imagen de fondo */
-    background-size: cover; /* La imagen cubre todo el área */
-    background-repeat: no-repeat; /* La imagen no se repite */
-    background-position: center; /* La imagen está centrada */
-    width: 100%; /* Ancho completo */
-    height: 100vh; /* Altura completa de la ventana */
-  }
-  
+  --background: none; /* Sin fondo de color por defecto */
+  background-image: url("/assets/img/pantalla-principal/fondo-tabs.svg"); /* Imagen de fondo */
+  background-size: cover; /* La imagen cubre todo el área */
+  background-repeat: no-repeat; /* La imagen no se repite */
+  background-position: center; /* La imagen está centrada */
+  width: 100%; /* Ancho completo */
+  height: 100vh; /* Altura completa de la ventana */
+}
+
 /* Contenedor de la barra superior */
 .top-bar {
-    display: flex; /* Configura el contenedor como flexbox */
-    align-items: center; /* Centra verticalmente los elementos */
-    justify-content: space-between; /* Espacia los elementos uniformemente */
-    padding: 25px 16px; /* Espaciado interno: 10px arriba/abajo, 16px izquierda/derecha */
-    width: 100%; /* Ancho completo */
-    background-color: transparent; /* Fondo transparente */
-  }
-  
+  height: 100px;
+  display: flex; /* Configura el contenedor como flexbox */
+  align-items: center; /* Centra verticalmente los elementos */
+  justify-content: space-between; /* Espacia los elementos uniformemente */
+  padding: 25px 16px; /* Espaciado interno: 10px arriba/abajo, 16px izquierda/derecha */
+  width: 100%; /* Ancho completo */
+  background-color: transparent; /* Fondo transparente */
+}
+
 /* Ajusta el ícono de notificación */
 .notificacion {
-    color: black;
-    height: 24px;
-    width: 24px;
+  color: black;
+  height: 24px;
+  width: 24px;
 }
-  
+
 /* Ajusta el texto de bienvenida */
 .bienvenida-text {
-    color: black;
-    text-align: center;
-    font-family: "Open Sans";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  color: black;
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
-  
+
 /* Ajusta la imagen de perfil */
 .imagen-perfil {
-    width: 50px;
-    height: 50px;
-    object-fit: cover; /* Mantiene las proporciones de la imagen */
-    border-radius: 50%; /* Hace la imagen circular */
-    border: 1px solid white;
-}  
+  width: 50px;
+  height: 50px;
+  object-fit: cover; /* Mantiene las proporciones de la imagen */
+  border-radius: 50%; /* Hace la imagen circular */
+  border: 1px solid white;
+}
 
 /* Contenedor de información debajo de la barra superior */
 .info-periodo {
   width: 324px;
   height: 287px;
-  background: #E9E9E9;
+  background: #e9e9e9;
   margin: 17px auto; /* Centra horizontalmente */
   border-radius: 20px; /* Bordes redondeados */
   display: flex;
@@ -90,7 +91,7 @@ ion-content {
 .info-periodo .linea-horizontal {
   width: 90%; /* Ancho de la línea */
   height: 1px; /* Grosor de la línea */
-  background-color: #9D9D9D;
+  background-color: #9d9d9d;
   margin: 1px 0; /* Espaciado vertical */
 }
 
@@ -107,22 +108,72 @@ ion-content {
 /* Botón dentro del contenedor */
 .boton-informacion {
   width: 223px; /* Ancho del botón */
+  min-height: 37px;
   height: 37px; /* Altura del botón */
   margin-bottom: 8px; /* Asegura que el botón quede en la parte inferior */
   --background: #ffff; /* Color de fondo del botón */
-  --color: #FF9CA7; /* Color del texto del botón */
+  --color: #ff9ca7; /* Color del texto del botón */
   --box-shadow: none; /* Sin sombra */
   --border-radius: 50px; /* Radio de borde */
   text-transform: none; /* Transformación de texto */
-  font-family: 'Roboto-medium'; /* Familia de fuente */
-  --background-activated: #FF8390;
+  font-family: "Roboto-medium"; /* Familia de fuente */
+  --background-activated: #f2f2f2;
+}
+
+/* Contenedor de síntomas */
+.info-sintomas {
+  width: 319px;
+  height: 132px; /* Altura fija del contenedor */
+  background: #ffffff; /* Fondo gris claro */
+  margin: 24px auto; /* Espaciado entre los componentes */
+  border-radius: 20px; /* Bordes redondeados */
+  display: flex;
+  flex-direction: column; /* Alinear el título y la lista en columna */
+  padding: 10px; /* Espaciado interno */
+}
+
+/* Estilo del título "Posibles síntomas" */
+.titulo-sintomas {
+  font-size: 16px; /* Tamaño de fuente del título */
+  font-weight: 600; /* Grosor de la fuente */
+  color: black; /* Color del texto */
+  margin-bottom: 8px; /* Espaciado entre el título y la lista */
+  text-align: left; /* Alinear el texto a la izquierda */
+}
+
+/* Contenedor de la lista de síntomas */
+.contenedor-lista-sintomas {
+  flex: 1; /* Ocupa el espacio restante */
+  overflow-y: auto; /* Permitir scroll vertical si los síntomas exceden el tamaño */
+}
+
+/* Estilo para cada síntoma */
+.sintoma-item {
+  display: flex;
+  align-items: center; /* Alinear imagen y texto horizontalmente */
+  margin-bottom: 8px; /* Espaciado entre síntomas */
+  width: 100%; /* Ocupar todo el ancho disponible */
+}
+
+/* Imagen del síntoma */
+.sintoma-icono {
+  width: 15px; /* Ancho de la imagen */
+  height: 15px; /* Altura de la imagen */
+  margin-right: 8px; /* Espaciado entre la imagen y el texto */
+}
+
+/* Texto del síntoma */
+.sintoma-item ion-text {
+  font-size: 15px; /* Tamaño de fuente */
+  color: black; /* Color del texto */
+  font-weight: 400; /* Grosor de la fuente */
 }
 
 /* Componentes adicionales */
-.info-sintomas, .info-consejos{
+.info-consejos {
   width: 319px;
   height: 132px;
-  background: #FFFFFF; /* Fondo gris claro */
+  background: #ffffff; /* Fondo gris claro */
   margin: 24px auto; /* Espaciado entre los componentes */
   border-radius: 20px; /* Bordes redondeados */
   display: flex;
@@ -144,7 +195,7 @@ ion-menu {
 
 .datos-perfil {
   height: 158px; /* Altura del contenedor */
-  background: #FCBCC3; /* Fondo del contenedor */
+  background: #fcbcc3; /* Fondo del contenedor */
   display: flex; /* Usar flexbox para disposición */
   flex-direction: column; /* Coloca elementos en columna */
   justify-content: center; /* Centra verticalmente */
@@ -181,7 +232,7 @@ ion-menu {
 .linea-separadora {
   width: 210px; /* Ancho fijo de la línea */
   height: 1px; /* Altura de la línea */
-  background-color: #FFFFFF; /* Color de la línea */
+  background-color: #ffffff; /* Color de la línea */
   margin: 4px 0; /* Espaciado superior e inferior */
 }
 
@@ -189,7 +240,7 @@ ion-menu {
 .correo-usuario {
   font-size: 13px;
   font-weight: 400;
-  color: #333333CF; /* Color del texto */
+  color: #333333cf; /* Color del texto */
 }
 
 .menu-content {
@@ -200,16 +251,16 @@ ion-menu {
   padding: 16px;
 }
 
-ion-item{
-  --background:#ffff;
+ion-item {
+  --background: #ffff;
   font-size: 20px;
   font-weight: 600;
   --color: black;
 }
 
-.icono{
+.icono {
   font-size: 25px;
-  color:black;
+  color: black;
 }
 
 /* Contenedor para el logo y los textos */
@@ -249,17 +300,533 @@ ion-item{
 .fem-syncronia {
   font-size: 17px;
   font-weight: 600;
-  color: #FF4D7F; /* Color de destaque */
+  color: #ff4d7f; /* Color de destaque */
 }
 
 ion-tab-bar {
-    --background: #ffffff; /* Fondo blanco para el tab-bar */
-    border-top: none;
+  --background: #ffffff; /* Fondo blanco para el tab-bar */
+  border-top: none;
 }
 
 ion-tab-button {
-    --background: #ffffff; /* Fondo blanco de los botones */
-    --color: #8e8e93; /* Color por defecto */
-    --color-selected: #ff4d7f; /* Color cuando está seleccionado */
-    font-size: 7px;
+  --background: #ffffff; /* Fondo blanco de los botones */
+  --color: #8e8e93; /* Color por defecto */
+  --color-selected: #ff4d7f; /* Color cuando está seleccionado */
+  font-size: 7px;
+}
+ion-button {
+  --color: black;
+  margin: 0; /* Elimina márgenes no deseados */
+  padding: 0; /* Elimina padding no deseado */
+}
+
+.mes-año {
+  color: black;
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+/* Contenedor principal */
+.info-dia {
+  width: 350px;
+  background: transparent;
+  border-radius: 20px;
+  margin: 24px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  position: relative;
+}
+
+/* Etiquetas superiores */
+.etiquetas-superiores {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.etiqueta-dia-actual {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.etiqueta-indice-ciclo {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  color: #7b7a7a;
+}
+/* Botón de editar */
+.boton-editar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 150px;
+  height: 10px;
+  --background: #fff;
+  --border-radius: 50px;
+  --color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: none;
+  --color: #ff9ca7;
+  --background-activated: #f2f2f2;
+}
+
+/* Contenedores adicionales */
+.contenedor-adicional {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+}
+
+.contenedor-item {
+  display: flex;
+  align-items: flex-start; /* Cambiado a flex-start para mejor alineación */
+  justify-content: space-between;
+  padding: 8px 0;
+  position: relative;
+  min-height: 24px; /* Altura mínima para items normales */
+}
+
+/* Ajusta el texto izquierdo */
+.item-texto {
+  font-size: 16px;
+  color: black;
+  flex: 0 0 80px;
+  text-align: left;
+  padding-right: 4px; /* Reduce el padding derecho */
+  font-family: "Open Sans";
+  font-weight: 600;
+}
+
+/* Línea divisora */
+.linea-divisora {
+  width: 3px;
+  height: 24px;
+  margin: 0 4px; /* Reduce el margen horizontal de 10px a 4px */
+  align-self: center;
+}
+
+/* Texto derecho */
+.texto-derecha {
+  font-size: 14px;
+  color: black;
+  flex: 1;
+  text-align: left;
+  font-weight: 600;
+  font-family: "Open Sans";
+}
+
+/* Colores específicos para cada línea */
+.contenedor-item[data-tipo="probabilidad"] .linea-divisora {
+  background-color: #c5e1a5;
+}
+
+.contenedor-item[data-tipo="sintomas"] .linea-divisora {
+  background-color: #ffb3c9;
+}
+
+/* Específicamente para el contenedor de síntomas */
+.contenedor-item[data-tipo="sintomas"] {
+  min-height: 90px; /* Igual que el max-height de lista-sintomas */
+  align-items: stretch; /* Hace que todos los hijos se estiren verticalmente */
+
+  .linea-divisora {
+    height: auto; /* Altura automática basada en el contenedor padre */
+    align-self: stretch; /* Ocupa toda la altura disponible */
+    margin: 0 4px;
+  }
+
+  .contenedor-sintomas {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 90px; /* Asegura altura mínima */
+  }
+
+  .lista-sintomas {
+    flex: 1;
+    max-height: 90px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+/* Ajustar el ancho del texto derecho para los síntomas */
+.contenedor-item[data-tipo="sintomas"] .texto-derecha {
+  display: none; /* Ocultamos el span vacío ya que usamos nuestro propio contenedor */
+}
+
+/* Estilos para síntomas */
+.sintoma-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+  font-family: "Open Sans";
+}
+
+.sin-sintomas {
+  font-size: 14px;
+  color: #999;
+  font-weight: 600;
+  text-align: left;
+  padding-left: 6px;
+}
+
+.contenedor-item[data-tipo="peso"] .linea-divisora {
+  background-color: #d5b3ff;
+}
+
+.contenedor-item[data-tipo="temp"] .linea-divisora {
+  background-color: #ffd9b3;
+}
+
+/* Centrar el título "Análisis" */
+.titulo-analisis {
+  display: flex;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  text-align: center; /* Asegura que el texto esté centrado */
+  width: 100%; /* Ocupa todo el ancho disponible */
+}
+
+/* Estilo para el contenedor de ciclos */
+.contenedor-ciclos {
+  width: 316px;
+  height: 170px;
+  background: #ffe3e0; /* Fondo gris claro */
+  border-radius: 20px; /* Bordes redondeados */
+  margin: 16px auto; /* Centrado y margen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  color: black; /* Color del texto */
+  font-weight: 600;
+  padding: 16px; /* Añadido padding para espaciado interno */
+  box-shadow: none;
+}
+
+/* Estilo para la línea con ícono y texto "Ciclos" */
+.linea-ciclos {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Alinea a la izquierda */
+  margin-bottom: 8px;
+}
+
+.icono-ciclos {
+  font-size: 24px;
+  margin-right: 8px;
+  color: black;
+}
+
+.texto-ciclos {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  color: black;
+  margin-top: 8px; /* Espaciado superior para separar del borde */
+}
+
+/* Estilo para el texto adicional */
+.texto-ciclos-registrados {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 12px;
+  text-align: left; /* Alinea el texto a la izquierda */
+  display: block;
+  width: 100%; /* Para asegurarse de que ocupe toda la línea */
+}
+
+/* Ajustar el padding del ion-card-content */
+ion-card-content {
+  padding: 0; /* Eliminar el padding */
+}
+
+/* Contenedor para las dos cards pequeñas */
+.contenedor-cards {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px; /* Espaciado entre las cards */
+}
+
+/* Estilo para las cards pequeñas */
+.card-pequena {
+  width: 140px;
+  height: 67px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column; /* Asegura que los elementos estén en columna */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  color: white;
+  font-weight: 600;
+  margin: 0;
+  padding: 5px; /* Añadir un pequeño padding */
+  box-shadow: none;
+}
+
+/* Contenedor para el ícono y el texto */
+.contenido-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px; /* Reducir el espacio entre el ícono y el texto */
+  width: 70%;
+}
+
+/* Estilo del icono */
+.icono-card {
+  font-size: 20px;
+  color: black;
+  flex-shrink: 0; /* Evita que el icono se reduzca */
+}
+
+/* Estilo del texto */
+.texto-dias {
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap; /* Evita que se divida en dos líneas */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1; /* Permite que el texto se expanda */
+  text-align: center;
+  margin-left: 2px; /* Ajuste adicional si es necesario */
+}
+
+.color-texto-periodo {
+  color: #9f0000;
+}
+.color-texto-ciclo {
+  color: #9f6900;
+}
+/* Línea divisora */
+.linea-divisora-analisis {
+  width: 90%; /* Ocupar todo el ancho disponible */
+  height: 1px;
+  margin: 2px 0;
+}
+
+/* Colores de la línea divisora */
+.linea-roja {
+  background-color: #9f0000;
+}
+
+.linea-amarilla {
+  background-color: #9f6900;
+}
+
+/* Estilo del texto "Promedio de período" y "Promedio de ciclo" */
+.texto-promedio {
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap; /* Evitar que se divida en dos líneas */
+  width: 100%; /* Ocupar todo el ancho */
+}
+
+/* Ajustar el padding del ion-card-content */
+.content-cards {
+  padding: 0; /* Eliminar el padding */
+  width: 100%; /* Asegurar que ocupe todo el ancho */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Contenedor general */
+.contenedor-peso,
+.contenedor-temperatura,
+.contenedor-historial {
+  width: 316px;
+  height: 99px; /* Manteniendo el tamaño que ya modificaste */
+  background: #ffffff;
+  border-radius: 20px;
+  margin: 12px auto;
+  font-size: 16px;
+  padding: 8px 12px; /* Espacio interno */
+  color: black;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column; /* Mantiene todo alineado en columna */
+  justify-content: center;
+  background: #ffe3e0;
+  box-shadow: none;
+}
+
+/* Ajuste de las líneas internas */
+.contenedor-peso ion-text,
+.contenedor-temperatura ion-text,
+.contenedor-historial ion-text {
+  margin: 0;
+  padding: 0;
+  line-height: 1.2; /* Reduce espacio entre líneas */
+}
+
+/* Contenedor de la línea y la flecha */
+.linea-con-flecha {
+  display: flex;
+  justify-content: space-between; /* Alinea la línea y la flecha en extremos opuestos */
+  align-items: center; /* Alinea la flecha y el texto en la misma línea */
+  width: 100%; /* Toma el ancho completo del contenedor */
+  margin-bottom: 4px; /* Ajusta el espacio entre la línea y los textos */
+  position: relative; /* Posiciona la flecha en relación con la línea */
+}
+
+/* Primera línea: Icono + Título */
+.linea {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Contenedor de los textos (Dato + Última Actualización) */
+.contenedor-texto {
+  display: flex;
+  flex-direction: column; /* Mantiene los textos en columna */
+  padding-left: 6px; /* Espaciado alineado */
+  gap: 6px; /* Añade un espacio entre los elementos */
+}
+
+/* Icono */
+.icono {
+  font-size: 25px;
+  color: #4a4a4a;
+}
+
+/* Título */
+.titulo {
+  font-size: 16px;
+  font-weight: 700;
+  color: black;
+}
+
+/* Valor (Ej. 36.6°) */
+.dato {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  padding-bottom: 6px; /* Aumenta la separación entre el dato y la última actualización */
+}
+
+/* Última actualización */
+.ultima-actualizacion {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.4);
+  padding-top: 6px; /* Aumenta la separación superior */
+}
+
+/* Flecha en la parte superior derecha */
+.flecha {
+  font-size: 18px;
+  color: #4a4a4a;
+  position: absolute; /* Hace que la flecha esté en la parte superior derecha */
+  top: 0;
+  right: 0;
+}
+
+/* Contenedor principal para el análisis */
+.contenedor-analisis {
+  display: flex;
+  flex-direction: column;
+  height: calc(
+    100vh - 150px
+  ); /* Ajusta la altura restando el espacio de la barra superior y el tab-bar */
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden; /* Evita el scroll */
+}
+
+/* Ajustes para el componente de temperatura  y peso*/
+app-ciclos,
+app-grafica {
+  flex: 1; /* Ocupa el espacio disponible */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.spinner-periodo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+
+.info-consejos {
+  width: 319px;
+  height: 180px; /* Altura fija del contenedor */
+  background: #ffffff; /* Fondo gris claro */
+  margin: 24px auto; /* Espaciado entre los componentes */
+  border-radius: 20px; /* Bordes redondeados */
+  display: flex;
+  flex-direction: column; /* Alinear el título y la lista en columna */
+  padding: 10px; /* Espaciado interno */
+  text-align: left;
+
+
+  .titulo-consejos {
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+    margin-bottom: 8px;
+    width: 100%;
+    text-align: left;
+    padding-left: 4px; // opcional para empujar un poquito
+  }
+
+
+  .consejos-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    .consejo {
+      flex: 1 1 calc(33.33% - 10px);
+      max-width: calc(33.33% - 10px);
+      border-radius: 12px;
+      text-align: center;
+      padding: 6px; 
+
+      img {
+        width: 100%;
+        max-width: 130px;
+        height: auto;
+
+      }
+
+      p {
+        font-family: "Open Sans";
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0;
+      }
+    }
+  }
 }

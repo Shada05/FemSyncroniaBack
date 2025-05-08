@@ -17,7 +17,7 @@ const symptoms_Controller = require('../controllers/symptoms.js');
 const cycle_calendarController = require('../controllers/cycle_calendars.js');
 const { uploadImage } = require('../controllers/imageController');
 const upload = require('../middlewares/upload');
-const  auth_controller = require('../controllers/authcontroller');
+const  auth_controller = require('../controllers/authController');
 const { authenticateToken } = require('../middlewares/auth');
 const { enviarCodigoVerificacion, validarCodigo } = require('../controllers/emailController');
 
@@ -142,10 +142,7 @@ router.get('/api/v1/cycle_calendar', cycle_calendarController.index);
 router.get('/api/v1/cycle_calendar/:id', cycle_calendarController.show);
 router.get('/api/v1/cycle_calendar_id/:user_id', cycle_calendarController.show_userid);
 router.put('/api/v1/cycle_calendar/:id', cycle_calendarController.update);
-router.delete('/api/v1/cycle_calendar/:id', cycle_calendarController.destroy);
-
-
-
+router.delete('/api/v1/cycle_calendar/:user_id', cycle_calendarController.destroy);
 
 
 module.exports = {

@@ -87,7 +87,7 @@
 
     <div class="divisor"></div>
     <div class="contenedor-boton">
-      <ion-button class="btn-continuar" [routerLink]="['/sintomas']" type="submit" [disabled]="formulario.invalid">
+      <ion-button class="btn-continuar" (click)="enviarDatos()" type="submit">
         Continuar
       </ion-button>
     </div>

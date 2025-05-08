@@ -161,6 +161,7 @@ span a {
 /* Estilos generales para los botones */
 .btn-config {
   --border-radius: 50px; /* Radio de borde */
+  min-height: 44px;;
   width: 302px; /* Ancho del botón */
   height: 44px; /* Altura del botón */
   text-transform: none; /* Transformación de texto */
@@ -169,45 +170,30 @@ span a {
 
 /* Estilos específicos para el botón de registrarse */
 .btn-registrarse {
+  --background-activated: #FF8390;
   --background: #FFB7BF; /* Color de fondo */
   --color: white; /* Color de texto */
-  --padding-start: 20px; /* Espacio interior al inicio */
-  --padding-end: 20px; /* Espacio interior al final */
   --border-color: #FFB7BF; /* Color del borde */
-  --border-style: solid; /* Estilo de borde */
-  --border-width: 1px; /* Ancho de borde */
   --box-shadow: none; /* Sin sombra */
   font-size: 18px; /* Tamaño de fuente */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones */
 }
 
-/* Estilos para el botón de registrarse al pasar el mouse */
-.btn-registrarse:hover {
-  --background: white; /* Cambio de color de fondo */
-  --color: #FFB7BF; /* Cambio de color de texto */
-}
   
 /* Estilos específicos para el botón de Google */
 .btn-Google {
   font-size: 18px; /* Tamaño de fuente */
   --color: black; /* Color de texto */
-  --background: rgba(0, 0, 0, 0.09); /* Color de fondo */
-  --box-shadow: none; /* Sin sombra */
+  --background:  #E9E9E9; /* Color de fondo */
+  --background-activated:#CCCCCC;
 }
   
-/* Estilos para el botón de Google al pasar el mouse */
-.btn-Google:hover {
-  --background: white; /* Cambio de color de fondo */
-  --border-color: rgba(0, 0, 0, 0.09); /* Cambio de color del borde */
-  --border-style: solid; /* Estilo de borde */
-  --border-width: 1px; /* Ancho de borde */
-}
 
 ion-popover {
   --background: #E4E4E4;
   --backdrop-opacity: 0.6;
   --box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.6);
   --width: 300px;
+  border: 0;
 }
 
 ion-popover ion-content{

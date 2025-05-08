@@ -55,27 +55,57 @@
           <div class="top-bar">
             <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg"></ion-icon>
             <ion-text class="bienvenida-text">Bienvenida</ion-text>
-            <img class="imagen-perfil" [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()">
+            <ion-avatar><img [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()"></ion-avatar>
           </div>
 
           <!-- Contenedor periodo -->
-          <div class="info-periodo">
-            <ion-text class="info-text titulo">Retraso</ion-text>
-            <ion-text class="numero">15</ion-text>
-            <ion-text class="info-text subtitulo">días de tu periodo</ion-text>
-            <div class="linea-horizontal"></div>
-            <ion-text class="info-text observacion">Baja probabilidad de quedar embarazada</ion-text>
-            <ion-button class="boton-informacion">Registrar</ion-button>
-          </div>
+          <ng-container *ngIf="fechasCargadas; else spinnerPeriodo">
+            <div class="info-periodo" [ngStyle]="{ 'background': getColorPeriodo() }">
+              <ion-text class="info-text titulo">{{ getTituloPeriodo() }}</ion-text>
+              <ion-text class="numero">{{ getNumeroPeriodo() }}</ion-text>
+              <ion-text class="info-text subtitulo">{{ getSubtituloPeriodo() }}</ion-text>
+              <div class="linea-horizontal"></div>
+              <ion-text class="info-text observacion">{{ getProbabilidadEmbarazo() }}</ion-text>
+              <ion-button class="boton-informacion">Registrar</ion-button>
+            </div>
+          </ng-container>
 
+          <!-- Spinner mientras se cargan fechas -->
+          <ng-template #spinnerPeriodo>
+            <div class="info-periodo spinner-periodo">
+              <ion-spinner name="crescent" color="medium"></ion-spinner>
+            </div>
+          </ng-template>
+              
           <!-- Contenedor síntomas -->
           <div class="info-sintomas">
-            <ion-text>Espacio para los síntomas</ion-text>
+            <ion-text class="titulo-sintomas">Síntomas de hoy</ion-text>
+            <div class="contenedor-lista-sintomas">
+              <ion-text style="color: black;" *ngIf="sintomasHoy.length === 0">No hay síntomas calificados hoy.</ion-text>
+              <div *ngFor="let sintoma of sintomasHoy" class="sintoma-item">
+                <img [src]="sintoma.icono" alt="{{ sintoma.nombre }}" class="sintoma-icono" *ngIf="sintoma.icono">
+                <ion-text>{{ sintoma.nombre }}</ion-text>
+              </div>
+            </div>
           </div>
 
           <!-- Consejo del día -->
           <div class="info-consejos">
-            <ion-text>Espacio para los consejos del día</ion-text>
+            <ion-text class="titulo-consejos">Consejos del dia</ion-text>
+            <div class="consejos-grid">
+              <div class="consejo">
+                <img src='assets/img/cuidados/C-4.svg' alt="Mima tu piel">
+                <p>Mima tu piel</p>
+              </div>
+              <div class="consejo">
+                <img src='assets/img/cuidados/C-5.svg' alt="Conecta y medita">
+                <p>Conecta y medita</p>
+              </div>
+              <div class="consejo">
+                <img src='assets/img/cuidados/C-6.svg' alt="Hidrátate siempre">
+                <p>Hidrátate siempre</p>
+              </div>
+            </div>
           </div>
         </ion-content>
       </div>
@@ -84,15 +114,228 @@
     <ion-tab tab="calendario">
       <div id="pagina-calendario">
         <ion-content>
-          <div class="center">Contenido calendario</div>
+          <!-- Barra superior -->
+          <div class="top-bar">
+            <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg"></ion-icon>
+            <ion-button (click)="mesAnterior()" fill="clear">
+              <ion-icon name="chevron-back-outline"></ion-icon>
+            </ion-button>
+            <ion-text class="mes-año">{{ obtenerNombreMes(mesActual) }} {{ anoActual }}</ion-text>
+            <ion-button (click)="mesSiguiente()" fill="clear">
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </ion-button>
+            <ion-avatar><img [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()">
+            </ion-avatar>
+          </div>
+
+          <!-- Componente del calendario -->
+          <app-calendario-ciclo [mesActual]="mesActual" [anoActual]="anoActual" [fechaInicio]="fechaInicio"
+            [fechaFin]="fechaFin" [userId]="userId" (diaSeleccionado)="actualizarDiaSeleccionado($event)">
+          </app-calendario-ciclo>
+
+          <!-- Contenedor de información del día -->
+          <div class="info-dia">
+            <!-- Etiquetas en la parte superior izquierda -->
+            <div class="etiquetas-superiores">
+              <div class="etiqueta-dia-actual">{{ diaActual }} {{ obtenerNombreMes(mesActual) }}</div>
+              <!-- Día actual -->
+              <div class="etiqueta-indice-ciclo">día del ciclo {{ indice }}</div> <!-- Número del índice -->
+            </div>
+
+            <!-- Botón en la parte superior derecha -->
+            <ion-button class="boton-editar" [routerLink]="['/registro-sintomas', obtenerFechaFormateada()]">
+              Editar
+            </ion-button>
+
+            <!-- Contenedores adicionales con data-attributes -->
+            <div class="contenedor-adicional">
+              <div class="contenedor-item" data-tipo="probabilidad">
+                <span class="item-texto">{{ getProbabilidadTexto() }}</span>
+                <div class="linea-divisora"></div>
+                <span class="texto-derecha">Probabilidad de quedar embarazada</span>
+            </div>
+              <div class="contenedor-item" data-tipo="sintomas">
+                <span class="item-texto">Síntomas</span>
+                <div class="linea-divisora"></div>
+                <div class="contenedor-sintomas">
+                  <div class="lista-sintomas" *ngIf="sintomasDiaSeleccionado.length > 0">
+                    <div class="sintoma-item" *ngFor="let sintoma of sintomasDiaSeleccionado">
+                      <span>{{ sintoma.nombre }}</span>
+                    </div>
+                  </div>
+                  <div class="sin-sintomas" *ngIf="sintomasDiaSeleccionado.length === 0">
+                    No hay síntomas hoy
+                  </div>
+                </div>
+              </div>
+              <div class="contenedor-item" data-tipo="peso">
+                <span class="item-texto">Peso</span>
+                <div class="linea-divisora"></div>
+                <span class="texto-derecha">{{ peso ? (peso + ' kg') : '--' }}</span>
+              </div>
+              <div class="contenedor-item" data-tipo="temp">
+                <span class="item-texto">Temp</span>
+                <div class="linea-divisora"></div>
+                <span class="texto-derecha">{{ temperatura ? (temperatura + '°C') : '--' }}</span>
+              </div>
+            </div>
+          </div>
         </ion-content>
       </div>
     </ion-tab>
 
-    <ion-tab tab="grafica">
+    <ion-tab tab="analisis">
       <div id="pagina-grafica">
         <ion-content>
-          <div class="center">Contenido gráfica</div>
+
+          <!-- Barra superior -->
+          <div class="top-bar">
+            <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg"></ion-icon>
+            <ion-text class="bienvenida-text">Análisis</ion-text>
+            <ion-avatar><ion-img [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()"></ion-img>
+            </ion-avatar>
+          </div>
+          <ng-container *ngIf="componenteActivo === 'ciclos'">
+            <div class="contenedor-analisis">
+              <app-ciclos (cerrarComponente)="ocultarComponente()">
+
+              </app-ciclos>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="componenteActivo === 'temperatura'">
+            <div class="contenedor-analisis">
+              <app-grafica [yAxisLabels]="misLabelsY" [minTemp]="minTemp" [maxTemp]="maxTemp"
+                (cerrarComponente)="ocultarComponente()"></app-grafica>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="componenteActivo === 'peso'">
+            <div class="contenedor-analisis">
+              <app-grafica [yAxisLabels]="misLabelsY" [minTemp]="minTemp" [maxTemp]="maxTemp"
+                (cerrarComponente)="ocultarComponente()"></app-grafica>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="componenteActivo === 'historial'">
+            <app-historial (cerrarComponente)="ocultarComponente()"></app-historial>
+          </ng-container>
+          <!-- Contenedor para Ciclos -->
+          <ng-container *ngIf="!componenteActivo">
+            <ion-card class="contenedor-ciclos">
+              <ion-card-content>
+                <!-- Línea con ícono y texto "Ciclos" -->
+                <div class="linea-ciclos">
+                  <ion-icon src="assets/icons/pantalla-principal/ciclo.svg" class="icono-ciclos"></ion-icon>
+                  <ion-text class="texto-ciclos">Ciclos</ion-text>
+                </div>
+
+                <!-- Botón de adelante en la parte superior derecha del contenedor Ciclos -->
+                <ion-button fill="clear" class="flecha" (click)="mostrarComponente('ciclos')">
+                  <ion-icon src="assets/icons/pantalla-principal/Adelante.svg"></ion-icon>
+                </ion-button>
+
+                <!-- Texto adicional -->
+                <ion-text class="texto-ciclos-registrados">33 ciclos registrados</ion-text>
+
+                <!-- Contenedor para las dos cards pequeñas -->
+                <div class="contenedor-cards">
+                  <!-- Card 1: Promedio de ciclo -->
+                  <ion-card class="card-pequena" style="background-color: rgba(255, 184, 0, 0.32);">
+                    <ion-card-content class="content-cards">
+                      <div class="contenido-card">
+                        <ion-icon src="assets/icons/pantalla-principal/ciclo-amarillo.svg"
+                          class="icono-card"></ion-icon>
+                        <ion-text class="texto-dias color-texto-ciclo">30 días</ion-text>
+                      </div>
+                      <div class="linea-divisora-analisis linea-amarilla"></div>
+                      <ion-text class="texto-promedio color-texto-ciclo">Promedio de ciclo</ion-text>
+                    </ion-card-content>
+                  </ion-card>
+                  <!-- Card 2: Promedio de período -->
+                  <ion-card class="card-pequena" style="background-color: rgba(255, 0, 0, 0.32);">
+                    <ion-card-content class="content-cards">
+                      <div class="contenido-card">
+                        <ion-icon src="assets/icons/pantalla-principal/sangre-1.svg" class="icono-card"></ion-icon>
+                        <ion-text class="texto-dias color-texto-periodo">7 días</ion-text>
+                      </div>
+                      <div class="linea-divisora-analisis linea-roja"></div>
+                      <ion-text class="texto-promedio color-texto-periodo">Promedio de período</ion-text>
+                    </ion-card-content>
+                  </ion-card>
+                </div>
+              </ion-card-content>
+            </ion-card>
+
+            <!-- Grid para Temperatura, Peso e Historial -->
+            <ion-grid>
+              <ion-row>
+                <!-- Contenedor para Temperatura -->
+                <ion-col size="12">
+                  <ion-card class="contenedor-temperatura">
+                    <ion-card-content>
+                      <div class="linea-con-flecha">
+                        <div class="linea">
+                          <ion-icon src="assets/icons/pantalla-principal/temperatura.svg" class="icono"></ion-icon>
+                          <ion-text class="titulo">Temperatura</ion-text>
+                        </div>
+                        <!-- Flecha en la parte superior derecha -->
+                        <ion-button fill="clear" class="flecha" (click)="mostrarComponente('temperatura')">
+                          <ion-icon src="assets/icons/pantalla-principal/Adelante.svg"></ion-icon>
+                        </ion-button>
+                      </div>
+                      <div class="contenedor-texto">
+                        <ion-text class="dato">36.6°</ion-text>
+                        <ion-text class="ultima-actualizacion">Última actualización</ion-text>
+                      </div>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+
+                <!-- Contenedor para Peso -->
+                <ion-col size="12">
+                  <ion-card class="contenedor-peso">
+                    <ion-card-content>
+                      <div class="linea-con-flecha">
+                        <div class="linea">
+                          <ion-icon src="assets/icons/pantalla-principal/escala-de-peso.svg" class="icono"></ion-icon>
+                          <ion-text class="titulo">Peso</ion-text>
+                        </div>
+                        <!-- Flecha en la parte superior derecha -->
+                        <ion-button fill="clear" class="flecha" (click)="mostrarComponente('peso')">
+                          <ion-icon src="assets/icons/pantalla-principal/Adelante.svg"></ion-icon>
+                        </ion-button>
+                      </div>
+                      <div class="contenedor-texto">
+                        <ion-text class="dato">65.700 kg</ion-text>
+                        <ion-text class="ultima-actualizacion">Última actualización</ion-text>
+                      </div>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+
+                <!-- Contenedor para Historial -->
+                <ion-col size="12">
+                  <ion-card class="contenedor-historial">
+                    <ion-card-content>
+                      <div class="linea-con-flecha">
+                        <div class="linea">
+                          <ion-icon src="assets/icons/pantalla-principal/historial.svg" class="icono"></ion-icon>
+                          <ion-text class="titulo">Historial</ion-text>
+                        </div>
+                        <!-- Flecha en la parte superior derecha -->
+                        <ion-button fill="clear" class="flecha" (click)="mostrarComponente('historial')">
+                          <ion-icon src="assets/icons/pantalla-principal/Adelante.svg"></ion-icon>
+                        </ion-button>
+                      </div>
+                      <div class="contenedor-texto">
+                        <ion-text class="dato">Registro de periodo</ion-text>
+                        <ion-text class="ultima-actualizacion">Última actualización</ion-text>
+                      </div>
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ng-container>
         </ion-content>
       </div>
     </ion-tab>
@@ -100,10 +343,22 @@
     <ion-tab tab="buscar">
       <div id="pagina-buscar">
         <ion-content>
-          <div class="center">Contenido buscar</div>
+          <!-- Barra superior -->
+          <div class="top-bar">
+            <ion-icon class="notificacion" src="/assets/icons/pantalla-principal/campana.svg"></ion-icon>
+            <ion-text class="bienvenida-text">Información</ion-text>
+            <ion-avatar>
+              <ion-img [src]="profileImage" alt="Foto de perfil" (click)="abrirMenuPerfil()"></ion-img>
+            </ion-avatar>
+          </div>
+          <div class="contenedor-info">
+            <app-informacion />
+          </div>
         </ion-content>
       </div>
     </ion-tab>
+    
+
 
     <ion-tab-bar slot="bottom">
       <ion-tab-button tab="principal">
@@ -114,13 +369,13 @@
         <ion-icon src="../../../assets/icons/Tabs/Calendario.svg"></ion-icon>
         Calendario
       </ion-tab-button>
-      <ion-tab-button tab="grafica">
+      <ion-tab-button tab="analisis">
         <ion-icon src="../../../assets/icons/Tabs/Estadisticas.svg"></ion-icon>
-        Gráfica
+        Análisis
       </ion-tab-button>
       <ion-tab-button tab="buscar">
         <ion-icon src="../../../assets/icons/Tabs/Buscar.svg"></ion-icon>
-        Buscar
+        Información
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>

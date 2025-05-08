@@ -1,0 +1,115 @@
+/* Contenedor del historial */
+.contenedor-historial {
+    width: 100vw; /* Ancho del 100% de la ventana */
+    height: calc(100vh - 150px); /* Resta la altura del top-bar (100px) + tab-bar (56px) + margen (10px) */
+    background: transparent; /* Fondo transparente */
+    border-radius: 16px;
+    padding: 16px; /* Espaciado interno */
+    box-shadow: none;
+    position: fixed;
+    top: 100px; /* Ajusta el top para que no se superponga con el top-bar */
+    left: 50%;
+    transform: translateX(-50%); /* Centra el componente horizontalmente */
+    z-index: 1000; /* Asegura que esté sobre otros elementos */
+    margin: 0 auto; /* Asegura que no haya margen adicional */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transición suave */
+    overflow-y: auto; /* Permite el scroll vertical si el contenido excede la altura */
+}
+  
+/* Animación cuando se cierra el contenedor */
+.contenedor-historial.cerrando {
+    animation: cerrarVentana 0.3s ease forwards;
+    overflow-y: hidden; /* Oculta el scrollbar durante la animación */
+}
+  
+@keyframes cerrarVentana {
+    0% {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) scale(0.9);
+    }
+}
+  
+/* Contenedor del botón de cerrar */
+.boton-cerrar-container {
+    position: fixed; /* Fijo en la pantalla */
+    top: 116px; /* Ajusta la posición vertical (100px del top-bar + 16px de padding) */
+    right: 25px; /* Distancia desde la derecha */
+    z-index: 1001; /* Asegura que esté por encima de otros elementos */
+    pointer-events: none; /* Permite hacer clic a través del contenedor */
+}
+
+/* Estilos del botón de cerrar */
+.boton-cerrar {
+    font-size: 30px; /* Tamaño del ícono */
+    color: #ff4d7f; /* Color del ícono */
+    background: none; /* Fondo transparente */
+    border: none; /* Sin borde */
+    border-radius: 50%; /* Hace que el ícono sea circular */
+    padding: 0; /* Elimina el padding por defecto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    pointer-events: auto; /* Permite hacer clic en el botón */
+}
+
+/* Clase para ocultar el botón */
+.boton-cerrar-container.oculto {
+    opacity: 0; /* Oculta el botón */
+    pointer-events: none; /* Desactiva interacciones */
+}
+  
+/* Contenido del historial */
+.contenido-historial {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 800px; /* Limita el ancho máximo para que no se vea demasiado ancho */
+    margin-top: 20px; /* Reducimos el margen superior */
+    padding: 16px; /* Eliminamos el padding interno */
+}
+  
+/* Lista del historial */
+.lista-historial {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Espaciado entre los elementos */
+}
+  
+/* Elementos del historial */
+.item-historial {
+    background: #FFE3E0; /* Fondo blanco para los elementos */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 20px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño del texto */
+    color: black; /* Color del texto */
+    height: 80px; /* Altura fija */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    position: relative; /* Para posicionar el ícono correctamente */
+}
+  
+/* Ícono dentro de los elementos */
+.icono-item {
+    position: absolute; /* Posiciona el ícono de manera absoluta */
+    top: 12px; /* Distancia desde la parte superior */
+    right: 12px; /* Distancia desde la derecha */
+    font-size: 20px; /* Tamaño del ícono */
+    color: #666; /* Color del ícono */
+}
+  
+/* Título del elemento */
+.titulo {
+    font-size: 18px; /* Tamaño del título */
+    font-weight: bold; /* Texto en negrita */
+    margin-bottom: 4px; /* Espacio entre el título y la fecha */
+}
+  
+/* Fecha del elemento */
+.fecha {
+    font-size: 14px; /* Tamaño de la fecha */
+    color: #666; /* Color gris para la fecha */
+}

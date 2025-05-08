@@ -1,0 +1,180 @@
+.contenido-grafica {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ocupa toda la altura disponible */
+    width: 100%;
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transición suave */
+}
+
+/* Animación cuando se cierra el contenedor */
+.contenido-grafica.cerrando {
+    animation: cerrarVentana 0.3s ease forwards;
+}
+
+@keyframes cerrarVentana {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+/* Resto de los estilos (sin cambios) */
+.contenedor-grafica {
+    flex: 1; /* Ocupa todo el espacio disponible */
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Para posicionar el canvas correctamente */
+}
+
+canvas {
+    width: 100% !important; /* Ocupa el 100% del ancho del contenedor */
+    height: 100% !important; /* Ocupa el 100% de la altura del contenedor */
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.contenedor-inferior {
+    height: 190px;
+    width: 100%;
+    border-radius: 20px;
+    background: #FFE3E0;
+    flex-shrink: 0;
+    margin-top: 16px;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.boton-cerrar-container {
+    position: absolute;
+    top: 100px;
+    right: 35px;
+    z-index: 2;
+}
+
+.boton-cerrar {
+    font-size: 30px;
+    color: #ff4d7f;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    background: none;
+    border-radius: 50%;
+}
+
+/* Clase para ocultar el botón */
+.boton-cerrar-container.oculto {
+    opacity: 0; /* Oculta el botón */
+    pointer-events: none; /* Desactiva interacciones */
+}
+/* Nueva estructura para el día, subtítulo y temperatura */
+.informacion-dia {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Para alinear la temperatura a la derecha */
+    flex-wrap: wrap; /* Permite que los elementos se ajusten cuando el espacio sea limitado */
+}
+
+.informacion-dia-izquierda {
+    display: flex;
+    flex-direction: column;
+}
+
+.dia-actual {
+    font-size: 20px;
+    font-weight: 700;
+    color: black;
+    margin-bottom: 4px; /* Espacio entre el día actual y el subtítulo */
+}
+
+.subtitulo-dia {
+    font-size: 15px;
+    color: #00000066;
+}
+
+.temperatura-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.temperatura {
+    font-size: 20px;
+    font-weight: 700;
+    color: black;
+}
+
+/* Barra de intensidad */
+.barra-intensidad {
+    width: 100%;
+    height: 19px; /* Se reduce el alto de la barra */
+    background: none;
+    border-radius: 10px; /* Agregado border-radius para bordes redondeados */
+    position: relative;
+    overflow: visible; /* Permite que los elementos fuera del contenedor se vean */
+    margin-top: 16px;
+}
+
+.niveles {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    margin: 0; /* Elimina el margen entre los niveles */
+    padding: 0; /* Elimina el padding entre los niveles */
+}
+
+.nivel {
+    flex: 1;
+    height: 100%;
+    background: #FFB3C9;
+    border-radius: 10px; /* Border-radius para cada nivel */
+}
+
+.contenedor-indicador {
+    position: absolute;
+    bottom: -15px; /* Asegura que el contenedor esté justo fuera de la barra */
+    left: 0;
+    width: 100%;
+    height: 20px; /* Establecemos la altura para ajustarlo bien */
+    display: flex;
+    justify-content: flex-start;
+    pointer-events: none; /* Evita que el contenedor interfiera con las interacciones del usuario */
+}
+
+.indicador {
+    width: 20px;
+    height: 20px;
+    background: #ff4d7f;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Triángulo apuntando hacia abajo */
+    position: absolute;
+    bottom: 0; /* Asegura que la punta quede alineada con la parte inferior */
+    transition: left 0.3s ease;
+}
+
+/* Colores de niveles (opcional) */
+.nivel:nth-child(1) { background: #31B5FF; }  /* frío */
+.nivel:nth-child(2) { background: #73FF31; }  /* bueno */
+.nivel:nth-child(3) { background: #FFD436; }  /* Regular */
+.nivel:nth-child(4) { background: #FFA031; }  /* Malo */
+.nivel:nth-child(5) { background: #FF3D31; }  /* Peligroso */
+
+.contenedor-boton {
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+    margin-top: 25px; /* Separa más el botón de la barra de intensidad */
+    width: 100%; /* Asegura que el contenedor ocupa todo el ancho disponible */
+}
+
+.editar-button {
+    --color: #FF9CA7;
+    --background: white;
+    --border-radius: 50px;
+    min-height: 34px;
+    width: 320px;
+    font-weight: 600;
+    font-size: 18px;
+    --background-activated: #F2F2F2;
+}

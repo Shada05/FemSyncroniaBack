@@ -7,13 +7,13 @@
   <div class="contenedor-central">
     <!-- Perfil -->
     <div class="contenedor-perfil">
-      <img class="foto-perfil" src="/assets/img/pantalla-principal/Foto-perfil.svg" alt="Foto de perfil">
+      <img class="foto-perfil" [src]="profileImage" alt="Foto de perfil">
       <div class="informacion-usuario">
         <div class="nombre-apellido">
-          <ion-text class="nombre">María</ion-text>
-          <ion-text class="apellido">Hernández</ion-text>
+          <ion-text class="nombre">{{nombre}}</ion-text>
+          <ion-text class="apellido">{{apellido}}</ion-text>
         </div>
-        <ion-text class="correo">maryhz43gmail.com</ion-text>
+        <ion-text class="correo">{{email}}</ion-text>
       </div>
     </div>
 
@@ -23,13 +23,13 @@
       <div class="detalle">
         <ion-icon class="icono" src="/assets/icons/editar-perfil/ciclo.svg"></ion-icon>
         <ion-text class="texto-detalle">Duración del ciclo</ion-text>
-        <ion-text class="contador">5 días</ion-text>
+        <ion-text class="contador">28 días</ion-text>
         <ion-icon class="icono-editar" src="/assets/icons/editar-perfil/editar.svg"></ion-icon>
       </div>
       <div class="detalle">
         <ion-icon class="icono" src="/assets/icons/editar-perfil/sangre.svg"></ion-icon>
         <ion-text class="texto-detalle">Duración del periodo</ion-text>
-        <ion-text class="contador">28 días</ion-text>
+        <ion-text class="contador">5 días</ion-text>
         <ion-icon class="icono-editar" src="/assets/icons/editar-perfil/editar.svg"></ion-icon>
       </div>
     </div>

@@ -1,0 +1,105 @@
+<div class="center">
+  <ion-card class="contenedor-ciclos" [class.cerrando]="estaCerrando">
+    <ion-card-content>
+      <!-- Botón de cierre en la esquina superior derecha -->
+      <div class="boton-cerrar-container">
+        <ion-icon name="close-circle-outline" (click)="cerrar()" class="boton-cerrar"></ion-icon>
+      </div>
+
+      <!-- Línea con ícono y texto "Ciclos" -->
+      <div class="linea-ciclos">
+        <ion-icon src="assets/icons/pantalla-principal/ciclo.svg" class="icono-ciclos"></ion-icon>
+        <ion-text class="texto-ciclos">Ciclos</ion-text>
+      </div>
+
+      <!-- Texto adicional -->
+      <ion-text class="texto-ciclos-registrados">33 ciclos registrados</ion-text>
+
+      <!-- Card 1: Promedio de ciclo -->
+      <ion-card class="card-pequena" style="background-color: rgba(255, 184, 0, 0.32);">
+        <ion-card-content class="content-cards">
+          <div class="contenido-card">
+            <!-- Grupo: ícono + texto "30 días" -->
+            <div class="grupo-izquierda">
+              <ion-icon src="assets/icons/pantalla-principal/ciclo-amarillo.svg" class="icono-card"></ion-icon>
+              <ion-text class="texto-dias color-texto-ciclo">30 días</ion-text>
+            </div>
+            <!-- Línea divisora -->
+            <div class="linea-divisora-analisis linea-amarilla"></div>
+            <!-- Texto "Promedio de ciclo" -->
+            <ion-text class="texto-promedio color-texto-ciclo">Promedio de ciclo</ion-text>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Tabla debajo de la Card 1 -->
+      <div class="tabla">
+        <!-- Primera fila (negrita) -->
+        <div class="fila primera-fila">
+          <div class="columna">Fecha</div>
+          <div class="columna">Duración</div>
+        </div>
+        <!-- Otras filas (texto negro) -->
+        <div class="fila">
+          <div class="columna">1 oct - 27 oct</div>
+          <div class="columna">27 dias</div>
+        </div>
+        <div class="fila">
+          <div class="columna">28 oct - 23 nov</div>
+          <div class="columna">27 dias</div>
+        </div>
+        <div class="fila">
+          <div class="columna">24 nov - 20 dic</div>
+          <div class="columna">27 dias</div>
+        </div>
+        <div class="fila">
+          <div class="columna">21 dic - 14 ene</div>
+          <div class="columna">25 dias</div>
+        </div>
+      </div>
+
+      <!-- Card 2: Promedio de período -->
+      <ion-card class="card-pequena" style="background-color: rgba(255, 0, 0, 0.32);">
+        <ion-card-content class="content-cards">
+          <div class="contenido-card">
+            <!-- Grupo: ícono + texto "7 días" -->
+            <div class="grupo-izquierda">
+              <ion-icon src="assets/icons/pantalla-principal/sangre-1.svg" class="icono-card"></ion-icon>
+              <ion-text class="texto-dias color-texto-periodo">7 días</ion-text>
+            </div>
+            <!-- Línea divisora -->
+            <div class="linea-divisora-analisis linea-roja"></div>
+            <!-- Texto "Promedio de período" -->
+            <ion-text class="texto-promedio color-texto-periodo">Promedio de período</ion-text>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Tabla debajo de la Card 2 -->
+      <div class="tabla">
+        <!-- Primera fila (negrita) -->
+        <div class="fila primera-fila">
+          <div class="columna">Fecha</div>
+          <div class="columna">Duración</div>
+        </div>
+        <!-- Otras filas (texto negro) -->
+        <div class="fila">
+          <div class="columna">1 oct - 7 oct</div>
+          <div class="columna">7 dias</div>
+        </div>
+        <div class="fila">
+          <div class="columna">28 oct - 3 nov</div>
+          <div class="columna">7 dias</div>
+        </div>
+        <div class="fila">
+          <div class="columna">24 nov - 30 nov</div>
+          <div class="columna">7 dias</div>
+        </div>
+        <div class="fila">
+          <div class="columna">21 dic - 27 dic</div>
+          <div class="columna">8 dias</div>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</div>

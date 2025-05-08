@@ -1,0 +1,335 @@
+<div class = "contenedor-principal">
+
+  <!-- 1ro parte: Carrusel -->
+  <div class="carrusel horizontal" *ngIf="!selectedCuidado && !mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones" >
+    <ion-text class="titulo-informacion">Novedades</ion-text>
+    <div 
+      class="carrusel-inner" 
+      [class.sin-transicion]="sinTransicion"
+      [style.transform]="'translateX(-' + slideVisual * 100 + '%)'">
+      <img [src]="imagenesCarrusel[imagenesCarrusel.length - 1]" />
+      <img 
+      *ngFor="let img of imagenesCarrusel; let i = index" 
+      [src]="img" 
+      (click)="
+        i === 0 ? mostrarInfoFlujo = true : 
+        i === 1 ? mostrarInfoEleccion = true : 
+        i === 2 ? mostrarInfoOpciones = true : null"
+      />
+      <img [src]="imagenesCarrusel[0]" />
+    </div>
+
+    <button class="carrusel-btn izquierda" (click)="irAnteriorSlide()">‹</button>
+    <button class="carrusel-btn derecha" (click)="irASiguienteSlide()">›</button>
+
+    <div class="carrusel-puntos">
+      <span 
+        *ngFor="let img of imagenesCarrusel; let i = index"
+        [class.activo]="slideVisual === i + 1 || 
+                        (slideVisual === 0 && i === imagenesCarrusel.length - 1) || 
+                        (slideVisual === imagenesCarrusel.length + 1 && i === 0)"
+        (click)="irASlide(i)">
+      </span>
+    </div>
+  </div>
+
+  <!-- 2do parte: Seleccion -->
+  <div class="galeria-horizontal" *ngIf="!selectedCuidado && !mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones">
+    <ion-text class="titulo-informacion">Recomendaciones para ti</ion-text>
+    <div class="contenedor-galeria">
+      <img *ngFor="let img of imagenesGaleria" [src]="img.src" [alt]="img.alt" class="img-galeria" />
+    </div>
+  </div>
+
+
+  <!-- 3ro parte: Tabla -->
+  <div class="bloque-cuidados" *ngIf="!selectedCuidado && !mostrarInfoFlujo && !mostrarInfoEleccion && !mostrarInfoOpciones">
+    <ion-text class="titulo-informacion">Cuidados del día a día</ion-text>
+      <div class="cuidados-grid">
+        <div class="cuadro" *ngFor="let item of cuidados" (click)="mostrarCuidado(item.titulo)">
+          <img [src]="item.img" [alt]="item.titulo" />
+          <p>{{ item.titulo }}</p>
+        </div>
+        <br><br><br>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Información 1: flujo vaginal-->
+<ng-container *ngIf="mostrarInfoFlujo">
+  <div class="info-panel">
+    <!-- Botón de cerrar -->
+    <ion-button fill="clear" class="btn-cerrar" (click)="mostrarInfoFlujo = false">
+      <ion-icon name="close-circle-outline"></ion-icon>
+    </ion-button>
+
+    <!-- título -->
+    <div class="contenedor-titulo">
+      <ion-text class="titulo-panel">
+        Flujo Vaginal: <br>Lo que debes de saber
+      </ion-text>
+    </div>
+
+    <!-- Imagen -->
+    <img src="assets/img/Informacion/I-1.svg" alt="Ilustración flujo vaginal" class="img-ilustrativa" />
+
+    <!-- texto centrado -->
+    <p class="contenido-panel-centrado">
+      El flujo vaginal es algo completamente normal en el cuerpo de una mujer 
+      y tiene un papel importante en la limpieza y protección de la zona íntima. 
+      Aquí te dejamos algunos puntos clave para entenderlo mejor:
+    </p>
+
+    <!-- texto de lado -->
+    <div class="contenido-panel-lado">
+      <p><strong>🔹¿Por qué es importante?</strong><br>
+        El flujo ayuda a mantener la vagina limpia, hidratada y protegida de infecciones. 
+        Su cantidad y textura pueden cambiar dependiendo de la etapa del ciclo menstrual.</p>
+    
+      <p><strong>🔹Tipos de flujo y qué significan</strong><br>
+      ✅ Transparente o blanco y sin olor: Normal, indica que la vagina está sana. 
+      Puede volverse más espeso antes de la menstruación..<br>
+      ✅ Blanco espeso y con picazón: Puede ser una infección por hongos (candidiasis).<br>
+      ✅ Amarillo o verdoso con mal olor: Puede ser una infección bacteriana o de transmisión sexual.<br>
+      ✅ Gris con olor fuerte (como a pescado): Puede ser vaginosis bacteriana y requiere tratamiento.<br>
+      ✅ Rosado o marrón: Puede ser sangre vieja antes o después de la menstruación.</p>
+    
+      <p><strong>🔹¿Cuándo preocuparse?</strong><br>
+        Si notas cambios en el color, olor o textura del flujo, especialmente si hay picazón, 
+        ardor o mal olor, es importante consultar a un médico.</p>
+    
+      <p><strong>🔹Consejos para mantener un flujo saludable</strong><br>
+      ✔️ Usa ropa interior de algodón y evita telas sintéticas..<br>
+      ✔️ No uses duchas vaginales, pueden alterar el pH natural.<br>
+      ✔️ Mantén una higiene adecuada con agua y jabón suave.<br>
+      ✔️ Evita usar productos perfumados en la zona íntima.<br>
+      </p>
+    </div>
+
+    <!-- parte final -->
+    <p class="contenido-panel-final">
+    El flujo vaginal es parte del cuerpo y cambia con el ciclo menstrual. 
+    Conócelo y presta atención a cualquier señal inusual. ✨ <br><br><br>
+    </p>
+  </div>
+</ng-container>
+  
+<!-- Información 2: ¿Ya te bajo?-->
+<ng-container *ngIf="mostrarInfoEleccion">
+  <div class="info-panel">
+    <!-- Botón de cerrar -->
+    <ion-button fill="clear" class="btn-cerrar" (click)="mostrarInfoEleccion = false">
+      <ion-icon name="close-circle-outline"></ion-icon>
+    </ion-button>
+
+    <!-- título -->
+    <div class="contenedor-titulo">
+      <ion-text class="titulo-panel">
+        ¿Ya te bajó?<br>¡Bienvenida al club!
+      </ion-text>
+    </div>
+
+    <!-- Imagen -->
+    <img src="assets/img/Informacion/I-2.svg" alt="Ilustración bienvenida" class="img-ilustrativa" />
+
+    <!-- texto centrado -->
+    <div class="contenido-panel-centrado">
+      <p>La menstruación será tu nuevo compañero de vida por mucho tiempo, así que ve 
+        tomando nota de lo que puedes hacer para sentirte más cómoda y cuidarte mejor:</p>
+
+      <p><strong>✅ Usa la protección adecuada</strong><br>
+      Hay toallas sanitarias, tampones y copas menstruales. 
+      Prueba diferentes opciones hasta encontrar la que mejor se adapte a ti.</p>
+
+      <p><strong>✅ Cambia tu protección a tiempo</strong><br>
+      No importa qué uses, cámbiala cada 4 a 6 horas para evitar malos olores o infecciones.</p>
+
+      <p><strong>✅ Lleva un kit menstrual contigo</strong><br>
+        Siempre ten en tu bolso una toalla, tampones o lo que uses, 
+        junto con toallitas húmedas y un cambio de ropa por si acaso.</p>
+
+      <p><strong>✅ No ignores el dolor</strong><br>
+        Si los cólicos son muy fuertes, prueba con una bolsa de agua caliente, 
+        estiramientos suaves o un té relajante. Si el dolor es demasiado intenso, consulta con un médico.</p>
+
+      <p><strong>✅ Hidrátate y come bien</strong><br>
+      Beber suficiente agua y comer alimentos ricos en hierro 
+      te ayudará a evitar el cansancio y sentirte mejor.</p>
+
+      <p><strong>✅ No tengas vergüenza</strong><br>
+        La menstruación es natural. No hay razón para sentirte incómoda al hablar de ella 
+        o pedir ayuda si lo necesitas.</p>
+
+      <p><strong>✅ Lleva un registro de tu ciclo</strong><br>
+      Anota cuándo empieza y termina tu periodo cada mes. 
+      Esto te ayudará a saber cuándo llegará el siguiente y si hay cambios en tu cuerpo.</p>
+    </div>
+
+    <!-- Cierre -->
+    <p class="contenido-panel-final">
+      🌸 Tu periodo es parte de ti, <br> a conocerlo y llevarlo de la mejor manera. <br><br><br>
+    </p>
+  </div>
+</ng-container>
+
+<!-- Información 3: Opciones menstruales -->
+<ng-container *ngIf="mostrarInfoOpciones">
+  <div class="info-panel">
+    <!-- Botón de cerrar -->
+    <ion-button fill="clear" class="btn-cerrar" (click)="mostrarInfoOpciones = false">
+      <ion-icon name="close-circle-outline"></ion-icon>
+    </ion-button>
+
+    <!-- título -->
+    <div class="contenedor-titulo">
+      <ion-text class="titulo-panel">
+        ¿Sostenibilidad, <br>Comodidad o Practicidad?
+      </ion-text>
+    </div>
+
+    <!-- Imagen -->
+    <img src="assets/img/Informacion/I-3.svg" alt="Ilustración opciones menstruales" class="img-ilustrativa" />
+
+    <!-- texto de lado -->
+    <div class="contenido-panel-lado">
+      <p>Cada mujer tiene necesidades diferentes, y elegir el método adecuado para tu periodo 
+        depende de tu comodidad, estilo de vida y preferencias. Aquí te damos una guía para ayudarte:</p>
+
+      <p><strong>🔹 Toallas sanitarias</strong><br>
+      ✔️ Son fáciles de usar y perfectas para quienes empiezan.<br>
+      ✔️ No requieren inserción, solo se colocan en la ropa interior..<br>
+      ✔️ Hay de distintos tamaños y niveles de absorción.<br>
+      ❌ Pueden sentirse incómodas si usas ropa ajustada.<br>
+      ❌ Si no se cambian a tiempo, pueden generar malos olores.</p>
+
+      <p><strong>🔹 Tampones</strong><br>
+      ✔️ Ideales si practicas deporte o nadas, ya que no se notan.<br>
+      ✔️ Absorben el flujo desde dentro, evitando manchas.<br>
+      ✔️ Hay de diferentes tamaños según tu flujo.<br>
+      ❌ Requieren inserción y pueden ser incómodos al inicio.<br>
+      ❌ Deben cambiarse cada 4-6 horas para evitar infecciones.</p>
+
+      <p><strong>🔹 Copa menstrual</strong><br>
+      ✔️ Es reutilizable y ecológica, te dura años.<br>
+      ✔️ Se puede usar hasta por 12 horas sin cambiarla.<br>
+      ✔️ No genera residuos ni malos olores.<br>
+      ❌ Puede ser difícil de colocar y sacar al principio..<br>
+      ❌ No a todas les resulta cómoda de inmediato.</p>
+
+      <p><strong>💡 ¿Cuál elegir?</strong><br>
+      👉 Si buscas algo fácil y sin complicaciones, prueba las toallas.<br>
+      👉 Si quieres más libertad de movimiento, los tampones pueden ser una buena opción.<br>
+      👉 Si te interesa algo duradero y ecológico, la copa menstrual es ideal.</p>
+    </div>
+
+    <!-- Cierre -->
+    <p class="contenido-panel-final">
+      ✨ No hay una opción perfecta, solo la que mejor se adapte a ti.<br>
+      ¡Prueba y descubre cuál te funciona mejor!<br><br><br>
+    </p>
+  </div>
+</ng-container>
+
+
+<ng-container *ngIf="selectedCuidado">
+  <div class="info-panel">
+    <ion-button fill="clear" class="btn-cerrar" (click)="ocultarPantalla()">
+      <ion-icon name="close-circle-outline"></ion-icon>
+    </ion-button>
+
+    <!-- CUADRO: Tómate un descanso -->
+    <ng-container *ngIf="selectedCuidado === 'Tómate un descanso'">
+      <img src="assets/img/cuidados/C-1.svg" alt="Descanso" class="img-ilustrativa2" />
+      <div class="contenedor-titulo">
+        <ion-text class="titulo-panel">Tómate un descanso</ion-text>
+      </div>
+      <div class="texto-informativo">
+        <p>Darte un descanso no es solo un lujo, es una necesidad para tu bienestar, 
+          especialmente durante tu periodo menstrual.</p>
+        <p>En esos días, el cuerpo trabaja más de lo habitual, y hacer pausas ayuda 
+          a aliviar el estrés físico y mental.</p>
+        <p>Un buen descanso puede reducir los cólicos, equilibrar las emociones y
+           mejorar tu energía para el resto del día.</p>
+        <p>Escucha a tu cuerpo, respira profundo y date permiso para recargar fuerzas.</p>
+      </div>
+      <p class="texto-final-destacado">¡Te lo mereces! </p>
+    </ng-container>
+
+    <!-- CUADRO: Equilibrio y Salud -->
+    <ng-container *ngIf="selectedCuidado === 'Equilibrio y Salud'">
+      <img src="assets/img/cuidados/C-2.svg" alt="Equilibrio y Salud" class="img-ilustrativa2" />
+      <div class="contenedor-titulo">
+        <ion-text class="titulo-panel">Equilibrio y Salud</ion-text>
+      </div>
+      <div class="texto-informativo">
+        <p>Mantener un balance entre una alimentación saludable y el ejercicio es clave para cuidar tu cuerpo, especialmente durante tu periodo menstrual.</p>
+        <p>Una dieta rica en frutas, verduras, y alimentos con omega-3 puede ayudarte a reducir la inflamación y los malestares. </p>
+        <p>Por otro lado, actividades ligeras como caminar, yoga o estiramientos pueden aliviar los cólicos y mejorar tu estado de ánimo.</p>
+      </div>
+      <p class="texto-final-destacado">¡Encuentra tu equilibrio!</p> <br>
+    </ng-container>
+
+    <!-- CUADRO: Duerme y recuperate -->
+    <ng-container *ngIf="selectedCuidado === 'Duerme y recupérate'">
+      <img src="assets/img/cuidados/C-3.svg" alt="Duerme y recupérate" class="img-ilustrativa2" />
+      <div class="contenedor-titulo">
+        <ion-text class="titulo-panel">Duerme y recupérate</ion-text>
+      </div>
+      <div class="texto-informativo">
+        <p>Dormir adecuadamente es esencial para reducir la fatiga, aliviar dolores y mejorar el estado de ánimo.</p>
+        <p>Un buen descanso de entre 7 a 9 horas puede ayudar a equilibrar las hormonas, mejora la función inmunológica y reduce el estrés.</p>
+        <p>También, favorece la recuperación del cuerpo y una mejor gestión de los síntomas menstruales, permitiendo un ciclo más saludable y menos incómodo.</p>
+      </div>
+      <p class="texto-final-destacado">Duerme, <br> tu ciclo lo agradecerá!</p> <br>
+    </ng-container>
+
+
+    <!-- CUADRO: Mima tu piel -->
+    <ng-container *ngIf="selectedCuidado === 'Mima tu piel'">
+      <img src="assets/img/cuidados/C-4.svg" alt="Mima tu piel" class="img-ilustrativa2" />
+      <div class="contenedor-titulo">
+        <ion-text class="titulo-panel">Mima tu piel</ion-text>
+      </div>
+      <div class="texto-informativo">
+        <p>Cuidar tu piel es muy importante ya que los cambios hormonales pueden hacerla más sensible o propensa a brotes.Al seguir una rutina de cuidado adecuada, puedes ayudar a reducir la irritación, mantenerla hidratada y equilibrada.</p>
+        <p>Esto no solo mejora la salud de tu piel, sino que también te hace sentir más cómoda y cuidada durante todo tu ciclo menstrual.</p>
+      </div>
+      <p class="texto-final-destacado">Repite después de mi:<br> ¡Mi piel lo merece!</p>  <br><br>
+    </ng-container>
+
+    <!-- CUADRO: Conecta y medita -->
+    <ng-container *ngIf="selectedCuidado === 'Conecta y medita'">
+      <img src="assets/img/cuidados/C-5.svg" alt="Conecta y medita" class="img-ilustrativa2" />
+      <div class="contenedor-titulo">
+        <ion-text class="titulo-panel">Conecta y medita</ion-text>
+      </div>
+      <div class="texto-informativo">
+        <p>La meditación es una herramienta poderosa para reducir el estrés y la ansiedad, dos factores que pueden intensificar los síntomas menstruales.</p>
+        <p>Al conectar con tu respiración y dejar ir los pensamientos negativos, puedes lograr un equilibrio emocional que te ayude a manejar mejor los cambios hormonales.</p>
+        <p>Además, ayuda a aliviar dolores como los cólicos y mejora la calidad del sueño, promoviendo un bienestar tanto física como mental.</p>
+      </div>
+      <p class="texto-final-destacado">Respira, relájate y déjate llevar</p><br>
+    </ng-container>
+    
+        <!-- CUADRO: Hidrátate siempre -->
+        <ng-container *ngIf="selectedCuidado === 'Hidrátate siempre'">
+          <img src="assets/img/cuidados/C-6.svg" alt="Hidrátate siempre" class="img-ilustrativa2" />
+          <div class="contenedor-titulo">
+            <ion-text class="titulo-panel">Hidrátate siempre</ion-text>
+          </div>
+          <div class="texto-informativo">
+            <p>Mantenerte bien hidratada es clave para reducir la hinchazón, los dolores de cabeza y mejorar la digestión.</p>
+            <p>El agua ayuda a equilibrar las hormonas, mantiene la piel radiante y favorece la circulación.</p>
+            <p>Beber suficiente agua también contribuye a aliviar los cólicos y mejora tu energía, ayudándote a sentirte 
+              más equilibrada y en control 
+              durante esos días.</p>
+          </div>
+          <p class="texto-final-destacado">Un sorbo de agua, un respiro para tu cuerpo</p><br>
+        </ng-container>
+
+  </div>
+</ng-container>

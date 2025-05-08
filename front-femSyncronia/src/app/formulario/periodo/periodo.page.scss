@@ -54,13 +54,52 @@ ion-text {
     margin-top: 10px;
 }
 
+/* Estilos personalizados para ion-radio */
 ion-radio {
+    color: #868686;
+    --size: 20px; /* Tamaño del radio */
+    --color: #9E9E9E; /* Color del borde cuando no está seleccionado */
     
-    color: #585858;
-    --color:#9E9E9E;
-    --color-checked: #FF94A0; /* Color de relleno al estar seleccionado */
-    --size: 15px; /* Ajusta el tamaño del radio */
+    margin-right: 30px; /* Margen derecho para separar los radios */
 }
+
+/* Elimina el margen derecho del último radio para evitar espacio extra */
+ion-radio:last-child {
+    margin-right: 0;
+}
+
+/* Estilos para el contenedor del radio */
+ion-radio::part(container) {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #9E9E9E;
+}
+
+/* Estilos para el marcador del radio */
+ion-radio::part(mark) {
+    background: none;
+    transition: none;
+    transform: none;
+    border-radius: 0;
+}
+
+/* Estilos para el radio seleccionado */
+ion-radio.radio-checked::part(container) {
+    background: #FF94A0;
+    border-color: transparent;
+}
+
+/* Estilos para el marcador del radio seleccionado */
+ion-radio.radio-checked::part(mark) {
+    width: 6px;
+    height: 10px;
+    border-width: 0px 2px 2px 0px;
+    border-style: solid;
+    border-color: #fff;
+    transform: rotate(45deg);
+}
+
 /* Estilo para el divisor */
 .divisor {
     width: 100%; /* Ancho completo */

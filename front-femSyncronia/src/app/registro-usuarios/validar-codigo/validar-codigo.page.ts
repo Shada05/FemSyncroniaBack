@@ -4,7 +4,7 @@ import { IonInput } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import { CodigoService } from 'src/app/services/codigo.service';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { UtilidadesService } from 'src/app/services/utilidades.service';
 
 @Component({
   selector: 'app-validar-codigo',
@@ -22,11 +22,13 @@ export class ValidarCodigoPage implements OnInit {
   @ViewChild('codigo5', { static: false }) codigo5: IonInput | null = null;
   @ViewChild('codigo6', { static: false }) codigo6: IonInput | null = null;
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private authService: AuthService,
-    private codigo: CodigoService,
-    private toastController: ToastController,
-    private router: Router,) {
+    private codigoService: CodigoService,
+    private router: Router,
+    private utilidadesService: UtilidadesService
+  ) {
     this.formulario = this.fb.group({
       codigo1: ['', [Validators.required, Validators.pattern('^[0-9]$')]],
       codigo2: ['', [Validators.required, Validators.pattern('^[0-9]$')]],
@@ -42,20 +44,78 @@ export class ValidarCodigoPage implements OnInit {
   }
 
   moverFoco(inputActual: IonInput | null, siguienteInput: IonInput | null) {
-    setTimeout(() => {
-      if (inputActual?.value) {
-        siguienteInput?.setFocus();
-      }
-    }, 100);
+    if (inputActual?.value && siguienteInput) {
+      siguienteInput.setFocus();
+    }
   }
 
-  handleKeydown(event: KeyboardEvent, inputAnterior: IonInput | null, inputSiguiente: IonInput | null) {
+handleKeydown(event: KeyboardEvent, inputAnterior: IonInput | null, inputSiguiente: IonInput | null) {
+    const currentInput = event.target as HTMLInputElement;
+    
     if (event.key === 'Backspace') {
-      if ((event.target as HTMLInputElement).value === '') {
-        if (inputAnterior) {
-          inputAnterior.setFocus();
-        }
+      if (currentInput.value === '' && inputAnterior) {
+        event.preventDefault();
+        this.moverFocoConCursorAlFinal(inputAnterior);
       }
+    } else if (event.key === 'ArrowLeft') {
+      event.preventDefault(); // Siempre prevenir el comportamiento por defecto
+      
+      if (inputAnterior) {
+        // Mover al input anterior si existe
+        this.moverFocoConCursorAlFinal(inputAnterior);
+      } else {
+        // Estamos en el primer input - mantener cursor al inicio
+        currentInput.setSelectionRange(0, 0);
+      }
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault(); // Siempre prevenir el comportamiento por defecto
+      
+      if (inputSiguiente) {
+        // Mover al input siguiente si existe
+        this.moverFocoConCursorAlFinal(inputSiguiente);
+      } else {
+        // Estamos en el último input - mantener cursor al final
+        currentInput.setSelectionRange(currentInput.value.length, currentInput.value.length);
+      }
+    } else if (/^[0-9]$/.test(event.key)) {
+      if (currentInput.value && inputSiguiente) {
+        setTimeout(() => this.moverFocoConCursorAlFinal(inputSiguiente!), 10);
+      }
+    }
+  }
+
+  private async moverFocoConCursorAlFinal(input: IonInput) {
+    if (!input) return;
+    
+    try {
+      await input.setFocus();
+      const inputElement = await input.getInputElement();
+      if (inputElement) {
+        inputElement.setSelectionRange(inputElement.value.length, inputElement.value.length);
+      }
+    } catch (error) {
+      console.error('Error al mover el foco:', error);
+    }
+  }
+
+  handlePaste(event: ClipboardEvent) {
+    event.preventDefault();
+    const clipboardData = event.clipboardData?.getData('text/plain').trim();
+
+    if (clipboardData && /^\d{6}$/.test(clipboardData)) {
+      const digits = clipboardData.split('');
+
+      this.formulario.patchValue({
+        codigo1: digits[0],
+        codigo2: digits[1],
+        codigo3: digits[2],
+        codigo4: digits[3],
+        codigo5: digits[4],
+        codigo6: digits[5]
+      });
+
+      // Mover el foco al último input
+      setTimeout(() => this.codigo6?.setFocus(), 10);
     }
   }
 
@@ -67,78 +127,100 @@ export class ValidarCodigoPage implements OnInit {
   }
 
   async obtenerCorreo() {
-    const token = await this.authService.obtenerToken();
-    if (token) {
-      this.authService.verificarToken(token).subscribe(response => {
-        this.correo = response.user.email;
-        console.log('Correo obtenido del token:', this.correo);
-      }, error => {
-        console.log('Error al obtener el correo:', error);
-      });
-    } else {
-      console.log('No hay token almacenado.');
+    try {
+      const token = await this.authService.obtenerToken();
+      if (token) {
+        this.authService.verificarToken(token).subscribe(
+          response => {
+            this.correo = response.user.email;
+            console.log('Correo obtenido del token:', this.correo);
+          },
+          error => {
+            console.log('Error al obtener el correo:', error);
+            this.utilidadesService.mostrarToastAdvertencia('Error al obtener el correo asociado');
+          }
+        );
+      } else {
+        console.log('No hay token almacenado.');
+        this.utilidadesService.mostrarToastAdvertencia('No se encontró sesión activa');
+      }
+    } catch (error) {
+      console.error('Error inesperado al obtener correo:', error);
+      this.utilidadesService.mostrarToastAdvertencia('Error inesperado al obtener información');
     }
   }
 
+  async reenviarCodigo() {
+    if (!this.correo) {
+      await this.utilidadesService.mostrarToastAdvertencia('No se encontró correo asociado');
+      return;
+    }
 
-  reenviarCodigo() {
-    this.codigo.enviarCodigo(this.correo).subscribe(
-      async (response) => {
-        console.log('Código de verificación enviado:', response);
-      },
-      async (error) => {
-        console.error('Error al enviar el código de verificación:', error);
-        const toast = await this.toastController.create({
-          message: 'Error al enviar el código de verificación. Intenta nuevamente.',
-          duration: 2000,
-          color: 'danger',
-        });
-        await toast.present();
-      }
-    );
+    try {
+      await this.utilidadesService.mostrarLoading('Enviando código de verificación...');
+      this.codigoService.enviarCodigo(this.correo).subscribe(
+        async (response) => {
+          console.log('Código de verificación enviado:', response);
+          await this.utilidadesService.ocultarLoading();
+          await this.utilidadesService.mostrarToastAdvertencia('Código enviado correctamente');
+        },
+        async (error) => {
+          console.error('Error al enviar el código de verificación:', error);
+          await this.utilidadesService.ocultarLoading();
+          await this.utilidadesService.mostrarToastAdvertencia('Error al enviar el código. Intenta nuevamente.');
+        }
+      );
+    } catch (error) {
+      console.error('Error inesperado:', error);
+      await this.utilidadesService.ocultarLoading();
+      await this.utilidadesService.mostrarToastAdvertencia('Error inesperado. Intenta nuevamente.');
+    }
   }
-  validarCodigo() {
+
+  async validarCodigo() {
     if (this.formulario.valid) {
       const codigo = Object.values(this.formulario.value).join('');
       console.log('Código ingresado:', codigo);
 
-      this.codigo.validarCodigo(this.correo, codigo).subscribe(
-        async (response) => {
-          if (response.valido) {
-            // Código correcto
-            console.log('Código válido:', response.mensaje);
-            // redirigir solo si es válido el codigo
-            this.router.navigate(['/confirmacion-registro']);
+      try {
+        await this.utilidadesService.mostrarLoading('Validando código...');
+        this.codigoService.validarCodigo(this.correo, codigo).subscribe(
+          async (response) => {
+            if (response.valido) {
+              console.log('Código válido:', response.mensaje);
+              await this.utilidadesService.ocultarLoading();
+              this.router.navigate(['/confirmacion-registro']);
+            } else {
+              await this.utilidadesService.ocultarLoading();
+              await this.utilidadesService.mostrarToastAdvertencia(response.mensaje || 'Código inválido');
+              this.marcarInputsComoInvalidos();
+            }
+          },
+          async (error) => {
+            const mensajeError = error.error.mensaje || 'Error al validar el código';
+            console.error('Error al validar el código:', mensajeError);
+            await this.utilidadesService.ocultarLoading();
+            await this.utilidadesService.mostrarToastAdvertencia(mensajeError);
+            this.marcarInputsComoInvalidos();
           }
-        },
-        async (error) => {
-          const mensajeError = error.error.mensaje;
-
-          console.error('Error al validar el código:', error.error.mensaje);
-
-          const toast = await this.toastController.create({
-            message: mensajeError,
-            duration: 2000,
-            color: 'danger',
-          });
-
-          await toast.present();
-          this.marcarInputsComoInvalidos(); // Marcar todos los inputs como inválidos
-        }
-
-      );
+        );
+      } catch (error) {
+        console.error('Error inesperado:', error);
+        await this.utilidadesService.ocultarLoading();
+        await this.utilidadesService.mostrarToastAdvertencia('Error inesperado. Intenta nuevamente.');
+        this.marcarInputsComoInvalidos();
+      }
     } else {
-      console.log('El formulario no es válido.');
-      this.marcarInputsComoInvalidos(); // Marcar todos los inputs como inválidos
+      this.utilidadesService.mostrarToastAdvertencia('Por favor ingresa un código válido de 6 dígitos');
+      this.marcarInputsComoInvalidos();
     }
   }
 
   marcarInputsComoInvalidos() {
-    // Marcar todos los controles del formulario como inválidos y tocados
     Object.keys(this.formulario.controls).forEach(key => {
       const control = this.formulario.get(key);
-      control?.setErrors({ 'invalid': true }); // Agregar un error personalizado
-      control?.markAsTouched(); // Marcar como tocado
+      control?.setErrors({ 'invalid': true });
+      control?.markAsTouched();
     });
   }
 }
