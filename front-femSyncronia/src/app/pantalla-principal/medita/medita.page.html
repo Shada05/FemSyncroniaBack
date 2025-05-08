@@ -1,13 +1,20 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>medita</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="fondo-construccion">
+  <!-- Botón cerrar -->
+  <ion-button class="boton-cerrar" fill="clear" (click)="cerrarPantalla()">
+    <ion-icon name="close-outline"></ion-icon>
+  </ion-button>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">medita</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="info-panel">
+    <img src="assets/img/cuidados/C-5.svg" alt="Mima tu piel" class="img-ilustrativa2" />
+    <div class="contenedor-titulo">
+      <ion-text class="titulo-panel">Conecta y medita</ion-text>
+    </div>
+
+    <div class="texto-informativo">
+      <p>La meditación es una herramienta poderosa para reducir el estrés y la ansiedad, dos factores que pueden intensificar los síntomas menstruales.</p>
+      <p>Al conectar con tu respiración y dejar ir los pensamientos negativos, puedes lograr un equilibrio emocional que te ayude a manejar mejor los cambios hormonales.</p>
+      <p>Además, ayuda a aliviar dolores como los cólicos y mejora la calidad del sueño, promoviendo un bienestar tanto física como mental.</p>
+    </div>
+    <p class="texto-final-destacado">Respira, relájate y déjate llevar</p><br>
+  </div>
 </ion-content>

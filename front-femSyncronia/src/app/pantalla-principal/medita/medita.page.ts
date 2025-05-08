@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-medita',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MeditaPage implements OnInit {
 
-  constructor() { }
+      constructor(private navCtrl: NavController) {}
+    
+      cerrarPantalla() {
+        this.navCtrl.back(); 
+      }
 
   ngOnInit() {
   }
