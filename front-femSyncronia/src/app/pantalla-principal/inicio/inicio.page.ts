@@ -8,6 +8,9 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
+import { IonTabs } from '@ionic/angular';
+import { ViewChild } from '@angular/core';
+
 
 interface Sintoma {
   id: number; // ID del síntoma
@@ -65,6 +68,24 @@ export class InicioPage implements OnInit {
   
   peso: number | null = null;
   temperatura: number | null = null;
+
+  irAPestanaInformacion() {
+    this.router.navigate(['/construccion']);
+  }
+
+  irAPestanaPiel() {
+    this.router.navigate(['/piel']);
+  }
+
+  irAPestanaAgua() {
+    this.router.navigate(['/hidratate']);
+  }
+
+  irAPestanaMedita() {
+    this.router.navigate(['/medita']);
+  }
+  
+  
 
   constructor(
     private menuCtrl: MenuController,
