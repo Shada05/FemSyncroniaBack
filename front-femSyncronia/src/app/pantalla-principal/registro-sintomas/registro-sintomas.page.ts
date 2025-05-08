@@ -238,6 +238,12 @@ export class RegistroSintomasPage implements OnInit {
       }
     }
   
+    try {
+      await lastValueFrom(this.apiService.eliminarRegistroEnciclo(this.userId, anioActual, mesActual));
+    } catch (error) {
+      console.warn('No se pudo eliminar registro existente o no existía:', error);
+    }
+  
     const sintomasCalificados = this.sintomas
       .filter((sintoma) => sintoma.estrellas > 0)
       .map((sintoma) => ({
