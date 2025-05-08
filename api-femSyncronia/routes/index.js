@@ -145,9 +145,6 @@ router.put('/api/v1/cycle_calendar/:id', cycle_calendarController.update);
 router.delete('/api/v1/cycle_calendar/user/:user_id/:year/:month', cycle_calendarController.destroy);
 
 
-
-
-
 module.exports = {
    router
 }

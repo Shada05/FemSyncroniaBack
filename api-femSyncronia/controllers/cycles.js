@@ -212,30 +212,6 @@ exports.store_prediction = async (req, res) => {
         notes: req.body.notes
     };
     console.log(cycle);
-
-    try {
-        // Almacenar el ciclo en la base de datos
-        const createdCycle = await cycles.create(cycle);
-
-        // Llamar al script de Python después de almacenar los datos
-        const pythonProcess = spawn('python3', ['/IA-Cycles/prueba.py', createdCycle.user_id]); // entorno python 3
-
-        pythonProcess.stdout.on('data', (data) => {
-            console.log(`Salida del script Python: ${data}`);
-        });
-
-        pythonProcess.stderr.on('data', (data) => {
-            console.error(`Error en el script Python: ${data}`);
-        });
-
-        pythonProcess.on('close', (code) => {
-            console.log(`El script Python terminó con código ${code}`);
-            res.status(200).send(createdCycle); // Enviar respuesta al cliente
-        });
-    } catch (error) {
-        console.error('Error al almacenar el ciclo:', error);
-        res.status(400).send(error);
-    }
 };
 
 exports.index = async (req, res) =>{
