@@ -212,30 +212,6 @@ exports.store_prediction = async (req, res) => {
         notes: req.body.notes
     };
     console.log(cycle);
-
-    try {
-        // Almacenar el ciclo en la base de datos
-        const createdCycle = await cycles.create(cycle);
-
-        // Llamar al script de Python después de almacenar los datos
-        const pythonProcess = spawn('python3', ['/IA-Cycles/prueba.py', createdCycle.user_id]); // entorno python 3
-
-        pythonProcess.stdout.on('data', (data) => {
-            console.log(`Salida del script Python: ${data}`);
-        });
-
-        pythonProcess.stderr.on('data', (data) => {
-            console.error(`Error en el script Python: ${data}`);
-        });
-
-        pythonProcess.on('close', (code) => {
-            console.log(`El script Python terminó con código ${code}`);
-            res.status(200).send(createdCycle); // Enviar respuesta al cliente
-        });
-    } catch (error) {
-        console.error('Error al almacenar el ciclo:', error);
-        res.status(400).send(error);
-    }
 };
 
 exports.index = async (req, res) =>{
@@ -359,31 +335,45 @@ exports.show_tables = async (req, res) => {
 };
 
 exports.destroy = async (req, res) => {
-    const userId = parseInt(req.params.user_id);
-    const year = parseInt(req.params.year);
-    const month = parseInt(req.params.month);
-    return await cycles.destroy({
-        where: {
-            user_id: userId,
-            [Op.and]: [
-                where(fn('MONTH', col('date')), month),
-                where(fn('YEAR', col('date')), year)
-            ]
-        }
-    }).then(
-        deleted => {
-            if (deleted) {
-                res.status(200).send({ message: 'data eliminado con éxito' });
-            } else {
-                res.status(404).send({ message: 'data no encontrado' });
-            }
-        }
-    ).catch(
-        error => {
-            console.log(error);
-            res.status(400).send(error);
-        }
-    );
+  const userId = parseInt(req.params.user_id);
+  const year = req.params.year ? parseInt(req.params.year) : null;
+  const month = req.params.month ? parseInt(req.params.month) : null;
+  const day = req.params.day ? parseInt(req.params.day) : null;
+
+  const condiciones = {
+    user_id: userId,
+  };
+
+  const andConditions = [];
+
+  if (day !== null) {
+    andConditions.push(where(fn('DAY', col('date')), day));
+  }
+  if (month !== null) {
+    andConditions.push(where(fn('MONTH', col('date')), month));
+  }
+  if (year !== null) {
+    andConditions.push(where(fn('YEAR', col('date')), year));
+  }
+
+  if (andConditions.length > 0) {
+    condiciones[Op.and] = andConditions;
+  }
+
+  try {
+    const deleted = await cycles.destroy({
+      where: condiciones
+    });
+
+    if (deleted) {
+      res.status(200).send({ message: 'data eliminado con éxito' });
+    } else {
+      res.status(404).send({ message: 'data no encontrado' });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error);
+  }
 };
 
 exports.update = async (req, res) => {
